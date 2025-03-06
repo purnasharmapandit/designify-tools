@@ -17,12 +17,15 @@ import {
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
 
-const Tool = ({ icon: Icon, name, description, color }: { 
+const Tool = ({ icon: Icon, name, description, color, link }: { 
   icon: any; 
   name: string; 
   description: string;
   color: string;
+  link?: string;
 }) => (
   <motion.div
     initial={{ opacity: 0, y: 20 }}
@@ -34,6 +37,14 @@ const Tool = ({ icon: Icon, name, description, color }: {
     </div>
     <h3 className="text-lg font-semibold mb-2">{name}</h3>
     <p className="text-gray-600">{description}</p>
+    
+    {link && (
+      <div className="mt-4">
+        <Link to={link}>
+          <Button variant="outline" size="sm">Try Now</Button>
+        </Link>
+      </div>
+    )}
   </motion.div>
 );
 
@@ -43,7 +54,8 @@ const Tools = () => {
       icon: Paintbrush,
       name: "Logo Maker",
       description: "Create professional logos with AI-powered design suggestions",
-      color: "bg-purple-100 text-purple-500"
+      color: "bg-purple-100 text-purple-500",
+      link: "/logo-maker"
     },
     {
       icon: Image,

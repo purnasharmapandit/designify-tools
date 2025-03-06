@@ -20,6 +20,8 @@ import ExportingDesigns from "./pages/blogs/ExportingDesigns";
 import CustomizingProfilePicture from "./pages/blogs/CustomizingProfilePicture";
 import BusinessCards from "./pages/blogs/BusinessCards";
 import BillingSubscriptions from "./pages/blogs/BillingSubscriptions";
+import LogoMaker from "./pages/logo-maker/LogoMaker";
+import LogoEditor from "./pages/logo-maker/LogoEditor";
 
 const queryClient = new QueryClient();
 
@@ -45,6 +47,8 @@ const App = () => (
           <Route path="/blogs/customizing-profile-picture" element={<CustomizingProfilePicture />} />
           <Route path="/blogs/business-cards" element={<BusinessCards />} />
           <Route path="/blogs/billing-subscriptions" element={<BillingSubscriptions />} />
+          <Route path="/logo-maker" element={<LogoMaker />} />
+          <Route path="/logo-maker/editor/:id" element={<LogoEditor />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

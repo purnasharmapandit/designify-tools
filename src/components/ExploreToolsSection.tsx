@@ -1,38 +1,45 @@
 
 import { motion } from "framer-motion";
 import ToolCard from "./ToolCard";
+import { Link } from "react-router-dom";
 
 const ExploreToolsSection = () => {
   const tools = [
     {
-      name: "Mockup Generator",
-      color: "bg-gradient-to-br from-indigo-100 to-indigo-200",
-      iconColor: "text-indigo-500"
+      name: "Logo Maker",
+      color: "bg-gradient-to-br from-purple-100 to-purple-200",
+      iconColor: "text-purple-500",
+      link: "/logo-maker"
     },
     {
       name: "Social Banner Maker",
       color: "bg-gradient-to-br from-emerald-100 to-emerald-200",
-      iconColor: "text-emerald-500"
+      iconColor: "text-emerald-500",
+      link: "#"
     },
     {
       name: "QR Code Designer",
       color: "bg-gradient-to-br from-amber-100 to-amber-200",
-      iconColor: "text-amber-500"
+      iconColor: "text-amber-500",
+      link: "#"
     },
     {
       name: "Presentation Templates",
       color: "bg-gradient-to-br from-rose-100 to-rose-200",
-      iconColor: "text-rose-500"
+      iconColor: "text-rose-500",
+      link: "#"
     },
     {
       name: "Flyer Designer",
       color: "bg-gradient-to-br from-blue-100 to-blue-200",
-      iconColor: "text-blue-500"
+      iconColor: "text-blue-500",
+      link: "#"
     },
     {
       name: "Icon Generator",
       color: "bg-gradient-to-br from-purple-100 to-purple-200",
-      iconColor: "text-purple-500"
+      iconColor: "text-purple-500",
+      link: "#"
     }
   ];
 
@@ -46,7 +53,7 @@ const ExploreToolsSection = () => {
           viewport={{ once: true }}
           className="text-center mb-12"
         >
-          <h2 className="text-3xl md:text-4xl font-bold font-display mb-4">Explore Other Tools</h2>
+          <h2 className="text-3xl md:text-4xl font-bold font-display mb-4">Explore Our Tools</h2>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
             Discover our full suite of design tools to enhance your creative workflow
           </p>
@@ -54,13 +61,14 @@ const ExploreToolsSection = () => {
         
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 md:gap-6">
           {tools.map((tool, index) => (
-            <ToolCard
-              key={index}
-              name={tool.name}
-              color={tool.color}
-              iconColor={tool.iconColor}
-              className="rounded-2xl"
-            />
+            <Link key={index} to={tool.link || "#"} className="block">
+              <ToolCard
+                name={tool.name}
+                color={tool.color}
+                iconColor={tool.iconColor}
+                className="rounded-2xl"
+              />
+            </Link>
           ))}
         </div>
       </div>

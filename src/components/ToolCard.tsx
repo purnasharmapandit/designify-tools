@@ -1,16 +1,18 @@
 
 import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 
 interface ToolCardProps {
   name: string;
   color: string;
   iconColor: string;
   className?: string;
+  link?: string;
 }
 
-const ToolCard = ({ name, color, iconColor, className }: ToolCardProps) => {
-  return (
+const ToolCard = ({ name, color, iconColor, className, link }: ToolCardProps) => {
+  const cardContent = (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
@@ -29,6 +31,12 @@ const ToolCard = ({ name, color, iconColor, className }: ToolCardProps) => {
       </div>
     </motion.div>
   );
+
+  if (link) {
+    return cardContent;
+  }
+
+  return cardContent;
 };
 
 export default ToolCard;
