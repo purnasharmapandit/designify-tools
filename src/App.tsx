@@ -14,6 +14,7 @@ import ContactUs from "./pages/ContactUs";
 import AboutUs from "./pages/AboutUs";
 import Pricing from "./pages/Pricing";
 import Tools from "./pages/Tools";
+import Careers from "./pages/Careers";
 import ScrollToTop from "./components/ScrollToTop";
 import CreateLogo from "./pages/blogs/CreateLogo";
 import ExportingDesigns from "./pages/blogs/ExportingDesigns";
@@ -42,6 +43,7 @@ const App = () => (
           <Route path="/refund-policy" element={<RefundPolicy />} />
           <Route path="/contact-us" element={<ContactUs />} />
           <Route path="/about-us" element={<AboutUs />} />
+          <Route path="/careers" element={<Careers />} />
           <Route path="/blogs/create-logo" element={<CreateLogo />} />
           <Route path="/blogs/exporting-designs" element={<ExportingDesigns />} />
           <Route path="/blogs/customizing-profile-picture" element={<CustomizingProfilePicture />} />

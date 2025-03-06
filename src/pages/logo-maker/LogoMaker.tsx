@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
@@ -470,51 +469,59 @@ const IndustryStylesSection = () => {
           </p>
         </motion.div>
         
-        <Tabs defaultValue="technology" className="w-full">
-          <TabsList className="grid grid-cols-4 md:grid-cols-5 lg:grid-cols-10 max-w-3xl mx-auto mb-8">
-            {industries.map((industry) => (
-              <TabsTrigger key={industry.value} value={industry.value} className="text-xs md:text-sm">
-                {industry.label}
-              </TabsTrigger>
-            ))}
-          </TabsList>
-          
-          {industries.map((industry) => (
-            <TabsContent key={industry.value} value={industry.value} className="pt-4">
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-                {sampleLogos.map((logo, index) => (
-                  <div key={index} className="bg-gray-50 p-4 rounded-xl">
-                    <div className="aspect-square bg-white rounded-lg flex items-center justify-center p-4 mb-3 border">
-                      <img 
-                        src={logo.imageUrl} 
-                        alt={`${industry.label} logo example`} 
-                        className="max-h-24 object-contain" 
-                      />
-                    </div>
-                    <p className="text-sm font-medium text-center">{logo.style} Style</p>
-                  </div>
+        <div className="relative">
+          <Tabs defaultValue="technology" className="w-full">
+            <div className="w-full overflow-x-auto pb-3 no-scrollbar">
+              <TabsList className="inline-flex min-w-full w-max space-x-1 px-1">
+                {industries.map((industry) => (
+                  <TabsTrigger 
+                    key={industry.value} 
+                    value={industry.value} 
+                    className="whitespace-nowrap text-xs md:text-sm px-3 py-1.5"
+                  >
+                    {industry.label}
+                  </TabsTrigger>
                 ))}
-              </div>
-              <div className="mt-8 bg-gray-50 p-6 rounded-xl">
-                <h3 className="text-xl font-semibold mb-3">Tips for {industry.label} Logos</h3>
-                <ul className="space-y-2">
-                  <li className="flex items-start gap-2">
-                    <Check className="h-5 w-5 text-primary mt-0.5 shrink-0" />
-                    <span>Choose colors that reflect your {industry.label.toLowerCase()} brand values</span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <Check className="h-5 w-5 text-primary mt-0.5 shrink-0" />
-                    <span>Consider your audience preferences when selecting fonts</span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <Check className="h-5 w-5 text-primary mt-0.5 shrink-0" />
-                    <span>Ensure your logo works across all applications in your field</span>
-                  </li>
-                </ul>
-              </div>
-            </TabsContent>
-          ))}
-        </Tabs>
+              </TabsList>
+            </div>
+            
+            {industries.map((industry) => (
+              <TabsContent key={industry.value} value={industry.value} className="pt-4 mt-2">
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-6">
+                  {sampleLogos.map((logo, index) => (
+                    <div key={index} className="bg-gray-50 p-3 md:p-4 rounded-xl">
+                      <div className="aspect-square bg-white rounded-lg flex items-center justify-center p-4 mb-3 border">
+                        <img 
+                          src={logo.imageUrl} 
+                          alt={`${industry.label} logo example`} 
+                          className="max-h-16 md:max-h-24 object-contain" 
+                        />
+                      </div>
+                      <p className="text-xs md:text-sm font-medium text-center">{logo.style} Style</p>
+                    </div>
+                  ))}
+                </div>
+                <div className="mt-6 bg-gray-50 p-4 md:p-6 rounded-xl">
+                  <h3 className="text-lg md:text-xl font-semibold mb-3">Tips for {industry.label} Logos</h3>
+                  <ul className="space-y-2 text-sm md:text-base">
+                    <li className="flex items-start gap-2">
+                      <Check className="h-5 w-5 text-primary mt-0.5 shrink-0" />
+                      <span>Choose colors that reflect your {industry.label.toLowerCase()} brand values</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <Check className="h-5 w-5 text-primary mt-0.5 shrink-0" />
+                      <span>Consider your audience preferences when selecting fonts</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <Check className="h-5 w-5 text-primary mt-0.5 shrink-0" />
+                      <span>Ensure your logo works across all applications in your field</span>
+                    </li>
+                  </ul>
+                </div>
+              </TabsContent>
+            ))}
+          </Tabs>
+        </div>
       </div>
     </section>
   );
