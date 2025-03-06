@@ -53,20 +53,20 @@ const HeroSection = () => {
         
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-16">
           <ToolCard 
+            name="Logo Maker" 
             color="bg-pink-100" 
-            image="/lovable-uploads/logo-maker.png" 
-            alt="Logo Maker" 
+            iconColor="text-brand-pink" 
           />
           <ToolCard 
+            name="Profile Pic Generator" 
             color="bg-purple-100" 
-            image="/lovable-uploads/profile-pic.png" 
-            alt="Profile Pic Generator"
+            iconColor="text-brand-purple"
             className="md:mt-8" 
           />
           <ToolCard 
+            name="Business Card Generator" 
             color="bg-blue-100" 
-            image="/lovable-uploads/business-card.png" 
-            alt="Business Card Generator" 
+            iconColor="text-brand-blue" 
           />
         </div>
       </div>

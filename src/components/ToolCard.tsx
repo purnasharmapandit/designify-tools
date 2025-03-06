@@ -3,13 +3,13 @@ import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
 
 interface ToolCardProps {
+  name: string;
   color: string;
-  image: string;
-  alt: string;
+  iconColor: string;
   className?: string;
 }
 
-const ToolCard = ({ color, image, alt, className }: ToolCardProps) => {
+const ToolCard = ({ name, color, iconColor, className }: ToolCardProps) => {
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -23,13 +23,9 @@ const ToolCard = ({ color, image, alt, className }: ToolCardProps) => {
       )}
       style={{ aspectRatio: "1/1" }}
     >
-      <div className="h-full w-full p-2 flex items-center justify-center">
-        <img
-          src={image}
-          alt={alt}
-          className="w-full h-full object-contain"
-          loading="lazy"
-        />
+      <div className="h-full w-full p-6 flex flex-col items-center justify-center">
+        <span className={cn("text-5xl mb-3", iconColor)}>✦</span>
+        <h3 className="text-xl font-semibold text-center">{name}</h3>
       </div>
     </motion.div>
   );
