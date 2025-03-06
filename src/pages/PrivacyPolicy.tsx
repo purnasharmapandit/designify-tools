@@ -13,7 +13,7 @@ const PrivacyPolicy = () => {
       className="min-h-screen bg-white"
     >
       <Navbar />
-      <div className="pt-12 pb-6 bg-gradient-to-r from-primary/10 to-accent/10">
+      <div className="pt-28 pb-6 bg-gradient-to-r from-primary/10 to-accent/10">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             <div className="inline-block p-3 rounded-full bg-primary/10 mb-4">

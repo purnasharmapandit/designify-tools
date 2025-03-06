@@ -47,7 +47,7 @@ const ContactUs = () => {
       className="min-h-screen bg-white"
     >
       <Navbar />
-      <div className="pt-12 pb-6 bg-gradient-to-r from-primary/10 to-accent/10">
+      <div className="pt-28 pb-6 bg-gradient-to-r from-primary/10 to-accent/10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             <h1 className="text-4xl font-bold font-display mb-4">Contact Us</h1>
