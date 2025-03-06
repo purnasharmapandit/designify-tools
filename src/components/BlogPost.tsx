@@ -1,6 +1,6 @@
 
 import { motion } from "framer-motion";
-import { ArrowLeft, Clock, Share2, BookmarkPlus, Facebook, Copy, Pinterest } from "lucide-react";
+import { ArrowLeft, Clock, Share2, BookmarkPlus, Facebook, Copy } from "lucide-react";
 import { X } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
@@ -144,10 +144,7 @@ const BlogPost = ({ post, contentSlot }: BlogPostProps) => {
                       <X className="h-4 w-4" />
                       Tweet
                     </Button>
-                    <Button variant="outline" size="sm" onClick={() => window.open(`https://pinterest.com/pin/create/button/?url=${encodeURIComponent(window.location.href)}&media=${encodeURIComponent(post.coverImage || PLACEHOLDER_IMAGE)}&description=${encodeURIComponent(title)}`, '_blank')} className="flex items-center gap-2">
-                      <Pinterest className="h-4 w-4" />
-                      Pin
-                    </Button>
+                    {/* Removed Pinterest button since the icon isn't available */}
                   </div>
                   
                   {/* Mobile share dropdown */}
@@ -168,9 +165,7 @@ const BlogPost = ({ post, contentSlot }: BlogPostProps) => {
                         <DropdownMenuItem className="flex items-center gap-2" onClick={() => window.open(`https://twitter.com/intent/tweet?url=${encodeURIComponent(window.location.href)}&text=${encodeURIComponent(title)}`, '_blank')}>
                           <X className="h-4 w-4" /> Twitter
                         </DropdownMenuItem>
-                        <DropdownMenuItem className="flex items-center gap-2" onClick={() => window.open(`https://pinterest.com/pin/create/button/?url=${encodeURIComponent(window.location.href)}&media=${encodeURIComponent(post.coverImage || PLACEHOLDER_IMAGE)}&description=${encodeURIComponent(title)}`, '_blank')}>
-                          <Pinterest className="h-4 w-4" /> Pinterest
-                        </DropdownMenuItem>
+                        {/* Removed Pinterest menu item since the icon isn't available */}
                       </DropdownMenuContent>
                     </DropdownMenu>
                   </div>
