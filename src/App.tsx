@@ -15,6 +15,11 @@ import AboutUs from "./pages/AboutUs";
 import Pricing from "./pages/Pricing";
 import Tools from "./pages/Tools";
 import ScrollToTop from "./components/ScrollToTop";
+import CreateLogo from "./pages/blogs/CreateLogo";
+import ExportingDesigns from "./pages/blogs/ExportingDesigns";
+import CustomizingProfilePicture from "./pages/blogs/CustomizingProfilePicture";
+import BusinessCards from "./pages/blogs/BusinessCards";
+import BillingSubscriptions from "./pages/blogs/BillingSubscriptions";
 
 const queryClient = new QueryClient();
 
@@ -35,6 +40,11 @@ const App = () => (
           <Route path="/refund-policy" element={<RefundPolicy />} />
           <Route path="/contact-us" element={<ContactUs />} />
           <Route path="/about-us" element={<AboutUs />} />
+          <Route path="/blogs/create-logo" element={<CreateLogo />} />
+          <Route path="/blogs/exporting-designs" element={<ExportingDesigns />} />
+          <Route path="/blogs/customizing-profile-picture" element={<CustomizingProfilePicture />} />
+          <Route path="/blogs/business-cards" element={<BusinessCards />} />
+          <Route path="/blogs/billing-subscriptions" element={<BillingSubscriptions />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

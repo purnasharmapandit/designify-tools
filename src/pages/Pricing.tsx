@@ -1,4 +1,3 @@
-
 import { Button } from "@/components/ui/button";
 import { Check } from "lucide-react";
 import { motion } from "framer-motion";
@@ -73,7 +72,6 @@ const Pricing = () => {
         "24/7 priority support",
         "4K export quality",
         "Unlimited team members",
-        "API access",
         "Custom integration"
       ]
     }

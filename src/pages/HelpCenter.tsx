@@ -4,6 +4,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { HelpCircle, Book, Search } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
 
 const categories = [
   {
@@ -27,11 +28,11 @@ const categories = [
 ];
 
 const popularArticles = [
-  "How to create your first logo",
-  "Exporting designs in different formats",
-  "Customizing your profile picture",
-  "Creating business cards from templates",
-  "Account billing and subscriptions"
+  { title: "How to create your first logo", link: "/blogs/create-logo" },
+  { title: "Exporting designs in different formats", link: "/blogs/exporting-designs" },
+  { title: "Customizing your profile picture", link: "/blogs/customizing-profile-picture" },
+  { title: "Creating business cards from templates", link: "/blogs/business-cards" },
+  { title: "Account billing and subscriptions", link: "/blogs/billing-subscriptions" }
 ];
 
 const HelpCenter = () => {
@@ -94,10 +95,10 @@ const HelpCenter = () => {
             <ul className="divide-y divide-gray-200">
               {popularArticles.map((article, index) => (
                 <li key={index} className="py-4">
-                  <a href="#" className="flex items-center hover:text-primary transition-colors">
+                  <Link to={article.link} className="flex items-center hover:text-primary transition-colors">
                     <Book className="mr-4 h-5 w-5 text-primary" />
-                    <span>{article}</span>
-                  </a>
+                    <span>{article.title}</span>
+                  </Link>
                 </li>
               ))}
             </ul>
