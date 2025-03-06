@@ -121,7 +121,10 @@ export const downloadLogo = (logoId: string, format: 'svg' | 'png' | 'pdf' | 'jp
       toast.success("Logo downloaded as JPG image");
       break;
     default:
-      toast.success(`Logo downloaded in ${format.toUpperCase()} format`);
+      // Here's where the error occurred - format is never in this case due to TypeScript's exhaustive checking
+      // Ensure we have proper type assertion for safety
+      const formatString = format as string; // Explicitly cast to string to use toUpperCase
+      toast.success(`Logo downloaded in ${formatString.toUpperCase()} format`);
   }
 };
 
