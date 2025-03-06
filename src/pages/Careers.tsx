@@ -99,9 +99,9 @@ const CareersPage = () => {
         </section>
         
         {/* Why Join Us Section */}
-        <section className="py-16 bg-white">
+        <section className="bg-white py-[54px]">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-12 pt-28">
+            <div className="text-center mb-12 pt-28 py-[20px]">
               <h2 className="text-3xl md:text-4xl font-bold mb-4">Why Join Us?</h2>
               <p className="text-xl text-gray-600 max-w-2xl mx-auto">
                 Be part of a team that's revolutionizing design through artificial intelligence
