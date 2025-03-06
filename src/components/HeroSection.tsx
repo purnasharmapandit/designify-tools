@@ -1,6 +1,6 @@
 
 import { Button } from "@/components/ui/button";
-import { ChevronRight, Sparkles } from "lucide-react";
+import { ChevronRight, Sparkles, Zap, Star, PenTool } from "lucide-react";
 import { motion } from "framer-motion";
 
 const HeroSection = () => {
@@ -16,6 +16,9 @@ const HeroSection = () => {
           >
             <Sparkles className="h-8 w-8 text-brand-yellow absolute -left-10 -top-2 animate-float" />
             <Sparkles className="h-8 w-8 text-brand-blue absolute -right-10 top-2 animate-float" style={{ animationDelay: "1s" }} />
+            <Zap className="h-7 w-7 text-rose-400 absolute left-8 -top-6 animate-float" style={{ animationDelay: "0.5s" }} />
+            <Star className="h-6 w-6 text-green-400 absolute right-4 bottom-0 animate-float" style={{ animationDelay: "1.5s" }} />
+            <PenTool className="h-7 w-7 text-purple-400 absolute -right-16 -top-8 animate-float" style={{ animationDelay: "0.8s" }} />
           </motion.div>
           
           <motion.h1

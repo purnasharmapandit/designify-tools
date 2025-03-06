@@ -35,7 +35,7 @@ const Navbar = () => {
               Pricing
             </Link>
             <Link 
-              to="/contact" 
+              to="/contact-us" 
               className="font-medium text-gray-900 hover:text-primary transition-colors"
             >
               Contact
