@@ -21,7 +21,7 @@ const Footer = () => {
           <div>
             <h3 className="text-lg font-semibold mb-4">Tools</h3>
             <ul className="space-y-2">
-              <li><a href="#" className="text-gray-400 hover:text-white transition-colors">Logo Maker</a></li>
+              <li><Link to="/logo-maker" className="text-gray-400 hover:text-white transition-colors">Logo Maker</Link></li>
               <li><a href="#" className="text-gray-400 hover:text-white transition-colors">Profile Pic Generator</a></li>
               <li><a href="#" className="text-gray-400 hover:text-white transition-colors">Business Card Generator</a></li>
               <li><a href="#" className="text-gray-400 hover:text-white transition-colors">Banner Creator</a></li>
@@ -32,9 +32,10 @@ const Footer = () => {
             <h3 className="text-lg font-semibold mb-4">Company</h3>
             <ul className="space-y-2">
               <li><Link to="/about-us" className="text-gray-400 hover:text-white transition-colors">About Us</Link></li>
-              <li><a href="#" className="text-gray-400 hover:text-white transition-colors">Pricing</a></li>
+              <li><Link to="/pricing" className="text-gray-400 hover:text-white transition-colors">Pricing</Link></li>
               <li><a href="#" className="text-gray-400 hover:text-white transition-colors">Blog</a></li>
               <li><Link to="/contact-us" className="text-gray-400 hover:text-white transition-colors">Contact Us</Link></li>
+              <li><Link to="/careers" className="text-gray-400 hover:text-white transition-colors">Careers</Link></li>
             </ul>
           </div>
           
