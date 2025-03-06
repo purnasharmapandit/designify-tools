@@ -1,11 +1,13 @@
 
 import { motion } from "framer-motion";
-import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { useBlog } from "@/contexts/BlogContext";
+import { cn } from "@/lib/utils";
+
+const PLACEHOLDER_IMAGE = "/placeholder.svg";
 
 const Blog = () => {
   const { getAllPosts } = useBlog();
@@ -51,18 +53,23 @@ const Blog = () => {
               >
                 <Link to={`/blogs/${post.slug}`} className="block h-full">
                   <div className="rounded-xl overflow-hidden h-full border border-border transition-all duration-300 hover:shadow-lg hover:-translate-y-2">
-                    {post.coverImage && (
-                      <div className="aspect-video overflow-hidden">
-                        <img 
-                          src={post.coverImage} 
-                          alt={post.title} 
-                          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                        />
-                      </div>
-                    )}
+                    <div className="aspect-video overflow-hidden">
+                      <img 
+                        src={post.coverImage || PLACEHOLDER_IMAGE} 
+                        alt={post.title} 
+                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                      />
+                    </div>
                     <div className="p-6">
                       {post.category && (
-                        <span className="px-3 py-1 text-xs font-medium bg-primary/10 text-primary rounded-full">
+                        <span 
+                          className={cn(
+                            "px-3 py-1 text-xs font-medium rounded-full",
+                            post.categoryColor ? 
+                              `bg-${post.categoryColor}-100 text-${post.categoryColor}-800 border border-${post.categoryColor}-200` : 
+                              "bg-primary/10 text-primary"
+                          )}
+                        >
                           {post.category}
                         </span>
                       )}

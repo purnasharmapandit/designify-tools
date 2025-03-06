@@ -70,7 +70,7 @@ const BusinessCards = () => {
         <li>Order prints directly through our platform (premium feature)</li>
       </ul>
       
-      <div id="best-practices" className="bg-green-50 border-l-4 border-green-400 p-5 mt-8">
+      <div id="best-practices" className="bg-green-50 dark:bg-green-950/20 border-l-4 border-green-400 p-5 mt-8">
         <h3 className="text-lg font-bold mb-2">Best Practices for Business Cards</h3>
         <ul className="list-disc pl-6 space-y-2">
           <li>Keep the design clean and uncluttered</li>

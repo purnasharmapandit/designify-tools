@@ -38,6 +38,7 @@ export const blogPosts = {
     },
     coverImage: '/lovable-uploads/logo-maker.png',
     category: 'Design Guides',
+    categoryColor: 'blue',
     tags: ['Logo Design', 'Branding', 'Design Tools'],
     excerpt: 'Learn how to create a professional logo in minutes using our AI-powered Logo Maker.',
     tableOfContents: [
@@ -75,6 +76,7 @@ export const blogPosts = {
       avatar: 'https://i.pravatar.cc/150?img=5'
     },
     category: 'Tutorials',
+    categoryColor: 'yellow',
     tags: ['File Formats', 'Exports', 'Design Tools'],
     excerpt: 'A comprehensive guide to exporting your designs in various formats for different use cases.',
     tableOfContents: [
@@ -112,6 +114,7 @@ export const blogPosts = {
     },
     coverImage: '/lovable-uploads/profile-pic.png',
     category: 'Design Tips',
+    categoryColor: 'purple',
     tags: ['Profile Picture', 'Social Media', 'Image Editing'],
     excerpt: 'Tips and tutorials for creating the perfect profile picture for different platforms.',
     tableOfContents: [
@@ -147,6 +150,7 @@ export const blogPosts = {
     },
     coverImage: '/lovable-uploads/business-card.png',
     category: 'Templates',
+    categoryColor: 'green',
     tags: ['Business Cards', 'Print Design', 'Templates'],
     excerpt: 'Discover how to create professional business cards using our template library.',
     tableOfContents: [
@@ -181,6 +185,7 @@ export const blogPosts = {
       avatar: 'https://i.pravatar.cc/150?img=9'
     },
     category: 'Account Help',
+    categoryColor: 'orange',
     tags: ['Billing', 'Subscription', 'Pricing', 'Account'],
     excerpt: 'Everything you need to know about our subscription plans and billing options.',
     tableOfContents: [

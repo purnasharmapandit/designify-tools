@@ -26,6 +26,7 @@ export interface BlogPostType {
   author?: Author;
   coverImage?: string;
   category?: string;
+  categoryColor?: string;
   tags?: string[];
   excerpt?: string;
   tableOfContents?: TableOfContentsItem[];

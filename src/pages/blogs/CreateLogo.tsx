@@ -4,7 +4,10 @@ import BlogPost from "@/components/BlogPost";
 
 const CreateLogo = () => {
   const { getPostBySlug } = useBlog();
-  const post = getPostBySlug('create-logo') || blogPosts.createLogo;
+  const post = getPostBySlug('create-logo') || {
+    ...blogPosts.createLogo,
+    categoryColor: "green"
+  };
 
   const content = (
     <>
