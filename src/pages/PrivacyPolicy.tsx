@@ -13,17 +13,21 @@ const PrivacyPolicy = () => {
       className="min-h-screen bg-white"
     >
       <Navbar />
-      <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div className="text-center mb-12">
-          <div className="inline-block p-3 rounded-full bg-primary/10 mb-4">
-            <Lock className="h-8 w-8 text-primary" />
+      <div className="pt-12 pb-6 bg-gradient-to-r from-primary/10 to-accent/10">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center">
+            <div className="inline-block p-3 rounded-full bg-primary/10 mb-4">
+              <Lock className="h-8 w-8 text-primary" />
+            </div>
+            <h1 className="text-4xl font-bold font-display mb-4">Privacy Policy</h1>
+            <p className="text-lg text-gray-600">
+              Last updated: June 1, 2023
+            </p>
           </div>
-          <h1 className="text-4xl font-bold font-display mb-4">Privacy Policy</h1>
-          <p className="text-lg text-gray-600">
-            Last updated: June 1, 2023
-          </p>
         </div>
-
+      </div>
+      
+      <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="prose prose-lg max-w-none">
           <p>
             At AI Design Tools, we take your privacy seriously. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website or use our services.

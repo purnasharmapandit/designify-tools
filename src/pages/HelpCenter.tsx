@@ -43,22 +43,26 @@ const HelpCenter = () => {
       className="min-h-screen bg-white"
     >
       <Navbar />
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold font-display mb-4">Help Center</h1>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto mb-8">
-            Find answers to your questions and learn how to get the most out of our AI design tools
-          </p>
-          
-          <div className="max-w-2xl mx-auto mb-16">
-            <div className="relative">
-              <input
-                type="text"
-                placeholder="Search for help articles..."
-                className="w-full py-3 px-4 pr-12 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
-              />
-              <Search className="absolute right-4 top-3.5 text-gray-400" />
-            </div>
+      <div className="pt-12 pb-6 bg-gradient-to-r from-primary/10 to-accent/10">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center">
+            <h1 className="text-4xl font-bold font-display mb-4">Help Center</h1>
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+              Find answers to your questions and learn how to get the most out of our AI design tools
+            </p>
+          </div>
+        </div>
+      </div>
+      
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div className="max-w-2xl mx-auto mb-16">
+          <div className="relative">
+            <input
+              type="text"
+              placeholder="Search for help articles..."
+              className="w-full py-3 px-4 pr-12 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+            />
+            <Search className="absolute right-4 top-3.5 text-gray-400" />
           </div>
         </div>
 
