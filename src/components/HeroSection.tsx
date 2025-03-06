@@ -1,7 +1,6 @@
 
 import { Button } from "@/components/ui/button";
 import { ChevronRight, Sparkles } from "lucide-react";
-import ToolCard from "./ToolCard";
 import { motion } from "framer-motion";
 
 const HeroSection = () => {
@@ -49,25 +48,6 @@ const HeroSection = () => {
               Get Started Now <ChevronRight className="ml-2 h-4 w-4" />
             </Button>
           </motion.div>
-        </div>
-        
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-16">
-          <ToolCard 
-            name="Logo Maker" 
-            color="bg-pink-100" 
-            iconColor="text-brand-pink" 
-          />
-          <ToolCard 
-            name="Profile Pic Generator" 
-            color="bg-purple-100" 
-            iconColor="text-brand-purple"
-            className="md:mt-8" 
-          />
-          <ToolCard 
-            name="Business Card Generator" 
-            color="bg-blue-100" 
-            iconColor="text-brand-blue" 
-          />
         </div>
       </div>
     </section>

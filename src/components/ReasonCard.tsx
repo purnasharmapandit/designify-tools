@@ -7,7 +7,7 @@ interface ReasonCardProps {
   icon: LucideIcon;
   title: string;
   description: string;
-  color: string;
+  bgGradient: string;
   iconBgColor: string;
   delay?: number;
 }
@@ -16,7 +16,7 @@ const ReasonCard = ({
   icon: Icon, 
   title, 
   description, 
-  color,
+  bgGradient,
   iconBgColor,
   delay = 0 
 }: ReasonCardProps) => {
@@ -27,8 +27,8 @@ const ReasonCard = ({
       transition={{ duration: 0.5, delay: delay * 0.1 }}
       viewport={{ once: true }}
       className={cn(
-        "rounded-3xl p-6 glass-card card-hover h-full",
-        color
+        "rounded-3xl p-6 card-hover h-full",
+        bgGradient
       )}
     >
       <div className="flex flex-col h-full">
@@ -36,7 +36,7 @@ const ReasonCard = ({
           <Icon className="h-6 w-6 text-white" />
         </div>
         <h3 className="text-xl font-semibold mb-2">{title}</h3>
-        <p className="text-gray-600 mt-auto">{description}</p>
+        <p className="text-gray-700 mt-auto">{description}</p>
       </div>
     </motion.div>
   );

@@ -8,28 +8,32 @@ const features = [
     icon: PenTool,
     title: "Logo Designer",
     description: "Create professional logos for your brand with our intuitive designer. Choose from thousands of templates, customize colors, fonts, and icons to match your brand personality.",
-    iconColor: "bg-brand-purple",
+    iconColor: "text-white",
+    bgGradient: "bg-gradient-to-br from-purple-400 to-indigo-400 text-white",
     delay: 0
   },
   {
     icon: Image,
     title: "Profile Pictures",
     description: "Generate stunning profile pictures optimized for social media. Our AI helps you create professional headshots, avatars, and profile images that stand out on any platform.",
-    iconColor: "bg-brand-pink",
+    iconColor: "text-white",
+    bgGradient: "bg-gradient-to-br from-pink-400 to-rose-400 text-white",
     delay: 1
   },
   {
     icon: Layers,
     title: "Business Cards",
     description: "Design beautiful business cards that leave a lasting impression. Choose from premium templates, add your branding, and customize every detail to reflect your professional identity.",
-    iconColor: "bg-brand-blue",
+    iconColor: "text-white",
+    bgGradient: "bg-gradient-to-br from-blue-400 to-cyan-400 text-white",
     delay: 2
   },
   {
     icon: Zap,
     title: "Fast Export",
     description: "Export your designs in multiple formats with one click. Download in PNG, JPG, SVG, and PDF formats optimized for print, web, or social media with automatic sizing.",
-    iconColor: "bg-brand-yellow",
+    iconColor: "text-white",
+    bgGradient: "bg-gradient-to-br from-amber-400 to-yellow-300 text-white",
     delay: 3
   }
 ];
@@ -59,6 +63,7 @@ const FeaturesSection = () => {
               title={feature.title}
               description={feature.description}
               iconColor={feature.iconColor}
+              bgGradient={feature.bgGradient}
               delay={feature.delay}
             />
           ))}
