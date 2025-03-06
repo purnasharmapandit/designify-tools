@@ -1,11 +1,13 @@
 
 import { Button } from "@/components/ui/button";
-import { Menu, Wand2, X } from "lucide-react";
+import { Menu, Wand2, X, User, LogOut } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useState } from "react";
+import { useAuth } from "@/contexts/AuthContext";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { user, signOut, isLoading } = useAuth();
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md border-b border-slate-100">
@@ -47,12 +49,38 @@ const Navbar = () => {
           </nav>
           
           <div className="flex items-center space-x-4">
-            <Button
-              variant="default"
-              className="hidden md:inline-flex rounded-full font-medium px-6 transition-all"
-            >
-              Login
-            </Button>
+            {isLoading ? (
+              <div className="h-10 w-20 bg-gray-200 animate-pulse rounded-full"></div>
+            ) : user ? (
+              <div className="flex items-center gap-2">
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  className="flex items-center gap-2"
+                  onClick={signOut}
+                >
+                  <LogOut className="h-4 w-4" />
+                  <span className="hidden sm:inline">Sign out</span>
+                </Button>
+                <Button
+                  variant="default"
+                  size="sm"
+                  className="rounded-full"
+                >
+                  <User className="h-4 w-4 mr-2" />
+                  <span>Profile</span>
+                </Button>
+              </div>
+            ) : (
+              <Link to="/auth">
+                <Button
+                  variant="default"
+                  className="hidden md:inline-flex rounded-full font-medium px-6 transition-all"
+                >
+                  Sign in
+                </Button>
+              </Link>
+            )}
             
             {/* Mobile Menu Button */}
             <button
@@ -101,12 +129,42 @@ const Navbar = () => {
                 Contact
               </Link>
               <div className="mt-4">
-                <Button
-                  variant="default"
-                  className="w-full rounded-full font-medium px-6 transition-all"
-                >
-                  Login
-                </Button>
+                {isLoading ? (
+                  <div className="h-10 w-full bg-gray-200 animate-pulse rounded-full"></div>
+                ) : user ? (
+                  <div className="space-y-2">
+                    <Button
+                      variant="outline"
+                      className="w-full justify-start"
+                      onClick={() => {
+                        setIsMenuOpen(false);
+                      }}
+                    >
+                      <User className="h-4 w-4 mr-2" />
+                      Profile
+                    </Button>
+                    <Button
+                      variant="outline"
+                      className="w-full justify-start"
+                      onClick={() => {
+                        signOut();
+                        setIsMenuOpen(false);
+                      }}
+                    >
+                      <LogOut className="h-4 w-4 mr-2" />
+                      Sign out
+                    </Button>
+                  </div>
+                ) : (
+                  <Link to="/auth" onClick={() => setIsMenuOpen(false)}>
+                    <Button
+                      variant="default"
+                      className="w-full rounded-full font-medium px-6 transition-all"
+                    >
+                      Sign in
+                    </Button>
+                  </Link>
+                )}
               </div>
             </div>
           </div>
