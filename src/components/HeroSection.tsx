@@ -1,6 +1,6 @@
 
 import { Button } from "@/components/ui/button";
-import { ChevronRight, Sparkles, Zap, Star, PenTool } from "lucide-react";
+import { ChevronRight, Sparkles, Zap, Star, PenTool, Wand2, Lightbulb } from "lucide-react";
 import { motion } from "framer-motion";
 
 const HeroSection = () => {
@@ -8,25 +8,17 @@ const HeroSection = () => {
     <section className="pt-28 pb-16 px-4 sm:pt-32 sm:pb-20">
       <div className="max-w-7xl mx-auto">
         <div className="flex flex-col items-center justify-center text-center mb-12">
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5 }}
-            className="relative mb-4"
-          >
-            <Sparkles className="h-8 w-8 text-brand-yellow absolute -left-10 -top-2 animate-float" />
-            <Sparkles className="h-8 w-8 text-brand-blue absolute -right-10 top-2 animate-float" style={{ animationDelay: "1s" }} />
-            <Zap className="h-7 w-7 text-rose-400 absolute left-8 -top-6 animate-float" style={{ animationDelay: "0.5s" }} />
-            <Star className="h-6 w-6 text-green-400 absolute right-4 bottom-0 animate-float" style={{ animationDelay: "1.5s" }} />
-            <PenTool className="h-7 w-7 text-purple-400 absolute -right-16 -top-8 animate-float" style={{ animationDelay: "0.8s" }} />
-          </motion.div>
-          
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="text-4xl md:text-6xl font-bold font-display max-w-3xl leading-tight mb-4"
+            className="text-4xl md:text-6xl font-bold font-display max-w-3xl leading-tight mb-4 relative"
           >
+            <Sparkles className="h-12 w-12 text-brand-yellow absolute -left-14 top-0 animate-float" />
+            <Star className="h-10 w-10 text-brand-blue absolute -left-4 -top-8 animate-float" style={{ animationDelay: "0.8s" }} />
+            <Zap className="h-14 w-14 text-rose-400 absolute -right-16 top-0 animate-float" style={{ animationDelay: "0.5s" }} />
+            <PenTool className="h-12 w-12 text-purple-400 absolute -right-4 -top-10 animate-float" style={{ animationDelay: "1.2s" }} />
+            <Lightbulb className="h-10 w-10 text-green-400 absolute left-1/4 -bottom-6 animate-float" style={{ animationDelay: "1.5s" }} />
             The best place to get your design tools without any doubt
           </motion.h1>
           
