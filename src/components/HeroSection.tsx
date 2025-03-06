@@ -1,3 +1,4 @@
+
 import { Button } from "@/components/ui/button";
 import { ChevronRight, Sparkles, Zap, Star, PenTool, Wand2, Lightbulb } from "lucide-react";
 import { motion } from "framer-motion";
@@ -18,7 +19,11 @@ const HeroSection = () => {
               <Star className="absolute hidden md:block h-12 w-12 text-brand-blue md:-right-16 top-0 animate-float" style={{ animationDelay: "0.5s" }} />
               <PenTool className="absolute hidden md:block h-14 w-14 text-purple-400 md:-right-4 bottom-0 animate-float" style={{ animationDelay: "1.2s" }} />
               <Lightbulb className="absolute hidden md:block h-14 w-14 text-green-400 md:-left-4 bottom-0 animate-float" style={{ animationDelay: "0.8s" }} />
-              The best place to get your design tools without any doubt
+              <span className="bg-gradient-to-r from-purple-600 to-pink-500 text-transparent bg-clip-text">Unleash Your Creativity</span> With Our 
+              <span className="relative inline-block ml-2">
+                <span className="relative z-10">Game-Changing</span>
+                <span className="absolute bottom-1 left-0 w-full h-3 bg-yellow-300/50 -z-10 transform -rotate-1"></span>
+              </span> Design Tools
             </motion.h1>
           </div>
           
