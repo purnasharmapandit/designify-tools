@@ -9,7 +9,7 @@ const features = [
     title: "Logo Designer",
     description: "Create professional logos for your brand with our intuitive designer. Choose from thousands of templates, customize colors, fonts, and icons to match your brand personality.",
     iconColor: "text-white",
-    bgGradient: "bg-gradient-to-br from-purple-400 to-indigo-400 text-white",
+    bgGradient: "bg-gradient-to-br from-purple-100 to-indigo-100 text-gray-800",
     delay: 0
   },
   {
@@ -17,7 +17,7 @@ const features = [
     title: "Profile Pictures",
     description: "Generate stunning profile pictures optimized for social media. Our AI helps you create professional headshots, avatars, and profile images that stand out on any platform.",
     iconColor: "text-white",
-    bgGradient: "bg-gradient-to-br from-pink-400 to-rose-400 text-white",
+    bgGradient: "bg-gradient-to-br from-pink-100 to-rose-100 text-gray-800",
     delay: 1
   },
   {
@@ -25,7 +25,7 @@ const features = [
     title: "Business Cards",
     description: "Design beautiful business cards that leave a lasting impression. Choose from premium templates, add your branding, and customize every detail to reflect your professional identity.",
     iconColor: "text-white",
-    bgGradient: "bg-gradient-to-br from-blue-400 to-cyan-400 text-white",
+    bgGradient: "bg-gradient-to-br from-blue-100 to-cyan-100 text-gray-800",
     delay: 2
   },
   {
@@ -33,7 +33,7 @@ const features = [
     title: "Fast Export",
     description: "Export your designs in multiple formats with one click. Download in PNG, JPG, SVG, and PDF formats optimized for print, web, or social media with automatic sizing.",
     iconColor: "text-white",
-    bgGradient: "bg-gradient-to-br from-amber-400 to-yellow-300 text-white",
+    bgGradient: "bg-gradient-to-br from-amber-100 to-yellow-100 text-gray-800",
     delay: 3
   }
 ];
