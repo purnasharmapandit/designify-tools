@@ -103,7 +103,7 @@ const CareersPage = () => {
         {/* Hero Section */}
         <section className="bg-gradient-to-br from-primary/20 to-accent/10 py-20">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center">
+            <div className="text-center pt-28">
               <motion.h1 
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -141,7 +141,7 @@ const CareersPage = () => {
         {/* Why Join Us Section */}
         <section className="py-16 bg-white">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-12">
+            <div className="text-center mb-12 pt-28">
               <h2 className="text-3xl md:text-4xl font-bold mb-4">Why Join Us?</h2>
               <p className="text-xl text-gray-600 max-w-2xl mx-auto">
                 Be part of a team that's revolutionizing design through artificial intelligence
@@ -201,7 +201,7 @@ const CareersPage = () => {
         {/* Open Positions Section */}
         <section id="open-positions" className="py-16 bg-gray-50">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-12">
+            <div className="text-center mb-12 pt-28">
               <h2 className="text-3xl md:text-4xl font-bold mb-4">Open Positions</h2>
               <p className="text-xl text-gray-600 max-w-2xl mx-auto">
                 Explore our current opportunities and find your perfect role
@@ -224,7 +224,7 @@ const CareersPage = () => {
         {/* Application Form Section */}
         <section id="application-section" className="py-16 bg-white">
           <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-12">
+            <div className="text-center mb-12 pt-28">
               <h2 className="text-3xl md:text-4xl font-bold mb-4">Apply Now</h2>
               <p className="text-xl text-gray-600 max-w-2xl mx-auto">
                 Take the first step toward joining our team
@@ -246,7 +246,7 @@ const CareersPage = () => {
                 viewport={{ once: true }}
                 className="space-y-6"
               >
-                <h2 className="text-3xl md:text-4xl font-bold">Our Culture & Values</h2>
+                <h2 className="text-3xl md:text-4xl font-bold pt-28">Our Culture & Values</h2>
                 <p className="text-xl text-gray-700">
                   We believe in creating an inclusive, collaborative environment where everyone can do their best work.
                 </p>
