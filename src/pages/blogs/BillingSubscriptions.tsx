@@ -1,4 +1,3 @@
-
 import { motion } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -71,8 +70,8 @@ const BillingSubscriptions = () => {
             
             <h3 className="text-xl font-bold mt-6 mb-3">How to Subscribe</h3>
             <ol className="list-decimal pl-6 space-y-2 mb-6">
-              <li>Log in to your account and navigate to "Account Settings"</li>
-              <li>Click on "Subscription" in the sidebar menu</li>
+              <li>Log in to your account and navigate to &quot;Account Settings&quot;</li>
+              <li>Click on &quot;Subscription&quot; in the sidebar menu</li>
               <li>Choose your preferred plan</li>
               <li>Enter your payment information</li>
               <li>Review your order and confirm the subscription</li>
@@ -83,8 +82,8 @@ const BillingSubscriptions = () => {
               You can upgrade or downgrade your subscription at any time:
             </p>
             <ol className="list-decimal pl-6 space-y-2 mb-6">
-              <li>Go to "Account Settings" > "Subscription"</li>
-              <li>Click "Change Plan"</li>
+              <li>Go to &quot;Account Settings&quot; &gt; &quot;Subscription&quot;</li>
+              <li>Click &quot;Change Plan&quot;</li>
               <li>Select your new plan and confirm the change</li>
             </ol>
             <p>
@@ -107,7 +106,7 @@ const BillingSubscriptions = () => {
             <p>
               Subscriptions are billed monthly or annually, depending on your chosen billing cycle. You'll receive 
               an email receipt for each payment. All invoices are also available in your account dashboard under 
-              "Billing History."
+              &quot;Billing History.&quot;
             </p>
             
             <div className="bg-blue-50 border-l-4 border-blue-400 p-5 mt-8">
