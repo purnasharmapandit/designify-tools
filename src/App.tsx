@@ -12,6 +12,8 @@ import PrivacyPolicy from "./pages/PrivacyPolicy";
 import RefundPolicy from "./pages/RefundPolicy";
 import ContactUs from "./pages/ContactUs";
 import AboutUs from "./pages/AboutUs";
+import Pricing from "./pages/Pricing";
+import Tools from "./pages/Tools";
 import ScrollToTop from "./components/ScrollToTop";
 
 const queryClient = new QueryClient();
