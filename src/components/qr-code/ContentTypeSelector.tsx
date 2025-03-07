@@ -1,4 +1,3 @@
-
 import React from "react";
 import { motion } from "framer-motion";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
@@ -8,21 +7,14 @@ import {
   Globe, 
   Type, 
   Share2, 
-  Download, 
-  Upload, 
-  FileUp, 
   CreditCard, 
-  Music, 
   Wifi, 
   ClipboardList, 
-  Calendar, 
   Video, 
-  MapPin, 
   Star, 
   UserSquare, 
   Mail, 
-  Phone, 
-  MessageSquare
+  Phone
 } from "lucide-react";
 
 interface ContentTypeItem {
@@ -38,7 +30,7 @@ interface ContentTypeCategory {
   items: ContentTypeItem[];
 }
 
-// Simplified content categories
+// Updated content categories with removed options
 const contentCategories: ContentTypeCategory[] = [
   {
     id: "popular",
@@ -47,22 +39,17 @@ const contentCategories: ContentTypeCategory[] = [
       { type: "website", name: "Website URL", icon: <Globe className="h-5 w-5" />, description: "Link to a website or webpage" },
       { type: "text", name: "Plain Text", icon: <Type className="h-5 w-5" />, description: "Add any text content" },
       { type: "social", name: "Social Media", icon: <Share2 className="h-5 w-5" />, description: "Link to social media profiles" },
-      { type: "app_download", name: "App Download", icon: <Download className="h-5 w-5" />, description: "Link to app store download" },
-      { type: "batch_upload", name: "Batch Upload", icon: <Upload className="h-5 w-5" />, description: "Generate multiple QR codes" }
+      { type: "batch_upload", name: "Batch Upload", icon: <Star className="h-5 w-5" />, description: "Generate multiple QR codes" }
     ]
   },
   {
     id: "business",
     name: "Business Links",
     items: [
-      { type: "file_upload", name: "File Upload", icon: <FileUp className="h-5 w-5" />, description: "Link to downloadable files" },
       { type: "payment", name: "Payments", icon: <CreditCard className="h-5 w-5" />, description: "Link to payment options" },
-      { type: "music", name: "Music", icon: <Music className="h-5 w-5" />, description: "Link to music platforms" },
       { type: "wifi", name: "WiFi Login", icon: <Wifi className="h-5 w-5" />, description: "Share WiFi credentials" },
-      { type: "form", name: "Form Submission", icon: <ClipboardList className="h-5 w-5" />, description: "Link to online forms" },
-      { type: "zoom", name: "Zoom Meeting", icon: <Video className="h-5 w-5" />, description: "Join video meetings" },
-      { type: "location", name: "Location", icon: <MapPin className="h-5 w-5" />, description: "Share a map location" },
-      { type: "google_form", name: "Google Form", icon: <ClipboardList className="h-5 w-5" />, description: "Link to Google Forms" }
+      { type: "google_form", name: "Google Form", icon: <ClipboardList className="h-5 w-5" />, description: "Link to Google Forms" },
+      { type: "zoom", name: "Zoom Meeting", icon: <Video className="h-5 w-5" />, description: "Join video meetings" }
     ]
   },
   {
@@ -70,9 +57,7 @@ const contentCategories: ContentTypeCategory[] = [
     name: "Contacts",
     items: [
       { type: "phone", name: "Phone Number", icon: <Phone className="h-5 w-5" />, description: "Share phone contact" },
-      { type: "email", name: "Email Address", icon: <Mail className="h-5 w-5" />, description: "Share email contact" },
-      { type: "email_message", name: "Email Message", icon: <Mail className="h-5 w-5" />, description: "Compose an email" },
-      { type: "sms", name: "SMS Message", icon: <MessageSquare className="h-5 w-5" />, description: "Send a text message" }
+      { type: "email", name: "Email Address", icon: <Mail className="h-5 w-5" />, description: "Share email contact" }
     ]
   }
 ];
