@@ -12,8 +12,12 @@ import { ColorPicker } from "@/components/ui/color-picker";
 import { 
   QRCodeOptions, 
   QRCodeErrorCorrectionLevel, 
-  QRCodeOutputFormat 
+  QRCodeOutputFormat,
+  QRCodeContentType,
+  QRCodeCenterElement
 } from "@/hooks/use-qrcode";
+import ContentTypeSelector from "./ContentTypeSelector";
+import CenterElementSelector from "./CenterElementSelector";
 
 interface QRCodeFormProps {
   options: QRCodeOptions;
@@ -27,6 +31,52 @@ const QRCodeForm: React.FC<QRCodeFormProps> = ({ options, onUpdateOptions, onDow
     onUpdateOptions({ [name]: value });
   };
 
+  const handleContentTypeChange = (contentType: QRCodeContentType) => {
+    onUpdateOptions({ contentType });
+  };
+
+  const handleCenterElementChange = (centerElement: QRCodeCenterElement | null) => {
+    onUpdateOptions({ centerElement });
+  };
+
+  // Helper function to get the right input label based on content type
+  const getContentInputLabel = () => {
+    switch (options.contentType) {
+      case 'website':
+        return 'Website URL';
+      case 'text':
+        return 'Text';
+      case 'phone':
+        return 'Phone Number';
+      case 'email':
+        return 'Email Address';
+      case 'wifi':
+        return 'WiFi Details (SSID, Password)';
+      // Add more cases as needed
+      default:
+        return 'Content';
+    }
+  };
+
+  // Helper function to get the right placeholder based on content type
+  const getContentPlaceholder = () => {
+    switch (options.contentType) {
+      case 'website':
+        return 'https://example.com';
+      case 'text':
+        return 'Enter your text here...';
+      case 'phone':
+        return '+1 555 123 4567';
+      case 'email':
+        return 'example@domain.com';
+      case 'wifi':
+        return 'Enter WiFi details...';
+      // Add more cases as needed
+      default:
+        return 'Enter content for your QR code...';
+    }
+  };
+
   return (
     <Card className="bg-white shadow-md">
       <CardContent className="p-6">
@@ -36,17 +86,30 @@ const QRCodeForm: React.FC<QRCodeFormProps> = ({ options, onUpdateOptions, onDow
           transition={{ duration: 0.5 }}
           className="space-y-6"
         >
+          <div className="space-y-4">
+            <Label>QR Code Type</Label>
+            <ContentTypeSelector 
+              selectedType={options.contentType} 
+              onSelect={handleContentTypeChange} 
+            />
+          </div>
+
           <div className="space-y-2">
-            <Label htmlFor="content">QR Code Content</Label>
+            <Label htmlFor="content">{getContentInputLabel()}</Label>
             <Textarea
               id="content"
               name="content"
-              placeholder="Enter URL or text..."
+              placeholder={getContentPlaceholder()}
               value={options.content}
               onChange={handleInputChange}
               className="min-h-24"
             />
           </div>
+
+          <CenterElementSelector 
+            centerElement={options.centerElement} 
+            onChange={handleCenterElementChange} 
+          />
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="space-y-2">

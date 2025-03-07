@@ -2,14 +2,21 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { Card } from "@/components/ui/card";
+import { QRCodeCenterElement } from "@/hooks/use-qrcode";
 
 interface QRCodePreviewProps {
   qrCodeUrl: string;
   isGenerating: boolean;
   error: string | null;
+  centerElement?: QRCodeCenterElement | null;
 }
 
-const QRCodePreview: React.FC<QRCodePreviewProps> = ({ qrCodeUrl, isGenerating, error }) => {
+const QRCodePreview: React.FC<QRCodePreviewProps> = ({ 
+  qrCodeUrl, 
+  isGenerating, 
+  error,
+  centerElement 
+}) => {
   return (
     <Card className="flex flex-col items-center justify-center p-6 bg-white shadow-md min-h-80">
       <motion.div
@@ -28,12 +35,37 @@ const QRCodePreview: React.FC<QRCodePreviewProps> = ({ qrCodeUrl, isGenerating, 
             <p>{error}</p>
           </div>
         ) : qrCodeUrl ? (
-          <div className="p-2 bg-white rounded-lg shadow-sm">
+          <div className="p-2 bg-white rounded-lg shadow-sm relative">
             <img 
               src={qrCodeUrl} 
               alt="Generated QR Code" 
               className="max-w-full"
             />
+            
+            {/* Center Element Overlay */}
+            {centerElement && (
+              <div 
+                className="absolute inset-0 flex items-center justify-center pointer-events-none"
+                style={{ 
+                  // Size is a percentage of the QR code
+                  transform: `scale(${centerElement.size / 100})` 
+                }}
+              >
+                {centerElement.type === 'logo' && centerElement.content ? (
+                  <div className="bg-white p-1 rounded-md">
+                    <img 
+                      src={centerElement.content} 
+                      alt="Logo" 
+                      className="w-10 h-10 object-contain"
+                    />
+                  </div>
+                ) : centerElement.type === 'text' && centerElement.content ? (
+                  <div className="bg-white p-1 rounded-md text-sm font-bold text-black">
+                    {centerElement.content}
+                  </div>
+                ) : null}
+              </div>
+            )}
           </div>
         ) : (
           <div className="text-center p-4 text-gray-400">

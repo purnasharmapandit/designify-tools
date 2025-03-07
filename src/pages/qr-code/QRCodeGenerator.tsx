@@ -1,3 +1,4 @@
+
 import React from "react";
 import { motion } from "framer-motion";
 import { QrCode } from "lucide-react";
@@ -22,13 +23,15 @@ const QRCodeGenerator = () => {
     updateOptions,
     downloadQRCode 
   } = useQRCode({
+    contentType: 'website',
     content: '',
     size: 250,
     color: '#000000',
     bgColor: '#ffffff',
     errorCorrectionLevel: 'M',
     margin: 4,
-    outputFormat: 'png'
+    outputFormat: 'png',
+    centerElement: null
   });
 
   const handleDownload = () => {
@@ -76,6 +79,7 @@ const QRCodeGenerator = () => {
                 qrCodeUrl={qrCodeUrl} 
                 isGenerating={isGenerating} 
                 error={error}
+                centerElement={options.centerElement}
               />
             </div>
           </div>
