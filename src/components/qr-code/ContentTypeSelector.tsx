@@ -15,7 +15,6 @@ import {
   Music, 
   Wifi, 
   ClipboardList, 
-  CalendarCheck, 
   Calendar, 
   Video, 
   MapPin, 
@@ -23,10 +22,7 @@ import {
   UserSquare, 
   Mail, 
   Phone, 
-  MessageSquare, 
-  User, 
-  Ticket, 
-  FileText 
+  MessageSquare
 } from "lucide-react";
 
 interface ContentTypeItem {
@@ -42,6 +38,7 @@ interface ContentTypeCategory {
   items: ContentTypeItem[];
 }
 
+// Simplified content categories
 const contentCategories: ContentTypeCategory[] = [
   {
     id: "popular",
@@ -63,14 +60,9 @@ const contentCategories: ContentTypeCategory[] = [
       { type: "music", name: "Music", icon: <Music className="h-5 w-5" />, description: "Link to music platforms" },
       { type: "wifi", name: "WiFi Login", icon: <Wifi className="h-5 w-5" />, description: "Share WiFi credentials" },
       { type: "form", name: "Form Submission", icon: <ClipboardList className="h-5 w-5" />, description: "Link to online forms" },
-      { type: "attendance", name: "Attendance", icon: <CalendarCheck className="h-5 w-5" />, description: "Track attendance" },
-      { type: "event", name: "Event", icon: <Calendar className="h-5 w-5" />, description: "Link to event details" },
       { type: "zoom", name: "Zoom Meeting", icon: <Video className="h-5 w-5" />, description: "Join video meetings" },
       { type: "location", name: "Location", icon: <MapPin className="h-5 w-5" />, description: "Share a map location" },
-      { type: "review", name: "Google Review", icon: <Star className="h-5 w-5" />, description: "Request reviews" },
-      { type: "business_card", name: "Digital Business Card", icon: <UserSquare className="h-5 w-5" />, description: "Share contact details" },
-      { type: "google_form", name: "Google Form", icon: <ClipboardList className="h-5 w-5" />, description: "Link to Google Forms" },
-      { type: "newsletter", name: "Newsletter", icon: <Mail className="h-5 w-5" />, description: "Sign up for newsletters" }
+      { type: "google_form", name: "Google Form", icon: <ClipboardList className="h-5 w-5" />, description: "Link to Google Forms" }
     ]
   },
   {
@@ -81,17 +73,6 @@ const contentCategories: ContentTypeCategory[] = [
       { type: "email", name: "Email Address", icon: <Mail className="h-5 w-5" />, description: "Share email contact" },
       { type: "email_message", name: "Email Message", icon: <Mail className="h-5 w-5" />, description: "Compose an email" },
       { type: "sms", name: "SMS Message", icon: <MessageSquare className="h-5 w-5" />, description: "Send a text message" }
-    ]
-  },
-  {
-    id: "custom",
-    name: "Custom Pages",
-    items: [
-      { type: "contact_details", name: "Contact Details", icon: <User className="h-5 w-5" />, description: "Share contact information" },
-      { type: "event_page", name: "Event", icon: <Calendar className="h-5 w-5" />, description: "Create an event page" },
-      { type: "social_links", name: "Social Link Pages", icon: <Share2 className="h-5 w-5" />, description: "Share multiple social links" },
-      { type: "coupon", name: "Coupon", icon: <Ticket className="h-5 w-5" />, description: "Offer discounts and deals" },
-      { type: "detail_page", name: "Detail Page", icon: <FileText className="h-5 w-5" />, description: "Create information pages" }
     ]
   }
 ];
@@ -114,7 +95,7 @@ const ContentTypeSelector: React.FC<ContentTypeSelectorProps> = ({ selectedType,
   return (
     <div className="space-y-4">
       <Tabs defaultValue={getSelectedCategory()} className="w-full">
-        <TabsList className="grid grid-cols-4 mb-4">
+        <TabsList className="grid grid-cols-3 mb-4">
           {contentCategories.map((category) => (
             <TabsTrigger key={category.id} value={category.id} className="text-xs sm:text-sm">
               {category.name}

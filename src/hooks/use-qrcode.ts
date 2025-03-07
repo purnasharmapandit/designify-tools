@@ -18,14 +18,9 @@ export type QRCodeContentType =
   | 'music' 
   | 'wifi' 
   | 'form' 
-  | 'attendance' 
-  | 'event' 
   | 'zoom' 
   | 'location' 
-  | 'review' 
-  | 'business_card' 
-  | 'google_form' 
-  | 'newsletter'
+  | 'google_form'
   // Contacts
   | 'phone' 
   | 'email' 
@@ -102,20 +97,20 @@ export function useQRCode(options: Partial<QRCodeOptions> = {}) {
         }
       };
 
-      // For now, simple QR code generation without center element
-      // This would need a custom library implementation or post-processing for center elements
+      // Prepare content based on content type
+      const formattedContent = formatContentByType(qrOptions.content, qrOptions.contentType);
       
       let dataUrl;
       
       if (qrOptions.outputFormat === 'svg') {
-        dataUrl = await QRCode.toString(qrOptions.content, {
+        dataUrl = await QRCode.toString(formattedContent, {
           ...qrCodeOptions,
           type: 'svg'
         });
         // Convert SVG string to data URL
         dataUrl = `data:image/svg+xml;charset=utf-8,${encodeURIComponent(dataUrl)}`;
       } else {
-        dataUrl = await QRCode.toDataURL(qrOptions.content, {
+        dataUrl = await QRCode.toDataURL(formattedContent, {
           ...qrCodeOptions,
           type: qrOptions.outputFormat
         });
@@ -137,20 +132,57 @@ export function useQRCode(options: Partial<QRCodeOptions> = {}) {
           return `https://${content}`;
         }
         return content;
+        
       case 'email':
         return `mailto:${content}`;
+        
       case 'phone':
         return `tel:${content}`;
+        
       case 'sms':
         return `sms:${content}`;
+        
       case 'wifi':
-        // Format: WIFI:S:SSID;T:WPA;P:password;;
         try {
+          // Format: WIFI:S:SSID;T:WPA;P:password;;
           const wifiData = JSON.parse(content);
           return `WIFI:S:${wifiData.ssid};T:${wifiData.encryption || 'WPA'};P:${wifiData.password};;`;
         } catch (e) {
           return content;
         }
+        
+      case 'payment':
+        try {
+          const paymentData = JSON.parse(content);
+          if (paymentData.type === 'paypal') {
+            return `https://paypal.me/${paymentData.id}`;
+          } else if (paymentData.type === 'upi') {
+            return `upi://pay?pa=${paymentData.id}`;
+          }
+          return content;
+        } catch (e) {
+          return content;
+        }
+        
+      case 'social':
+        // For social media, ideally we would format based on platform
+        // For now, return as is
+        return content;
+        
+      case 'zoom':
+        // Ensure the Zoom link is properly formatted
+        if (!content.startsWith('http://') && !content.startsWith('https://')) {
+          return `https://${content}`;
+        }
+        return content;
+        
+      case 'google_form':
+        // Ensure the Google Form link is properly formatted
+        if (!content.startsWith('http://') && !content.startsWith('https://')) {
+          return `https://${content}`;
+        }
+        return content;
+        
       // For other types, we would implement specific formatters
       default:
         return content;
@@ -159,13 +191,12 @@ export function useQRCode(options: Partial<QRCodeOptions> = {}) {
 
   const updateOptions = (newOptions: Partial<QRCodeOptions>) => {
     setQrOptions((prevOptions) => {
-      // If content type changes, we might want to format the content
+      // If content type changes, reset content unless explicitly provided
       if (newOptions.contentType && newOptions.contentType !== prevOptions.contentType) {
-        const formattedContent = newOptions.content || prevOptions.content;
         return {
           ...prevOptions,
           ...newOptions,
-          content: formatContentByType(formattedContent, newOptions.contentType)
+          content: newOptions.content !== undefined ? newOptions.content : ''
         };
       }
       

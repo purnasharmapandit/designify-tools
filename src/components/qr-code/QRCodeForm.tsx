@@ -1,5 +1,5 @@
 
-import React from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -26,54 +26,260 @@ interface QRCodeFormProps {
 }
 
 const QRCodeForm: React.FC<QRCodeFormProps> = ({ options, onUpdateOptions, onDownload }) => {
+  const [socialPlatform, setSocialPlatform] = useState<string>("instagram");
+  const [wifiSecurity, setWifiSecurity] = useState<string>("WPA");
+  
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     onUpdateOptions({ [name]: value });
   };
 
   const handleContentTypeChange = (contentType: QRCodeContentType) => {
-    onUpdateOptions({ contentType });
+    onUpdateOptions({ contentType, content: '' });
   };
 
   const handleCenterElementChange = (centerElement: QRCodeCenterElement | null) => {
     onUpdateOptions({ centerElement });
   };
 
-  // Helper function to get the right input label based on content type
-  const getContentInputLabel = () => {
+  // Render different input fields based on content type
+  const renderContentInput = () => {
     switch (options.contentType) {
       case 'website':
-        return 'Website URL';
+        return (
+          <div className="space-y-2">
+            <Label htmlFor="content">Website URL</Label>
+            <Input
+              id="content"
+              name="content"
+              placeholder="https://example.com"
+              value={options.content}
+              onChange={handleInputChange}
+            />
+          </div>
+        );
+      
+      case 'social':
+        return (
+          <div className="space-y-4">
+            <div className="space-y-2">
+              <Label htmlFor="socialPlatform">Social Media Platform</Label>
+              <Select
+                value={socialPlatform}
+                onValueChange={(value) => {
+                  setSocialPlatform(value);
+                  onUpdateOptions({ content: '' });
+                }}
+              >
+                <SelectTrigger id="socialPlatform">
+                  <SelectValue placeholder="Select platform" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="instagram">Instagram</SelectItem>
+                  <SelectItem value="facebook">Facebook</SelectItem>
+                  <SelectItem value="twitter">Twitter</SelectItem>
+                  <SelectItem value="linkedin">LinkedIn</SelectItem>
+                  <SelectItem value="tiktok">TikTok</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="content">Username/Profile URL</Label>
+              <Input
+                id="content"
+                name="content"
+                placeholder={`Your ${socialPlatform} username or profile URL`}
+                value={options.content}
+                onChange={handleInputChange}
+              />
+            </div>
+          </div>
+        );
+      
       case 'text':
-        return 'Text';
+        return (
+          <div className="space-y-2">
+            <Label htmlFor="content">Text Content</Label>
+            <Textarea
+              id="content"
+              name="content"
+              placeholder="Enter your text here..."
+              value={options.content}
+              onChange={handleInputChange}
+              className="min-h-24"
+            />
+          </div>
+        );
+      
       case 'phone':
-        return 'Phone Number';
+        return (
+          <div className="space-y-2">
+            <Label htmlFor="content">Phone Number</Label>
+            <Input
+              id="content"
+              name="content"
+              placeholder="+1 555 123 4567"
+              value={options.content}
+              onChange={handleInputChange}
+            />
+          </div>
+        );
+      
       case 'email':
-        return 'Email Address';
+        return (
+          <div className="space-y-2">
+            <Label htmlFor="content">Email Address</Label>
+            <Input
+              id="content"
+              name="content"
+              placeholder="example@domain.com"
+              value={options.content}
+              onChange={handleInputChange}
+            />
+          </div>
+        );
+      
       case 'wifi':
-        return 'WiFi Details (SSID, Password)';
-      // Add more cases as needed
+        return (
+          <div className="space-y-4">
+            <div className="space-y-2">
+              <Label htmlFor="ssid">WiFi Network Name (SSID)</Label>
+              <Input
+                id="ssid"
+                placeholder="Network Name"
+                value={options.content.includes('"ssid":') ? JSON.parse(options.content).ssid || '' : ''}
+                onChange={(e) => {
+                  const wifi = options.content ? 
+                    JSON.parse(options.content.length ? options.content : '{"ssid":"","password":"","encryption":"WPA"}') : 
+                    { ssid: '', password: '', encryption: wifiSecurity };
+                  wifi.ssid = e.target.value;
+                  onUpdateOptions({ content: JSON.stringify(wifi) });
+                }}
+              />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="password">Password</Label>
+              <Input
+                id="password"
+                type="password"
+                placeholder="WiFi Password"
+                value={options.content.includes('"password":') ? JSON.parse(options.content).password || '' : ''}
+                onChange={(e) => {
+                  const wifi = options.content ? 
+                    JSON.parse(options.content.length ? options.content : '{"ssid":"","password":"","encryption":"WPA"}') : 
+                    { ssid: '', password: '', encryption: wifiSecurity };
+                  wifi.password = e.target.value;
+                  onUpdateOptions({ content: JSON.stringify(wifi) });
+                }}
+              />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="security">Security Type</Label>
+              <Select
+                value={wifiSecurity}
+                onValueChange={(value) => {
+                  setWifiSecurity(value);
+                  const wifi = options.content ? 
+                    JSON.parse(options.content.length ? options.content : '{"ssid":"","password":"","encryption":"WPA"}') : 
+                    { ssid: '', password: '', encryption: 'WPA' };
+                  wifi.encryption = value;
+                  onUpdateOptions({ content: JSON.stringify(wifi) });
+                }}
+              >
+                <SelectTrigger id="security">
+                  <SelectValue placeholder="Security Type" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="WPA">WPA/WPA2</SelectItem>
+                  <SelectItem value="WEP">WEP</SelectItem>
+                  <SelectItem value="nopass">No Password</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+          </div>
+        );
+      
+      case 'payment':
+        return (
+          <div className="space-y-4">
+            <div className="space-y-2">
+              <Label htmlFor="paymentType">Payment Type</Label>
+              <Select
+                value={options.content.includes('"type":') ? JSON.parse(options.content).type || 'upi' : 'upi'}
+                onValueChange={(value) => {
+                  const payment = { type: value, id: '' };
+                  onUpdateOptions({ content: JSON.stringify(payment) });
+                }}
+              >
+                <SelectTrigger id="paymentType">
+                  <SelectValue placeholder="Payment Type" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="upi">UPI Payment</SelectItem>
+                  <SelectItem value="paypal">PayPal</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="paymentId">
+                {options.content.includes('"type":"paypal"') ? 'PayPal Username' : 'UPI ID'}
+              </Label>
+              <Input
+                id="paymentId"
+                placeholder={options.content.includes('"type":"paypal"') ? 'username@paypal.com' : 'upiid@bank'}
+                value={options.content.includes('"id":') ? JSON.parse(options.content).id || '' : ''}
+                onChange={(e) => {
+                  const paymentType = options.content.includes('"type":"paypal"') ? 'paypal' : 'upi';
+                  const payment = { type: paymentType, id: e.target.value };
+                  onUpdateOptions({ content: JSON.stringify(payment) });
+                }}
+              />
+            </div>
+          </div>
+        );
+      
+      case 'zoom':
+        return (
+          <div className="space-y-2">
+            <Label htmlFor="content">Zoom Meeting Link</Label>
+            <Input
+              id="content"
+              name="content"
+              placeholder="https://zoom.us/j/example"
+              value={options.content}
+              onChange={handleInputChange}
+            />
+          </div>
+        );
+      
+      case 'google_form':
+        return (
+          <div className="space-y-2">
+            <Label htmlFor="content">Google Form Link</Label>
+            <Input
+              id="content"
+              name="content"
+              placeholder="https://forms.gle/example"
+              value={options.content}
+              onChange={handleInputChange}
+            />
+          </div>
+        );
+      
       default:
-        return 'Content';
-    }
-  };
-
-  // Helper function to get the right placeholder based on content type
-  const getContentPlaceholder = () => {
-    switch (options.contentType) {
-      case 'website':
-        return 'https://example.com';
-      case 'text':
-        return 'Enter your text here...';
-      case 'phone':
-        return '+1 555 123 4567';
-      case 'email':
-        return 'example@domain.com';
-      case 'wifi':
-        return 'Enter WiFi details...';
-      // Add more cases as needed
-      default:
-        return 'Enter content for your QR code...';
+        return (
+          <div className="space-y-2">
+            <Label htmlFor="content">Content</Label>
+            <Textarea
+              id="content"
+              name="content"
+              placeholder="Enter content for your QR code"
+              value={options.content}
+              onChange={handleInputChange}
+              className="min-h-24"
+            />
+          </div>
+        );
     }
   };
 
@@ -94,17 +300,7 @@ const QRCodeForm: React.FC<QRCodeFormProps> = ({ options, onUpdateOptions, onDow
             />
           </div>
 
-          <div className="space-y-2">
-            <Label htmlFor="content">{getContentInputLabel()}</Label>
-            <Textarea
-              id="content"
-              name="content"
-              placeholder={getContentPlaceholder()}
-              value={options.content}
-              onChange={handleInputChange}
-              className="min-h-24"
-            />
-          </div>
+          {renderContentInput()}
 
           <CenterElementSelector 
             centerElement={options.centerElement} 
