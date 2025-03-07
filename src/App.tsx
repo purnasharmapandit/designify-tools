@@ -27,6 +27,7 @@ import BillingSubscriptions from "./pages/blogs/BillingSubscriptions";
 import LogoMaker from "./pages/logo-maker/LogoMaker";
 import LogoEditor from "./pages/logo-maker/LogoEditor";
 import { BlogProvider } from "./contexts/BlogContext";
+import QRCodeGenerator from "./pages/qr-code/QRCodeGenerator";
 
 const queryClient = new QueryClient();
 
@@ -58,6 +59,7 @@ const App = () => (
               <Route path="/blogs/billing-subscriptions" element={<BillingSubscriptions />} />
               <Route path="/logo-maker" element={<LogoMaker />} />
               <Route path="/logo-maker/editor/:id" element={<LogoEditor />} />
+              <Route path="/qr-code-generator" element={<QRCodeGenerator />} />
               <Route path="/auth" element={<Auth />} />
               <Route path="*" element={<NotFound />} />
             </Routes>

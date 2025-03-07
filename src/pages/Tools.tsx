@@ -58,6 +58,13 @@ const Tools = () => {
       link: "/logo-maker"
     },
     {
+      icon: QrCode,
+      name: "QR Code Generator",
+      description: "Create customizable QR codes for your business or personal use",
+      color: "bg-green-100 text-green-500",
+      link: "/qr-code-generator"
+    },
+    {
       icon: Image,
       name: "Banner Designer",
       description: "Design eye-catching banners for social media and marketing",
@@ -80,12 +87,6 @@ const Tools = () => {
       name: "Color Palette Generator",
       description: "Generate beautiful color schemes for your designs",
       color: "bg-yellow-100 text-yellow-500"
-    },
-    {
-      icon: QrCode,
-      name: "QR Code Designer",
-      description: "Create stylish and functional QR codes",
-      color: "bg-green-100 text-green-500"
     },
     {
       icon: Presentation,
