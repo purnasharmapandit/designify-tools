@@ -1,10 +1,13 @@
+
 import React, { useState } from "react";
 import { Wand2 } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { toast } from "sonner";
-import IconGeneratorForm from "@/components/icon-generator/IconGeneratorForm";
+import IconGeneratorWizard from "@/components/icon-generator/IconGeneratorWizard";
 import IconPreview from "@/components/icon-generator/IconPreview";
+import FeaturesSection from "@/components/icon-generator/FeaturesSection";
+import FAQSection from "@/components/icon-generator/FAQSection";
 import { generateIcons, GeneratedIcon } from "@/services/runware";
 
 // Icon styles available
@@ -78,7 +81,6 @@ const IconGenerator = () => {
   };
   
   const handleDownloadIcon = (iconUrl: string) => {
-    // Create a temporary anchor element
     const link = document.createElement('a');
     link.href = iconUrl;
     link.target = '_blank';
@@ -92,79 +94,54 @@ const IconGenerator = () => {
   return (
     <div className="min-h-screen flex flex-col bg-gradient-to-b from-background to-background/80">
       <Navbar />
-      <main className="flex-grow container mx-auto px-4 py-10">
-        <div className="max-w-4xl mx-auto">
-          {/* Header Section */}
-          <div className="text-center mb-10">
-            <div className="inline-block p-3 bg-primary/10 rounded-full text-primary mb-4">
-              <Wand2 className="h-8 w-8" />
-            </div>
-            <h1 className="text-3xl md:text-4xl font-bold mb-3">
-              AI Icon Generator
-            </h1>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Create custom icons for your projects in seconds
-            </p>
-          </div>
-          
-          {/* Three Steps Section */}
-          <div className="mb-12">
-            <h2 className="text-xl font-semibold text-center mb-6">Create Custom Icons in 3 Simple Steps</h2>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {[
-                {
-                  number: "01",
-                  title: "Describe Your Icon",
-                  description: "Enter a detailed description of the icon you want to create"
-                },
-                {
-                  number: "02",
-                  title: "Customize Style",
-                  description: "Choose the style, colors, and other customization options"
-                },
-                {
-                  number: "03",
-                  title: "Generate & Download",
-                  description: "Generate your icons and download the ones you like"
-                }
-              ].map((step, index) => (
-                <div 
-                  key={index} 
-                  className="relative bg-card rounded-xl p-6 border transition-all hover:shadow-md flex flex-col"
-                >
-                  <div className="text-4xl font-bold text-primary/20 absolute right-4 top-4">{step.number}</div>
-                  <h3 className="text-lg font-medium mb-2">{step.title}</h3>
-                  <p className="text-sm text-muted-foreground">{step.description}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          <div className="bg-card rounded-xl border shadow-sm overflow-hidden">
-            <div className="grid md:grid-cols-5 divide-y md:divide-y-0 md:divide-x">
-              {/* Form */}
-              <div className="md:col-span-2 p-6">
-                <IconGeneratorForm 
-                  formData={formData} 
-                  onChange={handleFormChange}
-                  onGenerate={handleGenerateIcons}
-                  isGenerating={isGenerating}
-                  styles={ICON_STYLES}
-                />
+      <main className="flex-grow">
+        <div className="container mx-auto px-4 py-10">
+          <div className="max-w-4xl mx-auto">
+            {/* Header Section */}
+            <div className="text-center mb-10">
+              <div className="inline-block p-3 bg-primary/10 rounded-full text-primary mb-4">
+                <Wand2 className="h-8 w-8" />
               </div>
-              
-              {/* Preview */}
-              <div className="md:col-span-3 p-6 bg-muted/30">
-                <IconPreview 
-                  icons={generatedIcons} 
-                  isLoading={isGenerating}
-                  onDownload={handleDownloadIcon}
-                  showPlaceholder={generatedIcons.length === 0}
-                />
+              <h1 className="text-3xl md:text-4xl font-bold mb-3">
+                AI Icon Generator
+              </h1>
+              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+                Create custom icons for your projects in seconds
+              </p>
+            </div>
+
+            <div className="bg-card rounded-xl border shadow-sm overflow-hidden">
+              <div className="grid md:grid-cols-5 divide-y md:divide-y-0 md:divide-x">
+                {/* Wizard Form */}
+                <div className="md:col-span-2 p-6">
+                  <IconGeneratorWizard 
+                    formData={formData}
+                    onChange={handleFormChange}
+                    onGenerate={handleGenerateIcons}
+                    isGenerating={isGenerating}
+                    styles={ICON_STYLES}
+                  />
+                </div>
+                
+                {/* Preview */}
+                <div className="md:col-span-3 p-6 bg-muted/30">
+                  <IconPreview 
+                    icons={generatedIcons}
+                    isLoading={isGenerating}
+                    onDownload={handleDownloadIcon}
+                    showPlaceholder={generatedIcons.length === 0}
+                  />
+                </div>
               </div>
             </div>
           </div>
         </div>
+
+        {/* Features Section */}
+        <FeaturesSection />
+
+        {/* FAQ Section */}
+        <FAQSection />
       </main>
       <Footer />
     </div>

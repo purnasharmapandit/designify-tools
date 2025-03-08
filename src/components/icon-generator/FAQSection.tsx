@@ -1,58 +1,76 @@
 
 import React from "react";
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import { motion } from "framer-motion";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 
-const faqs = [
-  {
-    question: "How does the AI icon generator work?",
-    answer: "Our AI icon generator uses advanced machine learning algorithms that have been trained on millions of professional icons. When you enter your description and preferences, the AI interprets your request and generates custom icons that match your specifications. You can then customize the results by adjusting colors, style, and other attributes before downloading."
-  },
-  {
-    question: "Are the generated icons free to use?",
-    answer: "Yes! All icons created with our AI generator are free to use for both personal and commercial projects. There are no watermarks, attribution requirements, or hidden fees. You receive full usage rights to the icons you generate."
-  },
-  {
-    question: "What file formats can I download my icons in?",
-    answer: "You can download your icons in multiple formats including SVG (scalable vector graphics), PNG with transparent backgrounds (in various sizes), and ICO format for favicons. SVG is recommended for most uses as it's scalable to any size without losing quality."
-  },
-  {
-    question: "Can I customize the colors and style of my icons?",
-    answer: "Absolutely! Our tool offers extensive customization options. You can select from 20+ different icon styles (flat, gradient, outlined, 3D, isometric, etc.), choose custom colors for both the icon and background, and adjust other attributes to perfectly match your brand identity."
-  },
-  {
-    question: "Do I need design skills to create professional icons?",
-    answer: "Not at all! Our AI icon generator is designed to be user-friendly for everyone, regardless of design experience. Simply describe what you want, choose your preferences, and the AI handles the technical design work. The intuitive interface makes it easy to create professional-quality icons without any design skills."
-  },
-  {
-    question: "How many icons can I generate?",
-    answer: "You can generate up to 8 icon variations at once. This allows you to compare different interpretations of your request and choose the one that best fits your needs. There's no limit to how many batches you can create, so you can experiment until you find the perfect icon."
-  },
-  {
-    question: "Is there a limit to how many icons I can download?",
-    answer: "No, there are no download limits with our free icon generator. You can create and download as many icons as you need for your projects. For bulk generation needs or advanced features, check out our premium plans."
-  },
-  {
-    question: "Can I use these icons for my business or commercial projects?",
-    answer: "Yes, all icons generated with our tool can be used for commercial purposes including business websites, apps, marketing materials, products for sale, and client work. You receive full commercial usage rights with every download."
-  }
-];
+const FAQSection: React.FC = () => {
+  const faqs = [
+    {
+      question: "How does the AI icon generator work?",
+      answer: "Our AI icon generator uses advanced machine learning algorithms to transform your text descriptions into custom icons. The AI has been trained on millions of professional icon designs, understanding design principles, styles, and visual aesthetics. Just describe what you want, select a style and colors, and our AI will generate multiple icon options for you to choose from."
+    },
+    {
+      question: "What styles of icons can I create?",
+      answer: "You can create icons in 20 different styles, including flat, gradient, outlined, 3D, isometric, hand-drawn, pixel art, minimalist, duotone, line art, glyph, cartoon, material design, neon, vintage, watercolor, glassmorphism, neumorphic, clay, and emoji styles. Each style gives your icons a unique look and feel."
+    },
+    {
+      question: "How many icons can I generate at once?",
+      answer: "You can generate between 1 and 8 icons at once based on the same description. This allows you to explore different variations of your concept and choose the one that best fits your needs."
+    },
+    {
+      question: "What format are the icons delivered in?",
+      answer: "Icons are generated and delivered in WEBP format, which provides high quality with small file sizes. This format is widely supported by modern browsers and applications."
+    },
+    {
+      question: "Can I use these icons commercially?",
+      answer: "Yes, all icons you generate are royalty-free and can be used for both personal and commercial projects. You retain all rights to the icons you create with our tool."
+    },
+    {
+      question: "How detailed should my icon description be?",
+      answer: "The more specific your description, the better results you'll get. Include details about what the icon should represent, any specific elements you want to include, and the style or mood you're looking for. For example, instead of just 'house icon', try 'modern minimalist house icon with a chimney and pitched roof'."
+    }
+  ];
 
-const FAQSection = () => {
   return (
-    <section className="py-16 bg-white">
-      <div className="container mx-auto px-4">
+    <section className="py-16 bg-background">
+      <div className="container px-4">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          viewport={{ once: true }}
+          className="text-center mb-12"
+        >
+          <h2 className="text-3xl font-bold mb-4">Frequently Asked Questions</h2>
+          <p className="text-muted-foreground max-w-2xl mx-auto">
+            Everything you need to know about our AI icon generator
+          </p>
+        </motion.div>
+        
         <div className="max-w-3xl mx-auto">
-          <h2 className="text-3xl font-bold text-center mb-8">Frequently Asked Questions</h2>
-          <Accordion type="single" collapsible className="bg-white rounded-lg shadow-sm">
+          <Accordion type="single" collapsible className="w-full">
             {faqs.map((faq, index) => (
-              <AccordionItem key={index} value={`item-${index}`}>
-                <AccordionTrigger className="px-6 py-4 text-left font-medium">
-                  {faq.question}
-                </AccordionTrigger>
-                <AccordionContent className="px-6 pb-4 text-gray-600">
-                  {faq.answer}
-                </AccordionContent>
-              </AccordionItem>
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 10 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.3, delay: index * 0.1 }}
+                viewport={{ once: true }}
+              >
+                <AccordionItem value={`item-${index}`}>
+                  <AccordionTrigger className="text-left font-medium">
+                    {faq.question}
+                  </AccordionTrigger>
+                  <AccordionContent className="text-muted-foreground">
+                    {faq.answer}
+                  </AccordionContent>
+                </AccordionItem>
+              </motion.div>
             ))}
           </Accordion>
         </div>
