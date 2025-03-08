@@ -37,9 +37,10 @@ const PaletteControls = ({
           </TooltipContent>
         </Tooltip>
 
+        {/* Hide Copy button on mobile since we've added a dedicated one */}
         <Tooltip>
           <TooltipTrigger asChild>
-            <Button onClick={onCopy} variant="ghost" size="sm" className="text-white text-xs md:text-sm">
+            <Button onClick={onCopy} variant="ghost" size="sm" className="hidden md:flex text-white text-xs md:text-sm">
               <Copy className="h-3 w-3 md:h-4 md:w-4 mr-1 md:mr-2" />
               <span className="hidden xs:inline">Copy</span>
             </Button>

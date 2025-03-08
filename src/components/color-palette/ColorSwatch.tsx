@@ -35,7 +35,7 @@ const ColorSwatch = ({ color, index, isLocked, onToggleLock }: ColorSwatchProps)
       className="flex-1 flex flex-col justify-between"
       style={{ 
         backgroundColor: color,
-        minHeight: "30vh", // Reduced height on mobile for better visibility
+        minHeight: "20vh", // Further reduced height for mobile to fit all 5
         height: "100%"
       }}
     >
@@ -61,15 +61,16 @@ const ColorSwatch = ({ color, index, isLocked, onToggleLock }: ColorSwatchProps)
       </div>
 
       <div className="p-2 md:p-4 flex flex-col items-center gap-1 md:gap-2 mt-auto">
-        <h3 className="text-sm md:text-2xl font-bold font-mono tracking-wider truncate w-full text-center"
+        <h3 className="text-xs md:text-2xl font-bold font-mono tracking-wider truncate w-full text-center"
             style={{ color: textColor }}>
           {color.toUpperCase()}
         </h3>
         
+        {/* Only show copy button on desktop */}
         <Button
           variant="ghost"
           size="sm"
-          className="text-xs md:text-sm bg-white/10 backdrop-blur-sm hover:bg-white/20 py-1 px-2 h-auto min-h-0 md:min-h-9"
+          className="hidden md:flex text-xs md:text-sm bg-white/10 backdrop-blur-sm hover:bg-white/20 py-1 px-2 h-auto min-h-0 md:min-h-9"
           onClick={() => {
             navigator.clipboard.writeText(color);
             toast.success(`Copied ${color.toUpperCase()}`);

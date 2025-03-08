@@ -5,7 +5,7 @@ import Footer from "@/components/Footer";
 import { Drawer, DrawerTrigger } from "@/components/ui/drawer";
 import { useGenerateColorPalette } from "@/hooks/use-color-palette";
 import { Helmet } from "react-helmet";
-import { Palette, RefreshCw } from "lucide-react";
+import { Palette, RefreshCw, Copy } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 // Import our new components
@@ -119,7 +119,7 @@ const ColorPaletteGenerator = () => {
       
       {/* Main palette display - Stack vertically on mobile, horizontally on larger screens */}
       <main className="flex-grow flex flex-col md:flex-row">
-        <div className="w-full h-[40vh] md:h-[60vh] flex flex-col md:flex-row">
+        <div className="w-full h-[35vh] md:h-[60vh] flex flex-col md:flex-row">
           {colors.map((color, index) => (
             <ColorSwatch
               key={index}
@@ -129,6 +129,19 @@ const ColorPaletteGenerator = () => {
               onToggleLock={toggleLockColor}
             />
           ))}
+        </div>
+        
+        {/* Single mobile copy button that copies all colors */}
+        <div className="md:hidden flex justify-center p-2 bg-gray-900">
+          <Button
+            variant="ghost"
+            size="sm"
+            className="text-white"
+            onClick={copyToClipboard}
+          >
+            <Copy className="h-4 w-4 mr-2" />
+            Copy All Colors
+          </Button>
         </div>
       </main>
 
