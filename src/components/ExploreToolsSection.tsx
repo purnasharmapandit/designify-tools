@@ -21,13 +21,13 @@ const ExploreToolsSection = () => {
       name: "QR Code Designer",
       color: "bg-gradient-to-br from-amber-100 to-amber-200",
       iconColor: "text-amber-500",
-      link: "#"
+      link: "/qr-code-generator"
     },
     {
-      name: "Presentation Templates",
-      color: "bg-gradient-to-br from-rose-100 to-rose-200",
-      iconColor: "text-rose-500",
-      link: "#"
+      name: "Color Palette Generator",
+      color: "bg-gradient-to-br from-yellow-100 to-yellow-200",
+      iconColor: "text-yellow-500",
+      link: "/color-palette-generator"
     },
     {
       name: "Flyer Designer",

@@ -23,9 +23,9 @@ const Footer = () => {
             <ul className="space-y-2">
               <li><Link to="/logo-maker" className="text-gray-400 hover:text-white transition-colors">Logo Maker</Link></li>
               <li><Link to="/qr-code-generator" className="text-gray-400 hover:text-white transition-colors">QR Code Generator</Link></li>
+              <li><Link to="/color-palette-generator" className="text-gray-400 hover:text-white transition-colors">Color Palette Generator</Link></li>
               <li><a href="#" className="text-gray-400 hover:text-white transition-colors">Profile Pic Generator</a></li>
               <li><a href="#" className="text-gray-400 hover:text-white transition-colors">Business Card Generator</a></li>
-              <li><a href="#" className="text-gray-400 hover:text-white transition-colors">Banner Creator</a></li>
             </ul>
           </div>
           

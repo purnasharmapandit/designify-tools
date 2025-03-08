@@ -65,6 +65,13 @@ const Tools = () => {
       link: "/qr-code-generator"
     },
     {
+      icon: Palette,
+      name: "Color Palette Generator",
+      description: "Generate beautiful color schemes for your designs",
+      color: "bg-yellow-100 text-yellow-500",
+      link: "/color-palette-generator"
+    },
+    {
       icon: Image,
       name: "Banner Designer",
       description: "Design eye-catching banners for social media and marketing",
@@ -81,12 +88,6 @@ const Tools = () => {
       name: "Typography Tool",
       description: "Perfect your text layouts with advanced typography options",
       color: "bg-orange-100 text-orange-500"
-    },
-    {
-      icon: Palette,
-      name: "Color Palette Generator",
-      description: "Generate beautiful color schemes for your designs",
-      color: "bg-yellow-100 text-yellow-500"
     },
     {
       icon: Presentation,
