@@ -8,14 +8,14 @@ const guides = [
   {
     icon: <RefreshCw className="h-5 w-5" />,
     title: "Generate Palettes",
-    description: "Click the "Generate New Palette" button or press the Space key to create new color combinations instantly.",
+    description: 'Click the "Generate New Palette" button or press the Space key to create new color combinations instantly.',
     gradient: "bg-gradient-to-br from-blue-50 to-blue-100",
     iconBg: "bg-blue-100 text-blue-500"
   },
   {
     icon: <Zap className="h-5 w-5" />,
     title: "Lock Colors",
-    description: "Found a color you like? Click the lock icon or press 1-5 keys to lock colors so they won't change when generating new palettes.",
+    description: 'Found a color you like? Click the lock icon or press 1-5 keys to lock colors so they won\'t change when generating new palettes.',
     gradient: "bg-gradient-to-br from-purple-50 to-purple-100",
     iconBg: "bg-purple-100 text-primary"
   },
@@ -29,7 +29,7 @@ const guides = [
   {
     icon: <Sparkles className="h-5 w-5" />,
     title: "Customize Palette Type",
-    description: "Open settings with the gear icon or S key to choose from different palette types like analogous, monochromatic, or complementary.",
+    description: 'Open settings with the gear icon or S key to choose from different palette types like analogous, monochromatic, or complementary.',
     gradient: "bg-gradient-to-br from-amber-50 to-amber-100",
     iconBg: "bg-amber-100 text-amber-500"
   },
