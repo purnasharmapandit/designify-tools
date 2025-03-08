@@ -4,6 +4,7 @@ import { toast } from "sonner";
 import { generatePalette } from "@/utils/palette-generators";
 import { copyPaletteToClipboard, exportPaletteAsFile } from "@/utils/palette-export";
 import { PaletteType, ExportFormat } from "@/types/color-palette";
+import { getRandomColor } from "@/utils/color-utils";
 
 export type { PaletteType, ExportFormat } from "@/types/color-palette";
 
@@ -23,7 +24,11 @@ export function useGenerateColorPalette() {
 
   // Generate a new palette respecting locked colors
   const generateNewPalette = () => {
-    const newPalette = generatePalette(baseColor, paletteType, numberOfColors);
+    // Randomize the base color each time for more variety, unless explicitly set by user
+    const randomizedBaseColor = getRandomColor();
+    setBaseColor(randomizedBaseColor);
+    
+    const newPalette = generatePalette(randomizedBaseColor, paletteType, numberOfColors);
     
     // Make sure lockStatus has the right length
     const newLockStatus = [...lockStatus];
