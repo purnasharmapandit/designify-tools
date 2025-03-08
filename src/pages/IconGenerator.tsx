@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { Wand2, Palette, Download, ImageIcon, PanelTop, Star, Copy, RefreshCw } from "lucide-react";
@@ -14,9 +13,6 @@ import StylesGallery from "@/components/icon-generator/StylesGallery";
 import UseCasesSection from "@/components/icon-generator/UseCasesSection";
 import FAQSection from "@/components/icon-generator/FAQSection";
 import TestimonialsSection from "@/components/TestimonialsSection";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { DialogContent, DialogHeader, DialogTitle, Dialog, DialogDescription, DialogFooter } from "@/components/ui/dialog";
 import { generateIcons, GeneratedIcon } from "@/services/runware";
 
 // Icon styles available
@@ -54,9 +50,6 @@ export interface IconGeneratorFormData {
 const IconGenerator = () => {
   const [generatedIcons, setGeneratedIcons] = useState<GeneratedIcon[]>([]);
   const [isGenerating, setIsGenerating] = useState(false);
-  const [apiKeyDialogOpen, setApiKeyDialogOpen] = useState(false);
-  const [apiKey, setApiKey] = useState("");
-  const [showApiKeyError, setShowApiKeyError] = useState(false);
   
   const initialFormData: IconGeneratorFormData = {
     prompt: "",
@@ -78,20 +71,15 @@ const IconGenerator = () => {
       return;
     }
     
-    if (!apiKey) {
-      setApiKeyDialogOpen(true);
-      return;
-    }
-    
     setIsGenerating(true);
     
     try {
-      const icons = await generateIcons(formData, apiKey);
+      const icons = await generateIcons(formData);
       setGeneratedIcons(icons);
       toast.success(`${icons.length} icons generated successfully!`);
     } catch (error) {
       console.error("Error generating icons:", error);
-      toast.error("Failed to generate icons. Please check your API key and try again.");
+      toast.error("Failed to generate icons. Please try again later.");
     } finally {
       setIsGenerating(false);
     }
@@ -107,20 +95,6 @@ const IconGenerator = () => {
     link.click();
     document.body.removeChild(link);
     toast.success("Icon downloaded successfully!");
-  };
-
-  const handleApiKeySubmit = () => {
-    if (!apiKey.trim()) {
-      setShowApiKeyError(true);
-      return;
-    }
-    
-    // Store API key for this session only
-    setApiKeyDialogOpen(false);
-    setShowApiKeyError(false);
-    
-    // Immediately trigger generation after API key is set
-    handleGenerateIcons();
   };
 
   return (
@@ -202,40 +176,6 @@ const IconGenerator = () => {
         </section>
       </main>
       <Footer />
-
-      {/* API Key Dialog */}
-      <Dialog open={apiKeyDialogOpen} onOpenChange={setApiKeyDialogOpen}>
-        <DialogContent>
-          <DialogHeader>
-            <DialogTitle>Enter Your Runware API Key</DialogTitle>
-            <DialogDescription>
-              To generate icons, you need a Runware API key. Please enter your API key below.
-              You can get a key by signing up at <a href="https://runware.ai" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">Runware.ai</a>.
-            </DialogDescription>
-          </DialogHeader>
-          <div className="space-y-4 py-2">
-            <div className="space-y-2">
-              <Label htmlFor="api-key">Runware API Key</Label>
-              <Input
-                id="api-key"
-                placeholder="Enter your Runware API key"
-                value={apiKey}
-                onChange={(e) => setApiKey(e.target.value)}
-              />
-              {showApiKeyError && (
-                <p className="text-destructive text-sm">Please enter a valid API key</p>
-              )}
-            </div>
-            <p className="text-sm text-muted-foreground">
-              Your API key is only stored in your browser session and will not be saved when you close the page.
-            </p>
-          </div>
-          <DialogFooter>
-            <Button variant="outline" onClick={() => setApiKeyDialogOpen(false)}>Cancel</Button>
-            <Button onClick={handleApiKeySubmit}>Submit</Button>
-          </DialogFooter>
-        </DialogContent>
-      </Dialog>
     </div>
   );
 };

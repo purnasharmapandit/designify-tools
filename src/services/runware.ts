@@ -1,7 +1,6 @@
 
 import { toast } from "sonner";
-
-const API_ENDPOINT = "https://api.runware.ai/v1";
+import { supabase } from "@/integrations/supabase/client";
 
 export interface GenerateIconParams {
   prompt: string;
@@ -42,60 +41,23 @@ const STYLE_PROMPTS: Record<string, string> = {
   emoji: "emoji-style expressive icon"
 };
 
-export async function generateIcons(params: GenerateIconParams, apiKey: string): Promise<GeneratedIcon[]> {
-  const { prompt, style, color, backgroundColor, count } = params;
-  
-  // Enhance the prompt with style-specific keywords
-  const stylePrompt = STYLE_PROMPTS[style] || "";
-  const enhancedPrompt = `Create a professional ${stylePrompt} of ${prompt}. Primary color: ${color}, background: ${backgroundColor}. Clean vector style, suitable for UI, high-quality icon design.`;
-  
+export async function generateIcons(params: GenerateIconParams): Promise<GeneratedIcon[]> {
   try {
-    const tasks = [{
-      taskType: "authentication",
-      apiKey
-    }, {
-      taskType: "imageInference",
-      taskUUID: crypto.randomUUID(),
-      positivePrompt: enhancedPrompt,
-      model: "rundiffusion:130@100", // Juggernaut Pro model
-      width: 1024,
-      height: 1024,
-      numberResults: count,
-      outputFormat: "WEBP",
-      CFGScale: 7, // Optimal for icon generation
-      scheduler: "FlowMatchEulerDiscreteScheduler",
-      strength: 0.8,
-    }];
-
-    const response = await fetch(API_ENDPOINT, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(tasks),
+    // Call the Supabase Edge Function instead of directly calling the Runware API
+    const { data, error } = await supabase.functions.invoke('generate-icons', {
+      body: params
     });
 
-    if (!response.ok) {
-      const errorData = await response.json();
-      console.error("Runware API error:", errorData);
-      throw new Error(errorData.message || "Failed to generate icons");
-    }
-
-    const data = await response.json();
-    
-    // Filter for imageInference response
-    const imageResults = data.data.filter((item: any) => item.taskType === "imageInference");
-    
-    if (!imageResults.length) {
-      throw new Error("No images were generated");
+    if (error) {
+      console.error("Edge function error:", error);
+      throw new Error(error.message || "Failed to generate icons");
     }
     
-    return imageResults.map((item: any) => ({
-      imageURL: item.imageURL,
-      positivePrompt: item.positivePrompt,
-      seed: item.seed || 0,
-      NSFWContent: item.NSFWContent || false
-    }));
+    if (!data || !data.icons || !data.icons.length) {
+      throw new Error("No icons were generated");
+    }
+    
+    return data.icons;
   } catch (error) {
     console.error("Error generating icons:", error);
     throw error;
