@@ -1,6 +1,5 @@
-
 import React from "react";
-import { ImageIcon, Palette, Layout, Hash } from "lucide-react";
+import { ImageIcon, Palette, Layout, Hash, Wand } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -130,7 +129,7 @@ const IconGeneratorForm: React.FC<IconGeneratorFormProps> = ({
           </>
         ) : (
           <>
-            <Wand2 className="mr-2 h-5 w-5" />
+            <Wand className="mr-2 h-5 w-5" />
             Generate Icons
           </>
         )}
