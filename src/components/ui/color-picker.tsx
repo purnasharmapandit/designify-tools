@@ -12,25 +12,26 @@ interface ColorPickerProps {
 
 const ColorPicker: React.FC<ColorPickerProps> = ({ label, value, onChange, id }) => {
   return (
-    <div className="flex flex-col space-y-1.5">
-      <Label htmlFor={id}>{label}</Label>
-      <div className="flex items-center gap-2">
+    <div className="space-y-2">
+      <Label htmlFor={id} className="text-sm font-medium">{label}</Label>
+      <div className="flex items-center gap-3">
         <div
-          className="h-8 w-8 rounded-md border"
+          className="h-10 w-10 rounded-md border shadow-sm overflow-hidden"
           style={{ backgroundColor: value }}
-        />
-        <Input
-          id={id}
-          type="color"
-          value={value}
-          onChange={(e) => onChange(e.target.value)}
-          className="h-10 p-1 w-16"
-        />
+        >
+          <Input
+            id={id}
+            type="color"
+            value={value}
+            onChange={(e) => onChange(e.target.value)}
+            className="h-14 w-14 transform -translate-x-2 -translate-y-2 opacity-0"
+          />
+        </div>
         <Input
           type="text"
           value={value}
           onChange={(e) => onChange(e.target.value)}
-          className="h-10 flex-1"
+          className="h-10 flex-1 font-mono text-sm"
           placeholder="#RRGGBB"
         />
       </div>

@@ -1,14 +1,14 @@
 
 import React from "react";
-import { ImageIcon, Palette, Layout, Hash, Wand } from "lucide-react";
+import { Wand } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Slider } from "@/components/ui/slider";
 import { ColorPicker } from "@/components/ui/color-picker";
 import { IconGeneratorFormData } from "@/pages/IconGenerator";
+import { Card, CardContent } from "@/components/ui/card";
 
 interface IconGeneratorFormProps {
   formData: IconGeneratorFormData;
@@ -26,64 +26,56 @@ const IconGeneratorForm: React.FC<IconGeneratorFormProps> = ({
   styles
 }) => {
   return (
-    <div className="bg-white p-6 rounded-xl shadow-sm border space-y-6">
-      <div>
-        <Label htmlFor="prompt" className="text-base font-medium">
-          Describe your icon
-        </Label>
-        <Textarea
-          id="prompt"
-          placeholder="e.g., A modern shopping cart icon, minimalist house icon, cooking utensil icon set"
-          className="mt-1.5 min-h-[100px]"
-          value={formData.prompt}
-          onChange={(e) => onChange({ prompt: e.target.value })}
-        />
-        <p className="text-xs text-muted-foreground mt-1.5">
-          Be specific about style, colors, and details you want to include
-        </p>
-      </div>
-
-      <div>
-        <Label htmlFor="style" className="text-base font-medium">
-          Icon Style
-        </Label>
-        <Select
-          value={formData.style}
-          onValueChange={(value) => onChange({ style: value })}
-        >
-          <SelectTrigger id="style" className="mt-1.5">
-            <SelectValue placeholder="Select an icon style" />
-          </SelectTrigger>
-          <SelectContent>
-            {styles.map((style) => (
-              <SelectItem key={style.id} value={style.id}>
-                <div className="flex flex-col">
-                  <span>{style.name}</span>
-                  <span className="text-xs text-muted-foreground">{style.description}</span>
-                </div>
-              </SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
-      </div>
-
+    <div className="space-y-6">
       <div className="space-y-4">
         <div>
-          <Label htmlFor="primary-color" className="text-base font-medium">
-            Primary Color
+          <Label htmlFor="prompt" className="text-base font-medium">
+            Describe your icon
           </Label>
+          <Textarea
+            id="prompt"
+            placeholder="e.g., A modern shopping cart icon, minimalist house icon, cooking utensil icon set"
+            className="mt-1.5 min-h-[100px] resize-none"
+            value={formData.prompt}
+            onChange={(e) => onChange({ prompt: e.target.value })}
+          />
+          <p className="text-xs text-muted-foreground mt-1.5">
+            Be specific about style, colors, and details you want to include
+          </p>
+        </div>
+
+        <div className="space-y-3">
+          <Label className="text-base font-medium">
+            Icon Style
+          </Label>
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-2 mt-1.5">
+            {styles.slice(0, 9).map((style) => (
+              <Card 
+                key={style.id}
+                className={`cursor-pointer transition-all border ${
+                  formData.style === style.id 
+                    ? "ring-2 ring-primary border-primary" 
+                    : "hover:border-primary/50"
+                }`}
+                onClick={() => onChange({ style: style.id })}
+              >
+                <CardContent className="p-3">
+                  <div className="font-medium text-sm">{style.name}</div>
+                  <div className="text-xs text-muted-foreground line-clamp-1">{style.description}</div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2">
           <ColorPicker
             id="primary-color"
             label="Primary Color"
             value={formData.color}
             onChange={(value) => onChange({ color: value })}
           />
-        </div>
 
-        <div>
-          <Label htmlFor="background-color" className="text-base font-medium">
-            Background Color
-          </Label>
           <ColorPicker
             id="background-color"
             label="Background Color"
@@ -91,26 +83,27 @@ const IconGeneratorForm: React.FC<IconGeneratorFormProps> = ({
             onChange={(value) => onChange({ backgroundColor: value })}
           />
         </div>
-      </div>
 
-      <div>
-        <div className="flex justify-between items-center mb-2">
-          <Label htmlFor="count" className="text-base font-medium">
-            Number of Icons: {formData.count}
-          </Label>
-        </div>
-        <Slider
-          id="count"
-          min={1}
-          max={8}
-          step={1}
-          value={[formData.count]}
-          onValueChange={(value) => onChange({ count: value[0] })}
-          className="mt-1.5"
-        />
-        <div className="flex justify-between text-xs text-muted-foreground mt-1">
-          <span>1</span>
-          <span>8</span>
+        <div className="pt-2">
+          <div className="flex justify-between items-center mb-2">
+            <Label htmlFor="count" className="text-base font-medium">
+              Number of Icons
+            </Label>
+            <span className="text-sm font-medium">{formData.count}</span>
+          </div>
+          <Slider
+            id="count"
+            min={1}
+            max={8}
+            step={1}
+            value={[formData.count]}
+            onValueChange={(value) => onChange({ count: value[0] })}
+            className="mt-1.5"
+          />
+          <div className="flex justify-between text-xs text-muted-foreground mt-1">
+            <span>1</span>
+            <span>8</span>
+          </div>
         </div>
       </div>
 

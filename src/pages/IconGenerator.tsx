@@ -1,18 +1,10 @@
 import React, { useState } from "react";
-import { motion } from "framer-motion";
-import { Wand2, Palette, Download, ImageIcon, PanelTop, Star, Copy, RefreshCw } from "lucide-react";
+import { Wand2 } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { toast } from "sonner";
-import { Button } from "@/components/ui/button";
 import IconGeneratorForm from "@/components/icon-generator/IconGeneratorForm";
 import IconPreview from "@/components/icon-generator/IconPreview";
-import FeaturesList from "@/components/icon-generator/FeaturesList";
-import HowItWorksSection from "@/components/icon-generator/HowItWorksSection";
-import StylesGallery from "@/components/icon-generator/StylesGallery";
-import UseCasesSection from "@/components/icon-generator/UseCasesSection";
-import FAQSection from "@/components/icon-generator/FAQSection";
-import TestimonialsSection from "@/components/TestimonialsSection";
 import { generateIcons, GeneratedIcon } from "@/services/runware";
 
 // Icon styles available
@@ -98,82 +90,81 @@ const IconGenerator = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen flex flex-col bg-gradient-to-b from-background to-background/80">
       <Navbar />
-      <main className="flex-grow">
-        {/* Hero Section */}
-        <section className="py-20 bg-gradient-to-b from-primary/10 to-background">
-          <div className="container mx-auto px-4">
-            <div className="max-w-5xl mx-auto text-center mb-12">
-              <motion.div
-                initial={{ opacity: 0, y: -20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5 }}
-              >
-                <div className="inline-block p-3 bg-primary/10 rounded-full text-primary mb-4">
-                  <Wand2 className="h-10 w-10" />
-                </div>
-                <h1 className="text-4xl md:text-5xl font-bold font-display mb-4">
-                  AI Icon Generator: Create Stunning Icons with AI Without Watermark
-                </h1>
-                <p className="text-xl text-gray-600 md:max-w-3xl mx-auto">
-                  Design professional, customizable icons for any project in seconds — completely free and watermark-free.
-                </p>
-              </motion.div>
+      <main className="flex-grow container mx-auto px-4 py-10">
+        <div className="max-w-4xl mx-auto">
+          {/* Header Section */}
+          <div className="text-center mb-10">
+            <div className="inline-block p-3 bg-primary/10 rounded-full text-primary mb-4">
+              <Wand2 className="h-8 w-8" />
             </div>
-
-            <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-              <IconGeneratorForm 
-                formData={formData} 
-                onChange={handleFormChange}
-                onGenerate={handleGenerateIcons}
-                isGenerating={isGenerating}
-                styles={ICON_STYLES}
-              />
-              <IconPreview 
-                icons={generatedIcons} 
-                isLoading={isGenerating}
-                onDownload={handleDownloadIcon}
-                showPlaceholder={generatedIcons.length === 0}
-              />
-            </div>
-          </div>
-        </section>
-
-        {/* How It Works Section */}
-        <HowItWorksSection />
-        
-        {/* Features Section */}
-        <FeaturesList />
-        
-        {/* Use Cases Section */}
-        <UseCasesSection />
-        
-        {/* Icon Styles Gallery */}
-        <StylesGallery styles={ICON_STYLES} />
-        
-        {/* FAQs Section */}
-        <FAQSection />
-        
-        {/* Testimonials Section */}
-        <TestimonialsSection />
-        
-        {/* CTA Section */}
-        <section className="py-16 bg-primary/10">
-          <div className="container mx-auto px-4 text-center">
-            <h2 className="text-3xl font-bold mb-6">Ready to Create Your Custom Icons?</h2>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto mb-8">
-              Our free, AI-powered icon generator helps you create professional icons in seconds. No sign-up required.
+            <h1 className="text-3xl md:text-4xl font-bold mb-3">
+              AI Icon Generator
+            </h1>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              Create custom icons for your projects in seconds
             </p>
-            <Button
-              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-              size="lg"
-              className="font-semibold"
-            >
-              Generate Icons Now
-            </Button>
           </div>
-        </section>
+          
+          {/* Three Steps Section */}
+          <div className="mb-12">
+            <h2 className="text-xl font-semibold text-center mb-6">Create Custom Icons in 3 Simple Steps</h2>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {[
+                {
+                  number: "01",
+                  title: "Describe Your Icon",
+                  description: "Enter a detailed description of the icon you want to create"
+                },
+                {
+                  number: "02",
+                  title: "Customize Style",
+                  description: "Choose the style, colors, and other customization options"
+                },
+                {
+                  number: "03",
+                  title: "Generate & Download",
+                  description: "Generate your icons and download the ones you like"
+                }
+              ].map((step, index) => (
+                <div 
+                  key={index} 
+                  className="relative bg-card rounded-xl p-6 border transition-all hover:shadow-md flex flex-col"
+                >
+                  <div className="text-4xl font-bold text-primary/20 absolute right-4 top-4">{step.number}</div>
+                  <h3 className="text-lg font-medium mb-2">{step.title}</h3>
+                  <p className="text-sm text-muted-foreground">{step.description}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="bg-card rounded-xl border shadow-sm overflow-hidden">
+            <div className="grid md:grid-cols-5 divide-y md:divide-y-0 md:divide-x">
+              {/* Form */}
+              <div className="md:col-span-2 p-6">
+                <IconGeneratorForm 
+                  formData={formData} 
+                  onChange={handleFormChange}
+                  onGenerate={handleGenerateIcons}
+                  isGenerating={isGenerating}
+                  styles={ICON_STYLES}
+                />
+              </div>
+              
+              {/* Preview */}
+              <div className="md:col-span-3 p-6 bg-muted/30">
+                <IconPreview 
+                  icons={generatedIcons} 
+                  isLoading={isGenerating}
+                  onDownload={handleDownloadIcon}
+                  showPlaceholder={generatedIcons.length === 0}
+                />
+              </div>
+            </div>
+          </div>
+        </div>
       </main>
       <Footer />
     </div>
