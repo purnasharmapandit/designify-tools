@@ -13,34 +13,46 @@ import {
 
 const useCases = [
   {
-    icon: <Paintbrush className="h-8 w-8" />,
+    icon: <Paintbrush className="h-6 w-6" />,
     title: "Web Design",
-    description: "Create consistent and accessible color schemes for your website projects."
+    description: "Create consistent and accessible color schemes for your website projects.",
+    gradient: "bg-gradient-to-br from-purple-50 to-purple-100",
+    iconBg: "bg-purple-100 text-primary"
   },
   {
-    icon: <Palette className="h-8 w-8" />,
+    icon: <Palette className="h-6 w-6" />,
     title: "Graphic Design",
-    description: "Find harmonious color combinations for logos, illustrations, and visual assets."
+    description: "Find harmonious color combinations for logos, illustrations, and visual assets.",
+    gradient: "bg-gradient-to-br from-pink-50 to-pink-100",
+    iconBg: "bg-pink-100 text-pink-500"
   },
   {
-    icon: <ShoppingBag className="h-8 w-8" />,
+    icon: <ShoppingBag className="h-6 w-6" />,
     title: "Branding",
-    description: "Develop brand color palettes that convey the right emotion and identity."
+    description: "Develop brand color palettes that convey the right emotion and identity.",
+    gradient: "bg-gradient-to-br from-blue-50 to-blue-100",
+    iconBg: "bg-blue-100 text-blue-500"
   },
   {
-    icon: <MonitorSmartphone className="h-8 w-8" />,
+    icon: <MonitorSmartphone className="h-6 w-6" />,
     title: "UI/UX Design",
-    description: "Create color systems for interfaces that are both beautiful and usable."
+    description: "Create color systems for interfaces that are both beautiful and usable.",
+    gradient: "bg-gradient-to-br from-amber-50 to-amber-100",
+    iconBg: "bg-amber-100 text-amber-500"
   },
   {
-    icon: <Presentation className="h-8 w-8" />,
+    icon: <Presentation className="h-6 w-6" />,
     title: "Presentations",
-    description: "Design slides with coordinated colors that enhance your message."
+    description: "Design slides with coordinated colors that enhance your message.",
+    gradient: "bg-gradient-to-br from-green-50 to-green-100",
+    iconBg: "bg-green-100 text-green-500"
   },
   {
-    icon: <Globe className="h-8 w-8" />,
+    icon: <Globe className="h-6 w-6" />,
     title: "Social Media",
-    description: "Create visually cohesive social profiles with consistent color themes."
+    description: "Create visually cohesive social profiles with consistent color themes.",
+    gradient: "bg-gradient-to-br from-indigo-50 to-indigo-100",
+    iconBg: "bg-indigo-100 text-indigo-500"
   }
 ];
 
@@ -50,7 +62,7 @@ const UseCasesSection = () => {
       <div className="container mx-auto px-4">
         <div className="max-w-3xl mx-auto text-center mb-12">
           <h2 className="text-3xl font-bold mb-4">How to Use Color Palettes</h2>
-          <p className="text-lg text-gray-600">
+          <p className="text-lg text-muted-foreground">
             Beautiful color combinations can transform your designs. Here's how our tool can help.
           </p>
         </div>
@@ -63,13 +75,17 @@ const UseCasesSection = () => {
               transition={{ duration: 0.5, delay: index * 0.1 }}
               viewport={{ once: true }}
             >
-              <Card className="h-full">
+              <Card className={`h-full hover:shadow-md transition-shadow ${useCase.gradient}`}>
                 <CardContent className="p-6">
-                  <div className="mb-4 p-3 bg-purple-100 rounded-full text-purple-500 w-fit">
-                    {useCase.icon}
+                  <div className="flex items-start">
+                    <div className={`mr-4 p-3 rounded-full w-fit ${useCase.iconBg}`}>
+                      {useCase.icon}
+                    </div>
+                    <div>
+                      <h3 className="text-lg font-semibold mb-2">{useCase.title}</h3>
+                      <p className="text-muted-foreground">{useCase.description}</p>
+                    </div>
                   </div>
-                  <h3 className="text-lg font-semibold mb-2">{useCase.title}</h3>
-                  <p className="text-gray-600">{useCase.description}</p>
                 </CardContent>
               </Card>
             </motion.div>

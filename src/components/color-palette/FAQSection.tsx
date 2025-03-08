@@ -48,7 +48,7 @@ const FAQSection = () => {
             className="text-center mb-12"
           >
             <h2 className="text-3xl font-bold mb-4">Frequently Asked Questions</h2>
-            <p className="text-lg text-gray-600">
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
               Everything you need to know about color palettes and our generator
             </p>
           </motion.div>
@@ -66,7 +66,7 @@ const FAQSection = () => {
                   <AccordionTrigger className="text-left font-medium">
                     {faq.question}
                   </AccordionTrigger>
-                  <AccordionContent className="text-gray-600">
+                  <AccordionContent className="text-muted-foreground">
                     {faq.answer}
                   </AccordionContent>
                 </AccordionItem>
