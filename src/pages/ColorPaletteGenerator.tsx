@@ -4,6 +4,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Drawer, DrawerTrigger } from "@/components/ui/drawer";
 import { useGenerateColorPalette } from "@/hooks/use-color-palette";
+import { Helmet } from "react-helmet";
 
 // Import our new components
 import ColorSwatch from "@/components/color-palette/ColorSwatch";
@@ -80,6 +81,11 @@ const ColorPaletteGenerator = () => {
 
   return (
     <div className="flex flex-col min-h-screen">
+      <Helmet>
+        <title>Color Palette Generator | Create Beautiful Color Schemes</title>
+        <meta name="description" content="Generate stunning color palettes for your design projects with our free color palette generator. Create harmonious color schemes with various modes including analogous, complementary, and more." />
+      </Helmet>
+      
       <Navbar />
       
       {/* Main palette display - Stack vertically on mobile, horizontally on larger screens */}
