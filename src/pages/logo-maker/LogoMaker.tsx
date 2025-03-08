@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { toast } from "sonner";
@@ -29,6 +29,8 @@ import Footer from "@/components/Footer";
 import TestimonialsSection from "@/components/TestimonialsSection";
 import FAQSection from "@/components/FAQSection";
 import ToolCard from "@/components/ToolCard";
+import { useAuth } from "@/contexts/AuthContext";
+import { checkGenerationEligibility, recordGeneration } from "@/services/generationLimits";
 
 const industries = [
   { value: "technology", label: "Technology" },
@@ -91,6 +93,35 @@ const LogoInputForm = () => {
   const navigate = useNavigate();
   const { state, dispatch } = useLogoMaker();
   const [isGenerating, setIsGenerating] = useState(false);
+  const { user, isLoading } = useAuth();
+  const [generationStatus, setGenerationStatus] = useState<{
+    canGenerate: boolean;
+    message: string;
+    checked: boolean;
+  }>({
+    canGenerate: false,
+    message: "Checking generation eligibility...",
+    checked: false,
+  });
+  
+  useEffect(() => {
+    const checkEligibility = async () => {
+      if (isLoading) return;
+      
+      const result = await checkGenerationEligibility('logo');
+      setGenerationStatus({
+        canGenerate: result.canGenerate,
+        message: result.message,
+        checked: true,
+      });
+      
+      if (result.redirectToAuth) {
+        toast.info("Please sign in to generate logos");
+      }
+    };
+    
+    checkEligibility();
+  }, [isLoading, user]);
   
   const handleInputChange = (key: keyof LogoConfig, value: string | string[]) => {
     dispatch({ type: "UPDATE_CONFIG", payload: { [key]: value } });
@@ -101,6 +132,15 @@ const LogoInputForm = () => {
     if (scheme) {
       dispatch({ type: "UPDATE_CONFIG", payload: { colors: scheme.colors } });
     }
+  };
+
+  const handleNavigateToAuth = () => {
+    navigate("/auth", { state: { returnTo: "/logo-maker" } });
+  };
+
+  const handleNavigateToSubscription = () => {
+    navigate("/pricing");
+    toast.info("Subscribe to unlock unlimited logo generation");
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -117,10 +157,39 @@ const LogoInputForm = () => {
       return;
     }
     
+    if (!user) {
+      handleNavigateToAuth();
+      return;
+    }
+    
+    // Check again in case the status has changed
+    const eligibility = await checkGenerationEligibility('logo');
+    
+    if (!eligibility.canGenerate) {
+      if (eligibility.redirectToAuth) {
+        handleNavigateToAuth();
+      } else if (eligibility.redirectToSubscription) {
+        handleNavigateToSubscription();
+      }
+      toast.info(eligibility.message);
+      return;
+    }
+    
     try {
       setIsGenerating(true);
       const logos = await generateLogos(state.config);
       dispatch({ type: "SET_GENERATED_LOGOS", payload: logos });
+      
+      // Record this generation
+      await recordGeneration('logo');
+      
+      // Check eligibility again after generation
+      const newEligibility = await checkGenerationEligibility('logo');
+      setGenerationStatus({
+        canGenerate: newEligibility.canGenerate,
+        message: newEligibility.message,
+        checked: true,
+      });
       
       if (logos.length > 0) {
         dispatch({ type: "SELECT_LOGO", payload: logos[0] });
@@ -134,8 +203,55 @@ const LogoInputForm = () => {
     }
   };
 
+  const renderAuthPrompt = () => {
+    if (isLoading) {
+      return null;
+    }
+    
+    if (!user) {
+      return (
+        <div className="bg-primary/5 border border-primary/20 rounded-lg p-4 mb-6">
+          <h3 className="font-medium text-lg mb-2">Sign in to generate logos</h3>
+          <p className="text-muted-foreground mb-4">
+            Create a free account to start generating custom logos for your business.
+            Each new account gets one free logo generation.
+          </p>
+          <Button onClick={handleNavigateToAuth}>
+            Sign up or Sign in
+          </Button>
+        </div>
+      );
+    }
+    
+    if (!generationStatus.canGenerate && generationStatus.checked) {
+      return (
+        <div className="bg-primary/5 border border-primary/20 rounded-lg p-4 mb-6">
+          <h3 className="font-medium text-lg mb-2">Subscription Required</h3>
+          <p className="text-muted-foreground mb-4">
+            {generationStatus.message}
+          </p>
+          <Button onClick={handleNavigateToSubscription}>
+            View Subscription Plans
+          </Button>
+        </div>
+      );
+    }
+    
+    if (generationStatus.canGenerate && generationStatus.checked) {
+      return (
+        <div className="bg-green-50 border border-green-200 rounded-lg p-4 mb-6 text-green-800">
+          <p className="font-medium">{generationStatus.message}</p>
+        </div>
+      );
+    }
+    
+    return null;
+  };
+
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
+      {renderAuthPrompt()}
+      
       <div className="space-y-4">
         <div>
           <Label htmlFor="businessName">Business Name *</Label>

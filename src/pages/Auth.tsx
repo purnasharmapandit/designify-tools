@@ -18,6 +18,24 @@ const Auth = () => {
   const navigate = useNavigate();
   const location = useLocation();
   
+  // Get return URL from location state or query params
+  const getReturnUrl = () => {
+    // First check location state
+    if (location.state && location.state.returnTo) {
+      return location.state.returnTo;
+    }
+    
+    // Then check query params
+    const searchParams = new URLSearchParams(location.search);
+    const returnTo = searchParams.get("returnTo");
+    if (returnTo) {
+      return returnTo;
+    }
+    
+    // Default to home
+    return "/";
+  };
+  
   // Check if user is coming from email verification
   useEffect(() => {
     const searchParams = new URLSearchParams(location.search);
@@ -31,9 +49,10 @@ const Auth = () => {
   // Redirect if already logged in
   useEffect(() => {
     if (user && !isLoading) {
-      navigate("/");
+      const returnUrl = getReturnUrl();
+      navigate(returnUrl);
     }
-  }, [user, isLoading, navigate]);
+  }, [user, isLoading, navigate, location]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
