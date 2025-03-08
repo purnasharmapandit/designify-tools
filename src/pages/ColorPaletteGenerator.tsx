@@ -50,6 +50,7 @@ const ColorPaletteGenerator = () => {
     const isInput = target.tagName === 'INPUT' || 
                     target.tagName === 'TEXTAREA' || 
                     target.tagName === 'SELECT' ||
+                    target.tagName === 'BUTTON' ||
                     target.isContentEditable;
     
     // Space to generate new palette - only if not typing in an input
@@ -81,7 +82,7 @@ const ColorPaletteGenerator = () => {
     <div className="flex flex-col min-h-screen">
       <Navbar />
       
-      {/* Main palette display */}
+      {/* Main palette display - Stack vertically on mobile, horizontally on larger screens */}
       <main className="flex-grow flex flex-col md:flex-row">
         {colors.map((color, index) => (
           <ColorSwatch
