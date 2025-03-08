@@ -5,7 +5,7 @@ import Footer from "@/components/Footer";
 import { Drawer, DrawerTrigger } from "@/components/ui/drawer";
 import { useGenerateColorPalette } from "@/hooks/use-color-palette";
 import { Helmet } from "react-helmet";
-import { Palette, RefreshCw, Check, Smartphone, Sparkles, Zap, FileCopy } from "lucide-react";
+import { Palette, RefreshCw, Check, Smartphone, Sparkles, Zap, Copy } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 // Import our components
@@ -114,9 +114,6 @@ const ColorPaletteGenerator = () => {
               <RefreshCw className="mr-2 h-4 w-4" />
               Generate New Palette
             </Button>
-            <p className="text-sm text-muted-foreground">
-              Tip: Press the <kbd className="px-2 py-1 bg-background border rounded text-xs">Space</kbd> key to generate a new palette
-            </p>
           </div>
         </div>
       </section>
@@ -195,7 +192,7 @@ const ColorPaletteGenerator = () => {
             <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
               <div className="flex items-center mb-4">
                 <div className="bg-primary/10 p-2 rounded-full text-primary mr-3">
-                  <FileCopy className="h-5 w-5" />
+                  <Copy className="h-5 w-5" />
                 </div>
                 <h3 className="text-lg font-semibold">Save Your Work</h3>
               </div>
