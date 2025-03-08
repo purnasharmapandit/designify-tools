@@ -23,6 +23,8 @@ import { ColorPicker } from "@/components/ui/color-picker";
 import { toast } from "sonner";
 import { useGenerateColorPalette, PaletteType, ExportFormat } from "@/hooks/use-color-palette";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
+import UseCasesSection from "@/components/color-palette/UseCasesSection";
+import FAQSection from "@/components/color-palette/FAQSection";
 
 const ColorPaletteGenerator = () => {
   const { 
@@ -47,26 +49,36 @@ const ColorPaletteGenerator = () => {
 
   // Create wrapper functions to handle type conversion
   const handlePaletteTypeChange = (value: string) => {
-    setPaletteType(value as any);
+    setPaletteType(value as PaletteType);
   };
 
   const handleExportFormatChange = (value: string) => {
-    setExportFormat(value as any);
+    setExportFormat(value as ExportFormat);
   };
 
   // Handle keyboard shortcuts
   const handleKeyDown = useCallback((event: KeyboardEvent) => {
-    // Space to generate new palette
-    if (event.code === 'Space' && !isSettingsOpen) {
+    // Only proceed if target is the document body (not an input or other interactive element)
+    const target = event.target as HTMLElement;
+    const isInput = target.tagName === 'INPUT' || 
+                    target.tagName === 'TEXTAREA' || 
+                    target.tagName === 'SELECT' ||
+                    target.isContentEditable;
+    
+    // Space to generate new palette - only if not typing in an input
+    if (event.code === 'Space' && !isInput && !isSettingsOpen) {
+      event.preventDefault(); // Prevent scrolling
       generateNewPalette();
     }
+    
     // 'S' to open/close settings
-    if (event.code === 'KeyS') {
+    if (event.code === 'KeyS' && !isInput) {
       setIsSettingsOpen(prev => !prev);
     }
+    
     // '1-5' to lock/unlock colors
     const numKey = parseInt(event.key);
-    if (numKey >= 1 && numKey <= colors.length) {
+    if (!isInput && numKey >= 1 && numKey <= colors.length) {
       toggleLockColor(numKey - 1);
     }
   }, [colors.length, generateNewPalette, isSettingsOpen, toggleLockColor]);
@@ -305,6 +317,12 @@ const ColorPaletteGenerator = () => {
           </div>
         </div>
       )}
+
+      {/* Use Cases and FAQ Sections */}
+      <div className="bg-white">
+        <UseCasesSection />
+        <FAQSection />
+      </div>
 
       <Footer />
     </div>
