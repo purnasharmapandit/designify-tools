@@ -9,9 +9,9 @@ interface HeroSectionProps {
 
 const HeroSection = ({ onGenerateNewPalette }: HeroSectionProps) => {
   return (
-    <section className="py-8 md:py-12 bg-gradient-to-b from-primary/10 to-transparent">
+    <section className="py-12 md:py-16 bg-gradient-to-b from-primary/10 to-transparent">
       <div className="container mx-auto px-4">
-        <div className="max-w-3xl mx-auto text-center mb-8">
+        <div className="max-w-3xl mx-auto text-center mb-8 pt-8">
           <div className="inline-flex p-3 bg-primary/10 rounded-full text-primary mb-4">
             <Palette className="h-8 w-8" />
           </div>
