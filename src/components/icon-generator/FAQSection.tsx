@@ -37,7 +37,7 @@ const FAQSection: React.FC = () => {
   ];
 
   return (
-    <section className="py-16 bg-background">
+    <section className="py-16 bg-gray-50">
       <div className="container px-4">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -53,26 +53,28 @@ const FAQSection: React.FC = () => {
         </motion.div>
         
         <div className="max-w-3xl mx-auto">
-          <Accordion type="single" collapsible className="w-full">
-            {faqs.map((faq, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 10 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.3, delay: index * 0.1 }}
-                viewport={{ once: true }}
-              >
-                <AccordionItem value={`item-${index}`}>
-                  <AccordionTrigger className="text-left font-medium">
-                    {faq.question}
-                  </AccordionTrigger>
-                  <AccordionContent className="text-muted-foreground">
-                    {faq.answer}
-                  </AccordionContent>
-                </AccordionItem>
-              </motion.div>
-            ))}
-          </Accordion>
+          <div className="bg-white rounded-xl shadow-sm p-1">
+            <Accordion type="single" collapsible className="w-full">
+              {faqs.map((faq, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 10 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.3, delay: index * 0.1 }}
+                  viewport={{ once: true }}
+                >
+                  <AccordionItem value={`item-${index}`} className="border-b last:border-b-0">
+                    <AccordionTrigger className="text-left font-medium px-4 py-4 hover:no-underline hover:bg-gray-50 rounded-lg">
+                      {faq.question}
+                    </AccordionTrigger>
+                    <AccordionContent className="text-muted-foreground px-4 pb-4 pt-2">
+                      {faq.answer}
+                    </AccordionContent>
+                  </AccordionItem>
+                </motion.div>
+              ))}
+            </Accordion>
+          </div>
         </div>
       </div>
     </section>
