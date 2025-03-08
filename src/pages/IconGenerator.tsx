@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import { Wand2 } from "lucide-react";
 import Navbar from "@/components/Navbar";
@@ -15,7 +14,6 @@ import { useAuth } from "@/contexts/AuthContext";
 import { checkGenerationEligibility, recordGeneration } from "@/services/generationLimits";
 import { Button } from "@/components/ui/button";
 
-// Icon styles available
 export const ICON_STYLES = [
   { id: "flat", name: "Flat", description: "Simple, clean designs with solid colors" },
   { id: "gradient", name: "Gradient", description: "Smooth color transitions for a modern look" },
@@ -50,16 +48,7 @@ export interface IconGeneratorFormData {
 const IconGenerator = () => {
   const [generatedIcons, setGeneratedIcons] = useState<GeneratedIcon[]>([]);
   const [isGenerating, setIsGenerating] = useState(false);
-  const [generationStatus, setGenerationStatus] = useState<{
-    canGenerate: boolean;
-    message: string;
-    checked: boolean;
-  }>({
-    canGenerate: false,
-    message: "Checking generation eligibility...",
-    checked: false,
-  });
-
+  
   const navigate = useNavigate();
   const { user, isLoading } = useAuth();
   
@@ -77,25 +66,6 @@ const IconGenerator = () => {
     setFormData(prev => ({ ...prev, ...newData }));
   };
 
-  useEffect(() => {
-    const checkEligibility = async () => {
-      if (isLoading) return;
-      
-      const result = await checkGenerationEligibility('icon');
-      setGenerationStatus({
-        canGenerate: result.canGenerate,
-        message: result.message,
-        checked: true,
-      });
-      
-      if (result.redirectToAuth) {
-        toast.info("Please sign in to generate icons");
-      }
-    };
-    
-    checkEligibility();
-  }, [isLoading, user]);
-
   const handleNavigateToAuth = () => {
     navigate("/auth", { state: { returnTo: "/icon-generator" } });
   };
@@ -111,22 +81,19 @@ const IconGenerator = () => {
       return;
     }
     
-    if (!user) {
-      handleNavigateToAuth();
-      return;
-    }
-    
-    // Check again in case the status has changed
+    // Check eligibility only when user clicks generate
     const eligibility = await checkGenerationEligibility('icon');
     
     if (!eligibility.canGenerate) {
       if (eligibility.redirectToAuth) {
         handleNavigateToAuth();
+        toast.info("Please sign up or sign in to generate icons");
+        return;
       } else if (eligibility.redirectToSubscription) {
         handleNavigateToSubscription();
+        toast.info(eligibility.message);
+        return;
       }
-      toast.info(eligibility.message);
-      return;
     }
     
     setIsGenerating(true);
@@ -139,13 +106,6 @@ const IconGenerator = () => {
       // Record this generation
       await recordGeneration('icon');
       
-      // Check eligibility again after generation
-      const newEligibility = await checkGenerationEligibility('icon');
-      setGenerationStatus({
-        canGenerate: newEligibility.canGenerate,
-        message: newEligibility.message,
-        checked: true,
-      });
     } catch (error) {
       console.error("Error generating icons:", error);
       toast.error("Failed to generate icons. Please try again later.");
@@ -163,51 +123,6 @@ const IconGenerator = () => {
     link.click();
     document.body.removeChild(link);
     toast.success("Icon downloaded successfully!");
-  };
-
-  const renderAuthPrompt = () => {
-    if (isLoading) {
-      return null;
-    }
-    
-    if (!user) {
-      return (
-        <div className="bg-primary/5 border border-primary/20 rounded-lg p-4 mb-6">
-          <h3 className="font-medium text-lg mb-2">Sign in to generate icons</h3>
-          <p className="text-muted-foreground mb-4">
-            Create a free account to start generating custom icons for your projects.
-            Each new account gets one free icon generation.
-          </p>
-          <Button onClick={handleNavigateToAuth}>
-            Sign up or Sign in
-          </Button>
-        </div>
-      );
-    }
-    
-    if (!generationStatus.canGenerate && generationStatus.checked) {
-      return (
-        <div className="bg-primary/5 border border-primary/20 rounded-lg p-4 mb-6">
-          <h3 className="font-medium text-lg mb-2">Subscription Required</h3>
-          <p className="text-muted-foreground mb-4">
-            {generationStatus.message}
-          </p>
-          <Button onClick={handleNavigateToSubscription}>
-            View Subscription Plans
-          </Button>
-        </div>
-      );
-    }
-    
-    if (generationStatus.canGenerate && generationStatus.checked) {
-      return (
-        <div className="bg-green-50 border border-green-200 rounded-lg p-4 mb-6 text-green-800">
-          <p className="font-medium">{generationStatus.message}</p>
-        </div>
-      );
-    }
-    
-    return null;
   };
 
   return (
@@ -234,8 +149,6 @@ const IconGenerator = () => {
                 Create custom icons for your projects in seconds
               </p>
             </div>
-
-            {renderAuthPrompt()}
 
             <div className="bg-card rounded-xl border shadow-sm overflow-hidden">
               <div className="grid md:grid-cols-5 divide-y md:divide-y-0 md:divide-x">
