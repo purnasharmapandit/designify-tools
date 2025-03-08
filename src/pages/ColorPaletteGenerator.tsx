@@ -5,6 +5,8 @@ import Footer from "@/components/Footer";
 import { Drawer, DrawerTrigger } from "@/components/ui/drawer";
 import { useGenerateColorPalette } from "@/hooks/use-color-palette";
 import { Helmet } from "react-helmet";
+import { Palette, RefreshCw } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 // Import our new components
 import ColorSwatch from "@/components/color-palette/ColorSwatch";
@@ -88,17 +90,46 @@ const ColorPaletteGenerator = () => {
       
       <Navbar />
       
+      {/* Hero Section */}
+      <section className="py-8 md:py-12 bg-gradient-to-b from-primary/10 to-transparent">
+        <div className="container mx-auto px-4">
+          <div className="max-w-3xl mx-auto text-center mb-8">
+            <div className="inline-flex p-3 bg-primary/10 rounded-full text-primary mb-4">
+              <Palette className="h-8 w-8" />
+            </div>
+            <h1 className="text-3xl md:text-4xl font-bold mb-3">Color Palette Generator</h1>
+            <p className="text-lg text-muted-foreground mb-6">
+              Create beautiful color combinations for your projects with our intuitive color palette tool.
+              Press spacebar to generate new palettes or use numbers (1-5) to lock colors you like.
+            </p>
+            <Button 
+              onClick={generateNewPalette}
+              className="mb-3"
+              size="lg"
+            >
+              <RefreshCw className="mr-2 h-4 w-4" />
+              Generate New Palette
+            </Button>
+            <p className="text-sm text-muted-foreground">
+              Tip: Press the <kbd className="px-2 py-1 bg-background border rounded text-xs">Space</kbd> key to generate a new palette
+            </p>
+          </div>
+        </div>
+      </section>
+      
       {/* Main palette display - Stack vertically on mobile, horizontally on larger screens */}
       <main className="flex-grow flex flex-col md:flex-row">
-        {colors.map((color, index) => (
-          <ColorSwatch
-            key={index}
-            color={color}
-            index={index}
-            isLocked={lockStatus[index]}
-            onToggleLock={toggleLockColor}
-          />
-        ))}
+        <div className="w-full h-[50vh] md:h-[75vh] flex flex-col md:flex-row">
+          {colors.map((color, index) => (
+            <ColorSwatch
+              key={index}
+              color={color}
+              index={index}
+              isLocked={lockStatus[index]}
+              onToggleLock={toggleLockColor}
+            />
+          ))}
+        </div>
       </main>
 
       {/* Control bar */}

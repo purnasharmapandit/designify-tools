@@ -4,6 +4,7 @@ import { Wand2 } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { toast } from "sonner";
+import { Helmet } from "react-helmet";
 import IconGeneratorWizard from "@/components/icon-generator/IconGeneratorWizard";
 import IconPreview from "@/components/icon-generator/IconPreview";
 import FeaturesSection from "@/components/icon-generator/FeaturesSection";
@@ -93,6 +94,12 @@ const IconGenerator = () => {
 
   return (
     <div className="min-h-screen flex flex-col bg-gradient-to-b from-background to-background/80">
+      <Helmet>
+        <title>AI Icon Generator | Custom Icon Design Tool</title>
+        <meta name="description" content="Create professional custom icons for your projects using AI. Choose from 20+ styles including flat, 3D, isometric, and more. No design skills required." />
+        <meta name="keywords" content="icon generator, AI icon maker, custom icons, icon design tool" />
+      </Helmet>
+
       <Navbar />
       <main className="flex-grow">
         <div className="container mx-auto px-4 py-10">
