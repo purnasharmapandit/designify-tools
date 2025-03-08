@@ -119,7 +119,7 @@ const ColorPaletteGenerator = () => {
       
       {/* Main palette display - Stack vertically on mobile, horizontally on larger screens */}
       <main className="flex-grow flex flex-col md:flex-row">
-        <div className="w-full h-[50vh] md:h-[75vh] flex flex-col md:flex-row">
+        <div className="w-full h-[40vh] md:h-[60vh] flex flex-col md:flex-row">
           {colors.map((color, index) => (
             <ColorSwatch
               key={index}

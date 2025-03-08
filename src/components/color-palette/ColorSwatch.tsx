@@ -32,36 +32,36 @@ const ColorSwatch = ({ color, index, isLocked, onToggleLock }: ColorSwatchProps)
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.3, delay: index * 0.1 }}
-      className="flex-1 flex flex-col justify-between h-full"
+      className="flex-1 flex flex-col justify-between"
       style={{ 
         backgroundColor: color,
-        minHeight: "50vh", // Reduced height on mobile
+        minHeight: "30vh", // Reduced height on mobile for better visibility
         height: "100%"
       }}
     >
-      <div className="p-3 md:p-4 flex justify-between items-start">
+      <div className="p-2 md:p-4 flex justify-between items-start">
         <Button
           variant="ghost"
           size="icon"
-          className="h-7 w-7 md:h-9 md:w-9 rounded-full bg-white/10 backdrop-blur-sm hover:bg-white/20"
+          className="h-6 w-6 md:h-9 md:w-9 rounded-full bg-white/10 backdrop-blur-sm hover:bg-white/20"
           onClick={() => onToggleLock(index)}
           style={{ color: textColor }}
         >
           {isLocked ? (
-            <Lock className="h-4 w-4 md:h-5 md:w-5" />
+            <Lock className="h-3 w-3 md:h-5 md:w-5" />
           ) : (
-            <Unlock className="h-4 w-4 md:h-5 md:w-5" />
+            <Unlock className="h-3 w-3 md:h-5 md:w-5" />
           )}
         </Button>
 
-        <span className="text-sm font-mono px-2 py-1 rounded bg-white/10 backdrop-blur-sm"
+        <span className="text-xs md:text-sm font-mono px-1 py-0.5 md:px-2 md:py-1 rounded bg-white/10 backdrop-blur-sm"
               style={{ color: textColor }}>
           {index + 1}
         </span>
       </div>
 
-      <div className="p-3 md:p-4 flex flex-col items-center gap-2 mt-auto">
-        <h3 className="text-base md:text-2xl font-bold font-mono tracking-wider"
+      <div className="p-2 md:p-4 flex flex-col items-center gap-1 md:gap-2 mt-auto">
+        <h3 className="text-sm md:text-2xl font-bold font-mono tracking-wider truncate w-full text-center"
             style={{ color: textColor }}>
           {color.toUpperCase()}
         </h3>
@@ -69,7 +69,7 @@ const ColorSwatch = ({ color, index, isLocked, onToggleLock }: ColorSwatchProps)
         <Button
           variant="ghost"
           size="sm"
-          className="text-xs md:text-sm bg-white/10 backdrop-blur-sm hover:bg-white/20"
+          className="text-xs md:text-sm bg-white/10 backdrop-blur-sm hover:bg-white/20 py-1 px-2 h-auto min-h-0 md:min-h-9"
           onClick={() => {
             navigator.clipboard.writeText(color);
             toast.success(`Copied ${color.toUpperCase()}`);
