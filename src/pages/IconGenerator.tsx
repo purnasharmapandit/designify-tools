@@ -104,8 +104,8 @@ const IconGenerator = () => {
       <main className="flex-grow">
         <div className="container mx-auto px-4 py-10">
           <div className="max-w-4xl mx-auto">
-            {/* Header Section */}
-            <div className="text-center mb-10">
+            {/* Header Section - Adding pt-16 for extra padding at the top */}
+            <div className="text-center mb-10 pt-16">
               <div className="inline-block p-3 bg-primary/10 rounded-full text-primary mb-4">
                 <Wand2 className="h-8 w-8" />
               </div>
