@@ -16,23 +16,21 @@ const ColorPicker: React.FC<ColorPickerProps> = ({ label, value, onChange, id })
       <Label htmlFor={id}>{label}</Label>
       <div className="flex items-center gap-2">
         <div
-          className="h-8 w-8 rounded-md border border-gray-700 shadow-inner overflow-hidden"
+          className="h-8 w-8 rounded-md border"
           style={{ backgroundColor: value }}
-        >
-          <div className="h-full w-full" style={{ backgroundImage: 'linear-gradient(45deg, #333 25%, transparent 25%), linear-gradient(-45deg, #333 25%, transparent 25%), linear-gradient(45deg, transparent 75%, #333 75%), linear-gradient(-45deg, transparent 75%, #333 75%)', backgroundSize: '8px 8px', backgroundPosition: '0 0, 0 4px, 4px -4px, -4px 0px', opacity: 0.1 }} />
-        </div>
+        />
         <Input
           id={id}
           type="color"
           value={value}
           onChange={(e) => onChange(e.target.value)}
-          className="h-8 p-0 w-8 bg-transparent border-0"
+          className="h-10 p-1 w-16"
         />
         <Input
           type="text"
           value={value}
           onChange={(e) => onChange(e.target.value)}
-          className="h-9 flex-1 bg-gray-900/80 border-gray-700 text-gray-200 placeholder:text-gray-500"
+          className="h-10 flex-1"
           placeholder="#RRGGBB"
         />
       </div>
