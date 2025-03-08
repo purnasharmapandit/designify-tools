@@ -30,9 +30,9 @@ const PaletteDisplay = ({ colors, lockStatus, toggleLockColor }: PaletteDisplayP
 
   return (
     <main className="flex-grow">
-      <div className="w-full flex flex-col md:flex-row md:h-[60vh]">
+      <div className="w-full flex flex-col md:flex-row h-[60vh]">
         {colors.map((color, index) => (
-          <div key={index} className="relative h-auto md:h-full flex-1">
+          <div key={index} className="relative flex-1 h-full min-h-[100px] flex">
             <ColorSwatch
               color={color}
               index={index}

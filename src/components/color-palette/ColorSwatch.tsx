@@ -38,10 +38,7 @@ const ColorSwatch = ({ color, index, isLocked, onToggleLock }: ColorSwatchProps)
       animate={{ opacity: 1 }}
       transition={{ duration: 0.3, delay: index * 0.1 }}
       className="w-full h-full flex flex-col justify-between"
-      style={{ 
-        backgroundColor: color,
-        height: "15vh", // Mobile height that shows all 5 colors
-      }}
+      style={{ backgroundColor: color }}
     >
       <div className="p-2 md:p-4 flex justify-between items-start">
         <Button
@@ -74,7 +71,7 @@ const ColorSwatch = ({ color, index, isLocked, onToggleLock }: ColorSwatchProps)
         <Button
           variant="ghost"
           size="sm"
-          className="hidden md:flex text-xs md:text-sm bg-white/10 backdrop-blur-sm hover:bg-white/20 py-1 px-2 h-auto min-h-0 md:min-h-9"
+          className="hidden md:flex text-xs md:text-sm bg-white/10 backdrop-blur-sm hover:bg-white/20 py-1 px-2 h-auto min-h-0 md:min-h-9 mt-2"
           onClick={copyToClipboard}
           style={{ color: textColor }}
         >
