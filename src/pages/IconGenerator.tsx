@@ -14,6 +14,10 @@ import StylesGallery from "@/components/icon-generator/StylesGallery";
 import UseCasesSection from "@/components/icon-generator/UseCasesSection";
 import FAQSection from "@/components/icon-generator/FAQSection";
 import TestimonialsSection from "@/components/TestimonialsSection";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { DialogContent, DialogHeader, DialogTitle, Dialog, DialogDescription, DialogFooter } from "@/components/ui/dialog";
+import { generateIcons, GeneratedIcon } from "@/services/runware";
 
 // Icon styles available
 export const ICON_STYLES = [
@@ -39,14 +43,6 @@ export const ICON_STYLES = [
   { id: "emoji", name: "Emoji", description: "Expressive character style icons" },
 ];
 
-// Default sample icons
-const SAMPLE_ICONS = [
-  "/lovable-uploads/sample-icon-1.svg",
-  "/lovable-uploads/sample-icon-2.svg",
-  "/lovable-uploads/sample-icon-3.svg",
-  "/lovable-uploads/sample-icon-4.svg",
-];
-
 export interface IconGeneratorFormData {
   prompt: string;
   style: string;
@@ -56,8 +52,11 @@ export interface IconGeneratorFormData {
 }
 
 const IconGenerator = () => {
-  const [generatedIcons, setGeneratedIcons] = useState<string[]>([]);
+  const [generatedIcons, setGeneratedIcons] = useState<GeneratedIcon[]>([]);
   const [isGenerating, setIsGenerating] = useState(false);
+  const [apiKeyDialogOpen, setApiKeyDialogOpen] = useState(false);
+  const [apiKey, setApiKey] = useState("");
+  const [showApiKeyError, setShowApiKeyError] = useState(false);
   
   const initialFormData: IconGeneratorFormData = {
     prompt: "",
@@ -73,26 +72,55 @@ const IconGenerator = () => {
     setFormData(prev => ({ ...prev, ...newData }));
   };
 
-  const handleGenerateIcons = () => {
+  const handleGenerateIcons = async () => {
     if (!formData.prompt) {
       toast.error("Please enter a description for your icon");
       return;
     }
     
+    if (!apiKey) {
+      setApiKeyDialogOpen(true);
+      return;
+    }
+    
     setIsGenerating(true);
     
-    // Simulate API call for now - would be replaced with actual API integration
-    setTimeout(() => {
-      // For demo purposes, use sample icons
-      setGeneratedIcons(SAMPLE_ICONS);
+    try {
+      const icons = await generateIcons(formData, apiKey);
+      setGeneratedIcons(icons);
+      toast.success(`${icons.length} icons generated successfully!`);
+    } catch (error) {
+      console.error("Error generating icons:", error);
+      toast.error("Failed to generate icons. Please check your API key and try again.");
+    } finally {
       setIsGenerating(false);
-      toast.success("Icons generated successfully!");
-    }, 2000);
+    }
   };
   
   const handleDownloadIcon = (iconUrl: string) => {
-    // In a real implementation, this would download the actual icon
+    // Create a temporary anchor element
+    const link = document.createElement('a');
+    link.href = iconUrl;
+    link.target = '_blank';
+    link.download = `icon-${Date.now()}.webp`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
     toast.success("Icon downloaded successfully!");
+  };
+
+  const handleApiKeySubmit = () => {
+    if (!apiKey.trim()) {
+      setShowApiKeyError(true);
+      return;
+    }
+    
+    // Store API key for this session only
+    setApiKeyDialogOpen(false);
+    setShowApiKeyError(false);
+    
+    // Immediately trigger generation after API key is set
+    handleGenerateIcons();
   };
 
   return (
@@ -129,7 +157,7 @@ const IconGenerator = () => {
                 styles={ICON_STYLES}
               />
               <IconPreview 
-                icons={generatedIcons.length > 0 ? generatedIcons : SAMPLE_ICONS} 
+                icons={generatedIcons} 
                 isLoading={isGenerating}
                 onDownload={handleDownloadIcon}
                 showPlaceholder={generatedIcons.length === 0}
@@ -174,6 +202,40 @@ const IconGenerator = () => {
         </section>
       </main>
       <Footer />
+
+      {/* API Key Dialog */}
+      <Dialog open={apiKeyDialogOpen} onOpenChange={setApiKeyDialogOpen}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Enter Your Runware API Key</DialogTitle>
+            <DialogDescription>
+              To generate icons, you need a Runware API key. Please enter your API key below.
+              You can get a key by signing up at <a href="https://runware.ai" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">Runware.ai</a>.
+            </DialogDescription>
+          </DialogHeader>
+          <div className="space-y-4 py-2">
+            <div className="space-y-2">
+              <Label htmlFor="api-key">Runware API Key</Label>
+              <Input
+                id="api-key"
+                placeholder="Enter your Runware API key"
+                value={apiKey}
+                onChange={(e) => setApiKey(e.target.value)}
+              />
+              {showApiKeyError && (
+                <p className="text-destructive text-sm">Please enter a valid API key</p>
+              )}
+            </div>
+            <p className="text-sm text-muted-foreground">
+              Your API key is only stored in your browser session and will not be saved when you close the page.
+            </p>
+          </div>
+          <DialogFooter>
+            <Button variant="outline" onClick={() => setApiKeyDialogOpen(false)}>Cancel</Button>
+            <Button onClick={handleApiKeySubmit}>Submit</Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };
