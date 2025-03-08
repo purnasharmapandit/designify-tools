@@ -1,10 +1,11 @@
 
 import React from "react";
-import { motion } from "framer-motion";
-import { Download, Copy, ImageIcon, Expand } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Download, Copy, ImageIcon, Expand, RefreshCw } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import { GeneratedIcon } from "@/services/runware";
+import { Card } from "@/components/ui/card";
 
 interface IconPreviewProps {
   icons: GeneratedIcon[];
@@ -40,95 +41,24 @@ const IconPreview: React.FC<IconPreviewProps> = ({
   const getColumnClass = () => {
     // Responsive grid layout based on number of icons
     const count = icons.length;
+    if (count <= 1) return "grid-cols-1";
     if (count <= 2) return "grid-cols-1 sm:grid-cols-2";
-    if (count <= 4) return "grid-cols-2 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2";
-    return "grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4";
+    if (count <= 4) return "grid-cols-2";
+    return "grid-cols-2 md:grid-cols-3 lg:grid-cols-4";
   };
 
   return (
-    <div className="bg-white p-6 rounded-xl shadow-sm border">
-      <h3 className="text-lg font-semibold mb-4">
-        {showPlaceholder ? "Preview" : "Generated Icons"}
-      </h3>
-
-      <div className="bg-gray-50 border rounded-lg p-4 h-[500px] overflow-auto">
-        {isLoading ? (
-          <div className="flex flex-col items-center justify-center h-full">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
-            <p className="mt-4 text-gray-600">Generating your icons...</p>
-            <p className="text-sm text-gray-500 mt-2">This may take a few moments</p>
-          </div>
-        ) : (
-          <>
-            {showPlaceholder ? (
-              <div className="flex flex-col items-center justify-center h-full text-gray-400">
-                <ImageIcon className="h-16 w-16 mb-4" />
-                <p className="text-center">
-                  Your generated icons will appear here
-                  <br />
-                  <span className="text-sm">Fill out the form and click "Generate Icons"</span>
-                </p>
-              </div>
-            ) : (
-              <div className={`grid ${getColumnClass()} gap-4`}>
-                {icons.map((icon, index) => (
-                  <motion.div
-                    key={index}
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.3, delay: index * 0.1 }}
-                    className="bg-white rounded-lg p-4 border shadow-sm flex flex-col items-center"
-                  >
-                    <div className="flex items-center justify-center bg-gray-50 rounded-lg p-4 w-full h-32 mb-3 relative group">
-                      <img
-                        src={icon.imageURL}
-                        alt={`Generated icon ${index + 1}`}
-                        className="max-h-full max-w-full object-contain"
-                      />
-                      <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-30 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-200 rounded-lg">
-                        <Button
-                          variant="secondary"
-                          size="sm"
-                          className="scale-90 hover:scale-100 transition-transform"
-                          onClick={() => window.open(icon.imageURL, '_blank')}
-                        >
-                          <Expand className="h-4 w-4" />
-                        </Button>
-                      </div>
-                    </div>
-                    <div className="flex gap-2 w-full">
-                      <Button
-                        variant="outline"
-                        size="sm"
-                        className="flex-1"
-                        onClick={() => copyToClipboard(icon.imageURL)}
-                      >
-                        <Copy className="h-4 w-4 mr-1" />
-                        <span className="text-xs">Copy</span>
-                      </Button>
-                      <Button
-                        variant="outline"
-                        size="sm"
-                        className="flex-1"
-                        onClick={() => onDownload(icon.imageURL)}
-                      >
-                        <Download className="h-4 w-4 mr-1" />
-                        <span className="text-xs">Download</span>
-                      </Button>
-                    </div>
-                  </motion.div>
-                ))}
-              </div>
-            )}
-          </>
-        )}
-      </div>
-
-      {!showPlaceholder && !isLoading && icons.length > 0 && (
-        <div className="mt-4 flex justify-end">
+    <div className="h-full flex flex-col">
+      <div className="flex justify-between items-center mb-6">
+        <h2 className="text-xl font-semibold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-400">
+          {showPlaceholder ? "Your Icons" : "Generated Icons"}
+        </h2>
+        
+        {!showPlaceholder && !isLoading && icons.length > 0 && (
           <Button
             variant="outline"
             size="sm"
+            className="text-xs border-gray-700 bg-gray-800/50 hover:bg-gray-700/50 text-gray-300"
             onClick={() => {
               // Download all icons as a batch
               icons.forEach((icon, index) => {
@@ -139,11 +69,88 @@ const IconPreview: React.FC<IconPreviewProps> = ({
               toast.success("Downloading all icons...");
             }}
           >
-            <Download className="h-4 w-4 mr-1" />
+            <Download className="h-3.5 w-3.5 mr-1" />
             Download All
           </Button>
+        )}
+      </div>
+
+      <Card className="flex-1 bg-gray-800/30 backdrop-blur border-gray-700 rounded-xl overflow-hidden">
+        <div className="p-4 h-full overflow-auto">
+          {isLoading ? (
+            <div className="flex flex-col items-center justify-center h-full">
+              <div className="relative">
+                <div className="h-16 w-16 rounded-full border-t-2 border-l-2 border-purple-500 animate-spin"></div>
+                <div className="absolute inset-0 h-16 w-16 rounded-full border-b-2 border-r-2 border-pink-500 animate-spin animation-delay-500"></div>
+              </div>
+              <p className="mt-6 text-gray-400 text-center">Crafting your icons<br />This may take a moment</p>
+            </div>
+          ) : (
+            <>
+              {showPlaceholder ? (
+                <div className="flex flex-col items-center justify-center h-full">
+                  <div className="bg-gray-800/50 p-8 rounded-full mb-6">
+                    <ImageIcon className="h-12 w-12 text-gray-600" />
+                  </div>
+                  <h3 className="font-medium text-gray-400 text-center">Your generated icons will appear here</h3>
+                  <p className="text-gray-500 text-sm mt-2 text-center max-w-sm">
+                    Describe what you want, choose a style, and click "Generate Icons"
+                  </p>
+                </div>
+              ) : (
+                <AnimatePresence>
+                  <div className={`grid ${getColumnClass()} gap-4`}>
+                    {icons.map((icon, index) => (
+                      <motion.div
+                        key={index}
+                        initial={{ opacity: 0, scale: 0.9 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        transition={{ duration: 0.3, delay: index * 0.1 }}
+                        className="bg-gray-900/80 rounded-lg overflow-hidden backdrop-blur border border-gray-800 group"
+                      >
+                        <div className="relative aspect-square bg-gray-950 flex items-center justify-center p-4">
+                          <img
+                            src={icon.imageURL}
+                            alt={`Generated icon ${index + 1}`}
+                            className="max-h-full max-w-full object-contain"
+                          />
+                          {/* Overlay with actions */}
+                          <div className="absolute inset-0 bg-black/70 opacity-0 group-hover:opacity-100 flex items-center justify-center gap-2 transition-opacity duration-200">
+                            <Button
+                              variant="ghost"
+                              size="icon"
+                              className="rounded-full bg-white/10 hover:bg-white/20 text-white"
+                              onClick={() => copyToClipboard(icon.imageURL)}
+                            >
+                              <Copy className="h-4 w-4" />
+                            </Button>
+                            <Button
+                              variant="ghost"
+                              size="icon"
+                              className="rounded-full bg-white/10 hover:bg-white/20 text-white"
+                              onClick={() => onDownload(icon.imageURL)}
+                            >
+                              <Download className="h-4 w-4" />
+                            </Button>
+                            <Button
+                              variant="ghost"
+                              size="icon"
+                              className="rounded-full bg-white/10 hover:bg-white/20 text-white"
+                              onClick={() => window.open(icon.imageURL, '_blank')}
+                            >
+                              <Expand className="h-4 w-4" />
+                            </Button>
+                          </div>
+                        </div>
+                      </motion.div>
+                    ))}
+                  </div>
+                </AnimatePresence>
+              )}
+            </>
+          )}
         </div>
-      )}
+      </Card>
     </div>
   );
 };
