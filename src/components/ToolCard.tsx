@@ -33,7 +33,7 @@ const ToolCard = ({ name, color, iconColor, className, link }: ToolCardProps) =>
   );
 
   if (link) {
-    return <Link to={link}>{cardContent}</Link>;
+    return <Link to={link} className="block">{cardContent}</Link>;
   }
 
   return cardContent;

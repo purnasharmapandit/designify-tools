@@ -2,7 +2,14 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { Card, CardContent } from "@/components/ui/card";
-import { Store, Wifi, User, FileText, MapPin, CreditCard } from "lucide-react";
+import { 
+  Store, 
+  Wifi, 
+  User, 
+  FileText, 
+  MapPin, 
+  CreditCard 
+} from "lucide-react";
 
 const useCases = [
   {
@@ -68,7 +75,7 @@ const UseCasesSection = () => {
               transition={{ duration: 0.5, delay: index * 0.1 }}
               viewport={{ once: true }}
             >
-              <Card className={`h-full hover:shadow-md transition-shadow ${useCase.gradient}`}>
+              <Card className={`h-full hover:shadow-md transition-shadow card-hover ${useCase.gradient}`}>
                 <CardContent className="p-6">
                   <div className="flex items-start">
                     <div className={`mr-4 p-3 rounded-full w-fit ${useCase.iconBg}`}>

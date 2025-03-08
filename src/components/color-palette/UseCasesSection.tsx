@@ -58,7 +58,7 @@ const useCases = [
 
 const UseCasesSection = () => {
   return (
-    <section className="py-16">
+    <section className="py-16 bg-white">
       <div className="container mx-auto px-4">
         <div className="max-w-3xl mx-auto text-center mb-12">
           <h2 className="text-3xl font-bold mb-4">How to Use Color Palettes</h2>
@@ -74,6 +74,7 @@ const UseCasesSection = () => {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
               viewport={{ once: true }}
+              className="card-hover"
             >
               <Card className={`h-full hover:shadow-md transition-shadow ${useCase.gradient}`}>
                 <CardContent className="p-6">

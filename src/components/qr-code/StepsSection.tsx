@@ -8,17 +8,23 @@ const steps = [
   {
     icon: <Pencil className="h-6 w-6" />,
     title: "Enter Your Content",
-    description: "Input the URL, text, or data you want to encode in your QR code."
+    description: "Input the URL, text, or data you want to encode in your QR code.",
+    gradient: "bg-gradient-to-br from-purple-50 to-purple-100",
+    iconBg: "bg-purple-100 text-primary"
   },
   {
     icon: <PaintBucket className="h-6 w-6" />,
     title: "Customize Your QR Code",
-    description: "Choose colors, adjust size, and select error correction level to match your needs."
+    description: "Choose colors, adjust size, and select error correction level to match your needs.",
+    gradient: "bg-gradient-to-br from-green-50 to-green-100",
+    iconBg: "bg-green-100 text-green-500"
   },
   {
     icon: <Download className="h-6 w-6" />,
     title: "Download & Share",
-    description: "Download your QR code in your preferred format and share it with the world."
+    description: "Download your QR code in your preferred format and share it with the world.",
+    gradient: "bg-gradient-to-br from-amber-50 to-amber-100",
+    iconBg: "bg-amber-100 text-amber-500"
   }
 ];
 
@@ -39,20 +45,23 @@ const StepsSection = () => {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: index * 0.2 }}
+              viewport={{ once: true }}
             >
-              <Card className="h-full p-6 hover:shadow-md transition-shadow bg-gradient-to-br from-white to-gray-50">
-                <div className="flex items-start">
-                  <div className="mr-4 p-3 bg-secondary/10 rounded-full text-secondary flex-shrink-0">
-                    {step.icon}
-                  </div>
-                  <div>
-                    <div className="flex items-center mb-2">
-                      <div className="w-6 h-6 rounded-full bg-secondary text-secondary-foreground font-bold flex items-center justify-center text-sm mr-2">
-                        {index + 1}
-                      </div>
-                      <h3 className="text-xl font-semibold">{step.title}</h3>
+              <Card className={`h-full hover:shadow-md transition-shadow card-hover ${step.gradient}`}>
+                <div className="p-6">
+                  <div className="flex items-start">
+                    <div className={`mr-4 p-3 rounded-full ${step.iconBg}`}>
+                      {step.icon}
                     </div>
-                    <p className="text-muted-foreground">{step.description}</p>
+                    <div>
+                      <div className="flex items-center mb-2">
+                        <div className="w-6 h-6 rounded-full bg-secondary text-secondary-foreground font-bold flex items-center justify-center text-sm mr-2">
+                          {index + 1}
+                        </div>
+                        <h3 className="text-xl font-semibold">{step.title}</h3>
+                      </div>
+                      <p className="text-muted-foreground">{step.description}</p>
+                    </div>
                   </div>
                 </div>
               </Card>
