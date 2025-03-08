@@ -46,6 +46,15 @@ const ColorPaletteGenerator = () => {
     setExportFormat
   } = useGenerateColorPalette();
 
+  // Create wrapper functions to handle type conversion
+  const handlePaletteTypeChange = (value: string) => {
+    setPaletteType(value as any);
+  };
+
+  const handleExportFormatChange = (value: string) => {
+    setExportFormat(value as any);
+  };
+
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar />
@@ -90,7 +99,7 @@ const ColorPaletteGenerator = () => {
                       <div className="space-y-4">
                         <div>
                           <label className="text-sm font-medium mb-1 block">Palette Type</label>
-                          <Select value={paletteType} onValueChange={setPaletteType}>
+                          <Select value={paletteType} onValueChange={handlePaletteTypeChange}>
                             <SelectTrigger>
                               <SelectValue placeholder="Select palette type" />
                             </SelectTrigger>
@@ -211,7 +220,7 @@ const ColorPaletteGenerator = () => {
                   <CardContent className="pt-6">
                     <div className="mb-6">
                       <label className="text-sm font-medium mb-1 block">Export Format</label>
-                      <Select value={exportFormat} onValueChange={setExportFormat}>
+                      <Select value={exportFormat} onValueChange={handleExportFormatChange}>
                         <SelectTrigger>
                           <SelectValue placeholder="Select format" />
                         </SelectTrigger>

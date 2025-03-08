@@ -2,8 +2,8 @@
 import { useState, useEffect } from "react";
 import { toast } from "sonner";
 
-type PaletteType = "analogous" | "monochromatic" | "triadic" | "complementary" | "split-complementary" | "tetradic" | "random";
-type ExportFormat = "hex" | "rgb" | "hsl" | "css" | "tailwind";
+export type PaletteType = "analogous" | "monochromatic" | "triadic" | "complementary" | "split-complementary" | "tetradic" | "random";
+export type ExportFormat = "hex" | "rgb" | "hsl" | "css" | "tailwind";
 
 export function useGenerateColorPalette() {
   const [colors, setColors] = useState<string[]>(['#9b87f5', '#87B9F5', '#F5DB87', '#F87FF2', '#F5876A']);
