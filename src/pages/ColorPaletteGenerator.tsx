@@ -118,11 +118,11 @@ const ColorPaletteGenerator = () => {
         </div>
       </section>
       
-      {/* Main palette display - Stack vertically on mobile */}
+      {/* Main palette display - Stack vertically on mobile, use full height columns on desktop */}
       <main className="flex-grow">
-        <div className="w-full flex flex-col md:flex-row">
+        <div className="w-full flex flex-col md:flex-row md:h-[60vh]">
           {colors.map((color, index) => (
-            <div key={index} className="relative">
+            <div key={index} className="relative h-auto md:h-full flex-1">
               <ColorSwatch
                 color={color}
                 index={index}

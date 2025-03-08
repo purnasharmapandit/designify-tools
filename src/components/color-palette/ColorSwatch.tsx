@@ -37,7 +37,7 @@ const ColorSwatch = ({ color, index, isLocked, onToggleLock }: ColorSwatchProps)
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.3, delay: index * 0.1 }}
-      className="w-full"
+      className="w-full h-full flex flex-col justify-between"
       style={{ 
         backgroundColor: color,
         height: "15vh", // Mobile height that shows all 5 colors
