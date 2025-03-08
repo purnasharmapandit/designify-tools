@@ -2,6 +2,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { QrCode } from "lucide-react";
+import { Helmet } from "react-helmet";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import QRCodeForm from "@/components/qr-code/QRCodeForm";
@@ -46,6 +47,12 @@ const QRCodeGenerator = () => {
 
   return (
     <div className="min-h-screen flex flex-col">
+      <Helmet>
+        <title>Free QR Code Generator | Create Custom QR Codes Online</title>
+        <meta name="description" content="Generate free custom QR codes for websites, text, contact info, WiFi, and more. Download in PNG, SVG, or JPG formats. No sign-up required." />
+        <meta name="keywords" content="qr code generator, free qr code, custom qr code, qr code maker, create qr code" />
+      </Helmet>
+      
       <Navbar />
       <main className="flex-grow">
         {/* Hero Section */}
