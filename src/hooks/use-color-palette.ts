@@ -13,9 +13,11 @@ export function useGenerateColorPalette() {
   const [lockStatus, setLockStatus] = useState<boolean[]>([false, false, false, false, false]);
   const [exportFormat, setExportFormat] = useState<ExportFormat>("hex");
 
+  // Initialize the palette on first load, but don't regenerate automatically when settings change
   useEffect(() => {
+    // Only run once on component mount
     generateNewPalette();
-  }, [baseColor, paletteType, numberOfColors]);
+  }, []);
 
   // Convert hex to HSL
   const hexToHSL = (hex: string): [number, number, number] => {
