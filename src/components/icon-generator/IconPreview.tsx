@@ -61,7 +61,7 @@ const IconPreview: React.FC<IconPreviewProps> = ({
               >
                 <div className="aspect-square bg-background rounded-md border overflow-hidden flex items-center justify-center p-4 transition-all group-hover:shadow-md">
                   <img 
-                    src={icon.url} 
+                    src={icon.imageURL} 
                     alt={`Generated icon ${index + 1}`}
                     className="max-w-full max-h-full object-contain"
                   />
@@ -70,7 +70,7 @@ const IconPreview: React.FC<IconPreviewProps> = ({
                     <Button 
                       variant="secondary" 
                       size="sm" 
-                      onClick={() => onDownload(icon.url)}
+                      onClick={() => onDownload(icon.imageURL)}
                       className="h-8"
                     >
                       <Download className="h-3.5 w-3.5 mr-1" />
