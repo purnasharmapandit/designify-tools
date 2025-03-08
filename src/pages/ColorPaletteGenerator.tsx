@@ -5,10 +5,10 @@ import Footer from "@/components/Footer";
 import { Drawer, DrawerTrigger } from "@/components/ui/drawer";
 import { useGenerateColorPalette } from "@/hooks/use-color-palette";
 import { Helmet } from "react-helmet";
-import { Palette, RefreshCw, Copy } from "lucide-react";
+import { Palette, RefreshCw } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
-// Import our new components
+// Import our components
 import ColorSwatch from "@/components/color-palette/ColorSwatch";
 import PaletteControls from "@/components/color-palette/PaletteControls";
 import PaletteSettings from "@/components/color-palette/PaletteSettings";
@@ -81,6 +81,11 @@ const ColorPaletteGenerator = () => {
     };
   }, [handleKeyDown]);
 
+  // Function to copy individual color
+  const handleCopyIndividualColor = (color: string) => {
+    navigator.clipboard.writeText(color);
+  };
+
   return (
     <div className="flex flex-col min-h-screen">
       <Helmet>
@@ -117,31 +122,31 @@ const ColorPaletteGenerator = () => {
         </div>
       </section>
       
-      {/* Main palette display - Stack vertically on mobile, horizontally on larger screens */}
-      <main className="flex-grow flex flex-col md:flex-row">
-        <div className="w-full h-[35vh] md:h-[60vh] flex flex-col md:flex-row">
+      {/* Main palette display - Stack vertically on mobile */}
+      <main className="flex-grow">
+        <div className="w-full flex flex-col md:flex-row">
           {colors.map((color, index) => (
-            <ColorSwatch
-              key={index}
-              color={color}
-              index={index}
-              isLocked={lockStatus[index]}
-              onToggleLock={toggleLockColor}
-            />
+            <div key={index} className="relative">
+              <ColorSwatch
+                color={color}
+                index={index}
+                isLocked={lockStatus[index]}
+                onToggleLock={toggleLockColor}
+              />
+              {/* Individual copy button for mobile view */}
+              <Button
+                variant="secondary"
+                size="sm"
+                className="md:hidden absolute bottom-3 right-3 text-xs bg-white/20 backdrop-blur-sm hover:bg-white/30"
+                style={{ 
+                  color: getTextColor(color)
+                }}
+                onClick={() => handleCopyIndividualColor(color)}
+              >
+                Copy
+              </Button>
+            </div>
           ))}
-        </div>
-        
-        {/* Single mobile copy button that copies all colors */}
-        <div className="md:hidden flex justify-center p-2 bg-gray-900">
-          <Button
-            variant="ghost"
-            size="sm"
-            className="text-white"
-            onClick={copyToClipboard}
-          >
-            <Copy className="h-4 w-4 mr-2" />
-            Copy All Colors
-          </Button>
         </div>
       </main>
 
@@ -185,6 +190,19 @@ const ColorPaletteGenerator = () => {
       <Footer />
     </div>
   );
+};
+
+// Helper function to determine text color based on background
+const getTextColor = (hexColor: string) => {
+  // Convert hex to RGB
+  const r = parseInt(hexColor.slice(1, 3), 16);
+  const g = parseInt(hexColor.slice(3, 5), 16);
+  const b = parseInt(hexColor.slice(5, 7), 16);
+  
+  // Calculate luminance
+  const luminance = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
+  
+  return luminance > 0.5 ? '#000000' : '#FFFFFF';
 };
 
 export default ColorPaletteGenerator;

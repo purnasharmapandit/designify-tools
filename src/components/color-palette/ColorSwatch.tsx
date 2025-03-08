@@ -27,16 +27,20 @@ const ColorSwatch = ({ color, index, isLocked, onToggleLock }: ColorSwatchProps)
   
   const textColor = getTextColor(color);
   
+  const copyToClipboard = () => {
+    navigator.clipboard.writeText(color);
+    toast.success(`Copied ${color.toUpperCase()}`);
+  };
+  
   return (
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.3, delay: index * 0.1 }}
-      className="flex-1 flex flex-col justify-between"
+      className="w-full"
       style={{ 
         backgroundColor: color,
-        minHeight: "20vh", // Further reduced height for mobile to fit all 5
-        height: "100%"
+        height: "15vh", // Mobile height that shows all 5 colors
       }}
     >
       <div className="p-2 md:p-4 flex justify-between items-start">
@@ -60,8 +64,8 @@ const ColorSwatch = ({ color, index, isLocked, onToggleLock }: ColorSwatchProps)
         </span>
       </div>
 
-      <div className="p-2 md:p-4 flex flex-col items-center gap-1 md:gap-2 mt-auto">
-        <h3 className="text-xs md:text-2xl font-bold font-mono tracking-wider truncate w-full text-center"
+      <div className="p-2 md:p-4 flex flex-col items-center mt-auto">
+        <h3 className="text-sm md:text-2xl font-bold font-mono tracking-wider truncate w-full text-center"
             style={{ color: textColor }}>
           {color.toUpperCase()}
         </h3>
@@ -71,10 +75,7 @@ const ColorSwatch = ({ color, index, isLocked, onToggleLock }: ColorSwatchProps)
           variant="ghost"
           size="sm"
           className="hidden md:flex text-xs md:text-sm bg-white/10 backdrop-blur-sm hover:bg-white/20 py-1 px-2 h-auto min-h-0 md:min-h-9"
-          onClick={() => {
-            navigator.clipboard.writeText(color);
-            toast.success(`Copied ${color.toUpperCase()}`);
-          }}
+          onClick={copyToClipboard}
           style={{ color: textColor }}
         >
           <Copy className="h-3 w-3 md:h-4 md:w-4 mr-1 md:mr-2" />
