@@ -1,32 +1,28 @@
 
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { motion } from "framer-motion";
 import { 
   RefreshCw, 
   Download, 
   Copy, 
-  Eye, 
-  Palette, 
-  Image as ImageIcon,
-  Sliders,
-  ArrowRight,
   Lock,
   Unlock,
-  Plus
+  Settings,
+  ChevronDown,
+  ChevronUp,
+  Info
 } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
-import { Separator } from "@/components/ui/separator";
-import { Slider } from "@/components/ui/slider";
-import { Card, CardContent } from "@/components/ui/card";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Drawer, DrawerContent, DrawerTrigger } from "@/components/ui/drawer";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { ColorPicker } from "@/components/ui/color-picker";
-import { ColorPalette } from "@/components/ColorPalette";
 import { toast } from "sonner";
-import { useGenerateColorPalette } from "@/hooks/use-color-palette";
+import { useGenerateColorPalette, PaletteType, ExportFormat } from "@/hooks/use-color-palette";
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 
 const ColorPaletteGenerator = () => {
   const { 
@@ -46,6 +42,9 @@ const ColorPaletteGenerator = () => {
     setExportFormat
   } = useGenerateColorPalette();
 
+  const [isSettingsOpen, setIsSettingsOpen] = useState(false);
+  const [showShortcuts, setShowShortcuts] = useState(false);
+
   // Create wrapper functions to handle type conversion
   const handlePaletteTypeChange = (value: string) => {
     setPaletteType(value as any);
@@ -55,296 +54,258 @@ const ColorPaletteGenerator = () => {
     setExportFormat(value as any);
   };
 
-  return (
-    <div className="min-h-screen flex flex-col">
-      <Navbar />
-      <main className="flex-grow pt-24 pb-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <motion.h1
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-              className="text-4xl font-bold font-display mb-4"
-            >
-              Color Palette Generator
-            </motion.h1>
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.1 }}
-              className="text-xl text-gray-600"
-            >
-              Create beautiful, harmonious color schemes for your designs
-            </motion.p>
-          </div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="bg-white rounded-xl shadow-md p-6 mb-8"
-          >
-            <Tabs defaultValue="generate" className="w-full">
-              <TabsList className="mb-6 w-full md:w-auto">
-                <TabsTrigger value="generate">Generate</TabsTrigger>
-                <TabsTrigger value="adjust">Adjust</TabsTrigger>
-                <TabsTrigger value="export">Export</TabsTrigger>
-              </TabsList>
-              
-              <TabsContent value="generate" className="space-y-6">
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                  <Card>
-                    <CardContent className="pt-6">
-                      <div className="space-y-4">
-                        <div>
-                          <label className="text-sm font-medium mb-1 block">Palette Type</label>
-                          <Select value={paletteType} onValueChange={handlePaletteTypeChange}>
-                            <SelectTrigger>
-                              <SelectValue placeholder="Select palette type" />
-                            </SelectTrigger>
-                            <SelectContent>
-                              <SelectItem value="analogous">Analogous</SelectItem>
-                              <SelectItem value="monochromatic">Monochromatic</SelectItem>
-                              <SelectItem value="triadic">Triadic</SelectItem>
-                              <SelectItem value="complementary">Complementary</SelectItem>
-                              <SelectItem value="split-complementary">Split Complementary</SelectItem>
-                              <SelectItem value="tetradic">Tetradic</SelectItem>
-                              <SelectItem value="random">Random</SelectItem>
-                            </SelectContent>
-                          </Select>
-                        </div>
-
-                        <ColorPicker 
-                          label="Base Color" 
-                          value={baseColor} 
-                          onChange={setBaseColor}
-                          id="base-color"
-                        />
-                        
-                        <div>
-                          <label className="text-sm font-medium mb-1 block">Number of Colors</label>
-                          <div className="flex items-center space-x-4">
-                            <Slider 
-                              value={[numberOfColors]} 
-                              min={3} 
-                              max={10} 
-                              step={1} 
-                              onValueChange={(values) => setNumberOfColors(values[0])}
-                              className="flex-1"
-                            />
-                            <span className="font-mono bg-gray-100 px-2 py-1 rounded">{numberOfColors}</span>
-                          </div>
-                        </div>
-                      </div>
-                    </CardContent>
-                  </Card>
-
-                  <Card className="md:col-span-2">
-                    <CardContent className="pt-6">
-                      <div className="flex justify-between items-center mb-6">
-                        <h3 className="text-lg font-semibold flex items-center gap-2">
-                          <Palette className="h-5 w-5" /> Your Palette
-                        </h3>
-                        <Button 
-                          variant="outline" 
-                          size="sm" 
-                          onClick={generateNewPalette}
-                          className="gap-2"
-                        >
-                          <RefreshCw className="h-4 w-4" /> Generate
-                        </Button>
-                      </div>
-                      <ColorPalette 
-                        colors={colors} 
-                        lockStatus={lockStatus} 
-                        onToggleLock={toggleLockColor}
-                        onColorChange={(index, color) => {
-                          /* To be implemented */
-                        }}
-                      />
-                    </CardContent>
-                  </Card>
-                </div>
-              </TabsContent>
-              
-              <TabsContent value="adjust" className="space-y-6">
-                <div className="bg-gray-50 p-4 rounded-lg mb-6">
-                  <p className="text-sm text-gray-600">
-                    Fine-tune your palette colors. Lock colors you want to keep by clicking the lock icon.
-                  </p>
-                </div>
-                
-                <div className="grid grid-cols-1 gap-6">
-                  {colors.map((color, index) => (
-                    <Card key={index}>
-                      <CardContent className="pt-6">
-                        <div className="flex items-center gap-4 mb-4">
-                          <div 
-                            className="w-12 h-12 rounded-md border" 
-                            style={{ backgroundColor: color }}
-                          ></div>
-                          <div className="flex-1">
-                            <div className="flex justify-between">
-                              <span className="font-mono text-sm">{color.toUpperCase()}</span>
-                              <Button 
-                                variant="ghost" 
-                                size="sm"
-                                onClick={() => toggleLockColor(index)} 
-                              >
-                                {lockStatus[index] ? 
-                                  <Lock className="h-4 w-4" /> : 
-                                  <Unlock className="h-4 w-4" />
-                                }
-                              </Button>
-                            </div>
-                          </div>
-                        </div>
-                        
-                        <ColorPicker 
-                          label={`Color ${index + 1}`} 
-                          value={color} 
-                          onChange={(newColor) => {
-                            /* To be implemented */
-                          }}
-                          id={`color-${index}`}
-                        />
-                      </CardContent>
-                    </Card>
-                  ))}
-                </div>
-              </TabsContent>
-              
-              <TabsContent value="export" className="space-y-6">
-                <Card>
-                  <CardContent className="pt-6">
-                    <div className="mb-6">
-                      <label className="text-sm font-medium mb-1 block">Export Format</label>
-                      <Select value={exportFormat} onValueChange={handleExportFormatChange}>
-                        <SelectTrigger>
-                          <SelectValue placeholder="Select format" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="hex">HEX</SelectItem>
-                          <SelectItem value="rgb">RGB</SelectItem>
-                          <SelectItem value="hsl">HSL</SelectItem>
-                          <SelectItem value="css">CSS Variables</SelectItem>
-                          <SelectItem value="tailwind">Tailwind Config</SelectItem>
-                        </SelectContent>
-                      </Select>
-                    </div>
-                    
-                    <div className="bg-gray-50 p-4 rounded-lg mb-6 font-mono text-sm overflow-x-auto">
-                      <pre>
-                        {exportFormat === 'hex' && colors.map(color => `${color.toUpperCase()}\n`).join('')}
-                        {exportFormat === 'rgb' && colors.map(color => {
-                          const r = parseInt(color.slice(1, 3), 16);
-                          const g = parseInt(color.slice(3, 5), 16);
-                          const b = parseInt(color.slice(5, 7), 16);
-                          return `rgb(${r}, ${g}, ${b})\n`;
-                        }).join('')}
-                        {exportFormat === 'css' && `
-:root {
-${colors.map((color, i) => `  --color-${i + 1}: ${color};`).join('\n')}
-}
-                        `}
-                        {exportFormat === 'tailwind' && `
-module.exports = {
-  theme: {
-    extend: {
-      colors: {
-${colors.map((color, i) => `        color${i + 1}: '${color}',`).join('\n')}
-      }
+  // Handle keyboard shortcuts
+  const handleKeyDown = useCallback((event: KeyboardEvent) => {
+    // Space to generate new palette
+    if (event.code === 'Space' && !isSettingsOpen) {
+      generateNewPalette();
     }
-  }
-}
-                        `}
-                      </pre>
-                    </div>
-                    
-                    <div className="flex flex-wrap gap-4">
+    // 'S' to open/close settings
+    if (event.code === 'KeyS') {
+      setIsSettingsOpen(prev => !prev);
+    }
+    // '1-5' to lock/unlock colors
+    const numKey = parseInt(event.key);
+    if (numKey >= 1 && numKey <= colors.length) {
+      toggleLockColor(numKey - 1);
+    }
+  }, [colors.length, generateNewPalette, isSettingsOpen, toggleLockColor]);
+
+  useEffect(() => {
+    window.addEventListener('keydown', handleKeyDown);
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [handleKeyDown]);
+
+  const getTextColor = (hexColor: string) => {
+    // Convert hex to RGB
+    const r = parseInt(hexColor.slice(1, 3), 16);
+    const g = parseInt(hexColor.slice(3, 5), 16);
+    const b = parseInt(hexColor.slice(5, 7), 16);
+    
+    // Calculate luminance
+    const luminance = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
+    
+    return luminance > 0.5 ? '#000000' : '#FFFFFF';
+  };
+
+  return (
+    <div className="flex flex-col min-h-screen">
+      <Navbar />
+      
+      {/* Main palette display */}
+      <main className="flex-grow flex flex-col md:flex-row">
+        {colors.map((color, index) => (
+          <motion.div
+            key={index}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.3, delay: index * 0.1 }}
+            className="flex-1 flex flex-col justify-between min-h-[30vh] md:min-h-[calc(100vh-4rem)]"
+            style={{ backgroundColor: color }}
+          >
+            <div className="p-4 flex justify-between items-start">
+              <Button
+                variant="ghost"
+                size="icon"
+                className="rounded-full bg-white/10 backdrop-blur-sm hover:bg-white/20"
+                onClick={() => toggleLockColor(index)}
+                style={{ color: getTextColor(color) }}
+              >
+                {lockStatus[index] ? (
+                  <Lock className="h-4 w-4" />
+                ) : (
+                  <Unlock className="h-4 w-4" />
+                )}
+              </Button>
+
+              <span className="text-xs font-mono px-2 py-1 rounded bg-white/10 backdrop-blur-sm"
+                    style={{ color: getTextColor(color) }}>
+                {index + 1}
+              </span>
+            </div>
+
+            <div className="p-4 flex flex-col items-center gap-2">
+              <h3 className="text-2xl font-bold font-mono tracking-wider"
+                  style={{ color: getTextColor(color) }}>
+                {color.toUpperCase()}
+              </h3>
+              
+              <Button
+                variant="ghost"
+                size="sm"
+                className="bg-white/10 backdrop-blur-sm hover:bg-white/20"
+                onClick={() => {
+                  navigator.clipboard.writeText(color);
+                  toast.success(`Copied ${color.toUpperCase()}`);
+                }}
+                style={{ color: getTextColor(color) }}
+              >
+                <Copy className="h-3 w-3 mr-1" />
+                <span>Copy</span>
+              </Button>
+            </div>
+          </motion.div>
+        ))}
+      </main>
+
+      {/* Control bar */}
+      <div className="bg-gray-900 text-white p-3 flex justify-between items-center">
+        <div className="flex items-center gap-3">
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Button onClick={generateNewPalette} variant="ghost" className="text-white">
+                <RefreshCw className="h-4 w-4 mr-2" />
+                Generate
+              </Button>
+            </TooltipTrigger>
+            <TooltipContent>
+              <p>Generate new colors (Space)</p>
+            </TooltipContent>
+          </Tooltip>
+
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Button onClick={() => copyToClipboard()} variant="ghost" className="text-white">
+                <Copy className="h-4 w-4 mr-2" />
+                Copy
+              </Button>
+            </TooltipTrigger>
+            <TooltipContent>
+              <p>Copy colors to clipboard</p>
+            </TooltipContent>
+          </Tooltip>
+
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Button onClick={() => handleExport()} variant="ghost" className="text-white">
+                <Download className="h-4 w-4 mr-2" />
+                Export
+              </Button>
+            </TooltipTrigger>
+            <TooltipContent>
+              <p>Download as file</p>
+            </TooltipContent>
+          </Tooltip>
+        </div>
+
+        <div className="flex items-center gap-3">
+          <Button
+            variant="ghost"
+            className="text-white"
+            onClick={() => setShowShortcuts(prev => !prev)}
+          >
+            <Info className="h-4 w-4 mr-2" />
+            Shortcuts
+          </Button>
+
+          <Drawer open={isSettingsOpen} onOpenChange={setIsSettingsOpen}>
+            <DrawerTrigger asChild>
+              <Button variant="ghost" className="text-white">
+                <Settings className="h-4 w-4 mr-2" />
+                Settings
+              </Button>
+            </DrawerTrigger>
+            <DrawerContent className="bg-gray-900 text-white">
+              <div className="max-w-lg mx-auto p-6 space-y-6">
+                <h3 className="text-xl font-bold">Settings</h3>
+                
+                <div className="space-y-4">
+                  <div>
+                    <label className="text-sm font-medium mb-1 block">Palette Type</label>
+                    <Select value={paletteType} onValueChange={handlePaletteTypeChange}>
+                      <SelectTrigger className="bg-gray-800 border-gray-700">
+                        <SelectValue placeholder="Select palette type" />
+                      </SelectTrigger>
+                      <SelectContent className="bg-gray-800 border-gray-700">
+                        <SelectItem value="analogous">Analogous</SelectItem>
+                        <SelectItem value="monochromatic">Monochromatic</SelectItem>
+                        <SelectItem value="triadic">Triadic</SelectItem>
+                        <SelectItem value="complementary">Complementary</SelectItem>
+                        <SelectItem value="split-complementary">Split Complementary</SelectItem>
+                        <SelectItem value="tetradic">Tetradic</SelectItem>
+                        <SelectItem value="random">Random</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+
+                  <ColorPicker 
+                    label="Base Color" 
+                    value={baseColor} 
+                    onChange={setBaseColor}
+                    id="base-color"
+                  />
+                  
+                  <div>
+                    <label className="text-sm font-medium mb-1 block">Number of Colors</label>
+                    <div className="flex items-center">
                       <Button 
                         variant="outline" 
-                        onClick={() => copyToClipboard()}
-                        className="gap-2"
+                        size="sm"
+                        onClick={() => setNumberOfColors(Math.max(3, numberOfColors - 1))}
+                        className="bg-gray-800 border-gray-700"
                       >
-                        <Copy className="h-4 w-4" /> Copy
+                        -
                       </Button>
+                      <span className="mx-3">{numberOfColors}</span>
                       <Button 
-                        onClick={() => handleExport()}
-                        className="gap-2"
+                        variant="outline" 
+                        size="sm"
+                        onClick={() => setNumberOfColors(Math.min(10, numberOfColors + 1))}
+                        className="bg-gray-800 border-gray-700"
                       >
-                        <Download className="h-4 w-4" /> Download
+                        +
                       </Button>
                     </div>
-                  </CardContent>
-                </Card>
-              </TabsContent>
-            </Tabs>
-          </motion.div>
+                  </div>
 
-          <div className="mt-12">
-            <motion.h2
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-              viewport={{ once: true }}
-              className="text-2xl font-bold mb-6 text-center"
-            >
-              How to Use the Color Palette Generator
-            </motion.h2>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.1 }}
-                viewport={{ once: true }}
-                className="bg-white p-6 rounded-xl shadow-sm"
-              >
-                <div className="bg-purple-100 text-purple-600 w-10 h-10 flex items-center justify-center rounded-full mb-4">
-                  <Palette className="h-5 w-5" />
+                  <div>
+                    <label className="text-sm font-medium mb-1 block">Export Format</label>
+                    <Select value={exportFormat} onValueChange={handleExportFormatChange}>
+                      <SelectTrigger className="bg-gray-800 border-gray-700">
+                        <SelectValue placeholder="Select format" />
+                      </SelectTrigger>
+                      <SelectContent className="bg-gray-800 border-gray-700">
+                        <SelectItem value="hex">HEX</SelectItem>
+                        <SelectItem value="rgb">RGB</SelectItem>
+                        <SelectItem value="hsl">HSL</SelectItem>
+                        <SelectItem value="css">CSS Variables</SelectItem>
+                        <SelectItem value="tailwind">Tailwind Config</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
                 </div>
-                <h3 className="text-lg font-semibold mb-2">1. Choose a Base Color</h3>
-                <p className="text-gray-600">
-                  Select a base color using the color picker or enter a hex code to start your palette.
-                </p>
-              </motion.div>
-              
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.2 }}
-                viewport={{ once: true }}
-                className="bg-white p-6 rounded-xl shadow-sm"
-              >
-                <div className="bg-blue-100 text-blue-600 w-10 h-10 flex items-center justify-center rounded-full mb-4">
-                  <Sliders className="h-5 w-5" />
-                </div>
-                <h3 className="text-lg font-semibold mb-2">2. Generate & Adjust</h3>
-                <p className="text-gray-600">
-                  Pick a palette type and generate colors. Lock colors you like and regenerate until satisfied.
-                </p>
-              </motion.div>
-              
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.3 }}
-                viewport={{ once: true }}
-                className="bg-white p-6 rounded-xl shadow-sm"
-              >
-                <div className="bg-green-100 text-green-600 w-10 h-10 flex items-center justify-center rounded-full mb-4">
-                  <Download className="h-5 w-5" />
-                </div>
-                <h3 className="text-lg font-semibold mb-2">3. Export Your Palette</h3>
-                <p className="text-gray-600">
-                  Once you're happy with your palette, export it in your preferred format or copy the code.
-                </p>
-              </motion.div>
+              </div>
+            </DrawerContent>
+          </Drawer>
+        </div>
+      </div>
+
+      {/* Shortcuts popup */}
+      {showShortcuts && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50" onClick={() => setShowShortcuts(false)}>
+          <div className="bg-gray-900 p-6 rounded-lg max-w-md w-full" onClick={e => e.stopPropagation()}>
+            <h3 className="text-xl font-bold text-white mb-4">Keyboard Shortcuts</h3>
+            <div className="space-y-2 text-white">
+              <div className="flex justify-between">
+                <span>Generate new palette</span>
+                <kbd className="px-2 py-1 bg-gray-800 rounded">Space</kbd>
+              </div>
+              <div className="flex justify-between">
+                <span>Toggle settings</span>
+                <kbd className="px-2 py-1 bg-gray-800 rounded">S</kbd>
+              </div>
+              <div className="flex justify-between">
+                <span>Lock/unlock colors</span>
+                <kbd className="px-2 py-1 bg-gray-800 rounded">1-5</kbd>
+              </div>
             </div>
+            <Button className="w-full mt-4" onClick={() => setShowShortcuts(false)}>Close</Button>
           </div>
         </div>
-      </main>
+      )}
+
       <Footer />
     </div>
   );

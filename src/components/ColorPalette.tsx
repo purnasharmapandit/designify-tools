@@ -37,44 +37,50 @@ export const ColorPalette: React.FC<ColorPaletteProps> = ({
   };
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4">
+    <div className="flex flex-col md:flex-row w-full h-full">
       {colors.map((color, index) => (
         <motion.div
           key={index}
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.3, delay: index * 0.05 }}
-          className="relative aspect-square rounded-md overflow-hidden shadow-sm"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.3, delay: index * 0.1 }}
+          className="flex-1 flex flex-col justify-between p-4 h-36 md:h-full"
           style={{ backgroundColor: color }}
         >
-          <div className="absolute inset-0 flex flex-col justify-between p-3"
-               style={{ color: getTextColor(color) }}>
-            <div className="flex justify-between items-start">
-              <span className="font-mono text-xs bg-white/20 backdrop-blur-sm px-2 py-1 rounded">
-                Color {index + 1}
-              </span>
-              <Button
-                variant="ghost"
-                size="icon"
-                className="h-8 w-8 rounded-full bg-white/20 backdrop-blur-sm hover:bg-white/30"
-                onClick={() => onToggleLock(index)}
-              >
-                {lockStatus[index] ? (
-                  <Lock className="h-4 w-4" style={{ color: getTextColor(color) }} />
-                ) : (
-                  <Unlock className="h-4 w-4" style={{ color: getTextColor(color) }} />
-                )}
-              </Button>
-            </div>
+          <div className="flex justify-between">
+            <Button
+              variant="ghost"
+              size="icon"
+              className="rounded-full bg-white/10 backdrop-blur-sm hover:bg-white/20"
+              onClick={() => onToggleLock(index)}
+            >
+              {lockStatus[index] ? (
+                <Lock className="h-4 w-4" style={{ color: getTextColor(color) }} />
+              ) : (
+                <Unlock className="h-4 w-4" style={{ color: getTextColor(color) }} />
+              )}
+            </Button>
             
-            <div className="text-center">
-              <span className="font-mono font-bold tracking-wider text-sm">{color.toUpperCase()}</span>
-            </div>
+            <span 
+              className="text-xs font-mono px-2 py-1 rounded bg-white/10 backdrop-blur-sm"
+              style={{ color: getTextColor(color) }}
+            >
+              {index + 1}
+            </span>
+          </div>
+          
+          <div className="flex flex-col items-center gap-2">
+            <h3 
+              className="text-2xl font-bold font-mono tracking-wider"
+              style={{ color: getTextColor(color) }}
+            >
+              {color.toUpperCase()}
+            </h3>
             
             <Button
               variant="ghost"
               size="sm"
-              className="self-end bg-white/20 backdrop-blur-sm hover:bg-white/30"
+              className="bg-white/10 backdrop-blur-sm hover:bg-white/20"
               onClick={() => copyColorToClipboard(color)}
             >
               <Copy className="h-3 w-3 mr-1" style={{ color: getTextColor(color) }} />
