@@ -1,4 +1,3 @@
-
 import { motion } from "framer-motion";
 import { 
   Paintbrush, 
@@ -72,6 +71,13 @@ const Tools = () => {
       link: "/color-palette-generator"
     },
     {
+      icon: PenTool,
+      name: "Icon Generator",
+      description: "Design custom icons for your projects",
+      color: "bg-emerald-100 text-emerald-500",
+      link: "/icon-generator"
+    },
+    {
       icon: Image,
       name: "Banner Designer",
       description: "Design eye-catching banners for social media and marketing",
@@ -106,12 +112,6 @@ const Tools = () => {
       name: "Mock-up Generator",
       description: "Create realistic product mock-ups instantly",
       color: "bg-cyan-100 text-cyan-500"
-    },
-    {
-      icon: PenTool,
-      name: "Icon Designer",
-      description: "Design custom icons for your projects",
-      color: "bg-emerald-100 text-emerald-500"
     },
     {
       icon: Wand2,

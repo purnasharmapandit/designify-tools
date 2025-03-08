@@ -39,7 +39,7 @@ const ExploreToolsSection = () => {
       name: "Icon Generator",
       color: "bg-gradient-to-br from-purple-100 to-purple-200",
       iconColor: "text-purple-500",
-      link: "#"
+      link: "/icon-generator"
     }
   ];
 
