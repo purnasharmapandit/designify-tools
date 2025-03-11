@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { SignatureData } from "@/types/email-signature";
 import { Card } from "@/components/ui/card";
@@ -11,9 +10,6 @@ import ModernTemplate from "./templates/ModernTemplate";
 import CreativeTemplate from "./templates/CreativeTemplate";
 import CorporateTemplate from "./templates/CorporateTemplate";
 import MinimalistTemplate from "./templates/MinimalistTemplate";
-import ElegantTemplate from "./templates/ElegantTemplate";
-import CompactTemplate from "./templates/CompactTemplate";
-import BoldTemplate from "./templates/BoldTemplate";
 import TechTemplate from "./templates/TechTemplate";
 
 interface SignaturePreviewProps {
@@ -45,12 +41,6 @@ const SignaturePreview: React.FC<SignaturePreviewProps> = ({
         return <CorporateTemplate data={data} />;
       case "minimalist":
         return <MinimalistTemplate data={data} />;
-      case "elegant":
-        return <ElegantTemplate data={data} />;
-      case "compact":
-        return <CompactTemplate data={data} />;
-      case "bold":
-        return <BoldTemplate data={data} />;
       case "tech":
         return <TechTemplate data={data} />;
       default:
