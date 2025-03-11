@@ -107,8 +107,93 @@ const CreativeTemplate: React.FC<CreativeTemplateProps> = ({ data }) => {
                       flexWrap: "wrap", 
                       gap: "12px 25px",
                       maxWidth: "100%",
-                      marginBottom: "15px",
+                      marginBottom: "10px",
                     }}>
+                      {/* Social links on the left side */}
+                      <div style={{ display: "flex", gap: "10px", marginRight: "20px", alignItems: "center" }}>
+                        {data.socialLinks.linkedin && (
+                          <a 
+                            href={data.socialLinks.linkedin} 
+                            target="_blank" 
+                            rel="noopener noreferrer"
+                            style={{ 
+                              width: "24px",
+                              height: "24px",
+                              borderRadius: "50%",
+                              backgroundColor: data.colors.primary,
+                              display: "flex",
+                              alignItems: "center",
+                              justifyContent: "center",
+                              color: "#fff",
+                              textDecoration: "none"
+                            }}
+                          >
+                            <Linkedin size={14} />
+                          </a>
+                        )}
+                        {data.socialLinks.twitter && (
+                          <a 
+                            href={data.socialLinks.twitter} 
+                            target="_blank" 
+                            rel="noopener noreferrer"
+                            style={{ 
+                              width: "24px",
+                              height: "24px",
+                              borderRadius: "50%",
+                              backgroundColor: data.colors.primary,
+                              display: "flex",
+                              alignItems: "center",
+                              justifyContent: "center",
+                              color: "#fff",
+                              textDecoration: "none"
+                            }}
+                          >
+                            <Twitter size={14} />
+                          </a>
+                        )}
+                        {data.socialLinks.instagram && (
+                          <a 
+                            href={data.socialLinks.instagram} 
+                            target="_blank" 
+                            rel="noopener noreferrer"
+                            style={{ 
+                              width: "24px",
+                              height: "24px",
+                              borderRadius: "50%",
+                              backgroundColor: data.colors.primary,
+                              display: "flex",
+                              alignItems: "center",
+                              justifyContent: "center",
+                              color: "#fff",
+                              textDecoration: "none"
+                            }}
+                          >
+                            <Instagram size={14} />
+                          </a>
+                        )}
+                        {data.socialLinks.facebook && (
+                          <a 
+                            href={data.socialLinks.facebook} 
+                            target="_blank" 
+                            rel="noopener noreferrer"
+                            style={{ 
+                              width: "24px",
+                              height: "24px",
+                              borderRadius: "50%",
+                              backgroundColor: data.colors.primary,
+                              display: "flex",
+                              alignItems: "center",
+                              justifyContent: "center",
+                              color: "#fff",
+                              textDecoration: "none"
+                            }}
+                          >
+                            <Facebook size={14} />
+                          </a>
+                        )}
+                      </div>
+
+                      {/* Contact information */}
                       {data.phone && (
                         <span style={{ display: "flex", alignItems: "center" }}>
                           <Phone 
@@ -203,102 +288,18 @@ const CreativeTemplate: React.FC<CreativeTemplateProps> = ({ data }) => {
               <table cellPadding="0" cellSpacing="0" style={{ width: "100%" }}>
                 <tr>
                   <td>
-                    <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-                      <div style={{ display: "flex", alignItems: "center" }}>
-                        {data.companyLogoUrl && (
-                          <img 
-                            src={data.companyLogoUrl} 
-                            alt={data.company || "Company"} 
-                            style={{ 
-                              height: "28px", 
-                              maxWidth: "120px",
-                              marginRight: "10px"
-                            }} 
-                          />
-                        )}
-                      </div>
-                      <div style={{ display: "flex", gap: "10px" }}>
-                        {data.socialLinks.linkedin && (
-                          <a 
-                            href={data.socialLinks.linkedin} 
-                            target="_blank" 
-                            rel="noopener noreferrer"
-                            style={{ 
-                              width: "24px",
-                              height: "24px",
-                              borderRadius: "50%",
-                              backgroundColor: data.colors.primary,
-                              display: "flex",
-                              alignItems: "center",
-                              justifyContent: "center",
-                              color: "#fff",
-                              textDecoration: "none"
-                            }}
-                          >
-                            <Linkedin size={14} />
-                          </a>
-                        )}
-                        {data.socialLinks.twitter && (
-                          <a 
-                            href={data.socialLinks.twitter} 
-                            target="_blank" 
-                            rel="noopener noreferrer"
-                            style={{ 
-                              width: "24px",
-                              height: "24px",
-                              borderRadius: "50%",
-                              backgroundColor: data.colors.primary,
-                              display: "flex",
-                              alignItems: "center",
-                              justifyContent: "center",
-                              color: "#fff",
-                              textDecoration: "none"
-                            }}
-                          >
-                            <Twitter size={14} />
-                          </a>
-                        )}
-                        {data.socialLinks.instagram && (
-                          <a 
-                            href={data.socialLinks.instagram} 
-                            target="_blank" 
-                            rel="noopener noreferrer"
-                            style={{ 
-                              width: "24px",
-                              height: "24px",
-                              borderRadius: "50%",
-                              backgroundColor: data.colors.primary,
-                              display: "flex",
-                              alignItems: "center",
-                              justifyContent: "center",
-                              color: "#fff",
-                              textDecoration: "none"
-                            }}
-                          >
-                            <Instagram size={14} />
-                          </a>
-                        )}
-                        {data.socialLinks.facebook && (
-                          <a 
-                            href={data.socialLinks.facebook} 
-                            target="_blank" 
-                            rel="noopener noreferrer"
-                            style={{ 
-                              width: "24px",
-                              height: "24px",
-                              borderRadius: "50%",
-                              backgroundColor: data.colors.primary,
-                              display: "flex",
-                              alignItems: "center",
-                              justifyContent: "center",
-                              color: "#fff",
-                              textDecoration: "none"
-                            }}
-                          >
-                            <Facebook size={14} />
-                          </a>
-                        )}
-                      </div>
+                    <div style={{ display: "flex", alignItems: "center", justifyContent: "flex-start" }}>
+                      {data.companyLogoUrl && (
+                        <img 
+                          src={data.companyLogoUrl} 
+                          alt={data.company || "Company"} 
+                          style={{ 
+                            height: "28px", 
+                            maxWidth: "120px",
+                            marginRight: "10px"
+                          }} 
+                        />
+                      )}
                     </div>
                   </td>
                 </tr>
