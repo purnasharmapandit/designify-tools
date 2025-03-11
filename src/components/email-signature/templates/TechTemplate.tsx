@@ -309,19 +309,16 @@ const TechTemplate: React.FC<TechTemplateProps> = ({ data }) => {
                       style={{
                         display: "inline-flex",
                         alignItems: "center",
-                        padding: "9px 16px",
-                        borderRadius: "10px",
+                        justifyContent: "center",
+                        width: "36px", 
+                        height: "36px",
+                        borderRadius: "8px",
                         background: `linear-gradient(135deg, ${data.colors.primary}, ${data.colors.secondary})`,
                         color: "#fff",
-                        fontSize: "13px",
-                        textDecoration: "none",
-                        fontWeight: "600",
-                        letterSpacing: "0.01em",
-                        boxShadow: `0 4px 12px ${data.colors.primary}40`
+                        boxShadow: `0 2px 6px ${data.colors.primary}40`
                       }}
                     >
-                      <Calendar size={14} style={{ marginRight: "8px", flexShrink: 0 }} />
-                      Schedule a Meeting
+                      <Calendar size={18} />
                     </a>
                   )}
                 </div>
