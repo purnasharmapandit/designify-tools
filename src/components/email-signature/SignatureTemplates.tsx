@@ -32,14 +32,16 @@ const SignatureTemplates: React.FC<SignatureTemplatesProps> = ({ templates, onSe
             }`}>
               <div className="aspect-[4/3] relative overflow-hidden bg-muted">
                 {template.previewImage ? (
-                  <img 
-                    src={template.previewImage} 
-                    alt={template.name} 
-                    className="object-cover w-full h-full"
-                    onError={(e) => {
-                      e.currentTarget.src = "/placeholder.svg";
-                    }}
-                  />
+                  <div className="w-full h-full flex items-center justify-center bg-white p-2">
+                    <img 
+                      src={template.previewImage} 
+                      alt={template.name} 
+                      className="object-contain max-h-full max-w-full"
+                      onError={(e) => {
+                        e.currentTarget.src = "/placeholder.svg";
+                      }}
+                    />
+                  </div>
                 ) : (
                   <div className="absolute inset-0 flex items-center justify-center bg-muted">
                     <span className="text-muted-foreground">Preview not available</span>
