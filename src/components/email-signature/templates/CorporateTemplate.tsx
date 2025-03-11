@@ -41,287 +41,276 @@ const CorporateTemplate: React.FC<CorporateTemplateProps> = ({ data }) => {
         }}
       >
         <tbody>
+          {/* Header with company name */}
           <tr>
-            <td style={{ padding: "0" }}>
-              {/* Header with company logo and name */}
-              <table 
-                cellPadding="0" 
-                cellSpacing="0" 
-                style={{ 
-                  width: "100%",
-                  backgroundColor: data.colors.primary,
-                  borderRadius: "4px 4px 0 0",
-                  padding: "12px 20px",
-                }}
-              >
-                <tr>
-                  <td style={{ verticalAlign: "middle" }}>
-                    {data.companyLogoUrl && (
-                      <img 
-                        src={data.companyLogoUrl} 
-                        alt={data.company || "Company"} 
-                        style={{ 
-                          height: "30px", 
-                          maxWidth: "140px",
-                          margin: "0",
-                        }} 
-                      />
-                    )}
-                  </td>
-                  <td style={{ textAlign: "right", verticalAlign: "middle" }}>
-                    {data.company && (
-                      <h3 style={{ 
-                        color: "#fff", 
-                        margin: "0",
-                        fontSize: "16px",
-                        fontWeight: "600",
-                      }}>
-                        {data.company}
-                      </h3>
-                    )}
-                  </td>
-                </tr>
-              </table>
+            <td style={{ 
+              padding: "10px 20px", 
+              backgroundColor: data.colors.primary,
+              color: "#fff",
+              borderRadius: "4px 4px 0 0",
+            }}>
+              <div style={{ 
+                display: "flex", 
+                justifyContent: "flex-end", 
+                alignItems: "center" 
+              }}>
+                <h2 style={{ 
+                  margin: 0, 
+                  fontSize: "18px", 
+                  fontWeight: "bold" 
+                }}>
+                  {data.company || "Company Name"}
+                </h2>
+              </div>
             </td>
           </tr>
+          
+          {/* Main content */}
           <tr>
-            <td style={{ padding: "20px", borderLeft: `1px solid ${data.colors.secondary}`, borderRight: `1px solid ${data.colors.secondary}`, borderBottom: `1px solid ${data.colors.secondary}` }}>
+            <td style={{ padding: "20px", border: "1px solid #eee", borderTop: "none" }}>
               <table cellPadding="0" cellSpacing="0" style={{ width: "100%" }}>
                 <tr>
+                  {/* Photo and Name Section */}
                   <td style={{ verticalAlign: "top" }}>
-                    {data.photoUrl && (
-                      <img 
-                        src={data.photoUrl} 
-                        alt={data.name || "Photo"} 
-                        style={{ 
-                          width: "80px", 
-                          height: "80px", 
-                          borderRadius: "50%",
-                          border: `3px solid ${data.colors.secondary}`,
-                          marginRight: "15px",
-                          objectFit: "cover",
-                        }} 
-                      />
-                    )}
-                  </td>
-                  <td style={{ verticalAlign: "top" }}>
-                    <h3 style={{ 
-                      margin: "0 0 5px 0", 
-                      fontSize: "18px", 
-                      fontWeight: "bold",
-                      color: data.colors.primary, 
-                    }}>
-                      {data.name || "Your Name"} 
-                      {data.credentials && <span style={{ fontSize: "14px", fontWeight: "normal" }}>, {data.credentials}</span>}
-                    </h3>
-                    
-                    {data.jobTitle && (
-                      <p style={{ 
-                        margin: "0 0 3px 0", 
-                        fontSize: "14px",
-                        fontWeight: "500",
-                      }}>
-                        {data.jobTitle}
-                        {data.department && <span> | {data.department}</span>}
-                      </p>
-                    )}
-                    
-                    <table cellPadding="0" cellSpacing="0" style={{ marginTop: "12px" }}>
+                    <table cellPadding="0" cellSpacing="0">
                       <tr>
-                        <td style={{ paddingBottom: "8px" }}>
-                          {data.phone && (
-                            <div style={{ display: "flex", alignItems: "center", fontSize: "13px" }}>
-                              <Phone 
-                                size={14} 
-                                color={data.colors.primary} 
-                                style={{ marginRight: "6px" }} 
-                              />
-                              <a 
-                                href={`tel:${data.phone}`} 
-                                style={{ 
-                                  color: data.colors.text,
-                                  textDecoration: "none",
-                                }}
-                              >
-                                {data.phone}
-                              </a>
-                            </div>
+                        <td style={{ verticalAlign: "top", paddingRight: "15px" }}>
+                          {data.photoUrl && (
+                            <img 
+                              src={data.photoUrl} 
+                              alt={data.name || "Photo"} 
+                              style={{ 
+                                width: "70px", 
+                                height: "70px", 
+                                borderRadius: "50%",
+                                objectFit: "cover",
+                              }} 
+                            />
                           )}
                         </td>
-                        <td style={{ paddingLeft: "15px", paddingBottom: "8px" }}>
-                          {data.email && (
-                            <div style={{ display: "flex", alignItems: "center", fontSize: "13px" }}>
-                              <Mail 
-                                size={14} 
-                                color={data.colors.primary} 
-                                style={{ marginRight: "6px" }} 
-                              />
-                              <a 
-                                href={`mailto:${data.email}`} 
-                                style={{ 
-                                  color: data.colors.text,
-                                  textDecoration: "none",
-                                }}
-                              >
-                                {data.email}
-                              </a>
-                            </div>
+                        <td style={{ verticalAlign: "top" }}>
+                          <h3 style={{ 
+                            margin: "0 0 5px 0", 
+                            fontSize: "20px", 
+                            fontWeight: "bold",
+                            color: data.colors.primary, 
+                          }}>
+                            {data.name || "Your Name"}
+                          </h3>
+                          
+                          {data.jobTitle && (
+                            <p style={{ 
+                              margin: "0 0 10px 0", 
+                              fontSize: "14px",
+                              color: data.colors.text,
+                            }}>
+                              {data.jobTitle}
+                              {data.department && <span> | {data.department}</span>}
+                            </p>
                           )}
-                        </td>
-                      </tr>
-                      <tr>
-                        <td style={{ paddingBottom: "8px" }}>
-                          {data.website && (
-                            <div style={{ display: "flex", alignItems: "center", fontSize: "13px" }}>
-                              <Globe 
-                                size={14} 
-                                color={data.colors.primary} 
-                                style={{ marginRight: "6px" }} 
-                              />
+                          
+                          {/* Contact Information */}
+                          <table cellPadding="0" cellSpacing="0">
+                            {data.phone && (
+                              <tr>
+                                <td style={{ 
+                                  verticalAlign: "middle", 
+                                  paddingRight: "5px", 
+                                  paddingBottom: "5px",
+                                  color: data.colors.primary
+                                }}>
+                                  <Phone size={14} />
+                                </td>
+                                <td style={{ verticalAlign: "middle", paddingBottom: "5px" }}>
+                                  <a 
+                                    href={`tel:${data.phone}`} 
+                                    style={{ 
+                                      color: data.colors.text,
+                                      textDecoration: "none",
+                                      fontSize: "14px",
+                                    }}
+                                  >
+                                    {data.phone}
+                                  </a>
+                                </td>
+                              </tr>
+                            )}
+                            
+                            {data.email && (
+                              <tr>
+                                <td style={{ 
+                                  verticalAlign: "middle", 
+                                  paddingRight: "5px", 
+                                  paddingBottom: "5px",
+                                  color: data.colors.primary
+                                }}>
+                                  <Mail size={14} />
+                                </td>
+                                <td style={{ verticalAlign: "middle", paddingBottom: "5px" }}>
+                                  <a 
+                                    href={`mailto:${data.email}`} 
+                                    style={{ 
+                                      color: data.colors.text,
+                                      textDecoration: "none",
+                                      fontSize: "14px",
+                                    }}
+                                  >
+                                    {data.email}
+                                  </a>
+                                </td>
+                              </tr>
+                            )}
+                            
+                            {data.website && (
+                              <tr>
+                                <td style={{ 
+                                  verticalAlign: "middle", 
+                                  paddingRight: "5px", 
+                                  paddingBottom: "5px",
+                                  color: data.colors.primary
+                                }}>
+                                  <Globe size={14} />
+                                </td>
+                                <td style={{ verticalAlign: "middle", paddingBottom: "5px" }}>
+                                  <a 
+                                    href={data.website.startsWith('http') ? data.website : `https://${data.website}`}
+                                    target="_blank" 
+                                    rel="noopener noreferrer"
+                                    style={{ 
+                                      color: data.colors.text,
+                                      textDecoration: "none",
+                                      fontSize: "14px",
+                                    }}
+                                  >
+                                    {data.website.replace(/^https?:\/\//i, '')}
+                                  </a>
+                                </td>
+                              </tr>
+                            )}
+                          </table>
+                          
+                          {/* Schedule Meeting Button */}
+                          {data.meetingLink && (
+                            <div style={{ marginTop: "10px" }}>
                               <a 
-                                href={data.website.startsWith('http') ? data.website : `https://${data.website}`}
+                                href={data.meetingLink}
                                 target="_blank" 
                                 rel="noopener noreferrer"
                                 style={{ 
-                                  color: data.colors.text,
+                                  display: "inline-flex",
+                                  alignItems: "center",
+                                  backgroundColor: data.colors.primary,
+                                  color: "#fff",
                                   textDecoration: "none",
+                                  padding: "6px 12px",
+                                  borderRadius: "4px",
+                                  fontSize: "13px",
                                 }}
                               >
-                                {data.website.replace(/^https?:\/\//i, '')}
+                                <Calendar size={14} style={{ marginRight: "5px" }} />
+                                Schedule a meeting
                               </a>
-                            </div>
-                          )}
-                        </td>
-                        <td style={{ paddingLeft: "15px", paddingBottom: "8px" }}>
-                          {data.address && (
-                            <div style={{ display: "flex", alignItems: "center", fontSize: "13px" }}>
-                              <MapPin 
-                                size={14} 
-                                color={data.colors.primary} 
-                                style={{ marginRight: "6px" }} 
-                              />
-                              <span>{data.address}</span>
                             </div>
                           )}
                         </td>
                       </tr>
                     </table>
-                    
-                    {data.meetingLink && (
-                      <a 
-                        href={data.meetingLink}
-                        target="_blank" 
-                        rel="noopener noreferrer"
-                        style={{ 
-                          display: "inline-block",
-                          backgroundColor: data.colors.primary,
-                          color: "#fff",
-                          textDecoration: "none",
-                          padding: "6px 12px",
-                          borderRadius: "4px",
-                          fontSize: "13px",
-                          marginTop: "10px",
-                        }}
-                      >
-                        <Calendar size={14} style={{ marginRight: "5px", verticalAlign: "text-bottom" }} />
-                        Schedule a meeting
-                      </a>
-                    )}
                   </td>
                 </tr>
               </table>
               
-              {/* Social media */}
-              <table cellPadding="0" cellSpacing="0" style={{ marginTop: "15px", width: "100%" }}>
-                <tr>
-                  <td>
-                    <div style={{ borderTop: `1px solid ${data.colors.secondary}`, paddingTop: "10px" }}>
-                      <div style={{ display: "flex", gap: "8px" }}>
-                        {data.socialLinks.linkedin && (
-                          <a 
-                            href={data.socialLinks.linkedin} 
-                            target="_blank" 
-                            rel="noopener noreferrer"
-                            style={{ 
-                              width: "26px",
-                              height: "26px",
-                              borderRadius: "50%",
-                              backgroundColor: data.colors.primary,
-                              display: "flex",
-                              alignItems: "center",
-                              justifyContent: "center",
-                              color: "#fff",
-                              textDecoration: "none"
-                            }}
-                          >
-                            <Linkedin size={14} />
-                          </a>
-                        )}
-                        {data.socialLinks.twitter && (
-                          <a 
-                            href={data.socialLinks.twitter} 
-                            target="_blank" 
-                            rel="noopener noreferrer"
-                            style={{ 
-                              width: "26px",
-                              height: "26px",
-                              borderRadius: "50%",
-                              backgroundColor: data.colors.primary,
-                              display: "flex",
-                              alignItems: "center",
-                              justifyContent: "center",
-                              color: "#fff",
-                              textDecoration: "none"
-                            }}
-                          >
-                            <Twitter size={14} />
-                          </a>
-                        )}
-                        {data.socialLinks.instagram && (
-                          <a 
-                            href={data.socialLinks.instagram} 
-                            target="_blank" 
-                            rel="noopener noreferrer"
-                            style={{ 
-                              width: "26px",
-                              height: "26px",
-                              borderRadius: "50%",
-                              backgroundColor: data.colors.primary,
-                              display: "flex",
-                              alignItems: "center",
-                              justifyContent: "center",
-                              color: "#fff",
-                              textDecoration: "none"
-                            }}
-                          >
-                            <Instagram size={14} />
-                          </a>
-                        )}
-                        {data.socialLinks.facebook && (
-                          <a 
-                            href={data.socialLinks.facebook} 
-                            target="_blank" 
-                            rel="noopener noreferrer"
-                            style={{ 
-                              width: "26px",
-                              height: "26px",
-                              borderRadius: "50%",
-                              backgroundColor: data.colors.primary,
-                              display: "flex",
-                              alignItems: "center",
-                              justifyContent: "center",
-                              color: "#fff",
-                              textDecoration: "none"
-                            }}
-                          >
-                            <Facebook size={14} />
-                          </a>
-                        )}
-                      </div>
-                    </div>
-                  </td>
-                </tr>
-              </table>
+              {/* Divider */}
+              <div style={{ 
+                borderTop: `1px solid #eee`,
+                margin: "15px 0",
+              }}></div>
+              
+              {/* Social Media Links */}
+              <div style={{ display: "flex", gap: "10px" }}>
+                {data.socialLinks.twitter && (
+                  <a 
+                    href={data.socialLinks.twitter} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    style={{ 
+                      width: "30px",
+                      height: "30px",
+                      borderRadius: "50%",
+                      backgroundColor: data.colors.primary,
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      color: "#fff",
+                      textDecoration: "none"
+                    }}
+                  >
+                    <Twitter size={16} />
+                  </a>
+                )}
+                
+                {data.socialLinks.instagram && (
+                  <a 
+                    href={data.socialLinks.instagram} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    style={{ 
+                      width: "30px",
+                      height: "30px",
+                      borderRadius: "50%",
+                      backgroundColor: data.colors.primary,
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      color: "#fff",
+                      textDecoration: "none"
+                    }}
+                  >
+                    <Instagram size={16} />
+                  </a>
+                )}
+                
+                {data.socialLinks.facebook && (
+                  <a 
+                    href={data.socialLinks.facebook} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    style={{ 
+                      width: "30px",
+                      height: "30px",
+                      borderRadius: "50%",
+                      backgroundColor: data.colors.primary,
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      color: "#fff",
+                      textDecoration: "none"
+                    }}
+                  >
+                    <Facebook size={16} />
+                  </a>
+                )}
+                
+                {data.socialLinks.linkedin && (
+                  <a 
+                    href={data.socialLinks.linkedin} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    style={{ 
+                      width: "30px",
+                      height: "30px",
+                      borderRadius: "50%",
+                      backgroundColor: data.colors.primary,
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      color: "#fff",
+                      textDecoration: "none"
+                    }}
+                  >
+                    <Linkedin size={16} />
+                  </a>
+                )}
+              </div>
             </td>
           </tr>
         </tbody>
