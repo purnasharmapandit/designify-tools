@@ -4,6 +4,8 @@ export interface SignatureTemplate {
   name: string;
   description: string;
   previewImage: string;
+  featured?: boolean;
+  new?: boolean;
 }
 
 export interface SocialLinks {

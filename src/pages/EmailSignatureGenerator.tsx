@@ -18,25 +18,33 @@ const defaultTemplates: SignatureTemplate[] = [
     id: "minimal", 
     name: "Minimal",
     description: "Clean, simple design with essential information",
-    previewImage: "/signatures/minimal.png" 
+    previewImage: "/signatures/minimal.png",
+    featured: false,
+    new: false
   },
   { 
     id: "professional", 
     name: "Professional",
     description: "Complete business signature with contact details",
-    previewImage: "/signatures/professional.png" 
+    previewImage: "/signatures/professional.png",
+    featured: true,
+    new: false
   },
   { 
     id: "modern", 
     name: "Modern",
-    description: "Contemporary design with social media integration",
-    previewImage: "/signatures/modern.png" 
+    description: "Contemporary design with bold color accents",
+    previewImage: "/signatures/modern.png",
+    featured: false,
+    new: true
   },
   { 
     id: "creative", 
     name: "Creative",
     description: "Standout design for creative professionals",
-    previewImage: "/signatures/creative.png" 
+    previewImage: "/signatures/creative.png",
+    featured: false,
+    new: true
   },
 ];
 

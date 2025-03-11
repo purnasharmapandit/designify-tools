@@ -6,6 +6,9 @@ import { Button } from "@/components/ui/button";
 import { Copy, Download, ChevronLeft } from "lucide-react";
 import { toast } from "sonner";
 import MinimalTemplate from "./templates/MinimalTemplate";
+import ProfessionalTemplate from "./templates/ProfessionalTemplate";
+import ModernTemplate from "./templates/ModernTemplate";
+import CreativeTemplate from "./templates/CreativeTemplate";
 
 interface SignaturePreviewProps {
   templateId: string;
@@ -25,11 +28,15 @@ const SignaturePreview: React.FC<SignaturePreviewProps> = ({
   const renderTemplate = () => {
     switch (templateId) {
       case "minimal":
+        return <MinimalTemplate data={data} />;
+      case "professional":
+        return <ProfessionalTemplate data={data} />;
+      case "modern":
+        return <ModernTemplate data={data} />;
+      case "creative":
+        return <CreativeTemplate data={data} />;
       default:
         return <MinimalTemplate data={data} />;
-      // Add more templates here as they're created
-      // case "professional":
-      //   return <ProfessionalTemplate data={data} />;
     }
   };
   

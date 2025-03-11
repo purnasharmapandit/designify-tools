@@ -4,6 +4,8 @@ import { SignatureTemplate } from "@/types/email-signature";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
+import { Badge } from "@/components/ui/badge";
+import { Star } from "lucide-react";
 
 interface SignatureTemplatesProps {
   templates: SignatureTemplate[];
@@ -25,7 +27,9 @@ const SignatureTemplates: React.FC<SignatureTemplatesProps> = ({ templates, onSe
             whileHover={{ y: -5 }}
             transition={{ duration: 0.2 }}
           >
-            <Card className="overflow-hidden h-full cursor-pointer hover:border-primary/50">
+            <Card className={`overflow-hidden h-full cursor-pointer hover:border-primary/50 ${
+              template.featured ? 'border-primary/30' : ''
+            }`}>
               <div className="aspect-[4/3] relative overflow-hidden bg-muted">
                 {template.previewImage ? (
                   <img 
@@ -41,6 +45,20 @@ const SignatureTemplates: React.FC<SignatureTemplatesProps> = ({ templates, onSe
                     <span className="text-muted-foreground">Preview not available</span>
                   </div>
                 )}
+                {template.featured && (
+                  <div className="absolute top-2 right-2">
+                    <Badge className="bg-primary hover:bg-primary/90">
+                      <Star className="h-3 w-3 mr-1 fill-white" /> Popular
+                    </Badge>
+                  </div>
+                )}
+                {template.new && (
+                  <div className="absolute top-2 left-2">
+                    <Badge variant="outline" className="bg-background border-primary text-primary">
+                      New
+                    </Badge>
+                  </div>
+                )}
               </div>
               <CardContent className="p-4">
                 <h3 className="font-bold mb-1">{template.name}</h3>
@@ -48,6 +66,7 @@ const SignatureTemplates: React.FC<SignatureTemplatesProps> = ({ templates, onSe
                 <Button 
                   className="w-full" 
                   onClick={() => onSelect(template.id)}
+                  variant={template.id === "professional" ? "default" : "outline"}
                 >
                   Select
                 </Button>
