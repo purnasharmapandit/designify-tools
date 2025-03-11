@@ -113,15 +113,15 @@ const SocialSection: React.FC<SocialSectionProps> = ({ data }) => {
             display: "inline-flex",
             alignItems: "center",
             justifyContent: "center",
-            width: "36px", 
-            height: "36px",
+            width: "32px", 
+            height: "32px",
             borderRadius: "8px",
             background: `linear-gradient(135deg, ${data.colors.primary}, ${data.colors.secondary})`,
             color: "#fff",
             boxShadow: `0 2px 6px ${data.colors.primary}40`
           }}
         >
-          <Calendar size={18} />
+          <Calendar size={16} />
         </a>
       )}
     </div>

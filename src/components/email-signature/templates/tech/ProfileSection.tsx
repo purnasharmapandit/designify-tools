@@ -55,41 +55,45 @@ const ProfileSection: React.FC<ProfileSectionProps> = ({ data }) => {
             </span>
           )}
         </h2>
-        <p style={{ 
-          margin: "0 0 2px 0",
-          fontSize: "14px",
-          color: data.colors.secondary,
-          fontWeight: "500"
-        }}>
-          {data.jobTitle}
-          {data.department && (
-            <span style={{ 
-              color: "#555", 
-              opacity: "0.9",
-              fontWeight: "400" 
-            }}> • {data.department}</span>
-          )}
-        </p>
-        <div style={{ 
-          margin: "0",
-          fontSize: "14px",
-          color: "#222",
-          display: "flex",
-          alignItems: "center"
-        }}>
-          {data.company}
-          {data.companyLogoUrl && (
-            <img 
-              src={data.companyLogoUrl} 
-              alt={data.company}
-              style={{ 
-                height: "16px",
-                marginLeft: "8px",
-                verticalAlign: "middle"
-              }}
-            />
-          )}
-        </div>
+        {data.jobTitle && (
+          <p style={{ 
+            margin: "0 0 2px 0",
+            fontSize: "14px",
+            color: data.colors.secondary,
+            fontWeight: "500"
+          }}>
+            {data.jobTitle}
+            {data.department && (
+              <span style={{ 
+                color: "#555", 
+                opacity: "0.9",
+                fontWeight: "400" 
+              }}> • {data.department}</span>
+            )}
+          </p>
+        )}
+        {data.company && (
+          <div style={{ 
+            margin: "0",
+            fontSize: "14px",
+            color: "#222",
+            display: "flex",
+            alignItems: "center"
+          }}>
+            {data.company}
+            {data.companyLogoUrl && (
+              <img 
+                src={data.companyLogoUrl} 
+                alt={data.company}
+                style={{ 
+                  height: "16px",
+                  marginLeft: "8px",
+                  verticalAlign: "middle"
+                }}
+              />
+            )}
+          </div>
+        )}
       </div>
     </div>
   );
