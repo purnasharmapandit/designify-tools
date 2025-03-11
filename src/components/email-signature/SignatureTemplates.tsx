@@ -30,23 +30,10 @@ const SignatureTemplates: React.FC<SignatureTemplatesProps> = ({ templates, onSe
             <Card className={`overflow-hidden h-full cursor-pointer hover:border-primary/50 ${
               template.featured ? 'border-primary/30' : ''
             }`}>
-              <div className="aspect-[4/3] relative overflow-hidden bg-muted">
-                {template.previewImage ? (
-                  <div className="w-full h-full flex items-center justify-center bg-white p-2">
-                    <img 
-                      src={template.previewImage} 
-                      alt={template.name} 
-                      className="object-contain max-h-full max-w-full"
-                      onError={(e) => {
-                        e.currentTarget.src = "/placeholder.svg";
-                      }}
-                    />
-                  </div>
-                ) : (
-                  <div className="absolute inset-0 flex items-center justify-center bg-muted">
-                    <span className="text-muted-foreground">Preview not available</span>
-                  </div>
-                )}
+              <div className="aspect-[4/3] relative overflow-hidden bg-muted/20 flex items-center justify-center">
+                <div className="text-muted-foreground text-sm font-medium">
+                  {template.name} Template
+                </div>
                 {template.featured && (
                   <div className="absolute top-2 right-2">
                     <Badge className="bg-primary hover:bg-primary/90">
