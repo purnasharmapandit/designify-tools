@@ -36,13 +36,29 @@ const defaultTemplates: SignatureTemplate[] = [
     description: "Contemporary design with bold color accents",
     previewImage: "/signatures/modern.png",
     featured: false,
-    new: true
+    new: false
   },
   { 
     id: "creative", 
     name: "Creative",
     description: "Standout design for creative professionals",
     previewImage: "/signatures/creative.png",
+    featured: false,
+    new: false
+  },
+  { 
+    id: "corporate", 
+    name: "Corporate",
+    description: "Professional signature with branded header",
+    previewImage: "/signatures/corporate.png",
+    featured: false,
+    new: true
+  },
+  { 
+    id: "minimalist", 
+    name: "Minimalist",
+    description: "Ultra-clean design with refined typography",
+    previewImage: "/signatures/minimalist.png",
     featured: false,
     new: true
   },

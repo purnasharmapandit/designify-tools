@@ -9,6 +9,8 @@ import MinimalTemplate from "./templates/MinimalTemplate";
 import ProfessionalTemplate from "./templates/ProfessionalTemplate";
 import ModernTemplate from "./templates/ModernTemplate";
 import CreativeTemplate from "./templates/CreativeTemplate";
+import CorporateTemplate from "./templates/CorporateTemplate";
+import MinimalistTemplate from "./templates/MinimalistTemplate";
 
 interface SignaturePreviewProps {
   templateId: string;
@@ -35,6 +37,10 @@ const SignaturePreview: React.FC<SignaturePreviewProps> = ({
         return <ModernTemplate data={data} />;
       case "creative":
         return <CreativeTemplate data={data} />;
+      case "corporate":
+        return <CorporateTemplate data={data} />;
+      case "minimalist":
+        return <MinimalistTemplate data={data} />;
       default:
         return <MinimalTemplate data={data} />;
     }
