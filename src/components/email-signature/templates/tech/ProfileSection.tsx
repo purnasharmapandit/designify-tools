@@ -12,11 +12,11 @@ const ProfileSection: React.FC<ProfileSectionProps> = ({ data }) => {
   }
 
   return (
-    <table cellPadding="0" cellSpacing="0" border="0" style={{ marginBottom: "24px" }}>
+    <table cellPadding={0} cellSpacing={0} border={0} style={{ marginBottom: "24px" }}>
       <tr>
         <td style={{ verticalAlign: "middle" }}>
           {data.photoUrl && (
-            <table cellPadding="0" cellSpacing="0" border="0">
+            <table cellPadding={0} cellSpacing={0} border={0}>
               <tr>
                 <td style={{
                   width: "72px",
