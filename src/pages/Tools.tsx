@@ -1,3 +1,4 @@
+
 import { motion } from "framer-motion";
 import { 
   Paintbrush, 
@@ -11,7 +12,8 @@ import {
   Layers,
   PenTool,
   Wand2,
-  Share2
+  Share2,
+  Mail
 } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -78,16 +80,23 @@ const Tools = () => {
       link: "/icon-generator"
     },
     {
+      icon: Mail,
+      name: "Email Signature Generator",
+      description: "Create professional email signatures that make an impression",
+      color: "bg-blue-100 text-blue-500",
+      link: "/email-signature-generator"
+    },
+    {
       icon: Image,
       name: "Banner Designer",
       description: "Design eye-catching banners for social media and marketing",
-      color: "bg-blue-100 text-blue-500"
+      color: "bg-pink-100 text-pink-500"
     },
     {
       icon: Layout,
       name: "Social Media Kit",
       description: "Generate complete social media graphic packages instantly",
-      color: "bg-pink-100 text-pink-500"
+      color: "bg-indigo-100 text-indigo-500"
     },
     {
       icon: Type,

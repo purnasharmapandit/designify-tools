@@ -30,10 +30,10 @@ const ExploreToolsSection = () => {
       link: "/color-palette-generator"
     },
     {
-      name: "Flyer Designer",
+      name: "Email Signature",
       color: "bg-gradient-to-br from-blue-100 to-blue-200",
       iconColor: "text-blue-500",
-      link: "#"
+      link: "/email-signature-generator"
     },
     {
       name: "Icon Generator",
