@@ -92,29 +92,80 @@ const BoldTemplate: React.FC<BoldTemplateProps> = ({ data }) => {
                     </div>
                     
                     <div style={{ marginTop: "10px" }}>
-                      {Object.entries({
-                        linkedin: [data.socialLinks.linkedin, Linkedin],
-                        twitter: [data.socialLinks.twitter, Twitter],
-                        instagram: [data.socialLinks.instagram, Instagram],
-                        facebook: [data.socialLinks.facebook, Facebook],
-                        calendar: [data.meetingLink, Calendar]
-                      }).map(([key, [link, Icon]]) => 
-                        link && (
-                          <a 
-                            key={key}
-                            href={link}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            style={{
-                              display: "inline-block",
-                              marginRight: "12px",
-                              color: data.colors.primary,
-                              textDecoration: "none"
-                            }}
-                          >
-                            <Icon size={24} style={{ fill: data.colors.primary }} />
-                          </a>
-                        )
+                      {data.socialLinks.linkedin && (
+                        <a 
+                          href={data.socialLinks.linkedin}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          style={{
+                            display: "inline-block",
+                            marginRight: "12px",
+                            color: data.colors.primary,
+                            textDecoration: "none"
+                          }}
+                        >
+                          <Linkedin size={24} style={{ fill: data.colors.primary }} />
+                        </a>
+                      )}
+                      {data.socialLinks.twitter && (
+                        <a 
+                          href={data.socialLinks.twitter}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          style={{
+                            display: "inline-block",
+                            marginRight: "12px",
+                            color: data.colors.primary,
+                            textDecoration: "none"
+                          }}
+                        >
+                          <Twitter size={24} style={{ fill: data.colors.primary }} />
+                        </a>
+                      )}
+                      {data.socialLinks.instagram && (
+                        <a 
+                          href={data.socialLinks.instagram}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          style={{
+                            display: "inline-block",
+                            marginRight: "12px",
+                            color: data.colors.primary,
+                            textDecoration: "none"
+                          }}
+                        >
+                          <Instagram size={24} style={{ fill: data.colors.primary }} />
+                        </a>
+                      )}
+                      {data.socialLinks.facebook && (
+                        <a 
+                          href={data.socialLinks.facebook}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          style={{
+                            display: "inline-block",
+                            marginRight: "12px",
+                            color: data.colors.primary,
+                            textDecoration: "none"
+                          }}
+                        >
+                          <Facebook size={24} style={{ fill: data.colors.primary }} />
+                        </a>
+                      )}
+                      {data.meetingLink && (
+                        <a 
+                          href={data.meetingLink}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          style={{
+                            display: "inline-block",
+                            marginRight: "12px",
+                            color: data.colors.primary,
+                            textDecoration: "none"
+                          }}
+                        >
+                          <Calendar size={24} style={{ fill: data.colors.primary }} />
+                        </a>
                       )}
                     </div>
                   </td>

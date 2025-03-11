@@ -1,3 +1,4 @@
+
 import { SignatureTemplate } from "@/types/email-signature";
 
 export const defaultTemplates: SignatureTemplate[] = [

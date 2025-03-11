@@ -91,29 +91,80 @@ const CompactTemplate: React.FC<CompactTemplateProps> = ({ data }) => {
           {(data.socialLinks.linkedin || data.socialLinks.twitter || data.socialLinks.instagram || data.socialLinks.facebook || data.meetingLink) && (
             <tr>
               <td colSpan={2} style={{ paddingTop: "8px", borderTop: `1px solid ${data.colors.secondary}`, marginTop: "8px" }}>
-                {Object.entries({
-                  linkedin: [data.socialLinks.linkedin, Linkedin],
-                  twitter: [data.socialLinks.twitter, Twitter],
-                  instagram: [data.socialLinks.instagram, Instagram],
-                  facebook: [data.socialLinks.facebook, Facebook],
-                  calendar: [data.meetingLink, Calendar]
-                }).map(([key, [link, Icon]]) => 
-                  link && (
-                    <a 
-                      key={key}
-                      href={link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      style={{
-                        display: "inline-block",
-                        marginRight: "8px",
-                        color: data.colors.primary,
-                        textDecoration: "none"
-                      }}
-                    >
-                      <Icon size={14} />
-                    </a>
-                  )
+                {data.socialLinks.linkedin && (
+                  <a 
+                    href={data.socialLinks.linkedin}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{
+                      display: "inline-block",
+                      marginRight: "8px",
+                      color: data.colors.primary,
+                      textDecoration: "none"
+                    }}
+                  >
+                    <Linkedin size={14} />
+                  </a>
+                )}
+                {data.socialLinks.twitter && (
+                  <a 
+                    href={data.socialLinks.twitter}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{
+                      display: "inline-block",
+                      marginRight: "8px",
+                      color: data.colors.primary,
+                      textDecoration: "none"
+                    }}
+                  >
+                    <Twitter size={14} />
+                  </a>
+                )}
+                {data.socialLinks.instagram && (
+                  <a 
+                    href={data.socialLinks.instagram}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{
+                      display: "inline-block",
+                      marginRight: "8px",
+                      color: data.colors.primary,
+                      textDecoration: "none"
+                    }}
+                  >
+                    <Instagram size={14} />
+                  </a>
+                )}
+                {data.socialLinks.facebook && (
+                  <a 
+                    href={data.socialLinks.facebook}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{
+                      display: "inline-block",
+                      marginRight: "8px",
+                      color: data.colors.primary,
+                      textDecoration: "none"
+                    }}
+                  >
+                    <Facebook size={14} />
+                  </a>
+                )}
+                {data.meetingLink && (
+                  <a 
+                    href={data.meetingLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{
+                      display: "inline-block",
+                      marginRight: "8px",
+                      color: data.colors.primary,
+                      textDecoration: "none"
+                    }}
+                  >
+                    <Calendar size={14} />
+                  </a>
                 )}
               </td>
             </tr>
