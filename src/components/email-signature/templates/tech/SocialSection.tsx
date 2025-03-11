@@ -113,16 +113,13 @@ const SocialSection: React.FC<SocialSectionProps> = ({ data }) => {
             display: "inline-flex",
             alignItems: "center",
             justifyContent: "center",
-            width: "40px",
-            height: "40px",
-            borderRadius: "10px",
+            width: "36px", 
+            height: "36px",
+            borderRadius: "8px",
             background: `linear-gradient(135deg, ${data.colors.primary}, ${data.colors.secondary})`,
             color: "#fff",
-            textDecoration: "none",
-            fontWeight: "600",
-            boxShadow: `0 4px 12px ${data.colors.primary}40`
+            boxShadow: `0 2px 6px ${data.colors.primary}40`
           }}
-          title="Schedule a Meeting"
         >
           <Calendar size={18} />
         </a>
