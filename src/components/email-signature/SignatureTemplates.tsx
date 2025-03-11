@@ -30,10 +30,12 @@ const SignatureTemplates: React.FC<SignatureTemplatesProps> = ({ templates, onSe
             <Card className={`overflow-hidden h-full cursor-pointer hover:border-primary/50 ${
               template.featured ? 'border-primary/30' : ''
             }`}>
-              <div className="aspect-[4/3] relative overflow-hidden bg-muted/20 flex items-center justify-center">
-                <div className="text-muted-foreground text-sm font-medium">
-                  {template.name} Template
-                </div>
+              <div className="aspect-[4/3] relative overflow-hidden bg-white">
+                <img 
+                  src={template.previewImage} 
+                  alt={`${template.name} Template Preview`}
+                  className="w-full h-full object-contain p-4"
+                />
                 {template.featured && (
                   <div className="absolute top-2 right-2">
                     <Badge className="bg-primary hover:bg-primary/90">
