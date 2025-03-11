@@ -54,7 +54,7 @@ export const defaultTemplates: SignatureTemplate[] = [
     id: "tech", 
     name: "Tech",
     description: "Premium tech-focused signature with advanced styling",
-    previewImage: "",
+    previewImage: "/lovable-uploads/4894cea5-585c-4904-82e3-fd2a5f99eed2.png",
     featured: false,
     new: true
   }
