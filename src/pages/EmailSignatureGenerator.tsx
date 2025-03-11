@@ -18,7 +18,7 @@ const defaultTemplates: SignatureTemplate[] = [
     id: "minimal", 
     name: "Minimal",
     description: "Clean, simple design with essential information",
-    previewImage: "/signatures/minimal.png",
+    previewImage: "/lovable-uploads/019fb233-5ff0-46de-9a2a-163263b84501.png",
     featured: false,
     new: false
   },
@@ -26,7 +26,7 @@ const defaultTemplates: SignatureTemplate[] = [
     id: "professional", 
     name: "Professional",
     description: "Complete business signature with contact details",
-    previewImage: "/signatures/professional.png",
+    previewImage: "/lovable-uploads/4894cea5-585c-4904-82e3-fd2a5f99eed2.png",
     featured: true,
     new: false
   },
@@ -34,7 +34,7 @@ const defaultTemplates: SignatureTemplate[] = [
     id: "modern", 
     name: "Modern",
     description: "Contemporary design with bold color accents",
-    previewImage: "/signatures/modern.png",
+    previewImage: "/lovable-uploads/196dbc24-e2c7-44b0-8f16-784d0bd45176.png",
     featured: false,
     new: false
   },
@@ -42,7 +42,7 @@ const defaultTemplates: SignatureTemplate[] = [
     id: "creative", 
     name: "Creative",
     description: "Standout design for creative professionals",
-    previewImage: "/signatures/creative.png",
+    previewImage: "/lovable-uploads/57d5ad99-eb1e-4280-a64f-e837c1d3b851.png",
     featured: false,
     new: false
   },
@@ -50,7 +50,7 @@ const defaultTemplates: SignatureTemplate[] = [
     id: "corporate", 
     name: "Corporate",
     description: "Professional signature with branded header",
-    previewImage: "/signatures/corporate.png",
+    previewImage: "/lovable-uploads/821d58bb-8315-4c80-be65-f4ba367bdeae.png",
     featured: false,
     new: true
   },

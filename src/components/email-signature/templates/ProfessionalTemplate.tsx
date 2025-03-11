@@ -51,7 +51,7 @@ const ProfessionalTemplate: React.FC<ProfessionalTemplateProps> = ({ data }) => 
                   style={{ 
                     width: "80px", 
                     height: "80px", 
-                    borderRadius: "50%", /* Full circle */
+                    borderRadius: "8px", /* Square with slightly rounded corners */
                     border: `2px solid ${data.colors.primary}`,
                     objectFit: "cover" 
                   }} 
