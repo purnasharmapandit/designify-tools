@@ -57,5 +57,13 @@ export const defaultTemplates: SignatureTemplate[] = [
     previewImage: "/lovable-uploads/4894cea5-585c-4904-82e3-fd2a5f99eed2.png",
     featured: false,
     new: true
+  },
+  { 
+    id: "business", 
+    name: "Business",
+    description: "Professional business layout with banner and logo",
+    previewImage: "/lovable-uploads/ad773163-0e7f-4f92-b290-351b0c446ab9.png",
+    featured: false,
+    new: true
   }
 ];
