@@ -190,117 +190,125 @@ const ProfessionalTemplate: React.FC<ProfessionalTemplateProps> = ({ data }) => 
                 borderTop: `1px solid ${data.colors.secondary}`,
                 marginTop: "10px" 
               }}>
-                <div style={{ 
-                  display: "flex", 
-                  gap: "10px",
-                  justifyContent: "center" 
-                }}>
-                  {data.socialLinks.linkedin && (
-                    <a 
-                      href={data.socialLinks.linkedin} 
-                      target="_blank" 
-                      rel="noopener noreferrer"
-                      style={{ 
-                        color: data.colors.primary,
-                        textDecoration: "none",
-                        width: "24px",
-                        height: "24px",
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        backgroundColor: data.colors.secondary,
-                        borderRadius: "50%",
-                        padding: "5px"
-                      }}
-                    >
-                      <Linkedin size={16} />
-                    </a>
-                  )}
-                  {data.socialLinks.twitter && (
-                    <a 
-                      href={data.socialLinks.twitter} 
-                      target="_blank" 
-                      rel="noopener noreferrer"
-                      style={{ 
-                        color: data.colors.primary,
-                        textDecoration: "none",
-                        width: "24px",
-                        height: "24px",
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        backgroundColor: data.colors.secondary,
-                        borderRadius: "50%",
-                        padding: "5px"
-                      }}
-                    >
-                      <Twitter size={16} />
-                    </a>
-                  )}
-                  {data.socialLinks.instagram && (
-                    <a 
-                      href={data.socialLinks.instagram} 
-                      target="_blank" 
-                      rel="noopener noreferrer"
-                      style={{ 
-                        color: data.colors.primary,
-                        textDecoration: "none",
-                        width: "24px",
-                        height: "24px",
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        backgroundColor: data.colors.secondary,
-                        borderRadius: "50%",
-                        padding: "5px"
-                      }}
-                    >
-                      <Instagram size={16} />
-                    </a>
-                  )}
-                  {data.socialLinks.facebook && (
-                    <a 
-                      href={data.socialLinks.facebook} 
-                      target="_blank" 
-                      rel="noopener noreferrer"
-                      style={{ 
-                        color: data.colors.primary,
-                        textDecoration: "none",
-                        width: "24px",
-                        height: "24px",
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        backgroundColor: data.colors.secondary,
-                        borderRadius: "50%",
-                        padding: "5px"
-                      }}
-                    >
-                      <Facebook size={16} />
-                    </a>
-                  )}
-                  {data.meetingLink && (
-                    <a 
-                      href={data.meetingLink} 
-                      target="_blank" 
-                      rel="noopener noreferrer"
-                      style={{ 
-                        color: data.colors.primary,
-                        textDecoration: "none",
-                        width: "24px",
-                        height: "24px",
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        backgroundColor: data.colors.secondary,
-                        borderRadius: "50%",
-                        padding: "5px"
-                      }}
-                    >
-                      <Calendar size={16} />
-                    </a>
-                  )}
-                </div>
+                <table cellPadding="0" cellSpacing="0" style={{ width: "100%" }}>
+                  <tr>
+                    <td style={{ textAlign: "left" }}>
+                      <div style={{ 
+                        display: "flex", 
+                        gap: "10px",
+                        justifyContent: "flex-start" 
+                      }}>
+                        {data.socialLinks.linkedin && (
+                          <a 
+                            href={data.socialLinks.linkedin} 
+                            target="_blank" 
+                            rel="noopener noreferrer"
+                            style={{ 
+                              color: data.colors.primary,
+                              textDecoration: "none",
+                              width: "24px",
+                              height: "24px",
+                              display: "flex",
+                              alignItems: "center",
+                              justifyContent: "center",
+                              backgroundColor: data.colors.secondary,
+                              borderRadius: "50%",
+                              padding: "5px"
+                            }}
+                          >
+                            <Linkedin size={16} />
+                          </a>
+                        )}
+                        {data.socialLinks.twitter && (
+                          <a 
+                            href={data.socialLinks.twitter} 
+                            target="_blank" 
+                            rel="noopener noreferrer"
+                            style={{ 
+                              color: data.colors.primary,
+                              textDecoration: "none",
+                              width: "24px",
+                              height: "24px",
+                              display: "flex",
+                              alignItems: "center",
+                              justifyContent: "center",
+                              backgroundColor: data.colors.secondary,
+                              borderRadius: "50%",
+                              padding: "5px"
+                            }}
+                          >
+                            <Twitter size={16} />
+                          </a>
+                        )}
+                        {data.socialLinks.instagram && (
+                          <a 
+                            href={data.socialLinks.instagram} 
+                            target="_blank" 
+                            rel="noopener noreferrer"
+                            style={{ 
+                              color: data.colors.primary,
+                              textDecoration: "none",
+                              width: "24px",
+                              height: "24px",
+                              display: "flex",
+                              alignItems: "center",
+                              justifyContent: "center",
+                              backgroundColor: data.colors.secondary,
+                              borderRadius: "50%",
+                              padding: "5px"
+                            }}
+                          >
+                            <Instagram size={16} />
+                          </a>
+                        )}
+                        {data.socialLinks.facebook && (
+                          <a 
+                            href={data.socialLinks.facebook} 
+                            target="_blank" 
+                            rel="noopener noreferrer"
+                            style={{ 
+                              color: data.colors.primary,
+                              textDecoration: "none",
+                              width: "24px",
+                              height: "24px",
+                              display: "flex",
+                              alignItems: "center",
+                              justifyContent: "center",
+                              backgroundColor: data.colors.secondary,
+                              borderRadius: "50%",
+                              padding: "5px"
+                            }}
+                          >
+                            <Facebook size={16} />
+                          </a>
+                        )}
+                      </div>
+                    </td>
+                    <td style={{ textAlign: "right" }}>
+                      {data.meetingLink && (
+                        <a 
+                          href={data.meetingLink} 
+                          target="_blank" 
+                          rel="noopener noreferrer"
+                          style={{ 
+                            display: "inline-flex",
+                            alignItems: "center",
+                            backgroundColor: data.colors.primary,
+                            color: "#fff",
+                            padding: "6px 12px",
+                            borderRadius: "4px",
+                            fontSize: "12px",
+                            textDecoration: "none",
+                            fontWeight: "bold"
+                          }}
+                        >
+                          <Calendar size={14} style={{ marginRight: "5px" }} />
+                          Schedule a Meeting
+                        </a>
+                      )}
+                    </td>
+                  </tr>
+                </table>
               </td>
             </tr>
           )}
