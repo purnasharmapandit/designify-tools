@@ -1,13 +1,17 @@
 
 import React from "react";
 import { SignatureData } from "@/types/email-signature";
-import { Mail, Phone, Globe, MapPin, ExternalLink } from "lucide-react";
+import { Mail, Phone, Globe, MapPin } from "lucide-react";
 
 interface ContactSectionProps {
   data: SignatureData;
 }
 
 const ContactSection: React.FC<ContactSectionProps> = ({ data }) => {
+  if (!data.email && !data.phone && !data.website && !data.address) {
+    return null;
+  }
+
   return (
     <div style={{ 
       display: "flex",
@@ -80,7 +84,6 @@ const ContactSection: React.FC<ContactSectionProps> = ({ data }) => {
         >
           <Globe size={14} style={{ marginRight: "8px", color: data.colors.primary, flexShrink: 0 }} />
           {data.website.replace(/^https?:\/\//i, '')}
-          <ExternalLink size={12} style={{ marginLeft: "4px", color: data.colors.primary, opacity: 0.7 }} />
         </a>
       )}
       

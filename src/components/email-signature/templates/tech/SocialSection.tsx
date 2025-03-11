@@ -8,6 +8,13 @@ interface SocialSectionProps {
 }
 
 const SocialSection: React.FC<SocialSectionProps> = ({ data }) => {
+  const hasSocialLinks = data.socialLinks.linkedin || data.socialLinks.twitter || 
+                         data.socialLinks.instagram || data.socialLinks.facebook;
+                         
+  if (!hasSocialLinks && !data.meetingLink) {
+    return null;
+  }
+
   return (
     <div style={{
       display: "flex",

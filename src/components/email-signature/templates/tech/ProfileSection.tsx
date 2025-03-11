@@ -7,6 +7,10 @@ interface ProfileSectionProps {
 }
 
 const ProfileSection: React.FC<ProfileSectionProps> = ({ data }) => {
+  if (!data.name && !data.jobTitle && !data.company && !data.department && !data.photoUrl) {
+    return null;
+  }
+
   return (
     <div style={{ marginBottom: "24px", display: "flex", alignItems: "center" }}>
       {data.photoUrl && (
@@ -21,7 +25,7 @@ const ProfileSection: React.FC<ProfileSectionProps> = ({ data }) => {
         }}>
           <img 
             src={data.photoUrl} 
-            alt={data.name}
+            alt={data.name || "Profile"}
             style={{ 
               width: "100%",
               height: "100%",
@@ -31,30 +35,32 @@ const ProfileSection: React.FC<ProfileSectionProps> = ({ data }) => {
         </div>
       )}
       <div>
-        <h2 style={{ 
-          margin: "0 0 6px 0",
-          fontSize: "20px",
-          fontWeight: "600",
-          background: `linear-gradient(135deg, ${data.colors.primary}, ${data.colors.secondary})`,
-          WebkitBackgroundClip: "text",
-          color: "transparent",
-          textShadow: "0 0 1px rgba(0,0,0,0.1)",
-          letterSpacing: "-0.01em"
-        }}>
-          {data.name}
-          {data.credentials && (
-            <span style={{ 
-              fontSize: "14px",
-              fontWeight: "normal",
-              opacity: "0.7",
-              marginLeft: "8px",
-              color: data.colors.text,
-              WebkitTextFillColor: data.colors.text
-            }}>
-              {data.credentials}
-            </span>
-          )}
-        </h2>
+        {data.name && (
+          <h2 style={{ 
+            margin: "0 0 6px 0",
+            fontSize: "20px",
+            fontWeight: "600",
+            background: `linear-gradient(135deg, ${data.colors.primary}, ${data.colors.secondary})`,
+            WebkitBackgroundClip: "text",
+            color: "transparent",
+            textShadow: "0 0 1px rgba(0,0,0,0.1)",
+            letterSpacing: "-0.01em"
+          }}>
+            {data.name}
+            {data.credentials && (
+              <span style={{ 
+                fontSize: "14px",
+                fontWeight: "normal",
+                opacity: "0.7",
+                marginLeft: "8px",
+                color: data.colors.text,
+                WebkitTextFillColor: data.colors.text
+              }}>
+                {data.credentials}
+              </span>
+            )}
+          </h2>
+        )}
         {data.jobTitle && (
           <p style={{ 
             margin: "0 0 2px 0",
