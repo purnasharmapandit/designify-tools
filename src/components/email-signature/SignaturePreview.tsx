@@ -49,26 +49,35 @@ const SignaturePreview: React.FC<SignaturePreviewProps> = ({
     }
   };
   
+  const cleanHtml = (html: string): string => {
+    return html
+      .replace(/data-reactroot=""/g, '')
+      .replace(/<!-- -->/g, '')
+      .replace(/ style=""/g, '')
+      .replace(/ class="[^"]*"/g, '')
+      .replace(/ className="[^"]*"/g, '')
+      .replace(/ tabIndex="[^"]*"/g, '')
+      .replace(/ aria-[^=]*="[^"]*"/g, '')
+      .replace(/ role="[^"]*"/g, '')
+      .replace(/ for="[^"]*"/g, '')
+      .replace(/ rel="noopener noreferrer"/g, ' rel="noopener"')
+      .replace(/ loading="[^"]*"/g, '')
+      .replace(/ data-[^=]*="[^"]*"/g, '')
+      .replace(/(<img[^>]*)(src="\/[^"]*")/g, (match, p1, p2) => {
+        // Convert relative URLs to absolute URLs
+        const absoluteUrl = p2.replace('src="/', `src="${window.location.origin}/`);
+        return p1 + absoluteUrl;
+      });
+  };
+  
   const handleCopyHtml = () => {
     const signatureElement = document.getElementById("signature-template");
     
     if (signatureElement) {
       const html = signatureElement.innerHTML;
-      // Clean up React-specific attributes
-      const cleanHtml = html
-        .replace(/data-reactroot=""/g, '')
-        .replace(/<!-- -->/g, '')
-        .replace(/style=""/g, '')
-        .replace(/ class="[^"]*"/g, '')
-        .replace(/ className="[^"]*"/g, '')
-        .replace(/ tabIndex="[^"]*"/g, '')
-        .replace(/ aria-[^=]*="[^"]*"/g, '')
-        .replace(/ role="[^"]*"/g, '')
-        .replace(/ for="[^"]*"/g, '')
-        .replace(/ rel="noopener noreferrer"/g, ' rel="noopener"')
-        .replace(/ loading="[^"]*"/g, '');
+      const cleanedHtml = cleanHtml(html);
       
-      navigator.clipboard.writeText(cleanHtml)
+      navigator.clipboard.writeText(cleanedHtml)
         .then(() => {
           setCopied(true);
           toast.success("HTML copied to clipboard!");
@@ -86,21 +95,9 @@ const SignaturePreview: React.FC<SignaturePreviewProps> = ({
     
     if (signatureElement) {
       const html = signatureElement.innerHTML;
-      // Clean up React-specific attributes
-      const cleanHtml = html
-        .replace(/data-reactroot=""/g, '')
-        .replace(/<!-- -->/g, '')
-        .replace(/style=""/g, '')
-        .replace(/ class="[^"]*"/g, '')
-        .replace(/ className="[^"]*"/g, '')
-        .replace(/ tabIndex="[^"]*"/g, '')
-        .replace(/ aria-[^=]*="[^"]*"/g, '')
-        .replace(/ role="[^"]*"/g, '')
-        .replace(/ for="[^"]*"/g, '')
-        .replace(/ rel="noopener noreferrer"/g, ' rel="noopener"')
-        .replace(/ loading="[^"]*"/g, '');
+      const cleanedHtml = cleanHtml(html);
       
-      const blob = new Blob([cleanHtml], { type: "text/html" });
+      const blob = new Blob([cleanedHtml], { type: "text/html" });
       const url = URL.createObjectURL(blob);
       const link = document.createElement("a");
       

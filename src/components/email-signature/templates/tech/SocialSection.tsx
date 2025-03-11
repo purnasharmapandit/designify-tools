@@ -7,191 +7,140 @@ interface SocialSectionProps {
 }
 
 const SocialSection: React.FC<SocialSectionProps> = ({ data }) => {
-  const hasSocialLinks = data.socialLinks.linkedin || data.socialLinks.twitter || 
-                         data.socialLinks.instagram || data.socialLinks.facebook;
-                         
-  if (!hasSocialLinks && !data.meetingLink) {
+  const hasSocialLinks = 
+    data.socialLinks.linkedin || 
+    data.socialLinks.twitter || 
+    data.socialLinks.facebook || 
+    data.socialLinks.instagram ||
+    data.meetingLink;
+  
+  if (!hasSocialLinks) {
     return null;
   }
 
   return (
-    <table cellPadding={0} cellSpacing={0} border={0} width="100%" style={{
-      borderTop: "1px solid #E5E7EB",
-      paddingTop: "18px",
-      marginTop: "2px"
-    }}>
-      <tr>
-        <td>
-          <table cellPadding={0} cellSpacing={0} border={0} align="left">
-            <tr>
-              {data.socialLinks.linkedin && (
-                <td style={{ paddingRight: "10px" }}>
-                  <a 
-                    href={data.socialLinks.linkedin}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    style={{
-                      display: "block",
-                      textDecoration: "none"
-                    }}
-                  >
-                    <table cellPadding={0} cellSpacing={0} border={0} style={{
-                      backgroundColor: "#F3F4F6",
-                      border: "1px solid #E5E7EB"
-                    }}>
-                      <tr>
-                        <td style={{
-                          width: "34px",
-                          height: "34px",
-                          textAlign: "center",
-                          verticalAlign: "middle"
-                        }}>
-                          <span style={{ 
-                            fontSize: "16px",
-                            color: data.colors.primary || "#4F46E5"
-                          }}>in</span>
-                        </td>
-                      </tr>
-                    </table>
-                  </a>
-                </td>
-              )}
-              {data.socialLinks.twitter && (
-                <td style={{ paddingRight: "10px" }}>
-                  <a 
-                    href={data.socialLinks.twitter}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    style={{
-                      display: "block",
-                      textDecoration: "none"
-                    }}
-                  >
-                    <table cellPadding={0} cellSpacing={0} border={0} style={{
-                      backgroundColor: "#F3F4F6",
-                      border: "1px solid #E5E7EB"
-                    }}>
-                      <tr>
-                        <td style={{
-                          width: "34px",
-                          height: "34px",
-                          textAlign: "center",
-                          verticalAlign: "middle"
-                        }}>
-                          <span style={{ 
-                            fontSize: "16px",
-                            color: data.colors.primary || "#4F46E5"
-                          }}>𝕏</span>
-                        </td>
-                      </tr>
-                    </table>
-                  </a>
-                </td>
-              )}
-              {data.socialLinks.instagram && (
-                <td style={{ paddingRight: "10px" }}>
-                  <a 
-                    href={data.socialLinks.instagram}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    style={{
-                      display: "block",
-                      textDecoration: "none"
-                    }}
-                  >
-                    <table cellPadding={0} cellSpacing={0} border={0} style={{
-                      backgroundColor: "#F3F4F6",
-                      border: "1px solid #E5E7EB"
-                    }}>
-                      <tr>
-                        <td style={{
-                          width: "34px",
-                          height: "34px",
-                          textAlign: "center",
-                          verticalAlign: "middle"
-                        }}>
-                          <span style={{ 
-                            fontSize: "16px",
-                            color: data.colors.primary || "#4F46E5"
-                          }}>📷</span>
-                        </td>
-                      </tr>
-                    </table>
-                  </a>
-                </td>
-              )}
-              {data.socialLinks.facebook && (
-                <td style={{ paddingRight: "10px" }}>
-                  <a 
-                    href={data.socialLinks.facebook}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    style={{
-                      display: "block",
-                      textDecoration: "none"
-                    }}
-                  >
-                    <table cellPadding={0} cellSpacing={0} border={0} style={{
-                      backgroundColor: "#F3F4F6",
-                      border: "1px solid #E5E7EB"
-                    }}>
-                      <tr>
-                        <td style={{
-                          width: "34px",
-                          height: "34px",
-                          textAlign: "center",
-                          verticalAlign: "middle"
-                        }}>
-                          <span style={{ 
-                            fontSize: "16px",
-                            color: data.colors.primary || "#4F46E5"
-                          }}>f</span>
-                        </td>
-                      </tr>
-                    </table>
-                  </a>
-                </td>
-              )}
-            </tr>
-          </table>
-          
-          {data.meetingLink && (
-            <table cellPadding={0} cellSpacing={0} border={0} align="right">
-              <tr>
-                <td>
-                  <a 
-                    href={data.meetingLink}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    style={{
-                      display: "block",
-                      textDecoration: "none"
-                    }}
-                  >
-                    <table cellPadding={0} cellSpacing={0} border={0} style={{
-                      backgroundColor: data.colors.primary || "#4F46E5"
-                    }}>
-                      <tr>
-                        <td style={{
-                          width: "32px",
-                          height: "32px",
-                          textAlign: "center",
-                          verticalAlign: "middle"
-                        }}>
-                          <span style={{ 
-                            fontSize: "16px",
-                            color: "#FFFFFF"
-                          }}>📅</span>
-                        </td>
-                      </tr>
-                    </table>
-                  </a>
-                </td>
-              </tr>
+    <table cellPadding={0} cellSpacing={0} border={0} style={{ width: "100%" }}>
+      <tbody>
+        <tr>
+          <td>
+            <table cellPadding={0} cellSpacing={0} border={0}>
+              <tbody>
+                <tr>
+                  {data.socialLinks.linkedin && (
+                    <td style={{ paddingRight: "12px" }}>
+                      <a 
+                        href={data.socialLinks.linkedin}
+                        target="_blank" 
+                        rel="noopener"
+                        style={{ textDecoration: "none" }}
+                      >
+                        <img 
+                          src="https://cdn-icons-png.flaticon.com/512/174/174857.png" 
+                          alt="LinkedIn" 
+                          width="18" 
+                          height="18" 
+                          style={{ 
+                            display: "block", 
+                            border: "0"
+                          }} 
+                        />
+                      </a>
+                    </td>
+                  )}
+                  
+                  {data.socialLinks.twitter && (
+                    <td style={{ paddingRight: "12px" }}>
+                      <a 
+                        href={data.socialLinks.twitter}
+                        target="_blank" 
+                        rel="noopener"
+                        style={{ textDecoration: "none" }}
+                      >
+                        <img 
+                          src="https://cdn-icons-png.flaticon.com/512/124/124021.png" 
+                          alt="Twitter" 
+                          width="18" 
+                          height="18" 
+                          style={{ 
+                            display: "block", 
+                            border: "0"
+                          }} 
+                        />
+                      </a>
+                    </td>
+                  )}
+                  
+                  {data.socialLinks.facebook && (
+                    <td style={{ paddingRight: "12px" }}>
+                      <a 
+                        href={data.socialLinks.facebook}
+                        target="_blank" 
+                        rel="noopener"
+                        style={{ textDecoration: "none" }}
+                      >
+                        <img 
+                          src="https://cdn-icons-png.flaticon.com/512/124/124010.png" 
+                          alt="Facebook" 
+                          width="18" 
+                          height="18" 
+                          style={{ 
+                            display: "block", 
+                            border: "0"
+                          }} 
+                        />
+                      </a>
+                    </td>
+                  )}
+                  
+                  {data.socialLinks.instagram && (
+                    <td style={{ paddingRight: "12px" }}>
+                      <a 
+                        href={data.socialLinks.instagram}
+                        target="_blank" 
+                        rel="noopener"
+                        style={{ textDecoration: "none" }}
+                      >
+                        <img 
+                          src="https://cdn-icons-png.flaticon.com/512/174/174855.png" 
+                          alt="Instagram" 
+                          width="18" 
+                          height="18" 
+                          style={{ 
+                            display: "block", 
+                            border: "0"
+                          }} 
+                        />
+                      </a>
+                    </td>
+                  )}
+                  
+                  {data.meetingLink && (
+                    <td>
+                      <a 
+                        href={data.meetingLink}
+                        target="_blank" 
+                        rel="noopener"
+                        style={{ textDecoration: "none" }}
+                      >
+                        <img 
+                          src="https://cdn-icons-png.flaticon.com/512/2948/2948111.png" 
+                          alt="Schedule Meeting" 
+                          width="18" 
+                          height="18" 
+                          style={{ 
+                            display: "block", 
+                            border: "0"
+                          }} 
+                        />
+                      </a>
+                    </td>
+                  )}
+                </tr>
+              </tbody>
             </table>
-          )}
-        </td>
-      </tr>
+          </td>
+        </tr>
+      </tbody>
     </table>
   );
 };
