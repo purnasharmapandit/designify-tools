@@ -11,174 +11,282 @@ const TechTemplate: React.FC<TechTemplateProps> = ({ data }) => {
   return (
     <div style={{ 
       maxWidth: "600px",
-      fontFamily: data.font || "monospace",
+      fontFamily: "'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
       color: data.colors.text,
-      background: "#f8f9fa",
-      borderRadius: "8px",
-      overflow: "hidden"
+      background: "#fff",
+      borderRadius: "16px",
+      padding: "1px",
+      background: `linear-gradient(135deg, ${data.colors.primary}, ${data.colors.secondary})`
     }}>
-      <div style={{ 
-        background: data.colors.primary,
-        padding: "2px 0",
-        marginBottom: "15px"
-      }} />
-      
-      <table cellPadding="0" cellSpacing="0" style={{ width: "100%" }}>
-        <tbody>
-          <tr>
-            <td style={{ padding: "20px" }}>
-              <table cellPadding="0" cellSpacing="0" style={{ width: "100%" }}>
-                <tr>
-                  <td style={{ verticalAlign: "top" }}>
-                    <div style={{ display: "flex", alignItems: "center", marginBottom: "15px" }}>
-                      {data.photoUrl && (
-                        <img 
-                          src={data.photoUrl} 
-                          alt={data.name}
-                          style={{ 
-                            width: "60px",
-                            height: "60px",
-                            borderRadius: "8px",
-                            marginRight: "15px"
-                          }}
-                        />
-                      )}
-                      <div>
-                        <h2 style={{ 
-                          margin: "0 0 5px 0",
-                          fontSize: "20px",
-                          color: data.colors.primary
-                        }}>
-                          {data.name} <span style={{ color: data.colors.text }}>//</span>
-                        </h2>
-                        <p style={{ 
-                          margin: "0 0 3px 0",
-                          fontSize: "14px"
-                        }}>
-                          <span style={{ color: data.colors.primary }}>role:</span> {data.jobTitle}
-                        </p>
-                        <p style={{ 
-                          margin: "0",
-                          fontSize: "14px"
-                        }}>
-                          <span style={{ color: data.colors.primary }}>team:</span> {data.company}
-                        </p>
-                      </div>
-                    </div>
-                    
-                    <div style={{ 
-                      background: "#ffffff",
-                      padding: "15px",
-                      borderRadius: "6px",
-                      marginBottom: "15px"
+      <div style={{
+        background: "#fff",
+        borderRadius: "15px",
+        padding: "24px"
+      }}>
+        <table cellPadding="0" cellSpacing="0" style={{ width: "100%" }}>
+          <tbody>
+            <tr>
+              <td>
+                <div style={{ marginBottom: "20px", display: "flex", alignItems: "center" }}>
+                  {data.photoUrl && (
+                    <img 
+                      src={data.photoUrl} 
+                      alt={data.name}
+                      style={{ 
+                        width: "64px",
+                        height: "64px",
+                        borderRadius: "16px",
+                        marginRight: "16px",
+                        objectFit: "cover"
+                      }}
+                    />
+                  )}
+                  <div>
+                    <h2 style={{ 
+                      margin: "0 0 4px 0",
+                      fontSize: "20px",
+                      fontWeight: "600",
+                      background: `linear-gradient(135deg, ${data.colors.primary}, ${data.colors.secondary})`,
+                      WebkitBackgroundClip: "text",
+                      WebkitTextFillColor: "transparent"
                     }}>
-                      <code style={{ display: "block", marginBottom: "8px", fontSize: "13px" }}>
-                        <span style={{ color: data.colors.primary }}>const</span> contact = {"{"}
-                      </code>
-                      {data.email && (
-                        <code style={{ display: "block", marginLeft: "20px", marginBottom: "4px", fontSize: "13px" }}>
-                          email: <a href={`mailto:${data.email}`} style={{ color: data.colors.text, textDecoration: "none" }}>"<span style={{ color: data.colors.primary }}>{data.email}</span>"</a>,
-                        </code>
+                      {data.name}
+                      {data.credentials && (
+                        <span style={{ 
+                          fontSize: "14px",
+                          fontWeight: "normal",
+                          opacity: "0.7",
+                          marginLeft: "8px",
+                          color: data.colors.text,
+                          WebkitTextFillColor: data.colors.text
+                        }}>
+                          {data.credentials}
+                        </span>
                       )}
-                      {data.phone && (
-                        <code style={{ display: "block", marginLeft: "20px", marginBottom: "4px", fontSize: "13px" }}>
-                          phone: <a href={`tel:${data.phone}`} style={{ color: data.colors.text, textDecoration: "none" }}>"<span style={{ color: data.colors.primary }}>{data.phone}</span>"</a>,
-                        </code>
+                    </h2>
+                    <p style={{ 
+                      margin: "0 0 2px 0",
+                      fontSize: "14px",
+                      color: data.colors.secondary,
+                      fontWeight: "500"
+                    }}>
+                      {data.jobTitle}
+                      {data.department && (
+                        <span style={{ color: data.colors.text, opacity: "0.7" }}> • {data.department}</span>
                       )}
-                      {data.website && (
-                        <code style={{ display: "block", marginLeft: "20px", marginBottom: "4px", fontSize: "13px" }}>
-                          web: <a href={data.website} style={{ color: data.colors.text, textDecoration: "none" }}>"<span style={{ color: data.colors.primary }}>{data.website}</span>"</a>,
-                        </code>
-                      )}
-                      <code style={{ display: "block", fontSize: "13px" }}>{"}"}</code>
+                    </p>
+                    <p style={{ 
+                      margin: "0",
+                      fontSize: "14px",
+                      color: data.colors.text
+                    }}>
+                      {data.company}
+                    </p>
+                  </div>
+                </div>
+                
+                <div style={{ 
+                  display: "flex",
+                  flexWrap: "wrap",
+                  gap: "12px",
+                  marginBottom: "20px"
+                }}>
+                  {data.email && (
+                    <a 
+                      href={`mailto:${data.email}`}
+                      style={{
+                        display: "inline-flex",
+                        alignItems: "center",
+                        padding: "8px 12px",
+                        borderRadius: "8px",
+                        backgroundColor: `${data.colors.primary}08`,
+                        color: data.colors.text,
+                        fontSize: "13px",
+                        textDecoration: "none",
+                        fontWeight: "500"
+                      }}
+                    >
+                      <Mail size={14} style={{ marginRight: "6px", color: data.colors.primary }} />
+                      {data.email}
+                    </a>
+                  )}
+                  
+                  {data.phone && (
+                    <a 
+                      href={`tel:${data.phone}`}
+                      style={{
+                        display: "inline-flex",
+                        alignItems: "center",
+                        padding: "8px 12px",
+                        borderRadius: "8px",
+                        backgroundColor: `${data.colors.primary}08`,
+                        color: data.colors.text,
+                        fontSize: "13px",
+                        textDecoration: "none",
+                        fontWeight: "500"
+                      }}
+                    >
+                      <Phone size={14} style={{ marginRight: "6px", color: data.colors.primary }} />
+                      {data.phone}
+                    </a>
+                  )}
+                  
+                  {data.website && (
+                    <a 
+                      href={data.website.startsWith('http') ? data.website : `https://${data.website}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      style={{
+                        display: "inline-flex",
+                        alignItems: "center",
+                        padding: "8px 12px",
+                        borderRadius: "8px",
+                        backgroundColor: `${data.colors.primary}08`,
+                        color: data.colors.text,
+                        fontSize: "13px",
+                        textDecoration: "none",
+                        fontWeight: "500"
+                      }}
+                    >
+                      <Globe size={14} style={{ marginRight: "6px", color: data.colors.primary }} />
+                      {data.website.replace(/^https?:\/\//i, '')}
+                    </a>
+                  )}
+                  
+                  {data.address && (
+                    <div style={{
+                      display: "inline-flex",
+                      alignItems: "center",
+                      padding: "8px 12px",
+                      borderRadius: "8px",
+                      backgroundColor: `${data.colors.primary}08`,
+                      color: data.colors.text,
+                      fontSize: "13px",
+                      fontWeight: "500"
+                    }}>
+                      <MapPin size={14} style={{ marginRight: "6px", color: data.colors.primary }} />
+                      {data.address}
                     </div>
-                    
-                    {(data.socialLinks.linkedin || data.socialLinks.twitter || data.socialLinks.instagram || data.socialLinks.facebook || data.meetingLink) && (
-                      <div style={{ textAlign: "right" }}>
-                        {data.socialLinks.linkedin && (
-                          <a 
-                            href={data.socialLinks.linkedin}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            style={{
-                              display: "inline-block",
-                              margin: "0 5px",
-                              color: data.colors.primary,
-                              textDecoration: "none"
-                            }}
-                          >
-                            <Linkedin size={18} />
-                          </a>
-                        )}
-                        {data.socialLinks.twitter && (
-                          <a 
-                            href={data.socialLinks.twitter}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            style={{
-                              display: "inline-block",
-                              margin: "0 5px",
-                              color: data.colors.primary,
-                              textDecoration: "none"
-                            }}
-                          >
-                            <Twitter size={18} />
-                          </a>
-                        )}
-                        {data.socialLinks.instagram && (
-                          <a 
-                            href={data.socialLinks.instagram}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            style={{
-                              display: "inline-block",
-                              margin: "0 5px",
-                              color: data.colors.primary,
-                              textDecoration: "none"
-                            }}
-                          >
-                            <Instagram size={18} />
-                          </a>
-                        )}
-                        {data.socialLinks.facebook && (
-                          <a 
-                            href={data.socialLinks.facebook}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            style={{
-                              display: "inline-block",
-                              margin: "0 5px",
-                              color: data.colors.primary,
-                              textDecoration: "none"
-                            }}
-                          >
-                            <Facebook size={18} />
-                          </a>
-                        )}
-                        {data.meetingLink && (
-                          <a 
-                            href={data.meetingLink}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            style={{
-                              display: "inline-block",
-                              margin: "0 5px",
-                              color: data.colors.primary,
-                              textDecoration: "none"
-                            }}
-                          >
-                            <Calendar size={18} />
-                          </a>
-                        )}
-                      </div>
+                  )}
+                </div>
+                
+                <div style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                  borderTop: `1px solid ${data.colors.primary}10`,
+                  paddingTop: "16px"
+                }}>
+                  <div style={{ display: "flex", gap: "8px" }}>
+                    {data.socialLinks.linkedin && (
+                      <a 
+                        href={data.socialLinks.linkedin}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        style={{
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          width: "32px",
+                          height: "32px",
+                          borderRadius: "8px",
+                          backgroundColor: `${data.colors.primary}08`,
+                          color: data.colors.primary,
+                          transition: "all 0.2s"
+                        }}
+                      >
+                        <Linkedin size={16} />
+                      </a>
                     )}
-                  </td>
-                </tr>
-              </table>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+                    {data.socialLinks.twitter && (
+                      <a 
+                        href={data.socialLinks.twitter}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        style={{
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          width: "32px",
+                          height: "32px",
+                          borderRadius: "8px",
+                          backgroundColor: `${data.colors.primary}08`,
+                          color: data.colors.primary,
+                          transition: "all 0.2s"
+                        }}
+                      >
+                        <Twitter size={16} />
+                      </a>
+                    )}
+                    {data.socialLinks.instagram && (
+                      <a 
+                        href={data.socialLinks.instagram}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        style={{
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          width: "32px",
+                          height: "32px",
+                          borderRadius: "8px",
+                          backgroundColor: `${data.colors.primary}08`,
+                          color: data.colors.primary,
+                          transition: "all 0.2s"
+                        }}
+                      >
+                        <Instagram size={16} />
+                      </a>
+                    )}
+                    {data.socialLinks.facebook && (
+                      <a 
+                        href={data.socialLinks.facebook}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        style={{
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          width: "32px",
+                          height: "32px",
+                          borderRadius: "8px",
+                          backgroundColor: `${data.colors.primary}08`,
+                          color: data.colors.primary,
+                          transition: "all 0.2s"
+                        }}
+                      >
+                        <Facebook size={16} />
+                      </a>
+                    )}
+                  </div>
+                  
+                  {data.meetingLink && (
+                    <a 
+                      href={data.meetingLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      style={{
+                        display: "inline-flex",
+                        alignItems: "center",
+                        padding: "8px 16px",
+                        borderRadius: "8px",
+                        background: `linear-gradient(135deg, ${data.colors.primary}, ${data.colors.secondary})`,
+                        color: "#fff",
+                        fontSize: "13px",
+                        textDecoration: "none",
+                        fontWeight: "500"
+                      }}
+                    >
+                      <Calendar size={14} style={{ marginRight: "6px" }} />
+                      Schedule a Meeting
+                    </a>
+                  )}
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 };
