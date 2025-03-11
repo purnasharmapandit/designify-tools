@@ -52,8 +52,13 @@ const SignaturePreview: React.FC<SignaturePreviewProps> = ({
     const signatureElement = document.getElementById("signature-template");
     
     if (signatureElement) {
-      const html = signatureElement.outerHTML;
-      navigator.clipboard.writeText(html)
+      const html = signatureElement.innerHTML;
+      const cleanHtml = html
+        .replace(/data-reactroot=""/g, '')
+        .replace(/<!-- -->/g, '')
+        .replace(/style=""/g, '');
+      
+      navigator.clipboard.writeText(cleanHtml)
         .then(() => {
           setCopied(true);
           toast.success("HTML copied to clipboard!");
@@ -70,8 +75,13 @@ const SignaturePreview: React.FC<SignaturePreviewProps> = ({
     const signatureElement = document.getElementById("signature-template");
     
     if (signatureElement) {
-      const html = signatureElement.outerHTML;
-      const blob = new Blob([html], { type: "text/html" });
+      const html = signatureElement.innerHTML;
+      const cleanHtml = html
+        .replace(/data-reactroot=""/g, '')
+        .replace(/<!-- -->/g, '')
+        .replace(/style=""/g, '');
+      
+      const blob = new Blob([cleanHtml], { type: "text/html" });
       const url = URL.createObjectURL(blob);
       const link = document.createElement("a");
       

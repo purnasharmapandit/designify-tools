@@ -9,32 +9,32 @@ interface TemplateWrapperProps {
 
 const TemplateWrapper: React.FC<TemplateWrapperProps> = ({ data, children }) => {
   return (
-    <div style={{ 
-      maxWidth: "600px",
+    <table cellPadding="0" cellSpacing="0" border="0" width="600" style={{ 
       fontFamily: "'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
       color: data.colors.text,
       borderRadius: "16px",
-      overflow: "hidden",
-      boxShadow: "0 4px 24px rgba(0,0,0,0.08)",
-      background: `linear-gradient(135deg, ${data.colors.primary}, ${data.colors.secondary})`
+      overflow: "hidden"
     }}>
-      <div style={{
-        background: "#fff",
-        borderRadius: "15px",
-        margin: "1px",
-        padding: "24px"
-      }}>
-        <table cellPadding="0" cellSpacing="0" style={{ width: "100%" }}>
-          <tbody>
+      <tr>
+        <td style={{
+          background: `linear-gradient(135deg, ${data.colors.primary}, ${data.colors.secondary})`,
+          padding: "1px",
+          borderRadius: "16px"
+        }}>
+          <table cellPadding="0" cellSpacing="0" border="0" width="100%" style={{
+            background: "#fff",
+            borderRadius: "15px",
+            padding: "24px"
+          }}>
             <tr>
               <td>
                 {children}
               </td>
             </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
+          </table>
+        </td>
+      </tr>
+    </table>
   );
 };
 

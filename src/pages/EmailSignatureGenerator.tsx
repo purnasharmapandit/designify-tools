@@ -34,7 +34,19 @@ const EmailSignatureGenerator = () => {
   
   // Update display data based on user input
   useEffect(() => {
-    setDisplayData(signatureData);
+    // Ensure we're using fully qualified URLs for all image sources
+    const updatedData = {...signatureData};
+    
+    // Make sure photoUrl and companyLogoUrl are absolute URLs
+    if (updatedData.photoUrl && !updatedData.photoUrl.startsWith('http')) {
+      updatedData.photoUrl = new URL(updatedData.photoUrl, window.location.origin).href;
+    }
+    
+    if (updatedData.companyLogoUrl && !updatedData.companyLogoUrl.startsWith('http')) {
+      updatedData.companyLogoUrl = new URL(updatedData.companyLogoUrl, window.location.origin).href;
+    }
+    
+    setDisplayData(updatedData);
   }, [signatureData]);
   
   // Reset userHasTyped when changing templates
