@@ -1,4 +1,3 @@
-
 import React from "react";
 import { SignatureData } from "@/types/email-signature";
 import { Mail, Phone, Globe, MapPin, Linkedin, Twitter, Instagram, Facebook, Calendar } from "lucide-react";
@@ -123,9 +122,7 @@ const CompactTemplate: React.FC<CompactTemplateProps> = ({ data }) => {
                             marginBottom: "2px"
                           }}>
                             <Globe size={10} style={{ verticalAlign: "middle", marginRight: "4px", color: data.colors.primary }} />
-                            <span style={{ vert
-
-icalAlign: "middle" }}>{data.website.replace(/^https?:\/\//i, '')}</span>
+                            <span style={{ verticalAlign: "middle" }}>{data.website.replace(/^https?:\/\//i, '')}</span>
                           </a>
                         )}
                       </div>
