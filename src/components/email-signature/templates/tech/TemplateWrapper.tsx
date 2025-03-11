@@ -9,7 +9,7 @@ interface TemplateWrapperProps {
 
 const TemplateWrapper: React.FC<TemplateWrapperProps> = ({ data, children }) => {
   return (
-    <table cellPadding="0" cellSpacing="0" border="0" style={{ 
+    <table cellPadding={0} cellSpacing={0} border={0} style={{ 
       width: "600px",
       fontFamily: "Arial, 'Helvetica Neue', Helvetica, sans-serif",
       color: data.colors.text || "#333333",
@@ -21,7 +21,7 @@ const TemplateWrapper: React.FC<TemplateWrapperProps> = ({ data, children }) => 
             padding: "1px",
             backgroundColor: data.colors.primary || "#4F46E5"
           }}>
-            <table cellPadding="0" cellSpacing="0" border="0" style={{
+            <table cellPadding={0} cellSpacing={0} border={0} style={{
               width: "100%",
               backgroundColor: "#FFFFFF",
               borderCollapse: "collapse"

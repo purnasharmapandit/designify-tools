@@ -12,16 +12,16 @@ const ContactSection: React.FC<ContactSectionProps> = ({ data }) => {
   }
 
   return (
-    <table cellPadding="0" cellSpacing="0" border="0" style={{ width: "100%", marginBottom: "22px" }}>
+    <table cellPadding={0} cellSpacing={0} border={0} style={{ width: "100%", marginBottom: "22px" }}>
       <tbody>
         <tr>
           <td>
-            <table cellPadding="0" cellSpacing="0" border="0" style={{ width: "100%" }}>
+            <table cellPadding={0} cellSpacing={0} border={0} style={{ width: "100%" }}>
               <tbody>
                 <tr>
                   {data.email && (
                     <td style={{ paddingRight: "10px", paddingBottom: "10px" }}>
-                      <table cellPadding="0" cellSpacing="0" border="0" style={{
+                      <table cellPadding={0} cellSpacing={0} border={0} style={{
                         backgroundColor: "#F3F4F6",
                         borderCollapse: "collapse"
                       }}>
@@ -52,7 +52,7 @@ const ContactSection: React.FC<ContactSectionProps> = ({ data }) => {
                   
                   {data.phone && (
                     <td style={{ paddingRight: "10px", paddingBottom: "10px" }}>
-                      <table cellPadding="0" cellSpacing="0" border="0" style={{
+                      <table cellPadding={0} cellSpacing={0} border={0} style={{
                         backgroundColor: "#F3F4F6",
                         borderCollapse: "collapse"
                       }}>
@@ -84,12 +84,12 @@ const ContactSection: React.FC<ContactSectionProps> = ({ data }) => {
               </tbody>
             </table>
 
-            <table cellPadding="0" cellSpacing="0" border="0" style={{ width: "100%" }}>
+            <table cellPadding={0} cellSpacing={0} border={0} style={{ width: "100%" }}>
               <tbody>
                 <tr>
                   {data.website && (
                     <td style={{ paddingRight: "10px", paddingBottom: "10px" }}>
-                      <table cellPadding="0" cellSpacing="0" border="0" style={{
+                      <table cellPadding={0} cellSpacing={0} border={0} style={{
                         backgroundColor: "#F3F4F6",
                         borderCollapse: "collapse"
                       }}>
@@ -122,7 +122,7 @@ const ContactSection: React.FC<ContactSectionProps> = ({ data }) => {
                   
                   {data.address && (
                     <td style={{ paddingRight: "10px", paddingBottom: "10px" }}>
-                      <table cellPadding="0" cellSpacing="0" border="0" style={{
+                      <table cellPadding={0} cellSpacing={0} border={0} style={{
                         backgroundColor: "#F3F4F6",
                         borderCollapse: "collapse"
                       }}>

@@ -12,12 +12,12 @@ const ProfileSection: React.FC<ProfileSectionProps> = ({ data }) => {
   }
 
   return (
-    <table cellPadding="0" cellSpacing="0" border="0" style={{ width: "100%", marginBottom: "24px" }}>
+    <table cellPadding={0} cellSpacing={0} border={0} style={{ width: "100%", marginBottom: "24px" }}>
       <tbody>
         <tr>
           {data.photoUrl && (
             <td width="90" style={{ verticalAlign: "top" }}>
-              <table cellPadding="0" cellSpacing="0" border="0">
+              <table cellPadding={0} cellSpacing={0} border={0}>
                 <tbody>
                   <tr>
                     <td style={{
@@ -46,7 +46,7 @@ const ProfileSection: React.FC<ProfileSectionProps> = ({ data }) => {
           )}
           <td style={{ verticalAlign: "top", paddingLeft: data.photoUrl ? "18px" : "0" }}>
             {data.name && (
-              <table cellPadding="0" cellSpacing="0" border="0" style={{ marginBottom: "6px" }}>
+              <table cellPadding={0} cellSpacing={0} border={0} style={{ marginBottom: "6px" }}>
                 <tbody>
                   <tr>
                     <td style={{ 
@@ -71,7 +71,7 @@ const ProfileSection: React.FC<ProfileSectionProps> = ({ data }) => {
               </table>
             )}
             {data.jobTitle && (
-              <table cellPadding="0" cellSpacing="0" border="0" style={{ marginBottom: "2px" }}>
+              <table cellPadding={0} cellSpacing={0} border={0} style={{ marginBottom: "2px" }}>
                 <tbody>
                   <tr>
                     <td style={{ 
@@ -90,7 +90,7 @@ const ProfileSection: React.FC<ProfileSectionProps> = ({ data }) => {
               </table>
             )}
             {data.company && (
-              <table cellPadding="0" cellSpacing="0" border="0">
+              <table cellPadding={0} cellSpacing={0} border={0}>
                 <tbody>
                   <tr>
                     <td style={{ 
