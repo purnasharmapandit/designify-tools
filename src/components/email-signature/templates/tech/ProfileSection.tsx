@@ -12,20 +12,16 @@ const ProfileSection: React.FC<ProfileSectionProps> = ({ data }) => {
   }
 
   return (
-    <table cellPadding={0} cellSpacing={0} border={0} style={{ marginBottom: "24px" }}>
+    <table cellPadding={0} cellSpacing={0} border={0} width="100%" style={{ marginBottom: "24px" }}>
       <tr>
-        <td style={{ verticalAlign: "middle" }}>
-          {data.photoUrl && (
+        {data.photoUrl && (
+          <td width="90" style={{ verticalAlign: "top" }}>
             <table cellPadding={0} cellSpacing={0} border={0}>
               <tr>
                 <td style={{
                   width: "72px",
                   height: "72px",
-                  borderRadius: "14px",
-                  overflow: "hidden",
-                  marginRight: "18px",
-                  border: `1px solid ${data.colors.primary}20`,
-                  boxShadow: "0 6px 12px rgba(0,0,0,0.06)"
+                  verticalAlign: "top"
                 }}>
                   <img 
                     src={data.photoUrl} 
@@ -33,55 +29,51 @@ const ProfileSection: React.FC<ProfileSectionProps> = ({ data }) => {
                     width="72"
                     height="72"
                     style={{ 
-                      width: "100%",
-                      height: "100%",
-                      objectFit: "cover"
+                      display: "block",
+                      width: "72px",
+                      height: "72px",
+                      border: `1px solid ${data.colors.primary || "#4F46E5"}`,
+                      maxWidth: "72px"
                     }}
                   />
                 </td>
-                <td width="18"></td>
               </tr>
             </table>
-          )}
-        </td>
-        <td style={{ verticalAlign: "middle" }}>
+          </td>
+        )}
+        <td style={{ verticalAlign: "top", paddingLeft: data.photoUrl ? "18px" : "0" }}>
           {data.name && (
-            <h2 style={{ 
+            <p style={{ 
               margin: "0 0 6px 0",
               padding: "0",
               fontSize: "20px",
-              fontWeight: "600",
-              color: data.colors.primary,
-              letterSpacing: "-0.01em"
+              fontWeight: "bold",
+              color: data.colors.primary || "#4F46E5"
             }}>
               {data.name}
               {data.credentials && (
                 <span style={{ 
                   fontSize: "14px",
                   fontWeight: "normal",
-                  opacity: "0.7",
-                  marginLeft: "8px",
-                  color: data.colors.text
+                  color: data.colors.text || "#333333",
+                  marginLeft: "8px"
                 }}>
                   {data.credentials}
                 </span>
               )}
-            </h2>
+            </p>
           )}
           {data.jobTitle && (
             <p style={{ 
               margin: "0 0 2px 0",
               padding: "0",
               fontSize: "14px",
-              color: data.colors.secondary,
-              fontWeight: "500"
+              color: data.colors.secondary || "#6366F1"
             }}>
               {data.jobTitle}
               {data.department && (
                 <span style={{ 
-                  color: "#555", 
-                  opacity: "0.9",
-                  fontWeight: "400" 
+                  color: "#555555"
                 }}> • {data.department}</span>
               )}
             </p>
@@ -91,7 +83,7 @@ const ProfileSection: React.FC<ProfileSectionProps> = ({ data }) => {
               margin: "0",
               padding: "0",
               fontSize: "14px",
-              color: "#222"
+              color: "#222222"
             }}>
               {data.company}
               {data.companyLogoUrl && (

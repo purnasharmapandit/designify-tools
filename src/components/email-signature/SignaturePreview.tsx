@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import { SignatureData } from "@/types/email-signature";
 import { Card } from "@/components/ui/card";
@@ -53,10 +54,19 @@ const SignaturePreview: React.FC<SignaturePreviewProps> = ({
     
     if (signatureElement) {
       const html = signatureElement.innerHTML;
+      // Clean up React-specific attributes
       const cleanHtml = html
         .replace(/data-reactroot=""/g, '')
         .replace(/<!-- -->/g, '')
-        .replace(/style=""/g, '');
+        .replace(/style=""/g, '')
+        .replace(/ class="[^"]*"/g, '')
+        .replace(/ className="[^"]*"/g, '')
+        .replace(/ tabIndex="[^"]*"/g, '')
+        .replace(/ aria-[^=]*="[^"]*"/g, '')
+        .replace(/ role="[^"]*"/g, '')
+        .replace(/ for="[^"]*"/g, '')
+        .replace(/ rel="noopener noreferrer"/g, ' rel="noopener"')
+        .replace(/ loading="[^"]*"/g, '');
       
       navigator.clipboard.writeText(cleanHtml)
         .then(() => {
@@ -76,10 +86,19 @@ const SignaturePreview: React.FC<SignaturePreviewProps> = ({
     
     if (signatureElement) {
       const html = signatureElement.innerHTML;
+      // Clean up React-specific attributes
       const cleanHtml = html
         .replace(/data-reactroot=""/g, '')
         .replace(/<!-- -->/g, '')
-        .replace(/style=""/g, '');
+        .replace(/style=""/g, '')
+        .replace(/ class="[^"]*"/g, '')
+        .replace(/ className="[^"]*"/g, '')
+        .replace(/ tabIndex="[^"]*"/g, '')
+        .replace(/ aria-[^=]*="[^"]*"/g, '')
+        .replace(/ role="[^"]*"/g, '')
+        .replace(/ for="[^"]*"/g, '')
+        .replace(/ rel="noopener noreferrer"/g, ' rel="noopener"')
+        .replace(/ loading="[^"]*"/g, '');
       
       const blob = new Blob([cleanHtml], { type: "text/html" });
       const url = URL.createObjectURL(blob);

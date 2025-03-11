@@ -1,7 +1,6 @@
 
 import React from "react";
 import { SignatureData } from "@/types/email-signature";
-import { Mail, Phone, Globe, MapPin } from "lucide-react";
 
 interface ContactSectionProps {
   data: SignatureData;
@@ -13,97 +12,130 @@ const ContactSection: React.FC<ContactSectionProps> = ({ data }) => {
   }
 
   return (
-    <div style={{ 
-      display: "flex",
-      flexWrap: "wrap",
-      gap: "10px",
-      marginBottom: "22px"
-    }}>
-      {data.email && (
-        <a 
-          href={`mailto:${data.email}`}
-          style={{
-            display: "inline-flex",
-            alignItems: "center",
-            padding: "8px 14px",
-            borderRadius: "10px",
-            backgroundColor: `${data.colors.primary}08`,
-            color: "#333",
-            fontSize: "13px",
-            textDecoration: "none",
-            fontWeight: "500",
-            transition: "all 0.2s ease",
-            border: `1px solid ${data.colors.primary}15`
-          }}
-        >
-          <Mail size={14} style={{ marginRight: "8px", color: data.colors.primary, flexShrink: 0 }} />
-          {data.email}
-        </a>
-      )}
-      
-      {data.phone && (
-        <a 
-          href={`tel:${data.phone}`}
-          style={{
-            display: "inline-flex",
-            alignItems: "center",
-            padding: "8px 14px",
-            borderRadius: "10px",
-            backgroundColor: `${data.colors.primary}08`,
-            color: "#333",
-            fontSize: "13px",
-            textDecoration: "none",
-            fontWeight: "500",
-            transition: "all 0.2s ease",
-            border: `1px solid ${data.colors.primary}15`
-          }}
-        >
-          <Phone size={14} style={{ marginRight: "8px", color: data.colors.primary, flexShrink: 0 }} />
-          {data.phone}
-        </a>
-      )}
-      
-      {data.website && (
-        <a 
-          href={data.website.startsWith('http') ? data.website : `https://${data.website}`}
-          target="_blank"
-          rel="noopener noreferrer"
-          style={{
-            display: "inline-flex",
-            alignItems: "center",
-            padding: "8px 14px",
-            borderRadius: "10px",
-            backgroundColor: `${data.colors.primary}08`,
-            color: "#333",
-            fontSize: "13px",
-            textDecoration: "none",
-            fontWeight: "500",
-            transition: "all 0.2s ease",
-            border: `1px solid ${data.colors.primary}15`
-          }}
-        >
-          <Globe size={14} style={{ marginRight: "8px", color: data.colors.primary, flexShrink: 0 }} />
-          {data.website.replace(/^https?:\/\//i, '')}
-        </a>
-      )}
-      
-      {data.address && (
-        <div style={{
-          display: "inline-flex",
-          alignItems: "center",
-          padding: "8px 14px",
-          borderRadius: "10px",
-          backgroundColor: `${data.colors.primary}08`,
-          color: "#333",
-          fontSize: "13px",
-          fontWeight: "500",
-          border: `1px solid ${data.colors.primary}15`
-        }}>
-          <MapPin size={14} style={{ marginRight: "8px", color: data.colors.primary, flexShrink: 0 }} />
-          {data.address}
-        </div>
-      )}
-    </div>
+    <table cellPadding={0} cellSpacing={0} border={0} width="100%" style={{ marginBottom: "22px" }}>
+      <tr>
+        <td>
+          <table cellPadding={0} cellSpacing={0} border={0} style={{ width: "100%" }}>
+            <tr>
+              {data.email && (
+                <td style={{ paddingRight: "10px", paddingBottom: "10px" }}>
+                  <table cellPadding={0} cellSpacing={0} border={0} style={{
+                    backgroundColor: "#F3F4F6",
+                    borderCollapse: "collapse"
+                  }}>
+                    <tr>
+                      <td style={{
+                        padding: "8px 14px",
+                        borderRadius: "4px",
+                        border: "1px solid #E5E7EB"
+                      }}>
+                        <a 
+                          href={`mailto:${data.email}`}
+                          style={{
+                            color: "#333333",
+                            fontSize: "13px",
+                            textDecoration: "none",
+                            fontFamily: "Arial, sans-serif"
+                          }}
+                        >
+                          ✉️ {data.email}
+                        </a>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              )}
+              
+              {data.phone && (
+                <td style={{ paddingRight: "10px", paddingBottom: "10px" }}>
+                  <table cellPadding={0} cellSpacing={0} border={0} style={{
+                    backgroundColor: "#F3F4F6",
+                    borderCollapse: "collapse"
+                  }}>
+                    <tr>
+                      <td style={{
+                        padding: "8px 14px",
+                        borderRadius: "4px",
+                        border: "1px solid #E5E7EB"
+                      }}>
+                        <a 
+                          href={`tel:${data.phone}`}
+                          style={{
+                            color: "#333333",
+                            fontSize: "13px",
+                            textDecoration: "none",
+                            fontFamily: "Arial, sans-serif"
+                          }}
+                        >
+                          📱 {data.phone}
+                        </a>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              )}
+            </tr>
+            <tr>
+              {data.website && (
+                <td style={{ paddingRight: "10px", paddingBottom: "10px" }}>
+                  <table cellPadding={0} cellSpacing={0} border={0} style={{
+                    backgroundColor: "#F3F4F6",
+                    borderCollapse: "collapse"
+                  }}>
+                    <tr>
+                      <td style={{
+                        padding: "8px 14px",
+                        borderRadius: "4px",
+                        border: "1px solid #E5E7EB"
+                      }}>
+                        <a 
+                          href={data.website.startsWith('http') ? data.website : `https://${data.website}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          style={{
+                            color: "#333333",
+                            fontSize: "13px",
+                            textDecoration: "none",
+                            fontFamily: "Arial, sans-serif"
+                          }}
+                        >
+                          🌐 {data.website.replace(/^https?:\/\//i, '')}
+                        </a>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              )}
+              
+              {data.address && (
+                <td style={{ paddingRight: "10px", paddingBottom: "10px" }}>
+                  <table cellPadding={0} cellSpacing={0} border={0} style={{
+                    backgroundColor: "#F3F4F6",
+                    borderCollapse: "collapse"
+                  }}>
+                    <tr>
+                      <td style={{
+                        padding: "8px 14px",
+                        borderRadius: "4px",
+                        border: "1px solid #E5E7EB"
+                      }}>
+                        <span style={{
+                          color: "#333333",
+                          fontSize: "13px",
+                          fontFamily: "Arial, sans-serif"
+                        }}>
+                          📍 {data.address}
+                        </span>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              )}
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
   );
 };
 

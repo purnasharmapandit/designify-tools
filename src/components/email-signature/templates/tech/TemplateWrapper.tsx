@@ -10,24 +10,21 @@ interface TemplateWrapperProps {
 const TemplateWrapper: React.FC<TemplateWrapperProps> = ({ data, children }) => {
   return (
     <table cellPadding={0} cellSpacing={0} border={0} width={600} style={{ 
-      fontFamily: "'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
-      color: data.colors.text,
-      borderRadius: "16px",
-      overflow: "hidden"
+      fontFamily: "Arial, 'Helvetica Neue', Helvetica, sans-serif",
+      color: data.colors.text || "#333333",
+      borderCollapse: "collapse"
     }}>
       <tr>
         <td style={{
-          background: `linear-gradient(135deg, ${data.colors.primary}, ${data.colors.secondary})`,
           padding: "1px",
-          borderRadius: "16px"
+          backgroundColor: data.colors.primary || "#4F46E5"
         }}>
           <table cellPadding={0} cellSpacing={0} border={0} width="100%" style={{
-            background: "#fff",
-            borderRadius: "15px",
-            padding: "24px"
+            backgroundColor: "#FFFFFF",
+            borderCollapse: "collapse"
           }}>
             <tr>
-              <td>
+              <td style={{ padding: "24px" }}>
                 {children}
               </td>
             </tr>
