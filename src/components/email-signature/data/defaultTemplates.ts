@@ -1,4 +1,3 @@
-
 import { SignatureTemplate } from "@/types/email-signature";
 
 export const defaultTemplates: SignatureTemplate[] = [
@@ -50,4 +49,36 @@ export const defaultTemplates: SignatureTemplate[] = [
     featured: false,
     new: true
   },
+  { 
+    id: "elegant", 
+    name: "Elegant",
+    description: "Sophisticated design with classic typography",
+    previewImage: "",
+    featured: false,
+    new: true
+  },
+  { 
+    id: "compact", 
+    name: "Compact",
+    description: "Space-efficient design for mobile users",
+    previewImage: "",
+    featured: false,
+    new: true
+  },
+  { 
+    id: "bold", 
+    name: "Bold",
+    description: "High-impact design with strong visuals",
+    previewImage: "",
+    featured: false,
+    new: true
+  },
+  { 
+    id: "tech", 
+    name: "Tech",
+    description: "Modern tech-focused signature style",
+    previewImage: "",
+    featured: false,
+    new: true
+  }
 ];
