@@ -58,11 +58,8 @@ const ProfileSection: React.FC<ProfileSectionProps> = ({ data }) => {
         <p style={{ 
           margin: "0 0 2px 0",
           fontSize: "14px",
-          // Improved color contrast for job title - using a darker color instead of secondary
-          color: "#333333",
-          fontWeight: "500",
-          // Add slight text shadow to improve readability on any background
-          textShadow: "0px 0px 1px rgba(255,255,255,0.5)"
+          color: data.colors.secondary,
+          fontWeight: "500"
         }}>
           {data.jobTitle}
           {data.department && (
