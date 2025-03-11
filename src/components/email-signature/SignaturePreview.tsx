@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { SignatureData } from "@/types/email-signature";
 import { Card } from "@/components/ui/card";
@@ -50,24 +49,68 @@ const SignaturePreview: React.FC<SignaturePreviewProps> = ({
   };
   
   const cleanHtml = (html: string): string => {
-    return html
-      .replace(/data-reactroot=""/g, '')
+    const tempDiv = document.createElement('div');
+    tempDiv.innerHTML = html;
+
+    const processNodes = (node: Node) => {
+      if (node.nodeType === Node.ELEMENT_NODE) {
+        const element = node as HTMLElement;
+        
+        const reactAttrs = [
+          'data-reactroot', 'data-reactid', 'data-react-checksum', 
+          'data-react-beautiful-dnd', 'data-rbd', 'data-react-sortable-tree',
+          'data-react', 'class', 'className', 'tabIndex', 'for'
+        ];
+        
+        reactAttrs.forEach(attr => {
+          if (element.hasAttribute(attr)) {
+            element.removeAttribute(attr);
+          }
+        });
+        
+        Array.from(element.attributes).forEach(attr => {
+          if (attr.name.startsWith('aria-') || attr.name.startsWith('data-')) {
+            element.removeAttribute(attr.name);
+          }
+        });
+        
+        if (element.hasAttribute('style') && element.getAttribute('style') === '') {
+          element.removeAttribute('style');
+        }
+        
+        if (element.tagName === 'IMG' && element.hasAttribute('src')) {
+          const src = element.getAttribute('src');
+          if (src && src.startsWith('/')) {
+            element.setAttribute('src', `${window.location.origin}${src}`);
+          }
+        }
+        
+        if (element.tagName === 'A' && element.hasAttribute('target')) {
+          element.setAttribute('rel', 'noopener');
+          if (element.hasAttribute('target') && element.getAttribute('target') === '_blank') {
+          } else {
+            element.removeAttribute('target');
+          }
+        }
+        
+        if (element.hasAttribute('role')) {
+          element.removeAttribute('role');
+        }
+        
+        Array.from(element.childNodes).forEach(processNodes);
+      }
+    };
+    
+    processNodes(tempDiv);
+    
+    let cleanedHtml = tempDiv.innerHTML;
+    
+    cleanedHtml = cleanedHtml
       .replace(/<!-- -->/g, '')
-      .replace(/ style=""/g, '')
-      .replace(/ class="[^"]*"/g, '')
-      .replace(/ className="[^"]*"/g, '')
-      .replace(/ tabIndex="[^"]*"/g, '')
-      .replace(/ aria-[^=]*="[^"]*"/g, '')
-      .replace(/ role="[^"]*"/g, '')
-      .replace(/ for="[^"]*"/g, '')
-      .replace(/ rel="noopener noreferrer"/g, ' rel="noopener"')
       .replace(/ loading="[^"]*"/g, '')
-      .replace(/ data-[^=]*="[^"]*"/g, '')
-      .replace(/(<img[^>]*)(src="\/[^"]*")/g, (match, p1, p2) => {
-        // Convert relative URLs to absolute URLs
-        const absoluteUrl = p2.replace('src="/', `src="${window.location.origin}/`);
-        return p1 + absoluteUrl;
-      });
+      .replace(/ rel="noopener noreferrer"/g, ' rel="noopener"');
+    
+    return cleanedHtml;
   };
   
   const handleCopyHtml = () => {
@@ -97,7 +140,18 @@ const SignaturePreview: React.FC<SignaturePreviewProps> = ({
       const html = signatureElement.innerHTML;
       const cleanedHtml = cleanHtml(html);
       
-      const blob = new Blob([cleanedHtml], { type: "text/html" });
+      const fullHtml = `<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <title>Email Signature</title>
+</head>
+<body>
+  ${cleanedHtml}
+</body>
+</html>`;
+      
+      const blob = new Blob([fullHtml], { type: "text/html" });
       const url = URL.createObjectURL(blob);
       const link = document.createElement("a");
       
@@ -170,6 +224,10 @@ const SignaturePreview: React.FC<SignaturePreviewProps> = ({
                 <li>Paste the HTML or import the downloaded file</li>
                 <li>Save your settings</li>
               </ol>
+              <p className="mt-3 text-xs text-muted-foreground">
+                Note: Some email clients may have limitations on HTML formatting or image display. 
+                For best results with Outlook, consider saving images to your device and reattaching them.
+              </p>
             </div>
           </div>
         )}

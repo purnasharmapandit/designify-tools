@@ -19,11 +19,11 @@ const SocialSection: React.FC<SocialSectionProps> = ({ data }) => {
   }
 
   return (
-    <table cellPadding={0} cellSpacing={0} border={0} style={{ width: "100%" }}>
+    <table cellPadding="0" cellSpacing="0" border="0" style={{ width: "100%" }}>
       <tbody>
         <tr>
           <td>
-            <table cellPadding={0} cellSpacing={0} border={0}>
+            <table cellPadding="0" cellSpacing="0" border="0">
               <tbody>
                 <tr>
                   {data.socialLinks.linkedin && (

@@ -12,12 +12,12 @@ const ProfileSection: React.FC<ProfileSectionProps> = ({ data }) => {
   }
 
   return (
-    <table cellPadding={0} cellSpacing={0} border={0} style={{ width: "100%", marginBottom: "24px" }}>
+    <table cellPadding="0" cellSpacing="0" border="0" style={{ width: "100%", marginBottom: "24px" }}>
       <tbody>
         <tr>
           {data.photoUrl && (
-            <td width={90} style={{ verticalAlign: "top" }}>
-              <table cellPadding={0} cellSpacing={0} border={0}>
+            <td width="90" style={{ verticalAlign: "top" }}>
+              <table cellPadding="0" cellSpacing="0" border="0">
                 <tbody>
                   <tr>
                     <td style={{
@@ -46,62 +46,74 @@ const ProfileSection: React.FC<ProfileSectionProps> = ({ data }) => {
           )}
           <td style={{ verticalAlign: "top", paddingLeft: data.photoUrl ? "18px" : "0" }}>
             {data.name && (
-              <p style={{ 
-                margin: "0 0 6px 0",
-                padding: "0",
-                fontSize: "20px",
-                fontWeight: "bold",
-                color: data.colors.primary || "#4F46E5"
-              }}>
-                {data.name}
-                {data.credentials && (
-                  <span style={{ 
-                    fontSize: "14px",
-                    fontWeight: "normal",
-                    color: data.colors.text || "#333333",
-                    marginLeft: "8px"
-                  }}>
-                    {data.credentials}
-                  </span>
-                )}
-              </p>
+              <table cellPadding="0" cellSpacing="0" border="0" style={{ marginBottom: "6px" }}>
+                <tbody>
+                  <tr>
+                    <td style={{ 
+                      fontSize: "20px",
+                      fontWeight: "bold",
+                      color: data.colors.primary || "#4F46E5"
+                    }}>
+                      {data.name}
+                      {data.credentials && (
+                        <span style={{ 
+                          fontSize: "14px",
+                          fontWeight: "normal",
+                          color: data.colors.text || "#333333",
+                          marginLeft: "8px"
+                        }}>
+                          {data.credentials}
+                        </span>
+                      )}
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
             )}
             {data.jobTitle && (
-              <p style={{ 
-                margin: "0 0 2px 0",
-                padding: "0",
-                fontSize: "14px",
-                color: data.colors.secondary || "#6366F1"
-              }}>
-                {data.jobTitle}
-                {data.department && (
-                  <span style={{ 
-                    color: "#555555"
-                  }}> • {data.department}</span>
-                )}
-              </p>
+              <table cellPadding="0" cellSpacing="0" border="0" style={{ marginBottom: "2px" }}>
+                <tbody>
+                  <tr>
+                    <td style={{ 
+                      fontSize: "14px",
+                      color: data.colors.secondary || "#6366F1"
+                    }}>
+                      {data.jobTitle}
+                      {data.department && (
+                        <span style={{ 
+                          color: "#555555"
+                        }}> • {data.department}</span>
+                      )}
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
             )}
             {data.company && (
-              <p style={{ 
-                margin: "0",
-                padding: "0",
-                fontSize: "14px",
-                color: "#222222"
-              }}>
-                {data.company}
-                {data.companyLogoUrl && (
-                  <img 
-                    src={data.companyLogoUrl} 
-                    alt={data.company}
-                    height="16"
-                    style={{ 
-                      height: "16px",
-                      marginLeft: "8px",
-                      verticalAlign: "middle"
-                    }}
-                  />
-                )}
-              </p>
+              <table cellPadding="0" cellSpacing="0" border="0">
+                <tbody>
+                  <tr>
+                    <td style={{ 
+                      fontSize: "14px",
+                      color: "#222222"
+                    }}>
+                      {data.company}
+                      {data.companyLogoUrl && (
+                        <img 
+                          src={data.companyLogoUrl} 
+                          alt={data.company}
+                          height="16"
+                          style={{ 
+                            height: "16px",
+                            marginLeft: "8px",
+                            verticalAlign: "middle"
+                          }}
+                        />
+                      )}
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
             )}
           </td>
         </tr>

@@ -32,18 +32,48 @@ const EmailSignatureGenerator = () => {
     }
   };
   
-  // Update display data based on user input
+  // Update display data based on user input and ensure all URLs are absolute
   useEffect(() => {
-    // Ensure we're using fully qualified URLs for all image sources
-    const updatedData = {...signatureData};
+    // Create a deep copy of signature data to avoid reference issues
+    const updatedData = JSON.parse(JSON.stringify(signatureData)) as SignatureData;
     
-    // Make sure photoUrl and companyLogoUrl are absolute URLs
+    // Ensure photoUrl is an absolute URL
     if (updatedData.photoUrl && !updatedData.photoUrl.startsWith('http')) {
       updatedData.photoUrl = new URL(updatedData.photoUrl, window.location.origin).href;
     }
     
+    // Ensure companyLogoUrl is an absolute URL
     if (updatedData.companyLogoUrl && !updatedData.companyLogoUrl.startsWith('http')) {
       updatedData.companyLogoUrl = new URL(updatedData.companyLogoUrl, window.location.origin).href;
+    }
+    
+    // Ensure all social media URLs are absolute
+    Object.keys(updatedData.socialLinks).forEach(key => {
+      const socialKey = key as keyof typeof updatedData.socialLinks;
+      const url = updatedData.socialLinks[socialKey];
+      if (url && !url.startsWith('http')) {
+        updatedData.socialLinks[socialKey] = new URL(url, window.location.origin).href;
+      }
+    });
+    
+    // Ensure website URL is absolute
+    if (updatedData.website && !updatedData.website.startsWith('http')) {
+      // Only add https:// prefix if it's a domain without protocol
+      if (!updatedData.website.includes('://')) {
+        updatedData.website = `https://${updatedData.website}`;
+      } else {
+        updatedData.website = new URL(updatedData.website, window.location.origin).href;
+      }
+    }
+    
+    // Ensure meeting link is absolute
+    if (updatedData.meetingLink && !updatedData.meetingLink.startsWith('http')) {
+      // Only add https:// prefix if it's a domain without protocol
+      if (!updatedData.meetingLink.includes('://')) {
+        updatedData.meetingLink = `https://${updatedData.meetingLink}`;
+      } else {
+        updatedData.meetingLink = new URL(updatedData.meetingLink, window.location.origin).href;
+      }
     }
     
     setDisplayData(updatedData);
