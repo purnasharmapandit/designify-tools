@@ -4,7 +4,7 @@ import MinimalistTemplate from "./MinimalistTemplate";
 import { EmailSignatureData, EmailSignatureTemplate } from "@/types/email-signature";
 import React from "react";
 
-export function renderTemplate(template: EmailSignatureTemplate, data: EmailSignatureData, isPreview = false): JSX.Element | string {
+export function renderTemplate(template: EmailSignatureTemplate, data: EmailSignatureData, isPreview = false): React.ReactNode | string {
   switch (template) {
     case "professional":
       return isPreview 
@@ -31,7 +31,7 @@ export function renderTemplate(template: EmailSignatureTemplate, data: EmailSign
   }
 }
 
-export function getTemplate(template: EmailSignatureTemplate, data: EmailSignatureData, isPreview = false): JSX.Element | string {
+export function getTemplate(template: EmailSignatureTemplate, data: EmailSignatureData, isPreview = false): React.ReactNode | string {
   return renderTemplate(template, data, isPreview);
 }
 
