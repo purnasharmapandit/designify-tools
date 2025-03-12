@@ -1,4 +1,3 @@
-
 import React, { useState, useRef, useEffect } from "react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -82,7 +81,7 @@ const SignaturePreview: React.FC<SignaturePreviewProps> = ({ data }) => {
   };
 
   return (
-    <div className="flex flex-col space-y-8 overflow-hidden h-full">
+    <div className="flex flex-col space-y-6">
       {/* Preview Section */}
       <div className="relative bg-white rounded-2xl shadow-sm overflow-hidden border border-indigo-100">
         <div className="absolute top-4 right-4 z-10">
@@ -109,10 +108,7 @@ const SignaturePreview: React.FC<SignaturePreviewProps> = ({ data }) => {
         </div>
         
         <div className="bg-gradient-to-r from-indigo-50 to-purple-50 p-6 border-b border-indigo-100">
-          <h3 className="text-lg font-semibold text-indigo-800 mb-2 flex items-center">
-            <FileText className="h-5 w-5 mr-2 text-indigo-600" />
-            Signature Preview
-          </h3>
+          <h3 className="text-lg font-semibold text-indigo-800 mb-2">Preview</h3>
           <p className="text-sm text-indigo-600/70">Preview how your signature will appear in emails</p>
         </div>
         
@@ -124,89 +120,51 @@ const SignaturePreview: React.FC<SignaturePreviewProps> = ({ data }) => {
           </div>
         </div>
         
-        <div className="p-4 bg-gradient-to-r from-indigo-50/50 to-purple-50/50 flex flex-wrap gap-2">
-          <Button onClick={handleCopySignature} size="sm" className="bg-indigo-600 hover:bg-indigo-700 text-white flex-1">
-            <Clipboard className="h-4 w-4 mr-2" />
+        <div className="p-4 bg-gradient-to-r from-indigo-50/50 to-purple-50/50 flex gap-2">
+          <Button onClick={handleCopySignature} size="sm" className="bg-indigo-600 hover:bg-indigo-700 text-white">
+            <Copy className="h-4 w-4 mr-2" />
             Copy Signature
           </Button>
-          <Button onClick={handleCopyHtml} variant="outline" size="sm" className="border-indigo-200 text-indigo-700 hover:bg-indigo-50 flex-1">
-            <Copy className="h-4 w-4 mr-2" />
-            Copy HTML
-          </Button>
-          <Button onClick={handleDownloadHtml} variant="outline" size="sm" className="border-indigo-200 text-indigo-700 hover:bg-indigo-50 flex-1">
+          <Button onClick={handleDownloadHtml} variant="outline" size="sm" className="border-indigo-200 text-indigo-700 hover:bg-indigo-50">
             <Download className="h-4 w-4 mr-2" />
-            Download
+            Download HTML
           </Button>
-        </div>
-      </div>
-
-      {/* HTML Code Section */}
-      <div className="bg-white rounded-2xl shadow-sm overflow-hidden border border-indigo-100">
-        <div className="bg-gradient-to-r from-gray-800 to-indigo-900 p-4">
-          <h3 className="text-lg font-semibold text-white mb-1 flex items-center">
-            <Code className="h-5 w-5 mr-2 text-indigo-300" />
-            HTML Code
-          </h3>
-          <p className="text-sm text-indigo-200">Copy and paste this code into your email client</p>
-        </div>
-        <div className="p-0 bg-gray-900">
-          <div className="relative">
-            <Textarea
-              readOnly
-              className="min-h-[180px] font-mono text-xs bg-gray-900 text-gray-100 p-4 resize-none border-0 rounded-none focus-visible:ring-0"
-              value={isProcessing ? "Processing HTML..." : htmlContent}
-            />
-            <Button 
-              onClick={handleCopyHtml} 
-              variant="ghost" 
-              size="sm" 
-              className="absolute top-2 right-2 h-8 text-white/80 hover:text-white hover:bg-white/10"
-              disabled={isProcessing}
-            >
-              {copied ? <Check className="h-4 w-4 mr-1" /> : <Copy className="h-4 w-4 mr-1" />}
-              <span className="text-xs">{copied ? "Copied!" : "Copy"}</span>
-            </Button>
-          </div>
         </div>
       </div>
 
       {/* Instructions Section */}
       <div className="bg-white rounded-2xl shadow-sm overflow-hidden border border-indigo-100">
-        <div className="bg-gradient-to-r from-indigo-600 to-purple-600 p-4">
-          <h3 className="text-lg font-semibold text-white mb-1 flex items-center">
-            <Info className="h-5 w-5 mr-2 text-indigo-200" />
-            Setup Instructions
-          </h3>
-          <p className="text-sm text-indigo-200">How to add your signature to email clients</p>
+        <div className="bg-gradient-to-br from-indigo-600 to-purple-600 p-6">
+          <div className="flex items-center gap-3">
+            <div className="bg-white/20 rounded-full p-2">
+              <Info className="h-5 w-5 text-white" />
+            </div>
+            <div>
+              <h3 className="text-lg font-semibold text-white">Setup Instructions</h3>
+              <p className="text-indigo-100 text-sm">Follow these steps to add your signature</p>
+            </div>
+          </div>
         </div>
         
         <div className="divide-y divide-indigo-100">
-          <div className="p-4 bg-gradient-to-r from-indigo-50/30 to-white">
-            <h4 className="font-medium text-indigo-800 mb-2">Gmail Instructions</h4>
-            <ol className="space-y-1 pl-5 list-decimal text-sm text-gray-700">
-              {emailClientInstructions.gmail.map((step, index) => (
-                <li key={index}>{step}</li>
-              ))}
-            </ol>
-          </div>
-          
-          <div className="p-4 bg-white">
-            <h4 className="font-medium text-indigo-800 mb-2">Outlook Instructions</h4>
-            <ol className="space-y-1 pl-5 list-decimal text-sm text-gray-700">
-              {emailClientInstructions.outlook.map((step, index) => (
-                <li key={index}>{step}</li>
-              ))}
-            </ol>
-          </div>
-          
-          <div className="p-4 bg-gradient-to-r from-indigo-50/30 to-white">
-            <h4 className="font-medium text-indigo-800 mb-2">Apple Mail Instructions</h4>
-            <ol className="space-y-1 pl-5 list-decimal text-sm text-gray-700">
-              {emailClientInstructions.appleMail.map((step, index) => (
-                <li key={index}>{step}</li>
-              ))}
-            </ol>
-          </div>
+          {Object.entries(emailClientInstructions).map(([client, steps], index) => (
+            <div 
+              key={client}
+              className={`p-6 ${index % 2 === 0 ? 'bg-gradient-to-r from-indigo-50/30 to-white' : 'bg-white'}`}
+            >
+              <h4 className="font-medium text-indigo-800 mb-3 flex items-center">
+                <span className="flex items-center justify-center bg-indigo-100 text-indigo-600 w-6 h-6 rounded-full text-sm mr-2">
+                  {index + 1}
+                </span>
+                {client.charAt(0).toUpperCase() + client.slice(1)}
+              </h4>
+              <ol className="space-y-2 pl-8 list-decimal text-sm text-gray-600">
+                {steps.map((step, stepIndex) => (
+                  <li key={stepIndex} className="leading-relaxed">{step}</li>
+                ))}
+              </ol>
+            </div>
+          ))}
         </div>
       </div>
     </div>
