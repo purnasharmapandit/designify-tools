@@ -30,6 +30,7 @@ import { BlogProvider } from "./contexts/BlogContext";
 import QRCodeGenerator from "./pages/qr-code/QRCodeGenerator";
 import ColorPaletteGenerator from "./pages/ColorPaletteGenerator";
 import IconGenerator from "./pages/IconGenerator";
+import EmailSignatureGenerator from "./pages/email-signature/EmailSignatureGenerator";
 
 const queryClient = new QueryClient();
 
@@ -64,6 +65,7 @@ const App = () => (
               <Route path="/qr-code-generator" element={<QRCodeGenerator />} />
               <Route path="/color-palette-generator" element={<ColorPaletteGenerator />} />
               <Route path="/icon-generator" element={<IconGenerator />} />
+              <Route path="/email-signature-generator" element={<EmailSignatureGenerator />} />
               <Route path="/auth" element={<Auth />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
