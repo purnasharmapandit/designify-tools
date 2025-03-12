@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -6,7 +5,8 @@ import { motion } from "framer-motion";
 import SignatureForm from "@/components/email-signature/SignatureForm";
 import SignaturePreview from "@/components/email-signature/SignaturePreview";
 import { EmailSignatureData } from "@/types/email-signature";
-import { ArrowRight, Sparkles, Mail, Palette, MousePointerClick, CheckCircle } from "lucide-react";
+import { ArrowRight, Sparkles, Mail, Palette, MousePointerClick, CheckCircle, Laptop } from "lucide-react";
+import { getEmailClientInstructions } from "@/utils/email-signature-utils";
 
 const EmailSignatureGenerator = () => {
   const [data, setData] = useState<EmailSignatureData>({
@@ -29,19 +29,19 @@ const EmailSignatureGenerator = () => {
     showAddress: true,
   });
 
+  const emailClientInstructions = getEmailClientInstructions();
+
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar />
       <main className="flex-grow">
         <div className="relative overflow-hidden bg-gradient-to-b from-indigo-50 via-white to-purple-50/30">
-          {/* Hero section with decorative elements */}
           <div className="absolute inset-0 overflow-hidden">
             <div className="absolute -top-40 -right-40 w-80 h-80 rounded-full bg-indigo-100/50 blur-3xl"></div>
             <div className="absolute top-40 -left-20 w-60 h-60 rounded-full bg-purple-100/30 blur-3xl"></div>
             <div className="absolute bottom-0 right-0 w-full h-1/3 bg-gradient-to-t from-white to-transparent"></div>
           </div>
 
-          {/* Content */}
           <div className="relative">
             <section className="pt-28 pb-16 px-4">
               <div className="container mx-auto">
@@ -107,6 +107,51 @@ const EmailSignatureGenerator = () => {
             </section>
           </div>
         </div>
+
+        <section className="py-12 px-4 bg-gradient-to-r from-indigo-50 to-purple-50">
+          <div className="container mx-auto">
+            <div className="max-w-3xl mx-auto text-center mb-8">
+              <h2 className="text-2xl md:text-3xl font-bold mb-4 bg-gradient-to-r from-indigo-700 to-purple-600 bg-clip-text text-transparent">
+                Email Client Setup Instructions
+              </h2>
+              <p className="text-gray-600">
+                How to add your beautiful signature to your email client
+              </p>
+            </div>
+            
+            <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+              {Object.entries(emailClientInstructions).map(([client, steps], index) => (
+                <div 
+                  key={client}
+                  className="relative p-6 rounded-2xl shadow-sm hover:shadow-md transition-all duration-300 bg-white border border-indigo-100 overflow-hidden"
+                >
+                  <div className="absolute top-0 right-0 w-32 h-32 bg-indigo-100/50 rounded-full blur-2xl -mr-16 -mt-16"></div>
+                  <div className="relative">
+                    <div className="flex items-center gap-3 mb-4">
+                      <div className="w-12 h-12 bg-indigo-100 rounded-xl flex items-center justify-center">
+                        {client === 'gmail' ? (
+                          <Mail className="h-5 w-5 text-indigo-600" />
+                        ) : client === 'outlook' ? (
+                          <Laptop className="h-5 w-5 text-indigo-600" />
+                        ) : (
+                          <Laptop className="h-5 w-5 text-indigo-600" />
+                        )}
+                      </div>
+                      <h3 className="text-xl font-semibold text-indigo-800">
+                        {client.charAt(0).toUpperCase() + client.slice(1)}
+                      </h3>
+                    </div>
+                    <ol className="space-y-2 pl-5 list-decimal text-gray-600">
+                      {steps.map((step, stepIndex) => (
+                        <li key={stepIndex} className="text-sm leading-relaxed">{step}</li>
+                      ))}
+                    </ol>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
 
         <section className="py-16 px-4 bg-indigo-900 text-white">
           <div className="container mx-auto">
