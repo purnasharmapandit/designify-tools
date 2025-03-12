@@ -1,10 +1,9 @@
-
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Textarea } from "@/components/ui/textarea";
-import { Copy, Download, Check } from "lucide-react";
+import { Copy, Download, Check, Code } from "lucide-react";
 import { EmailSignatureData } from "@/types/email-signature";
 import { getTemplate, getTemplateHtml } from "./templates";
 import { downloadSignatureHtml, getEmailClientInstructions } from "@/utils/email-signature-utils";
@@ -18,6 +17,7 @@ const SignaturePreview: React.FC<SignaturePreviewProps> = ({ data }) => {
   const [copied, setCopied] = useState(false);
   const [activeTab, setActiveTab] = useState("preview");
   const emailClientInstructions = getEmailClientInstructions();
+  const signatureRef = useRef<HTMLDivElement>(null);
 
   const handleCopyHtml = () => {
     const html = getTemplateHtml(data.template, data);
@@ -25,6 +25,21 @@ const SignaturePreview: React.FC<SignaturePreviewProps> = ({ data }) => {
     setCopied(true);
     toast.success("HTML code copied to clipboard!");
     setTimeout(() => setCopied(false), 2000);
+  };
+
+  const handleCopySignature = () => {
+    if (signatureRef.current) {
+      const selection = window.getSelection();
+      const range = document.createRange();
+      range.selectNodeContents(signatureRef.current);
+      if (selection) {
+        selection.removeAllRanges();
+        selection.addRange(range);
+        document.execCommand('copy');
+        selection.removeAllRanges();
+        toast.success("Signature copied to clipboard!");
+      }
+    }
   };
 
   const handleDownloadHtml = () => {
@@ -48,12 +63,18 @@ const SignaturePreview: React.FC<SignaturePreviewProps> = ({ data }) => {
 
           <TabsContent value="preview" className="p-4 border rounded-md mt-4">
             <div className="bg-white p-4">
-              {getTemplate(data.template, data, true)}
+              <div ref={signatureRef}>
+                {getTemplate(data.template, data, true)}
+              </div>
             </div>
             <div className="flex gap-2 mt-4">
-              <Button onClick={handleCopyHtml} className="w-full">
-                {copied ? <Check className="h-4 w-4 mr-2" /> : <Copy className="h-4 w-4 mr-2" />}
-                {copied ? "Copied!" : "Copy HTML"}
+              <Button onClick={handleCopySignature} className="w-full">
+                <Copy className="h-4 w-4 mr-2" />
+                Copy Signature
+              </Button>
+              <Button onClick={handleCopyHtml} variant="outline" className="w-full">
+                <Code className="h-4 w-4 mr-2" />
+                Copy HTML
               </Button>
               <Button onClick={handleDownloadHtml} variant="outline" className="w-full">
                 <Download className="h-4 w-4 mr-2" />
