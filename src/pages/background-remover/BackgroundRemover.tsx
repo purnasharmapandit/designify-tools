@@ -55,7 +55,7 @@ const BackgroundRemover = () => {
 
     try {
       const image = await loadImage(file);
-      const resultBlob = await removeBackground(image, refinementLevel);
+      const resultBlob = await removeBackground(image, refinementLevel, fileFormat);
       const resultUrl = URL.createObjectURL(resultBlob);
       setProcessedImage(resultUrl);
       
