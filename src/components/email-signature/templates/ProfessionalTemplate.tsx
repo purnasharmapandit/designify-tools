@@ -16,10 +16,10 @@ const ProfessionalTemplate: React.FC<ProfessionalTemplateProps> = ({ data, isPre
       <table style={{ fontFamily: data.font, borderCollapse: 'collapse', margin: 0, padding: 0, width: '100%', maxWidth: '500px' }}>
         <tbody>
           <tr>
-            {data.showProfileImage && data.profileImage && (
+            {data.showProfileImage && data.profileImageUrl && (
               <td style={{ verticalAlign: 'top', paddingRight: '15px', width: '100px' }}>
                 <img
-                  src={generateImageUrl(data.profileImage)}
+                  src={generateImageUrl(data.profileImageUrl)}
                   alt={data.fullName}
                   style={{ width: '80px', height: '80px', borderRadius: '50%', objectFit: 'cover' }}
                 />
@@ -113,10 +113,10 @@ const ProfessionalTemplate: React.FC<ProfessionalTemplateProps> = ({ data, isPre
                 </tbody>
               </table>
             </td>
-            {data.showCompanyLogo && data.companyLogo && (
+            {data.showCompanyLogo && data.companyLogoUrl && (
               <td style={{ verticalAlign: 'top', paddingLeft: '15px', width: '120px', textAlign: 'right' }}>
                 <img
-                  src={generateImageUrl(data.companyLogo)}
+                  src={generateImageUrl(data.companyLogoUrl)}
                   alt={data.company}
                   style={{ maxWidth: '100px', maxHeight: '60px', objectFit: 'contain' }}
                 />
@@ -142,22 +142,15 @@ const ProfessionalTemplate: React.FC<ProfessionalTemplateProps> = ({ data, isPre
     return `<a href="${url}" target="_blank" style="text-decoration:none;padding:0;margin:0;">${iconSvgs[platform] || iconSvgs.linkedin}</a>`;
   };
 
-  // Get base64 image data if available (for HTML export)
-  const getImageSrc = (file: File | null | undefined): string => {
-    if (!file) return '';
-    // @ts-ignore - we added this property in the SignaturePreview component
-    return (file as any).base64 || '';
-  };
-
   return `
     <table cellpadding="0" cellspacing="0" border="0" style="background-color:transparent;margin:0;padding:0;width:100%;max-width:500px;font-family:${data.font},-apple-system,system-ui,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;">
       <tr>
         <td style="padding:0;">
           <table cellpadding="0" cellspacing="0" border="0" style="width:100%;">
             <tr>
-              ${data.showProfileImage && data.profileImage ? `
+              ${data.showProfileImage && data.profileImageUrl ? `
               <td style="padding:0 15px 0 0;width:100px;vertical-align:top;">
-                <img src="${getImageSrc(data.profileImage)}" alt="${data.fullName}" width="80" height="80" style="border-radius:50%;width:80px;height:80px;object-fit:cover;" />
+                <img src="${data.profileImageUrl}" alt="${data.fullName}" width="80" height="80" style="border-radius:50%;width:80px;height:80px;object-fit:cover;" />
               </td>` : ''}
               <td style="padding:0;vertical-align:top;">
                 <table cellpadding="0" cellspacing="0" border="0" style="width:100%;">
@@ -213,9 +206,9 @@ const ProfessionalTemplate: React.FC<ProfessionalTemplateProps> = ({ data, isPre
                   </tr>` : ''}
                 </table>
               </td>
-              ${data.showCompanyLogo && data.companyLogo ? `
+              ${data.showCompanyLogo && data.companyLogoUrl ? `
               <td style="padding:0 0 0 15px;width:120px;vertical-align:top;text-align:right;">
-                <img src="${getImageSrc(data.companyLogo)}" alt="${data.company}" width="100" style="max-width:100px;height:auto;" />
+                <img src="${data.companyLogoUrl}" alt="${data.company}" width="100" style="max-width:100px;height:auto;" />
               </td>` : ''}
             </tr>
           </table>

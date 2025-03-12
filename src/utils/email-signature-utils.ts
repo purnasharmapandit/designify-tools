@@ -1,3 +1,4 @@
+
 import { EmailSignatureData, WebSafeFont } from "@/types/email-signature";
 
 export const webSafeFonts: { label: string; value: WebSafeFont }[] = [
@@ -40,6 +41,34 @@ export const emailTemplates = [
 
 // Cache for Base64 encoded images
 const imageCache = new Map<string, string>();
+
+export async function fetchImageAsBase64(url: string): Promise<string> {
+  if (!url) return '';
+  
+  // Check if we already have this image in cache
+  if (imageCache.has(url)) {
+    return imageCache.get(url) || '';
+  }
+  
+  try {
+    const response = await fetch(url);
+    const blob = await response.blob();
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        const base64String = reader.result as string;
+        // Cache the result
+        imageCache.set(url, base64String);
+        resolve(base64String);
+      };
+      reader.onerror = reject;
+      reader.readAsDataURL(blob);
+    });
+  } catch (error) {
+    console.error('Error fetching image:', error);
+    return '';
+  }
+}
 
 export function generateImageUrl(url: string): string {
   return url || '';

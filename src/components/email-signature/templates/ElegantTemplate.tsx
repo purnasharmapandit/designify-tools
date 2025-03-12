@@ -1,3 +1,4 @@
+
 import React from "react";
 import { EmailSignatureData } from "@/types/email-signature";
 import { generateImageUrl } from "@/utils/email-signature-utils";
@@ -19,7 +20,7 @@ const ElegantTemplate: React.FC<ElegantTemplateProps> = ({ data, isPreview = fal
               <table style={{ width: '100%', borderCollapse: 'collapse' }}>
                 <tbody>
                   <tr>
-                    {data.showProfileImage && data.profileImage && (
+                    {data.showProfileImage && data.profileImageUrl && (
                       <td style={{ verticalAlign: 'top', width: '80px', paddingRight: '15px' }}>
                         <div style={{ 
                           width: '80px', 
@@ -29,7 +30,7 @@ const ElegantTemplate: React.FC<ElegantTemplateProps> = ({ data, isPreview = fal
                           border: `1px solid ${data.primaryColor}`,
                         }}>
                           <img
-                            src={generateImageUrl(data.profileImage)}
+                            src={generateImageUrl(data.profileImageUrl)}
                             alt={data.fullName}
                             style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                           />
@@ -56,10 +57,10 @@ const ElegantTemplate: React.FC<ElegantTemplateProps> = ({ data, isPreview = fal
                       </p>
                       <div style={{ height: '2px', background: `linear-gradient(to right, ${data.primaryColor}, transparent)`, width: '120px', marginBottom: '10px' }}></div>
                     </td>
-                    {data.showCompanyLogo && data.companyLogo && (
+                    {data.showCompanyLogo && data.companyLogoUrl && (
                       <td style={{ verticalAlign: 'top', width: '100px', textAlign: 'right' }}>
                         <img
-                          src={generateImageUrl(data.companyLogo)}
+                          src={generateImageUrl(data.companyLogoUrl)}
                           alt={data.company}
                           style={{ maxWidth: '100px', maxHeight: '50px', objectFit: 'contain' }}
                         />
@@ -163,23 +164,16 @@ const ElegantTemplate: React.FC<ElegantTemplateProps> = ({ data, isPreview = fal
     return `<a href="${url}" target="_blank" style="text-decoration:none;padding:0;margin:0;">${iconSvgs[platform] || iconSvgs.linkedin}</a>`;
   };
 
-  // Get base64 image data if available (for HTML export)
-  const getImageSrc = (file: File | null | undefined): string => {
-    if (!file) return '';
-    // @ts-ignore - we added this property in the SignaturePreview component
-    return (file as any).base64 || '';
-  };
-
   return `
     <table cellpadding="0" cellspacing="0" border="0" style="background-color:transparent;margin:0;padding:0;width:100%;max-width:500px;font-family:${data.font},-apple-system,system-ui,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;">
       <tr>
         <td style="padding:0;">
           <table cellpadding="0" cellspacing="0" border="0" style="width:100%;">
             <tr>
-              ${data.showProfileImage && data.profileImage ? `
+              ${data.showProfileImage && data.profileImageUrl ? `
               <td style="padding:0 15px 0 0;width:80px;vertical-align:top;">
                 <div style="width:80px;height:80px;border-radius:5px;overflow:hidden;border:1px solid ${data.primaryColor};">
-                  <img src="${getImageSrc(data.profileImage)}" alt="${data.fullName}" width="80" height="80" style="width:100%;height:100%;object-fit:cover;" />
+                  <img src="${data.profileImageUrl}" alt="${data.fullName}" width="80" height="80" style="width:100%;height:100%;object-fit:cover;" />
                 </div>
               </td>` : ''}
               <td style="padding:0;vertical-align:top;">
@@ -192,9 +186,9 @@ const ElegantTemplate: React.FC<ElegantTemplateProps> = ({ data, isPreview = fal
                 </p>` : ''}
                 <div style="height:2px;background:linear-gradient(to right, ${data.primaryColor}, transparent);width:120px;margin-bottom:10px;"></div>
               </td>
-              ${data.showCompanyLogo && data.companyLogo ? `
+              ${data.showCompanyLogo && data.companyLogoUrl ? `
               <td style="padding:0 0 0 15px;width:100px;vertical-align:top;text-align:right;">
-                <img src="${getImageSrc(data.companyLogo)}" alt="${data.company}" width="100" style="max-width:100px;max-height:50px;" />
+                <img src="${data.companyLogoUrl}" alt="${data.company}" width="100" style="max-width:100px;max-height:50px;" />
               </td>` : ''}
             </tr>
           </table>

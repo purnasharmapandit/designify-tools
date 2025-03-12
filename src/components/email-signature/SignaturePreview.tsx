@@ -6,7 +6,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Copy, Download, Check, Laptop, Smartphone, Clipboard, Code, FileText, Info } from "lucide-react";
 import { EmailSignatureData } from "@/types/email-signature";
 import { getTemplate, getTemplateHtml } from "./templates";
-import { downloadSignatureHtml, getEmailClientInstructions, fileToBase64 } from "@/utils/email-signature-utils";
+import { downloadSignatureHtml, getEmailClientInstructions, fetchImageAsBase64 } from "@/utils/email-signature-utils";
 import { toast } from "sonner";
 
 interface SignaturePreviewProps {
@@ -29,35 +29,15 @@ const SignaturePreview: React.FC<SignaturePreviewProps> = ({ data }) => {
         // Create a copy of the data object to modify
         const processedData = { ...data };
         
-        // Convert image files to base64 if they exist
-        if (data.profileImage) {
-          const profileImageBase64 = await fileToBase64(data.profileImage);
-          // Create a dummy file with the base64 data to avoid modifying the original structure
-          const profileImageFile = new File(
-            [data.profileImage], 
-            data.profileImage.name, 
-            { type: data.profileImage.type }
-          );
-          Object.defineProperty(profileImageFile, 'base64', {
-            value: profileImageBase64,
-            writable: false
-          });
-          processedData.profileImage = profileImageFile as any;
+        // Convert image URLs to base64 if they exist
+        if (data.profileImageUrl) {
+          const profileImageBase64 = await fetchImageAsBase64(data.profileImageUrl);
+          processedData.profileImageUrl = profileImageBase64 || data.profileImageUrl;
         }
         
-        if (data.companyLogo) {
-          const companyLogoBase64 = await fileToBase64(data.companyLogo);
-          // Create a dummy file with the base64 data
-          const companyLogoFile = new File(
-            [data.companyLogo], 
-            data.companyLogo.name, 
-            { type: data.companyLogo.type }
-          );
-          Object.defineProperty(companyLogoFile, 'base64', {
-            value: companyLogoBase64,
-            writable: false
-          });
-          processedData.companyLogo = companyLogoFile as any;
+        if (data.companyLogoUrl) {
+          const companyLogoBase64 = await fetchImageAsBase64(data.companyLogoUrl);
+          processedData.companyLogoUrl = companyLogoBase64 || data.companyLogoUrl;
         }
         
         // Generate HTML with the processed data
