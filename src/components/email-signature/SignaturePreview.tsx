@@ -18,7 +18,6 @@ const SignaturePreview: React.FC<SignaturePreviewProps> = ({ data }) => {
   const [viewMode, setViewMode] = useState<"desktop" | "mobile">("desktop");
   const emailClientInstructions = getEmailClientInstructions();
   const signatureRef = useRef<HTMLDivElement>(null);
-  const [activeSection, setActiveSection] = useState<"preview" | "code" | "instructions">("preview");
 
   const handleCopyHtml = () => {
     const html = getTemplateHtml(data.template, data);
@@ -50,167 +49,132 @@ const SignaturePreview: React.FC<SignaturePreviewProps> = ({ data }) => {
   };
 
   return (
-    <div className="p-4 space-y-6 max-h-[80vh] overflow-y-auto no-scrollbar">
-      {/* Navigation */}
-      <div className="flex items-center justify-between mb-4 sm:mb-6">
-        <div className="flex space-x-1 p-1 bg-indigo-50 rounded-lg">
-          <Button
-            variant="ghost"
-            size="sm"
-            className={`flex items-center gap-1.5 rounded-md ${activeSection === "preview" ? "bg-white shadow-sm text-indigo-700" : "text-gray-500 hover:text-indigo-600"}`}
-            onClick={() => setActiveSection("preview")}
-          >
-            <FileText className="h-4 w-4" />
-            <span className="text-xs sm:text-sm">Preview</span>
+    <div className="flex flex-col space-y-8 overflow-hidden h-full">
+      {/* Preview Section */}
+      <div className="relative bg-white rounded-2xl shadow-sm overflow-hidden border border-indigo-100">
+        <div className="absolute top-4 right-4 z-10">
+          <div className="flex bg-indigo-50/80 backdrop-blur-sm rounded-full p-1 shadow-sm">
+            <Button 
+              variant="ghost" 
+              size="sm" 
+              className={`rounded-full px-3 py-1 text-xs font-medium transition-all ${viewMode === "desktop" ? "bg-white shadow-sm text-indigo-700" : "text-gray-500"}`}
+              onClick={() => setViewMode("desktop")}
+            >
+              <Laptop className="h-3.5 w-3.5 mr-1.5" />
+              Desktop
+            </Button>
+            <Button 
+              variant="ghost" 
+              size="sm" 
+              className={`rounded-full px-3 py-1 text-xs font-medium transition-all ${viewMode === "mobile" ? "bg-white shadow-sm text-indigo-700" : "text-gray-500"}`}
+              onClick={() => setViewMode("mobile")}
+            >
+              <Smartphone className="h-3.5 w-3.5 mr-1.5" />
+              Mobile
+            </Button>
+          </div>
+        </div>
+        
+        <div className="bg-gradient-to-r from-indigo-50 to-purple-50 p-6 border-b border-indigo-100">
+          <h3 className="text-lg font-semibold text-indigo-800 mb-2 flex items-center">
+            <FileText className="h-5 w-5 mr-2 text-indigo-600" />
+            Signature Preview
+          </h3>
+          <p className="text-sm text-indigo-600/70">Preview how your signature will appear in emails</p>
+        </div>
+        
+        <div className="p-8 flex items-center justify-center bg-white bg-[url('/grid-pattern.svg')] bg-center">
+          <div className={`transition-all mx-auto bg-white border rounded-md shadow-sm p-5 ${viewMode === "mobile" ? "max-w-[310px]" : "w-full max-w-[560px]"}`}>
+            <div ref={signatureRef} className={`${viewMode === "mobile" ? "scale-[0.8] origin-top-left" : ""}`}>
+              {getTemplate(data.template, data, true)}
+            </div>
+          </div>
+        </div>
+        
+        <div className="p-4 bg-gradient-to-r from-indigo-50/50 to-purple-50/50 flex flex-wrap gap-2">
+          <Button onClick={handleCopySignature} size="sm" className="bg-indigo-600 hover:bg-indigo-700 text-white flex-1">
+            <Clipboard className="h-4 w-4 mr-2" />
+            Copy Signature
           </Button>
-          <Button
-            variant="ghost"
-            size="sm"
-            className={`flex items-center gap-1.5 rounded-md ${activeSection === "code" ? "bg-white shadow-sm text-indigo-700" : "text-gray-500 hover:text-indigo-600"}`}
-            onClick={() => setActiveSection("code")}
-          >
-            <Code className="h-4 w-4" />
-            <span className="text-xs sm:text-sm">HTML</span>
+          <Button onClick={handleCopyHtml} variant="outline" size="sm" className="border-indigo-200 text-indigo-700 hover:bg-indigo-50 flex-1">
+            <Copy className="h-4 w-4 mr-2" />
+            Copy HTML
           </Button>
-          <Button
-            variant="ghost"
-            size="sm"
-            className={`flex items-center gap-1.5 rounded-md ${activeSection === "instructions" ? "bg-white shadow-sm text-indigo-700" : "text-gray-500 hover:text-indigo-600"}`}
-            onClick={() => setActiveSection("instructions")}
-          >
-            <Info className="h-4 w-4" />
-            <span className="text-xs sm:text-sm">Help</span>
+          <Button onClick={handleDownloadHtml} variant="outline" size="sm" className="border-indigo-200 text-indigo-700 hover:bg-indigo-50 flex-1">
+            <Download className="h-4 w-4 mr-2" />
+            Download
           </Button>
         </div>
       </div>
 
-      {/* Preview Section */}
-      {activeSection === "preview" && (
-        <div className="space-y-4">
-          <div className="flex items-center justify-end mb-2">
-            <div className="flex p-1 bg-gray-100 rounded-lg">
-              <Button 
-                variant={viewMode === "desktop" ? "default" : "ghost"} 
-                size="sm" 
-                className={`h-8 px-2 ${viewMode === "desktop" ? "bg-indigo-600" : "hover:bg-gray-200"}`}
-                onClick={() => setViewMode("desktop")}
-              >
-                <Laptop className="h-4 w-4 mr-1" />
-                <span className="text-xs">Desktop</span>
-              </Button>
-              <Button 
-                variant={viewMode === "mobile" ? "default" : "ghost"} 
-                size="sm" 
-                className={`h-8 px-2 ${viewMode === "mobile" ? "bg-indigo-600" : "hover:bg-gray-200"}`}
-                onClick={() => setViewMode("mobile")}
-              >
-                <Smartphone className="h-4 w-4 mr-1" />
-                <span className="text-xs">Mobile</span>
-              </Button>
-            </div>
-          </div>
-          
-          <div className="bg-white border rounded-lg overflow-hidden shadow-sm">
-            <div className="p-6 bg-gray-50 border-b">
-              <div className={`mx-auto transition-all bg-white p-4 border rounded-md ${viewMode === "mobile" ? "max-w-[320px]" : "w-full"}`}>
-                <div ref={signatureRef} className={`${viewMode === "mobile" ? "scale-[0.85] origin-top-left" : ""}`}>
-                  {getTemplate(data.template, data, true)}
-                </div>
-              </div>
-            </div>
-            <div className="p-4">
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
-                <Button onClick={handleCopySignature} className="bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white">
-                  <Clipboard className="h-4 w-4 mr-2" />
-                  Copy Signature
-                </Button>
-                <Button onClick={handleCopyHtml} variant="outline" className="border-indigo-200 text-indigo-700 hover:bg-indigo-50">
-                  <Copy className="h-4 w-4 mr-2" />
-                  Copy HTML
-                </Button>
-                <Button onClick={handleDownloadHtml} variant="outline" className="border-indigo-200 text-indigo-700 hover:bg-indigo-50">
-                  <Download className="h-4 w-4 mr-2" />
-                  Download
-                </Button>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
-
       {/* HTML Code Section */}
-      {activeSection === "code" && (
-        <div className="space-y-4">
-          <Card className="overflow-hidden border-0 shadow-md">
-            <div className="bg-gray-800 p-3 flex items-center justify-between">
-              <h3 className="text-sm font-medium text-white">Signature HTML Code</h3>
-              <Button 
-                variant="ghost" 
-                size="sm" 
-                className="h-8 text-white/80 hover:text-white hover:bg-white/10"
-                onClick={handleCopyHtml}
-              >
-                {copied ? <Check className="h-4 w-4 mr-1" /> : <Copy className="h-4 w-4 mr-1" />}
-                <span className="text-xs">{copied ? "Copied!" : "Copy"}</span>
-              </Button>
-            </div>
+      <div className="bg-white rounded-2xl shadow-sm overflow-hidden border border-indigo-100">
+        <div className="bg-gradient-to-r from-gray-800 to-indigo-900 p-4">
+          <h3 className="text-lg font-semibold text-white mb-1 flex items-center">
+            <Code className="h-5 w-5 mr-2 text-indigo-300" />
+            HTML Code
+          </h3>
+          <p className="text-sm text-indigo-200">Copy and paste this code into your email client</p>
+        </div>
+        <div className="p-0 bg-gray-900">
+          <div className="relative">
             <Textarea
               readOnly
-              className="min-h-[300px] font-mono text-xs bg-gray-900 text-gray-100 p-4 resize-none border-0 rounded-none focus-visible:ring-0"
+              className="min-h-[180px] font-mono text-xs bg-gray-900 text-gray-100 p-4 resize-none border-0 rounded-none focus-visible:ring-0"
               value={getTemplateHtml(data.template, data)}
             />
-          </Card>
-          
-          <Button onClick={handleDownloadHtml} className="w-full bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white">
-            <Download className="h-4 w-4 mr-2" />
-            Download HTML File
-          </Button>
+            <Button 
+              onClick={handleCopyHtml} 
+              variant="ghost" 
+              size="sm" 
+              className="absolute top-2 right-2 h-8 text-white/80 hover:text-white hover:bg-white/10"
+            >
+              {copied ? <Check className="h-4 w-4 mr-1" /> : <Copy className="h-4 w-4 mr-1" />}
+              <span className="text-xs">{copied ? "Copied!" : "Copy"}</span>
+            </Button>
+          </div>
         </div>
-      )}
+      </div>
 
       {/* Instructions Section */}
-      {activeSection === "instructions" && (
-        <div className="space-y-4">
-          <div className="bg-white rounded-lg shadow-sm border overflow-hidden">
-            <div className="bg-gradient-to-r from-indigo-600 to-purple-600 p-3">
-              <h3 className="text-sm font-medium text-white">Gmail Instructions</h3>
-            </div>
-            <div className="p-4">
-              <ol className="space-y-2 pl-5 list-decimal text-sm text-gray-700">
-                {emailClientInstructions.gmail.map((step, index) => (
-                  <li key={index}>{step}</li>
-                ))}
-              </ol>
-            </div>
+      <div className="bg-white rounded-2xl shadow-sm overflow-hidden border border-indigo-100">
+        <div className="bg-gradient-to-r from-indigo-600 to-purple-600 p-4">
+          <h3 className="text-lg font-semibold text-white mb-1 flex items-center">
+            <Info className="h-5 w-5 mr-2 text-indigo-200" />
+            Setup Instructions
+          </h3>
+          <p className="text-sm text-indigo-200">How to add your signature to email clients</p>
+        </div>
+        
+        <div className="divide-y divide-indigo-100">
+          <div className="p-4 bg-gradient-to-r from-indigo-50/30 to-white">
+            <h4 className="font-medium text-indigo-800 mb-2">Gmail Instructions</h4>
+            <ol className="space-y-1 pl-5 list-decimal text-sm text-gray-700">
+              {emailClientInstructions.gmail.map((step, index) => (
+                <li key={index}>{step}</li>
+              ))}
+            </ol>
           </div>
           
-          <div className="bg-white rounded-lg shadow-sm border overflow-hidden">
-            <div className="bg-gradient-to-r from-indigo-600 to-purple-600 p-3">
-              <h3 className="text-sm font-medium text-white">Outlook Instructions</h3>
-            </div>
-            <div className="p-4">
-              <ol className="space-y-2 pl-5 list-decimal text-sm text-gray-700">
-                {emailClientInstructions.outlook.map((step, index) => (
-                  <li key={index}>{step}</li>
-                ))}
-              </ol>
-            </div>
+          <div className="p-4 bg-white">
+            <h4 className="font-medium text-indigo-800 mb-2">Outlook Instructions</h4>
+            <ol className="space-y-1 pl-5 list-decimal text-sm text-gray-700">
+              {emailClientInstructions.outlook.map((step, index) => (
+                <li key={index}>{step}</li>
+              ))}
+            </ol>
           </div>
           
-          <div className="bg-white rounded-lg shadow-sm border overflow-hidden">
-            <div className="bg-gradient-to-r from-indigo-600 to-purple-600 p-3">
-              <h3 className="text-sm font-medium text-white">Apple Mail Instructions</h3>
-            </div>
-            <div className="p-4">
-              <ol className="space-y-2 pl-5 list-decimal text-sm text-gray-700">
-                {emailClientInstructions.appleMail.map((step, index) => (
-                  <li key={index}>{step}</li>
-                ))}
-              </ol>
-            </div>
+          <div className="p-4 bg-gradient-to-r from-indigo-50/30 to-white">
+            <h4 className="font-medium text-indigo-800 mb-2">Apple Mail Instructions</h4>
+            <ol className="space-y-1 pl-5 list-decimal text-sm text-gray-700">
+              {emailClientInstructions.appleMail.map((step, index) => (
+                <li key={index}>{step}</li>
+              ))}
+            </ol>
           </div>
         </div>
-      )}
+      </div>
     </div>
   );
 };
