@@ -1,12 +1,12 @@
 
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Copy, Download, Check, Laptop, Smartphone, Clipboard, Code, FileText, Info } from "lucide-react";
 import { EmailSignatureData } from "@/types/email-signature";
 import { getTemplate, getTemplateHtml } from "./templates";
-import { downloadSignatureHtml, getEmailClientInstructions } from "@/utils/email-signature-utils";
+import { downloadSignatureHtml, getEmailClientInstructions, fileToBase64 } from "@/utils/email-signature-utils";
 import { toast } from "sonner";
 
 interface SignaturePreviewProps {
@@ -16,12 +16,66 @@ interface SignaturePreviewProps {
 const SignaturePreview: React.FC<SignaturePreviewProps> = ({ data }) => {
   const [copied, setCopied] = useState(false);
   const [viewMode, setViewMode] = useState<"desktop" | "mobile">("desktop");
+  const [htmlContent, setHtmlContent] = useState("");
+  const [isProcessing, setIsProcessing] = useState(false);
   const emailClientInstructions = getEmailClientInstructions();
   const signatureRef = useRef<HTMLDivElement>(null);
 
+  // Process the HTML with base64 images when data changes
+  useEffect(() => {
+    const processHtml = async () => {
+      setIsProcessing(true);
+      try {
+        // Create a copy of the data object to modify
+        const processedData = { ...data };
+        
+        // Convert image files to base64 if they exist
+        if (data.profileImage) {
+          const profileImageBase64 = await fileToBase64(data.profileImage);
+          // Create a dummy file with the base64 data to avoid modifying the original structure
+          const profileImageFile = new File(
+            [data.profileImage], 
+            data.profileImage.name, 
+            { type: data.profileImage.type }
+          );
+          Object.defineProperty(profileImageFile, 'base64', {
+            value: profileImageBase64,
+            writable: false
+          });
+          processedData.profileImage = profileImageFile as any;
+        }
+        
+        if (data.companyLogo) {
+          const companyLogoBase64 = await fileToBase64(data.companyLogo);
+          // Create a dummy file with the base64 data
+          const companyLogoFile = new File(
+            [data.companyLogo], 
+            data.companyLogo.name, 
+            { type: data.companyLogo.type }
+          );
+          Object.defineProperty(companyLogoFile, 'base64', {
+            value: companyLogoBase64,
+            writable: false
+          });
+          processedData.companyLogo = companyLogoFile as any;
+        }
+        
+        // Generate HTML with the processed data
+        const html = getTemplateHtml(processedData.template, processedData);
+        setHtmlContent(html);
+      } catch (error) {
+        console.error('Error processing signature HTML:', error);
+        toast.error("Error preparing signature. Please try again.");
+      } finally {
+        setIsProcessing(false);
+      }
+    };
+    
+    processHtml();
+  }, [data]);
+
   const handleCopyHtml = () => {
-    const html = getTemplateHtml(data.template, data);
-    navigator.clipboard.writeText(html);
+    navigator.clipboard.writeText(htmlContent);
     setCopied(true);
     toast.success("HTML code copied to clipboard!");
     setTimeout(() => setCopied(false), 2000);
@@ -43,8 +97,7 @@ const SignaturePreview: React.FC<SignaturePreviewProps> = ({ data }) => {
   };
 
   const handleDownloadHtml = () => {
-    const html = getTemplateHtml(data.template, data);
-    downloadSignatureHtml(html, `${data.fullName.toLowerCase().replace(/\s+/g, '-')}-signature.html`);
+    downloadSignatureHtml(htmlContent, `${data.fullName.toLowerCase().replace(/\s+/g, '-')}-signature.html`);
     toast.success("Signature HTML downloaded successfully!");
   };
 
@@ -121,13 +174,14 @@ const SignaturePreview: React.FC<SignaturePreviewProps> = ({ data }) => {
             <Textarea
               readOnly
               className="min-h-[180px] font-mono text-xs bg-gray-900 text-gray-100 p-4 resize-none border-0 rounded-none focus-visible:ring-0"
-              value={getTemplateHtml(data.template, data)}
+              value={isProcessing ? "Processing HTML..." : htmlContent}
             />
             <Button 
               onClick={handleCopyHtml} 
               variant="ghost" 
               size="sm" 
               className="absolute top-2 right-2 h-8 text-white/80 hover:text-white hover:bg-white/10"
+              disabled={isProcessing}
             >
               {copied ? <Check className="h-4 w-4 mr-1" /> : <Copy className="h-4 w-4 mr-1" />}
               <span className="text-xs">{copied ? "Copied!" : "Copy"}</span>

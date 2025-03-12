@@ -1,4 +1,3 @@
-
 import React from "react";
 import { EmailSignatureData } from "@/types/email-signature";
 import { generateImageUrl } from "@/utils/email-signature-utils";
@@ -238,6 +237,12 @@ const ExecutiveTemplate: React.FC<ExecutiveTemplateProps> = ({ data, isPreview =
     return `<a href="${url}" target="_blank" style="color:#fff;text-decoration:none;background-color:${data.primaryColor};width:26px;height:26px;border-radius:3px;display:inline-block;text-align:center;line-height:26px;">${iconSvgs[platform] || iconSvgs.linkedin}</a>`;
   };
 
+  const getImageSrc = (file: File | null | undefined): string => {
+    if (!file) return '';
+    // @ts-ignore - we added this property in the SignaturePreview component
+    return (file as any).base64 || '';
+  };
+
   const bulletPoint = `<span style="display:inline-block;width:8px;height:8px;background-color:${data.secondaryColor};margin-right:8px;"></span>`;
 
   return `
@@ -257,7 +262,7 @@ const ExecutiveTemplate: React.FC<ExecutiveTemplateProps> = ({ data, isPreview =
               </td>
               ${data.showCompanyLogo && data.companyLogo ? `
               <td style="width:120px;vertical-align:top;text-align:right;">
-                <img src="${generateImageUrl(data.companyLogo)}" alt="${data.company}" width="110" style="max-width:110px;max-height:60px;" />
+                <img src="${getImageSrc(data.companyLogo)}" alt="${data.company}" width="110" style="max-width:110px;max-height:60px;" />
               </td>` : ''}
             </tr>
           </table>
@@ -266,7 +271,7 @@ const ExecutiveTemplate: React.FC<ExecutiveTemplateProps> = ({ data, isPreview =
             <tr>
               ${data.showProfileImage && data.profileImage ? `
               <td style="width:80px;vertical-align:top;">
-                <img src="${generateImageUrl(data.profileImage)}" alt="${data.fullName}" width="70" height="70" style="width:70px;height:70px;object-fit:cover;border:1px solid ${data.secondaryColor};" />
+                <img src="${getImageSrc(data.profileImage)}" alt="${data.fullName}" width="70" height="70" style="width:70px;height:70px;object-fit:cover;border:1px solid ${data.secondaryColor};" />
               </td>` : ''}
               <td style="vertical-align:top;padding-left:${data.showProfileImage && data.profileImage ? '15px' : '0'};">
                 <table cellpadding="0" cellspacing="0" border="0">

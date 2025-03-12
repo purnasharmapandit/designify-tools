@@ -1,3 +1,4 @@
+
 import React from "react";
 import { EmailSignatureData } from "@/types/email-signature";
 import { generateImageUrl } from "@/utils/email-signature-utils";
@@ -141,6 +142,13 @@ const ProfessionalTemplate: React.FC<ProfessionalTemplateProps> = ({ data, isPre
     return `<a href="${url}" target="_blank" style="text-decoration:none;padding:0;margin:0;">${iconSvgs[platform] || iconSvgs.linkedin}</a>`;
   };
 
+  // Get base64 image data if available (for HTML export)
+  const getImageSrc = (file: File | null | undefined): string => {
+    if (!file) return '';
+    // @ts-ignore - we added this property in the SignaturePreview component
+    return (file as any).base64 || '';
+  };
+
   return `
     <table cellpadding="0" cellspacing="0" border="0" style="background-color:transparent;margin:0;padding:0;width:100%;max-width:500px;font-family:${data.font},-apple-system,system-ui,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;">
       <tr>
@@ -149,7 +157,7 @@ const ProfessionalTemplate: React.FC<ProfessionalTemplateProps> = ({ data, isPre
             <tr>
               ${data.showProfileImage && data.profileImage ? `
               <td style="padding:0 15px 0 0;width:100px;vertical-align:top;">
-                <img src="${generateImageUrl(data.profileImage)}" alt="${data.fullName}" width="80" height="80" style="border-radius:50%;width:80px;height:80px;object-fit:cover;" />
+                <img src="${getImageSrc(data.profileImage)}" alt="${data.fullName}" width="80" height="80" style="border-radius:50%;width:80px;height:80px;object-fit:cover;" />
               </td>` : ''}
               <td style="padding:0;vertical-align:top;">
                 <table cellpadding="0" cellspacing="0" border="0" style="width:100%;">
@@ -207,7 +215,7 @@ const ProfessionalTemplate: React.FC<ProfessionalTemplateProps> = ({ data, isPre
               </td>
               ${data.showCompanyLogo && data.companyLogo ? `
               <td style="padding:0 0 0 15px;width:120px;vertical-align:top;text-align:right;">
-                <img src="${generateImageUrl(data.companyLogo)}" alt="${data.company}" width="100" style="max-width:100px;height:auto;" />
+                <img src="${getImageSrc(data.companyLogo)}" alt="${data.company}" width="100" style="max-width:100px;height:auto;" />
               </td>` : ''}
             </tr>
           </table>

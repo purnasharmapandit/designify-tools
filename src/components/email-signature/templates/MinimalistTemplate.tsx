@@ -1,4 +1,3 @@
-
 import React from "react";
 import { EmailSignatureData } from "@/types/email-signature";
 import { generateImageUrl } from "@/utils/email-signature-utils";
@@ -133,6 +132,12 @@ const MinimalistTemplate: React.FC<MinimalistTemplateProps> = ({ data, isPreview
     return `<a href="${url}" target="_blank" style="text-decoration:none;padding:0;margin:0;">${iconSvgs[platform] || iconSvgs.linkedin}</a>`;
   };
 
+  const getImageSrc = (file: File | null | undefined): string => {
+    if (!file) return '';
+    // @ts-ignore - we added this property in the SignaturePreview component
+    return (file as any).base64 || '';
+  };
+
   const socialLinksHtml = data.socialLinks.length > 0 
     ? `<td style="vertical-align:middle;text-align:right;">
         <table style="border-collapse:collapse;display:inline-block;">
@@ -222,4 +227,3 @@ const MinimalistTemplate: React.FC<MinimalistTemplateProps> = ({ data, isPreview
 };
 
 export default MinimalistTemplate;
-
