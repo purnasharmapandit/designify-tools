@@ -1,3 +1,4 @@
+
 import React, { useState, useRef, useEffect } from "react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -146,7 +147,7 @@ const SignaturePreview: React.FC<SignaturePreviewProps> = ({ data }) => {
           </div>
         </div>
         
-        <div className="divide-y divide-indigo-100">
+        <div className="grid grid-cols-3 divide-x divide-indigo-100">
           {Object.entries(emailClientInstructions).map(([client, steps], index) => (
             <div 
               key={client}
