@@ -1,6 +1,8 @@
 
 import ProfessionalTemplate from "./ProfessionalTemplate";
 import MinimalistTemplate from "./MinimalistTemplate";
+import ElegantTemplate from "./ElegantTemplate";
+import ExecutiveTemplate from "./ExecutiveTemplate";
 import { EmailSignatureData, EmailSignatureTemplate } from "@/types/email-signature";
 import React from "react";
 
@@ -14,16 +16,24 @@ export function renderTemplate(template: EmailSignatureTemplate, data: EmailSign
       return isPreview 
         ? React.createElement(MinimalistTemplate, { data, isPreview: true }) 
         : MinimalistTemplate({ data, isPreview: false });
+    case "elegant":
+      return isPreview 
+        ? React.createElement(ElegantTemplate, { data, isPreview: true }) 
+        : ElegantTemplate({ data, isPreview: false });
+    case "executive":
+      return isPreview 
+        ? React.createElement(ExecutiveTemplate, { data, isPreview: true }) 
+        : ExecutiveTemplate({ data, isPreview: false });
     case "corporate":
       // Fallback to professional for now
       return isPreview 
         ? React.createElement(ProfessionalTemplate, { data, isPreview: true }) 
         : ProfessionalTemplate({ data, isPreview: false });
     case "creative":
-      // Fallback to minimalist for now
+      // Fallback to elegant for now
       return isPreview 
-        ? React.createElement(MinimalistTemplate, { data, isPreview: true }) 
-        : MinimalistTemplate({ data, isPreview: false });
+        ? React.createElement(ElegantTemplate, { data, isPreview: true }) 
+        : ElegantTemplate({ data, isPreview: false });
     default:
       return isPreview 
         ? React.createElement(ProfessionalTemplate, { data, isPreview: true }) 
@@ -51,4 +61,3 @@ ${typeof innerContent === "string" ? innerContent : ""}
 </body>
 </html>`;
 }
-

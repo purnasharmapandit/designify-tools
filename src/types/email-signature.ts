@@ -1,5 +1,5 @@
 
-export type EmailSignatureTemplate = 'professional' | 'corporate' | 'creative' | 'minimalist';
+export type EmailSignatureTemplate = 'professional' | 'corporate' | 'creative' | 'minimalist' | 'elegant' | 'executive';
 
 export type SocialMediaLink = {
   platform: 'facebook' | 'twitter' | 'linkedin' | 'instagram' | 'youtube' | 'github' | 'dribble' | 'behance';

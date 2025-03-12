@@ -35,6 +35,8 @@ export const emailTemplates = [
   { label: "Corporate", value: "corporate" },
   { label: "Creative", value: "creative" },
   { label: "Minimalist", value: "minimalist" },
+  { label: "Elegant", value: "elegant" },
+  { label: "Executive", value: "executive" },
 ];
 
 export function generateImageUrl(file: File | null | undefined): string {
