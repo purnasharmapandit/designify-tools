@@ -1,11 +1,10 @@
-
 import { Button } from "@/components/ui/button";
 import { ChevronRight, Sparkles, Zap, Star, PenTool, Wand2, Lightbulb } from "lucide-react";
 import { motion } from "framer-motion";
 
 const HeroSection = () => {
   return (
-    <section className="pt-28 pb-16 px-4 sm:pt-32 sm:pb-20">
+    <section className="pt-36 pb-16 px-4 sm:pt-40 sm:pb-20">
       <div className="max-w-7xl mx-auto">
         <div className="flex flex-col items-center justify-center text-center mb-12">
           <div className="relative w-full max-w-3xl mx-auto">
