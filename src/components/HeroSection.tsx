@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 
 const HeroSection = () => {
   return (
-    <section className="pt-36 pb-16 px-4 sm:pt-40 sm:pb-20">
+    <section className="pt-40 pb-16 px-4 sm:pt-44 sm:pb-20">
       <div className="max-w-7xl mx-auto">
         <div className="flex flex-col items-center justify-center text-center mb-12">
           <div className="relative w-full max-w-3xl mx-auto">

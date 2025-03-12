@@ -43,7 +43,7 @@ const EmailSignatureGenerator = () => {
 
           {/* Content */}
           <div className="relative">
-            <section className="pt-10 pb-16 px-4">
+            <section className="pt-28 pb-16 px-4">
               <div className="container mx-auto">
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
