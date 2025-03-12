@@ -36,10 +36,10 @@ const ExploreToolsSection = () => {
       link: "/email-signature-generator"
     },
     {
-      name: "Icon Generator",
+      name: "Background Remover",
       color: "bg-gradient-to-br from-purple-100 to-purple-200",
       iconColor: "text-purple-500",
-      link: "/icon-generator"
+      link: "/background-remover"
     }
   ];
 

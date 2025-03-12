@@ -13,7 +13,8 @@ import {
   PenTool,
   Wand2,
   Share2,
-  Mail
+  Mail,
+  Scissors
 } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -85,6 +86,13 @@ const Tools = () => {
       description: "Create professional email signatures that make an impression",
       color: "bg-blue-100 text-blue-500",
       link: "/email-signature-generator"
+    },
+    {
+      icon: Scissors,
+      name: "Background Remover",
+      description: "Remove backgrounds from images with AI precision",
+      color: "bg-purple-100 text-purple-500",
+      link: "/background-remover"
     },
     {
       icon: Image,
