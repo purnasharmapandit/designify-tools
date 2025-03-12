@@ -1,4 +1,3 @@
-
 import React from "react";
 import { EmailSignatureData, SocialMediaLink } from "@/types/email-signature";
 import { Label } from "@/components/ui/label";
@@ -19,24 +18,6 @@ interface SignatureFormProps {
 }
 
 const SignatureForm: React.FC<SignatureFormProps> = ({ data, setData }) => {
-  const handleProfileImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target.files[0]) {
-      setData((prev) => ({
-        ...prev,
-        profileImage: e.target.files![0],
-      }));
-    }
-  };
-
-  const handleCompanyLogoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target.files[0]) {
-      setData((prev) => ({
-        ...prev,
-        companyLogo: e.target.files![0],
-      }));
-    }
-  };
-
   const addSocialLink = () => {
     setData((prev) => ({
       ...prev,
@@ -204,29 +185,29 @@ const SignatureForm: React.FC<SignatureFormProps> = ({ data, setData }) => {
                 />
               </div>
               <div className="space-y-2">
-                <Label htmlFor="profileImage">Profile Image</Label>
+                <Label htmlFor="profileImageUrl">Profile Image URL</Label>
                 <Input
-                  id="profileImage"
-                  type="file"
-                  accept="image/*"
-                  onChange={handleProfileImageChange}
-                  className="cursor-pointer"
+                  id="profileImageUrl"
+                  type="url"
+                  value={data.profileImageUrl}
+                  onChange={(e) => setData({ ...data, profileImageUrl: e.target.value })}
+                  placeholder="https://example.com/profile.jpg"
                 />
                 <p className="text-xs text-gray-500 mt-1">
-                  Recommended size: 100x100px. Max size: 1MB.
+                  Enter a direct URL to your profile image (recommended size: 100x100px)
                 </p>
               </div>
               <div className="space-y-2">
-                <Label htmlFor="companyLogo">Company Logo</Label>
+                <Label htmlFor="companyLogoUrl">Company Logo URL</Label>
                 <Input
-                  id="companyLogo"
-                  type="file"
-                  accept="image/*"
-                  onChange={handleCompanyLogoChange}
-                  className="cursor-pointer"
+                  id="companyLogoUrl"
+                  type="url"
+                  value={data.companyLogoUrl}
+                  onChange={(e) => setData({ ...data, companyLogoUrl: e.target.value })}
+                  placeholder="https://example.com/logo.png"
                 />
                 <p className="text-xs text-gray-500 mt-1">
-                  Recommended size: 200x50px. Max size: 1MB.
+                  Enter a direct URL to your company logo (recommended size: 200x50px)
                 </p>
               </div>
             </div>

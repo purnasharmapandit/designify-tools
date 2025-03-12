@@ -31,8 +31,8 @@ export interface EmailSignatureData {
   email: string;
   website: string;
   address: string;
-  profileImage?: File | null;
-  companyLogo?: File | null;
+  profileImageUrl: string;
+  companyLogoUrl: string;
   socialLinks: SocialMediaLink[];
   template: EmailSignatureTemplate;
   primaryColor: string;

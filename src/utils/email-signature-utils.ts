@@ -1,4 +1,3 @@
-
 import { EmailSignatureData, WebSafeFont } from "@/types/email-signature";
 
 export const webSafeFonts: { label: string; value: WebSafeFont }[] = [
@@ -42,36 +41,8 @@ export const emailTemplates = [
 // Cache for Base64 encoded images
 const imageCache = new Map<string, string>();
 
-export function generateImageUrl(file: File | null | undefined): string {
-  if (!file) return '';
-  
-  // For React preview, use object URL
-  if (typeof window !== 'undefined' && window.location) {
-    return URL.createObjectURL(file);
-  }
-  
-  return '';
-}
-
-// This function will convert File objects to base64 strings for email-ready HTML
-export async function fileToBase64(file: File | null | undefined): Promise<string> {
-  if (!file) return '';
-  
-  // Check cache first
-  const cacheKey = `${file.name}-${file.size}-${file.lastModified}`;
-  if (imageCache.has(cacheKey)) {
-    return imageCache.get(cacheKey) || '';
-  }
-  
-  return new Promise((resolve) => {
-    const reader = new FileReader();
-    reader.onload = function() {
-      const base64String = reader.result as string;
-      imageCache.set(cacheKey, base64String);
-      resolve(base64String);
-    };
-    reader.readAsDataURL(file);
-  });
+export function generateImageUrl(url: string): string {
+  return url || '';
 }
 
 export function getEmailClientInstructions(): Record<string, string[]> {
