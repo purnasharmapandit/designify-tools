@@ -1,5 +1,5 @@
 
-import React, { useState } from "react";
+import React from "react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -13,32 +13,26 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Label } from "@/components/ui/label";
-import { useToast } from "@/components/ui/use-toast";
 
-const ControlsSection = () => {
-  const [isProcessing, setIsProcessing] = useState(false);
-  const [refinementLevel, setRefinementLevel] = useState(50);
-  const [fileFormat, setFileFormat] = useState("png");
-  const { toast } = useToast();
+interface ControlsSectionProps {
+  onRemoveBackground: () => Promise<void>;
+  isProcessing: boolean;
+  refinementLevel: number;
+  setRefinementLevel: (value: number) => void;
+  fileFormat: string;
+  setFileFormat: (format: string) => void;
+  disabled: boolean;
+}
 
-  const handleRemoveBackground = () => {
-    setIsProcessing(true);
-    toast({
-      title: "Processing",
-      description: "Removing background from your image...",
-    });
-    
-    // Simulate background removal process
-    setTimeout(() => {
-      setIsProcessing(false);
-      toast({
-        title: "Success!",
-        description: "Background has been removed successfully.",
-      });
-      // This would normally trigger the preview update
-    }, 2000);
-  };
-
+const ControlsSection: React.FC<ControlsSectionProps> = ({
+  onRemoveBackground,
+  isProcessing,
+  refinementLevel,
+  setRefinementLevel,
+  fileFormat,
+  setFileFormat,
+  disabled
+}) => {
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -52,19 +46,27 @@ const ControlsSection = () => {
             <Label className="mb-2 block">Refinement Level</Label>
             <div className="flex items-center gap-4">
               <Slider
-                defaultValue={[refinementLevel]}
+                value={[refinementLevel]}
                 max={100}
                 step={1}
                 onValueChange={(values) => setRefinementLevel(values[0])}
                 className="flex-grow"
+                disabled={disabled || isProcessing}
               />
               <span className="text-sm font-medium w-8 text-right">{refinementLevel}%</span>
             </div>
+            <p className="text-xs text-gray-500 mt-1">
+              Higher values provide more precise edge detection
+            </p>
           </div>
           
           <div>
             <Label className="mb-2 block">Output Format</Label>
-            <Select defaultValue={fileFormat} onValueChange={setFileFormat}>
+            <Select 
+              value={fileFormat} 
+              onValueChange={setFileFormat}
+              disabled={disabled || isProcessing}
+            >
               <SelectTrigger>
                 <SelectValue placeholder="Select format" />
               </SelectTrigger>
@@ -74,16 +76,28 @@ const ControlsSection = () => {
                 <SelectItem value="webp">WebP</SelectItem>
               </SelectContent>
             </Select>
+            <p className="text-xs text-gray-500 mt-1">
+              PNG and WebP preserve transparency
+            </p>
           </div>
           
           <div className="flex items-end">
             <Button
-              onClick={handleRemoveBackground}
-              disabled={isProcessing}
+              onClick={onRemoveBackground}
+              disabled={disabled || isProcessing}
               className="w-full bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700"
             >
-              <Scissors className="h-4 w-4 mr-2" />
-              {isProcessing ? "Processing..." : "Remove Background"}
+              {isProcessing ? (
+                <>
+                  <div className="h-4 w-4 mr-2 animate-spin rounded-full border-2 border-white border-t-transparent"></div>
+                  Processing...
+                </>
+              ) : (
+                <>
+                  <Scissors className="h-4 w-4 mr-2" />
+                  Remove Background
+                </>
+              )}
             </Button>
           </div>
         </div>

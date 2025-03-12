@@ -6,10 +6,13 @@ import { Card } from "@/components/ui/card";
 import { Upload, Image as ImageIcon } from "lucide-react";
 import { useToast } from "@/components/ui/use-toast";
 
-const UploadSection = () => {
+interface UploadSectionProps {
+  onFileChange: (file: File) => void;
+  imagePreview: string | null;
+}
+
+const UploadSection: React.FC<UploadSectionProps> = ({ onFileChange, imagePreview }) => {
   const [isUploading, setIsUploading] = useState(false);
-  const [file, setFile] = useState<File | null>(null);
-  const [imagePreview, setImagePreview] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const { toast } = useToast();
 
@@ -26,21 +29,65 @@ const UploadSection = () => {
       return;
     }
 
-    setFile(selectedFile);
-    setImagePreview(URL.createObjectURL(selectedFile));
-    // Here we would normally start the background removal process
     setIsUploading(true);
-    setTimeout(() => {
-      setIsUploading(false);
+    
+    try {
+      onFileChange(selectedFile);
       toast({
         title: "Upload complete",
         description: "Your image is ready for background removal.",
       });
-    }, 1500);
+    } catch (error) {
+      toast({
+        title: "Upload failed",
+        description: "Failed to load the image. Please try another file.",
+        variant: "destructive"
+      });
+    } finally {
+      setIsUploading(false);
+    }
   };
 
   const handleUploadClick = () => {
     fileInputRef.current?.click();
+  };
+
+  const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    e.stopPropagation();
+  };
+
+  const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    e.stopPropagation();
+    
+    if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
+      const file = e.dataTransfer.files[0];
+      if (file.type.startsWith('image/')) {
+        setIsUploading(true);
+        try {
+          onFileChange(file);
+          toast({
+            title: "Upload complete",
+            description: "Your image is ready for background removal.",
+          });
+        } catch (error) {
+          toast({
+            title: "Upload failed",
+            description: "Failed to load the image. Please try another file.",
+            variant: "destructive"
+          });
+        } finally {
+          setIsUploading(false);
+        }
+      } else {
+        toast({
+          title: "Invalid file type",
+          description: "Please upload an image file (JPEG, PNG, etc.)",
+          variant: "destructive"
+        });
+      }
+    }
   };
 
   return (
@@ -51,7 +98,11 @@ const UploadSection = () => {
       className="flex flex-col h-full"
     >
       <h2 className="text-2xl font-bold mb-4">Upload Image</h2>
-      <Card className="flex-grow flex flex-col items-center justify-center p-8 border border-dashed border-purple-200 bg-purple-50/50 rounded-xl">
+      <Card 
+        className="flex-grow flex flex-col items-center justify-center p-8 border border-dashed border-purple-200 bg-purple-50/50 rounded-xl"
+        onDragOver={handleDragOver}
+        onDrop={handleDrop}
+      >
         {!imagePreview ? (
           <div className="text-center">
             <div className="mx-auto bg-white p-4 rounded-full mb-4 shadow-sm">
@@ -64,9 +115,10 @@ const UploadSection = () => {
             <Button 
               onClick={handleUploadClick} 
               className="bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700"
+              disabled={isUploading}
             >
               <Upload className="h-4 w-4 mr-2" />
-              Choose Image
+              {isUploading ? "Uploading..." : "Choose Image"}
             </Button>
             <input
               type="file"
@@ -89,8 +141,7 @@ const UploadSection = () => {
               <Button
                 variant="outline"
                 onClick={() => {
-                  setFile(null);
-                  setImagePreview(null);
+                  onFileChange(new File([], "")); // Reset file
                 }}
               >
                 Remove
