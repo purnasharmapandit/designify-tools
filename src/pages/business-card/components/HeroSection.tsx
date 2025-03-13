@@ -135,7 +135,7 @@ const HeroSection = ({
             </div>
 
             <div className="flex justify-center mt-6 gap-4">
-              {templates.map((template) => (
+              {templates.slice(0, 4).map((template) => (
                 <motion.button
                   key={template.id}
                   whileHover={{ scale: 1.05 }}

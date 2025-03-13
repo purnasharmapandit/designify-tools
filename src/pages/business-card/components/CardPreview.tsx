@@ -1,3 +1,4 @@
+
 import React from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { BusinessCardData } from "../types";
@@ -38,6 +39,27 @@ const CardPreview = ({ cardData, centerElement }: CardPreviewProps) => {
               <div className="absolute inset-0" style={{ 
                 background: `linear-gradient(135deg, ${cardData.primaryColor}40 0%, transparent 50%)` 
               }}></div>
+            )}
+            {cardData.template === "elegant" && (
+              <div className="absolute top-0 right-0 h-full w-1/3" style={{ 
+                background: `linear-gradient(90deg, transparent 0%, ${cardData.primaryColor}20 100%)` 
+              }}></div>
+            )}
+            {cardData.template === "modern" && (
+              <div className="absolute bottom-0 left-0 h-2 w-full" style={{ 
+                background: `linear-gradient(90deg, ${cardData.primaryColor} 0%, transparent 100%)` 
+              }}></div>
+            )}
+            {cardData.template === "professional" && (
+              <div className="absolute inset-0" style={{ 
+                background: `linear-gradient(45deg, ${cardData.primaryColor}10 0%, ${cardData.primaryColor}30 100%)` 
+              }}></div>
+            )}
+            {cardData.template === "vibrant" && (
+              <>
+                <div className="absolute -left-10 -bottom-20 h-40 w-40 rounded-full" style={{ backgroundColor: cardData.primaryColor, opacity: 0.2 }}></div>
+                <div className="absolute -right-10 -top-20 h-40 w-40 rounded-full" style={{ backgroundColor: cardData.primaryColor, opacity: 0.2 }}></div>
+              </>
             )}
             
             {/* Logo - Now displayed without any container */}

@@ -12,9 +12,16 @@ interface TemplatesSectionProps {
 const TemplatesSection = ({ designSectionRef, handleTemplateSelection }: TemplatesSectionProps) => {
   const navigate = useNavigate();
 
-  const handleSelectTemplate = (templateId: string) => {
-    navigate(`/business-card-editor?template=${templateId.toLowerCase()}`);
-  };
+  const templates = [
+    { id: "minimal", name: "Minimal", color: "bg-gray-50", textColor: "text-gray-900" },
+    { id: "corporate", name: "Corporate", color: "bg-blue-50", textColor: "text-blue-900" },
+    { id: "creative", name: "Creative", color: "bg-yellow-50", textColor: "text-yellow-900" },
+    { id: "bold", name: "Bold", color: "bg-red-50", textColor: "text-red-900" },
+    { id: "elegant", name: "Elegant", color: "bg-purple-50", textColor: "text-purple-900" },
+    { id: "modern", name: "Modern", color: "bg-green-50", textColor: "text-green-900" },
+    { id: "professional", name: "Professional", color: "bg-indigo-50", textColor: "text-indigo-900" },
+    { id: "vibrant", name: "Vibrant", color: "bg-pink-50", textColor: "text-pink-900" }
+  ];
 
   return (
     <section ref={designSectionRef} className="py-20 bg-gradient-to-br from-gray-50 to-gray-100">
@@ -25,18 +32,9 @@ const TemplatesSection = ({ designSectionRef, handleTemplateSelection }: Templat
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {[
-            { name: "Minimal", color: "bg-gray-50", textColor: "text-gray-900" },
-            { name: "Corporate", color: "bg-blue-50", textColor: "text-blue-900" },
-            { name: "Creative", color: "bg-yellow-50", textColor: "text-yellow-900" },
-            { name: "Bold", color: "bg-red-50", textColor: "text-red-900" },
-            { name: "Modern", color: "bg-green-50", textColor: "text-green-900" },
-            { name: "Elegant", color: "bg-purple-50", textColor: "text-purple-900" },
-            { name: "Professional", color: "bg-indigo-50", textColor: "text-indigo-900" },
-            { name: "Vibrant", color: "bg-pink-50", textColor: "text-pink-900" }
-          ].map((template, i) => (
+          {templates.map((template, i) => (
             <motion.div
-              key={i}
+              key={template.id}
               initial={{ opacity: 0, scale: 0.95 }}
               whileInView={{ opacity: 1, scale: 1 }}
               whileHover={{ y: -5, transition: { duration: 0.2 } }}
@@ -49,7 +47,7 @@ const TemplatesSection = ({ designSectionRef, handleTemplateSelection }: Templat
                   variant="secondary" 
                   size="sm" 
                   className="rounded-full"
-                  onClick={() => handleSelectTemplate(template.name)}
+                  onClick={() => handleTemplateSelection(template.id)}
                 >
                   Use Template
                 </Button>

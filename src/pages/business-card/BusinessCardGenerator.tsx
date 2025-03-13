@@ -21,6 +21,10 @@ const BusinessCardGenerator = () => {
     { id: "corporate", name: "Corporate", color: "#e0f2fe" },
     { id: "creative", name: "Creative", color: "#fef3c7" },
     { id: "bold", name: "Bold", color: "#fee2e2" },
+    { id: "elegant", name: "Elegant", color: "#e5deff" },
+    { id: "modern", name: "Modern", color: "#d3e4fd" },
+    { id: "professional", name: "Professional", color: "#fde1d3" },
+    { id: "vibrant", name: "Vibrant", color: "#ffdee2" },
   ];
 
   const scrollToTemplates = () => {
