@@ -1,4 +1,3 @@
-
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -33,51 +32,57 @@ import IconGenerator from "./pages/IconGenerator";
 import EmailSignatureGenerator from "./pages/email-signature/EmailSignatureGenerator";
 import BackgroundRemover from "./pages/background-remover/BackgroundRemover";
 import BusinessCardGenerator from "./pages/business-card/BusinessCardGenerator";
+import BusinessCardEditor from "./pages/business-card/BusinessCardEditor";
 
 const queryClient = new QueryClient();
 
-const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <BlogProvider>
-      <BrowserRouter>
-        <AuthProvider>
-          <TooltipProvider>
-            <Toaster />
-            <Sonner />
-            <ScrollToTop />
-            <Routes>
-              <Route path="/" element={<Index />} />
-              <Route path="/pricing" element={<Pricing />} />
-              <Route path="/tools" element={<Tools />} />
-              <Route path="/help-center" element={<HelpCenter />} />
-              <Route path="/terms-of-service" element={<TermsOfService />} />
-              <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-              <Route path="/refund-policy" element={<RefundPolicy />} />
-              <Route path="/contact-us" element={<ContactUs />} />
-              <Route path="/about-us" element={<AboutUs />} />
-              <Route path="/careers" element={<Careers />} />
-              <Route path="/blog" element={<Blog />} />
-              <Route path="/blogs/create-logo" element={<CreateLogo />} />
-              <Route path="/blogs/exporting-designs" element={<ExportingDesigns />} />
-              <Route path="/blogs/customizing-profile-picture" element={<CustomizingProfilePicture />} />
-              <Route path="/blogs/business-cards" element={<BusinessCards />} />
-              <Route path="/blogs/billing-subscriptions" element={<BillingSubscriptions />} />
-              <Route path="/logo-maker" element={<LogoMaker />} />
-              <Route path="/logo-maker/editor/:id" element={<LogoEditor />} />
-              <Route path="/qr-code-generator" element={<QRCodeGenerator />} />
-              <Route path="/color-palette-generator" element={<ColorPaletteGenerator />} />
-              <Route path="/icon-generator" element={<IconGenerator />} />
-              <Route path="/email-signature-generator" element={<EmailSignatureGenerator />} />
-              <Route path="/background-remover" element={<BackgroundRemover />} />
-              <Route path="/business-card-generator" element={<BusinessCardGenerator />} />
-              <Route path="/auth" element={<Auth />} />
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-          </TooltipProvider>
-        </AuthProvider>
-      </BrowserRouter>
-    </BlogProvider>
-  </QueryClientProvider>
-);
+function App() {
+  return (
+    <div className="relative">
+      <QueryClientProvider client={queryClient}>
+        <BlogProvider>
+          <BrowserRouter>
+            <AuthProvider>
+              <TooltipProvider>
+                <Toaster />
+                <Sonner />
+                <ScrollToTop />
+                <Routes>
+                  <Route path="/" element={<Index />} />
+                  <Route path="/pricing" element={<Pricing />} />
+                  <Route path="/tools" element={<Tools />} />
+                  <Route path="/help-center" element={<HelpCenter />} />
+                  <Route path="/terms-of-service" element={<TermsOfService />} />
+                  <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+                  <Route path="/refund-policy" element={<RefundPolicy />} />
+                  <Route path="/contact-us" element={<ContactUs />} />
+                  <Route path="/about-us" element={<AboutUs />} />
+                  <Route path="/careers" element={<Careers />} />
+                  <Route path="/blog" element={<Blog />} />
+                  <Route path="/blogs/create-logo" element={<CreateLogo />} />
+                  <Route path="/blogs/exporting-designs" element={<ExportingDesigns />} />
+                  <Route path="/blogs/customizing-profile-picture" element={<CustomizingProfilePicture />} />
+                  <Route path="/blogs/business-cards" element={<BusinessCards />} />
+                  <Route path="/blogs/billing-subscriptions" element={<BillingSubscriptions />} />
+                  <Route path="/logo-maker" element={<LogoMaker />} />
+                  <Route path="/logo-maker/editor/:id" element={<LogoEditor />} />
+                  <Route path="/qr-code-generator" element={<QRCodeGenerator />} />
+                  <Route path="/color-palette-generator" element={<ColorPaletteGenerator />} />
+                  <Route path="/icon-generator" element={<IconGenerator />} />
+                  <Route path="/email-signature-generator" element={<EmailSignatureGenerator />} />
+                  <Route path="/background-remover" element={<BackgroundRemover />} />
+                  <Route path="/business-card-generator" element={<BusinessCardGenerator />} />
+                  <Route path="/business-card-editor" element={<BusinessCardEditor />} />
+                  <Route path="/auth" element={<Auth />} />
+                  <Route path="*" element={<NotFound />} />
+                </Routes>
+              </TooltipProvider>
+            </AuthProvider>
+          </BrowserRouter>
+        </BlogProvider>
+      </QueryClientProvider>
+    </div>
+  );
+}
 
 export default App;

@@ -7,12 +7,13 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Layers, Download, Palette, PenTool, Crop, ChevronRight, Box, CheckCircle } from "lucide-react";
 import { ColorPicker } from "@/components/ui/color-picker";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const BusinessCardGenerator = () => {
   const [primaryColor, setPrimaryColor] = useState("#4f46e5");
   const [activeTemplate, setActiveTemplate] = useState("minimal");
   const designSectionRef = useRef<HTMLDivElement>(null);
+  const navigate = useNavigate();
 
   const templates = [
     { id: "minimal", name: "Minimal", color: "#f3f4f6" },
@@ -25,6 +26,15 @@ const BusinessCardGenerator = () => {
     if (designSectionRef.current) {
       designSectionRef.current.scrollIntoView({ behavior: "smooth" });
     }
+  };
+
+  const handleTemplateSelection = (templateId: string) => {
+    setActiveTemplate(templateId);
+    navigate(`/business-card-editor?template=${templateId}`);
+  };
+
+  const handleStartCustomizing = () => {
+    navigate("/business-card-editor");
   };
 
   return (
@@ -266,7 +276,12 @@ const BusinessCardGenerator = () => {
                   className={`${template.color} p-6 rounded-2xl shadow-sm hover:shadow-md transition-all duration-300 aspect-[1.8/1] relative overflow-hidden group`}
                 >
                   <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 bg-black/40 transition-opacity duration-300">
-                    <Button variant="secondary" size="sm" className="rounded-full">
+                    <Button 
+                      variant="secondary" 
+                      size="sm" 
+                      className="rounded-full"
+                      onClick={() => handleTemplateSelection(template.name.toLowerCase())}
+                    >
                       Use Template
                     </Button>
                   </div>
@@ -281,7 +296,12 @@ const BusinessCardGenerator = () => {
             </div>
 
             <div className="text-center mt-12">
-              <Button size="lg" variant="outline" className="rounded-full">
+              <Button 
+                size="lg" 
+                variant="outline" 
+                className="rounded-full"
+                onClick={() => scrollToTemplates()}
+              >
                 View All Templates
               </Button>
             </div>
@@ -324,7 +344,10 @@ const BusinessCardGenerator = () => {
                     </div>
                   </div>
                   
-                  <Button className="mt-4 rounded-full bg-gradient-to-r from-purple-500 to-indigo-600">
+                  <Button 
+                    className="mt-4 rounded-full bg-gradient-to-r from-purple-500 to-indigo-600"
+                    onClick={handleStartCustomizing}
+                  >
                     Start Customizing
                   </Button>
                 </div>
@@ -448,7 +471,7 @@ const BusinessCardGenerator = () => {
                 <Button 
                   size="lg" 
                   className="bg-white text-indigo-600 hover:bg-gray-100 rounded-full px-8 py-6 text-lg"
-                  onClick={scrollToTemplates}
+                  onClick={handleStartCustomizing}
                 >
                   Start Creating For Free
                   <ChevronRight className="ml-2 h-5 w-5" />
