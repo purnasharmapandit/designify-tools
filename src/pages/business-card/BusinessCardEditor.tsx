@@ -11,7 +11,6 @@ import CardPreview from "./components/CardPreview";
 import ActionButtons from "./components/ActionButtons";
 import { Button } from "@/components/ui/button";
 import { Download } from "lucide-react";
-import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 const BusinessCardEditor = () => {
   const location = useLocation();
@@ -98,18 +97,7 @@ const BusinessCardEditor = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <ActionButtons handleBackToTemplates={handleBackToTemplates} />
           
-          {/* Editor Steps Tabs */}
-          <div className="my-6">
-            <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full max-w-xl mx-auto">
-              <TabsList className="grid grid-cols-3 w-full">
-                <TabsTrigger value="layout">1. Choose Template</TabsTrigger>
-                <TabsTrigger value="content">2. Input Details</TabsTrigger>
-                <TabsTrigger value="design">3. Design</TabsTrigger>
-              </TabsList>
-            </Tabs>
-          </div>
-          
-          <div className="grid lg:grid-cols-12 gap-8">
+          <div className="grid lg:grid-cols-12 gap-8 mt-6">
             {/* Sidebar */}
             <div className="lg:col-span-4 space-y-6">
               <EditorSidebar 
