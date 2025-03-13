@@ -1,5 +1,5 @@
 
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { motion } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -12,6 +12,7 @@ import { Link } from "react-router-dom";
 const BusinessCardGenerator = () => {
   const [primaryColor, setPrimaryColor] = useState("#4f46e5");
   const [activeTemplate, setActiveTemplate] = useState("minimal");
+  const designSectionRef = useRef<HTMLDivElement>(null);
 
   const templates = [
     { id: "minimal", name: "Minimal", color: "#f3f4f6" },
@@ -19,6 +20,12 @@ const BusinessCardGenerator = () => {
     { id: "creative", name: "Creative", color: "#fef3c7" },
     { id: "bold", name: "Bold", color: "#fee2e2" },
   ];
+
+  const scrollToTemplates = () => {
+    if (designSectionRef.current) {
+      designSectionRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  };
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -47,11 +54,20 @@ const BusinessCardGenerator = () => {
                   Design professional business cards in minutes with our AI-powered tools. Choose from multiple templates and customize to your brand.
                 </p>
                 <div className="flex flex-wrap gap-4">
-                  <Button size="lg" className="rounded-full bg-gradient-to-r from-purple-500 to-indigo-600 hover:from-purple-600 hover:to-indigo-700 text-lg h-14 px-8">
+                  <Button 
+                    size="lg" 
+                    className="rounded-full bg-gradient-to-r from-purple-500 to-indigo-600 hover:from-purple-600 hover:to-indigo-700 text-lg h-14 px-8"
+                    onClick={scrollToTemplates}
+                  >
                     Start Creating Now
                     <ChevronRight className="ml-2 h-5 w-5" />
                   </Button>
-                  <Button size="lg" variant="outline" className="rounded-full border-2 h-14 px-8 text-lg">
+                  <Button 
+                    size="lg" 
+                    variant="outline" 
+                    className="rounded-full border-2 h-14 px-8 text-lg"
+                    onClick={scrollToTemplates}
+                  >
                     View Templates
                   </Button>
                 </div>
@@ -222,7 +238,7 @@ const BusinessCardGenerator = () => {
         </section>
 
         {/* Templates Section */}
-        <section className="py-20 bg-gradient-to-br from-gray-50 to-gray-100">
+        <section ref={designSectionRef} className="py-20 bg-gradient-to-br from-gray-50 to-gray-100">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-16">
               <h2 className="text-3xl md:text-4xl font-bold mb-4">Explore Our Template Collection</h2>
@@ -429,7 +445,11 @@ const BusinessCardGenerator = () => {
               <div className="max-w-3xl mx-auto text-center">
                 <h2 className="text-3xl md:text-4xl font-bold mb-6">Ready to Create Your Professional Business Cards?</h2>
                 <p className="text-xl mb-8 opacity-90">Join thousands of professionals who use our platform to create stunning business cards that make a lasting impression.</p>
-                <Button size="lg" className="bg-white text-indigo-600 hover:bg-gray-100 rounded-full px-8 py-6 text-lg">
+                <Button 
+                  size="lg" 
+                  className="bg-white text-indigo-600 hover:bg-gray-100 rounded-full px-8 py-6 text-lg"
+                  onClick={scrollToTemplates}
+                >
                   Start Creating For Free
                   <ChevronRight className="ml-2 h-5 w-5" />
                 </Button>
