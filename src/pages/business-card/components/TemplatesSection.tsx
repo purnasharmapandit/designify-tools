@@ -20,7 +20,11 @@ const TemplatesSection = ({ designSectionRef, handleTemplateSelection }: Templat
     { id: "elegant", name: "Elegant", color: "bg-purple-50", textColor: "text-purple-900" },
     { id: "modern", name: "Modern", color: "bg-green-50", textColor: "text-green-900" },
     { id: "professional", name: "Professional", color: "bg-indigo-50", textColor: "text-indigo-900" },
-    { id: "vibrant", name: "Vibrant", color: "bg-pink-50", textColor: "text-pink-900" }
+    { id: "vibrant", name: "Vibrant", color: "bg-pink-50", textColor: "text-pink-900" },
+    { id: "eco", name: "Eco Green", color: "bg-emerald-50", textColor: "text-emerald-900" },
+    { id: "gradient", name: "Gradient", color: "bg-sky-50", textColor: "text-sky-900" },
+    { id: "vintage", name: "Vintage", color: "bg-stone-50", textColor: "text-stone-900" },
+    { id: "geometric", name: "Geometric", color: "bg-fuchsia-50", textColor: "text-fuchsia-900" }
   ];
 
   return (
@@ -31,7 +35,7 @@ const TemplatesSection = ({ designSectionRef, handleTemplateSelection }: Templat
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">Find the perfect template for your business card among our diverse collection.</p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {templates.map((template, i) => (
             <motion.div
               key={template.id}
@@ -67,13 +71,9 @@ const TemplatesSection = ({ designSectionRef, handleTemplateSelection }: Templat
             size="lg" 
             variant="outline" 
             className="rounded-full"
-            onClick={() => {
-              if (designSectionRef.current) {
-                designSectionRef.current.scrollIntoView({ behavior: "smooth" });
-              }
-            }}
+            onClick={() => navigate("/business-card-editor")}
           >
-            View All Templates
+            Start Customizing
           </Button>
         </div>
       </div>

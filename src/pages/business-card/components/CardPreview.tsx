@@ -2,6 +2,7 @@
 import React from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { BusinessCardData } from "../types";
+import { Phone, Mail, MapPin } from "lucide-react";
 
 interface CardPreviewProps {
   cardData: BusinessCardData;
@@ -62,7 +63,47 @@ const CardPreview = ({ cardData, centerElement }: CardPreviewProps) => {
               </>
             )}
             
-            {/* Logo - Now displayed without any container */}
+            {/* New eco template - Similar to the uploaded image */}
+            {cardData.template === "eco" && (
+              <>
+                <div className="absolute inset-0 bg-gradient-to-br" style={{ 
+                  background: `linear-gradient(to bottom right, ${cardData.primaryColor} 0%, ${cardData.primaryColor}90 100%)` 
+                }}></div>
+                <div className="absolute top-0 right-0 bottom-0 left-1/3 rounded-l-full bg-white"></div>
+                <div className="absolute right-6 bottom-6 h-28 w-28 rounded-full border-4" style={{ 
+                  borderColor: cardData.primaryColor,
+                  backgroundColor: cardData.primaryColor,
+                  opacity: 0.8
+                }}></div>
+              </>
+            )}
+            
+            {/* New gradient template */}
+            {cardData.template === "gradient" && (
+              <div className="absolute inset-0" style={{ 
+                background: `linear-gradient(135deg, ${cardData.primaryColor} 0%, ${cardData.secondaryColor} 100%)`,
+                opacity: 0.9
+              }}></div>
+            )}
+            
+            {/* New vintage template */}
+            {cardData.template === "vintage" && (
+              <>
+                <div className="absolute inset-0 border-8 border-opacity-20" style={{ borderColor: cardData.primaryColor }}></div>
+                <div className="absolute top-4 left-4 right-4 bottom-4 border border-opacity-40" style={{ borderColor: cardData.primaryColor }}></div>
+              </>
+            )}
+            
+            {/* New geometric template */}
+            {cardData.template === "geometric" && (
+              <>
+                <div className="absolute -top-20 -right-20 h-40 w-40 rounded-full" style={{ backgroundColor: cardData.primaryColor, opacity: 0.1 }}></div>
+                <div className="absolute -bottom-10 -left-10 h-40 w-40 rounded-md transform rotate-45" style={{ backgroundColor: cardData.primaryColor, opacity: 0.1 }}></div>
+                <div className="absolute top-1/4 left-1/3 h-16 w-16 rounded-full" style={{ backgroundColor: cardData.primaryColor, opacity: 0.1 }}></div>
+              </>
+            )}
+            
+            {/* Logo */}
             {centerElement && centerElement.type === "logo" && centerElement.content && (
               <div className="absolute top-6 right-6 z-20">
                 <img 
@@ -77,7 +118,7 @@ const CardPreview = ({ cardData, centerElement }: CardPreviewProps) => {
               </div>
             )}
             
-            {/* Text - Keep the circular design */}
+            {/* Text circle */}
             {centerElement && centerElement.type === "text" && centerElement.content && (
               <div className="absolute top-6 right-6 z-20">
                 <div 
@@ -94,17 +135,64 @@ const CardPreview = ({ cardData, centerElement }: CardPreviewProps) => {
               </div>
             )}
             
-            <div className="z-10">
-              <h3 className="text-xl font-bold">{cardData.name}</h3>
-              <p className="text-sm opacity-75">{cardData.title}</p>
-            </div>
-            
-            <div className="text-xs space-y-1 z-10">
-              {cardData.email && <p>{cardData.email}</p>}
-              {cardData.phone && <p>{cardData.phone}</p>}
-              {cardData.website && <p>{cardData.website}</p>}
-              {cardData.address && <p>{cardData.address}</p>}
-            </div>
+            {/* Contact info with icons for eco template */}
+            {cardData.template === "eco" ? (
+              <>
+                <div className="z-10 ml-4 mt-4">
+                  <h3 className="text-xl font-bold" style={{ color: cardData.primaryColor }}>{cardData.name}</h3>
+                  <p className="text-sm opacity-75">{cardData.title}</p>
+                </div>
+                
+                <div className="text-xs space-y-2 z-10 ml-4 mb-4">
+                  {cardData.phone && (
+                    <div className="flex items-center">
+                      <div className="mr-2 p-1 rounded-full" style={{ backgroundColor: cardData.primaryColor }}>
+                        <Phone className="h-3 w-3 text-white" />
+                      </div>
+                      <p>{cardData.phone}</p>
+                    </div>
+                  )}
+                  {cardData.email && (
+                    <div className="flex items-center">
+                      <div className="mr-2 p-1 rounded-full" style={{ backgroundColor: cardData.primaryColor }}>
+                        <Mail className="h-3 w-3 text-white" />
+                      </div>
+                      <p>{cardData.email}</p>
+                    </div>
+                  )}
+                  {cardData.website && (
+                    <div className="flex items-center">
+                      <div className="mr-2 p-1 rounded-full" style={{ backgroundColor: cardData.primaryColor }}>
+                        <div className="h-3 w-3 flex items-center justify-center text-white text-xs font-bold">@</div>
+                      </div>
+                      <p>{cardData.website}</p>
+                    </div>
+                  )}
+                  {cardData.address && (
+                    <div className="flex items-center">
+                      <div className="mr-2 p-1 rounded-full" style={{ backgroundColor: cardData.primaryColor }}>
+                        <MapPin className="h-3 w-3 text-white" />
+                      </div>
+                      <p>{cardData.address}</p>
+                    </div>
+                  )}
+                </div>
+              </>
+            ) : (
+              <>
+                <div className="z-10">
+                  <h3 className="text-xl font-bold">{cardData.name}</h3>
+                  <p className="text-sm opacity-75">{cardData.title}</p>
+                </div>
+                
+                <div className="text-xs space-y-1 z-10">
+                  {cardData.email && <p>{cardData.email}</p>}
+                  {cardData.phone && <p>{cardData.phone}</p>}
+                  {cardData.website && <p>{cardData.website}</p>}
+                  {cardData.address && <p>{cardData.address}</p>}
+                </div>
+              </>
+            )}
           </div>
         </div>
       </CardContent>

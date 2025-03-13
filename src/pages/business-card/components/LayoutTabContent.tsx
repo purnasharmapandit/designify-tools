@@ -16,7 +16,11 @@ const LayoutTabContent = ({ cardData, handleInputChange }: LayoutTabContentProps
     { id: "elegant", name: "Elegant", color: "#e5deff" },
     { id: "modern", name: "Modern", color: "#d3e4fd" },
     { id: "professional", name: "Professional", color: "#fde1d3" },
-    { id: "vibrant", name: "Vibrant", color: "#ffdee2" }
+    { id: "vibrant", name: "Vibrant", color: "#ffdee2" },
+    { id: "eco", name: "Eco Green", color: "#dcfce7" },
+    { id: "gradient", name: "Gradient", color: "#f0f9ff" },
+    { id: "vintage", name: "Vintage", color: "#f9fafb" },
+    { id: "geometric", name: "Geometric", color: "#fdf4ff" }
   ];
 
   return (
