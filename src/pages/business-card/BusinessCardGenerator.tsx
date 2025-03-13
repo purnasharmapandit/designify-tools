@@ -31,11 +31,11 @@ const BusinessCardGenerator = () => {
 
   const handleTemplateSelection = (templateId: string) => {
     setActiveTemplate(templateId);
-    navigate(`/business-card-editor?template=${templateId}`);
+    navigate(`/business-card-editor?template=${templateId.toLowerCase()}`);
   };
 
   const handleStartCustomizing = () => {
-    navigate("/business-card-editor");
+    navigate(`/business-card-editor?template=${activeTemplate}`);
   };
 
   return (

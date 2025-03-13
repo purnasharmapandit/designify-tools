@@ -1,8 +1,8 @@
-
 import React from "react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { ChevronRight, Box, Palette, Download, PenTool, Crop } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 interface HeroSectionProps {
   scrollToTemplates: () => void;
@@ -17,6 +17,16 @@ const HeroSection = ({
   setActiveTemplate,
   templates
 }: HeroSectionProps) => {
+  const navigate = useNavigate();
+
+  const handleTemplateSelect = (templateId: string) => {
+    setActiveTemplate(templateId);
+  };
+
+  const handleStartCreating = () => {
+    navigate(`/business-card-editor?template=${activeTemplate}`);
+  };
+
   return (
     <section className="relative pt-32 pb-24 overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-50 z-0"></div>
@@ -42,7 +52,7 @@ const HeroSection = ({
               <Button 
                 size="lg" 
                 className="rounded-full bg-gradient-to-r from-purple-500 to-indigo-600 hover:from-purple-600 hover:to-indigo-700 text-lg h-14 px-8"
-                onClick={scrollToTemplates}
+                onClick={handleStartCreating}
               >
                 Start Creating Now
                 <ChevronRight className="ml-2 h-5 w-5" />
@@ -132,7 +142,7 @@ const HeroSection = ({
                   whileTap={{ scale: 0.95 }}
                   className={`w-8 h-8 rounded-full ${activeTemplate === template.id ? 'ring-2 ring-offset-2 ring-black' : ''}`}
                   style={{ backgroundColor: template.color }}
-                  onClick={() => setActiveTemplate(template.id)}
+                  onClick={() => handleTemplateSelect(template.id)}
                   aria-label={`Select ${template.name} template`}
                 ></motion.button>
               ))}

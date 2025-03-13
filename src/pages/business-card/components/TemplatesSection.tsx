@@ -2,6 +2,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
+import { useNavigate } from "react-router-dom";
 
 interface TemplatesSectionProps {
   designSectionRef: React.RefObject<HTMLDivElement>;
@@ -9,6 +10,12 @@ interface TemplatesSectionProps {
 }
 
 const TemplatesSection = ({ designSectionRef, handleTemplateSelection }: TemplatesSectionProps) => {
+  const navigate = useNavigate();
+
+  const handleSelectTemplate = (templateId: string) => {
+    navigate(`/business-card-editor?template=${templateId.toLowerCase()}`);
+  };
+
   return (
     <section ref={designSectionRef} className="py-20 bg-gradient-to-br from-gray-50 to-gray-100">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -42,7 +49,7 @@ const TemplatesSection = ({ designSectionRef, handleTemplateSelection }: Templat
                   variant="secondary" 
                   size="sm" 
                   className="rounded-full"
-                  onClick={() => handleTemplateSelection(template.name.toLowerCase())}
+                  onClick={() => handleSelectTemplate(template.name)}
                 >
                   Use Template
                 </Button>
