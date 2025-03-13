@@ -1,4 +1,3 @@
-
 import React from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { BusinessCardData } from "../types";
@@ -41,25 +40,24 @@ const CardPreview = ({ cardData, centerElement }: CardPreviewProps) => {
               }}></div>
             )}
             
-            {/* Logo or Text Center Element - Now positioned at top right and larger */}
+            {/* Logo - Now displayed without circular container */}
             {centerElement && centerElement.type === "logo" && centerElement.content && (
               <div className="absolute top-6 right-6 z-20">
-                <div 
-                  className="rounded-full overflow-hidden flex items-center justify-center bg-white/90 shadow-md"
-                  style={{ 
-                    width: `${centerElement.size * 1.5}px`, 
-                    height: `${centerElement.size * 1.5}px`,
-                  }}
-                >
+                <div className="flex items-center justify-center bg-white/90 shadow-md p-2 rounded">
                   <img 
                     src={centerElement.content} 
                     alt="Logo" 
-                    className="max-w-[80%] max-h-[80%] object-contain"
+                    className="object-contain"
+                    style={{ 
+                      width: `${centerElement.size * 1.5}px`, 
+                      height: `${centerElement.size * 1.5}px`,
+                    }}
                   />
                 </div>
               </div>
             )}
             
+            {/* Text - Keep the circular design */}
             {centerElement && centerElement.type === "text" && centerElement.content && (
               <div className="absolute top-6 right-6 z-20">
                 <div 
