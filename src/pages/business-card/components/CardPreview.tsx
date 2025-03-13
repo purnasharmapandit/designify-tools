@@ -40,20 +40,18 @@ const CardPreview = ({ cardData, centerElement }: CardPreviewProps) => {
               }}></div>
             )}
             
-            {/* Logo - Now displayed without circular container */}
+            {/* Logo - Now displayed without any container */}
             {centerElement && centerElement.type === "logo" && centerElement.content && (
               <div className="absolute top-6 right-6 z-20">
-                <div className="flex items-center justify-center bg-white/90 shadow-md p-2 rounded">
-                  <img 
-                    src={centerElement.content} 
-                    alt="Logo" 
-                    className="object-contain"
-                    style={{ 
-                      width: `${centerElement.size * 1.5}px`, 
-                      height: `${centerElement.size * 1.5}px`,
-                    }}
-                  />
-                </div>
+                <img 
+                  src={centerElement.content} 
+                  alt="Logo" 
+                  className="object-contain"
+                  style={{ 
+                    width: `${centerElement.size * 1.5}px`, 
+                    height: `${centerElement.size * 1.5}px`,
+                  }}
+                />
               </div>
             )}
             
