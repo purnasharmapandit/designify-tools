@@ -19,7 +19,7 @@ const CardPreview = ({ cardData, centerElement }: CardPreviewProps) => {
         
         <div className="flex justify-center">
           <div 
-            className="w-full max-w-md aspect-[1.8/1] rounded-lg shadow-lg p-6 flex flex-col justify-between relative overflow-hidden"
+            className="business-card w-full max-w-md aspect-[1.8/1] rounded-lg shadow-lg p-6 flex flex-col justify-between relative overflow-hidden"
             style={{ 
               backgroundColor: cardData.secondaryColor,
               color: cardData.textColor,

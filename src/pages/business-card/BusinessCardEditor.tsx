@@ -1,6 +1,8 @@
 
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import html2canvas from "html2canvas";
+import { toast } from "sonner";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { BusinessCardData } from "./types";
@@ -30,6 +32,7 @@ const BusinessCardEditor = () => {
   });
   
   const [centerElement, setCenterElement] = useState<any>(null);
+  const cardPreviewRef = useRef<HTMLDivElement>(null);
   
   const handleBackToTemplates = () => {
     navigate("/business-card-generator");
@@ -42,9 +45,46 @@ const BusinessCardEditor = () => {
     }));
   };
   
-  const handleDownload = () => {
-    // In a real app, this would generate and download the business card
-    alert("This would download your business card in a real application!");
+  const handleDownload = async () => {
+    if (!cardPreviewRef.current) {
+      toast.error("Could not generate business card. Please try again.");
+      return;
+    }
+
+    try {
+      toast.info("Preparing your business card...");
+      
+      // Find the card element inside the preview container
+      const cardElement = cardPreviewRef.current.querySelector(".business-card");
+      
+      if (!cardElement) {
+        toast.error("Could not find the business card element");
+        return;
+      }
+      
+      // Use html2canvas to convert the card to an image
+      const canvas = await html2canvas(cardElement as HTMLElement, {
+        scale: 3, // Higher scale for better quality
+        backgroundColor: null,
+        logging: false,
+      });
+      
+      // Convert the canvas to a data URL
+      const dataUrl = canvas.toDataURL("image/png");
+      
+      // Create a download link
+      const link = document.createElement("a");
+      link.href = dataUrl;
+      link.download = `business-card-${cardData.name.toLowerCase().replace(/\s+/g, "-")}.png`;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      
+      toast.success("Business card downloaded successfully!");
+    } catch (error) {
+      console.error("Error downloading business card:", error);
+      toast.error("Failed to download business card. Please try again.");
+    }
   };
   
   return (
@@ -70,7 +110,7 @@ const BusinessCardEditor = () => {
             </div>
             
             {/* Preview */}
-            <div className="lg:col-span-8">
+            <div className="lg:col-span-8" ref={cardPreviewRef}>
               <CardPreview 
                 cardData={cardData}
                 centerElement={centerElement}
