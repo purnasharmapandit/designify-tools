@@ -25,8 +25,8 @@ const Footer = () => {
               <li><Link to="/qr-code-generator" className="text-gray-400 hover:text-white transition-colors">QR Code Generator</Link></li>
               <li><Link to="/color-palette-generator" className="text-gray-400 hover:text-white transition-colors">Color Palette Generator</Link></li>
               <li><Link to="/icon-generator" className="text-gray-400 hover:text-white transition-colors">Icon Generator</Link></li>
-              <li><a href="#" className="text-gray-400 hover:text-white transition-colors">Profile Pic Generator</a></li>
-              <li><a href="#" className="text-gray-400 hover:text-white transition-colors">Business Card Generator</a></li>
+              <li><Link to="/business-card-generator" className="text-gray-400 hover:text-white transition-colors">Business Card Generator</Link></li>
+              <li><Link to="/background-remover" className="text-gray-400 hover:text-white transition-colors">Background Remover</Link></li>
             </ul>
           </div>
           

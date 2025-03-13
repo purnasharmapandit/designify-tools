@@ -32,6 +32,7 @@ import ColorPaletteGenerator from "./pages/ColorPaletteGenerator";
 import IconGenerator from "./pages/IconGenerator";
 import EmailSignatureGenerator from "./pages/email-signature/EmailSignatureGenerator";
 import BackgroundRemover from "./pages/background-remover/BackgroundRemover";
+import BusinessCardGenerator from "./pages/business-card/BusinessCardGenerator";
 
 const queryClient = new QueryClient();
 
@@ -68,6 +69,7 @@ const App = () => (
               <Route path="/icon-generator" element={<IconGenerator />} />
               <Route path="/email-signature-generator" element={<EmailSignatureGenerator />} />
               <Route path="/background-remover" element={<BackgroundRemover />} />
+              <Route path="/business-card-generator" element={<BusinessCardGenerator />} />
               <Route path="/auth" element={<Auth />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
