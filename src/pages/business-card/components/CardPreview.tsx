@@ -41,37 +41,37 @@ const CardPreview = ({ cardData, centerElement }: CardPreviewProps) => {
               }}></div>
             )}
             
-            {/* Logo or Text Center Element */}
+            {/* Logo or Text Center Element - Now positioned at top right and larger */}
             {centerElement && centerElement.type === "logo" && centerElement.content && (
-              <div className="absolute top-1/2 right-6 transform -translate-y-1/2">
+              <div className="absolute top-6 right-6 z-20">
                 <div 
-                  className="rounded-full overflow-hidden flex items-center justify-center"
+                  className="rounded-full overflow-hidden flex items-center justify-center bg-white/90 shadow-md"
                   style={{ 
-                    width: `${centerElement.size}px`, 
-                    height: `${centerElement.size}px`,
+                    width: `${centerElement.size * 1.5}px`, 
+                    height: `${centerElement.size * 1.5}px`,
                   }}
                 >
                   <img 
                     src={centerElement.content} 
                     alt="Logo" 
-                    className="max-w-full max-h-full object-contain"
+                    className="max-w-[80%] max-h-[80%] object-contain"
                   />
                 </div>
               </div>
             )}
             
             {centerElement && centerElement.type === "text" && centerElement.content && (
-              <div className="absolute top-1/2 right-6 transform -translate-y-1/2">
+              <div className="absolute top-6 right-6 z-20">
                 <div 
-                  className="rounded-full bg-gray-100 flex items-center justify-center"
+                  className="rounded-full flex items-center justify-center shadow-md"
                   style={{ 
-                    width: `${centerElement.size}px`, 
-                    height: `${centerElement.size}px`,
+                    width: `${centerElement.size * 1.5}px`, 
+                    height: `${centerElement.size * 1.5}px`,
                     backgroundColor: cardData.primaryColor,
                     color: cardData.secondaryColor
                   }}
                 >
-                  <span className="font-bold">{centerElement.content}</span>
+                  <span className="font-bold text-lg">{centerElement.content}</span>
                 </div>
               </div>
             )}

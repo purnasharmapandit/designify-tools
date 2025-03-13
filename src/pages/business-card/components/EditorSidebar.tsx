@@ -3,8 +3,6 @@ import React from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card, CardContent } from "@/components/ui/card";
 import { Text, Palette, Layout } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Download } from "lucide-react";
 import { BusinessCardData } from "../types";
 import ContentTabContent from "./ContentTabContent";
 import DesignTabContent from "./DesignTabContent";
@@ -15,7 +13,6 @@ interface EditorSidebarProps {
   setActiveTab: (tab: string) => void;
   cardData: BusinessCardData;
   handleInputChange: (field: keyof BusinessCardData, value: string) => void;
-  handleDownload: () => void;
   centerElement: any;
   setCenterElement: (element: any) => void;
 }
@@ -25,7 +22,6 @@ const EditorSidebar = ({
   setActiveTab,
   cardData,
   handleInputChange,
-  handleDownload,
   centerElement,
   setCenterElement,
 }: EditorSidebarProps) => {
@@ -36,7 +32,7 @@ const EditorSidebar = ({
           <TabsList className="grid grid-cols-3 mb-6">
             <TabsTrigger value="content">
               <Text className="h-4 w-4 mr-2" />
-              Content
+              Details
             </TabsTrigger>
             <TabsTrigger value="design">
               <Palette className="h-4 w-4 mr-2" />
@@ -44,7 +40,7 @@ const EditorSidebar = ({
             </TabsTrigger>
             <TabsTrigger value="layout">
               <Layout className="h-4 w-4 mr-2" />
-              Layout
+              Template
             </TabsTrigger>
           </TabsList>
           
@@ -71,13 +67,6 @@ const EditorSidebar = ({
             />
           </TabsContent>
         </Tabs>
-        
-        <div className="mt-6">
-          <Button onClick={handleDownload} className="w-full">
-            <Download className="mr-2 h-4 w-4" />
-            Download Business Card
-          </Button>
-        </div>
       </CardContent>
     </Card>
   );
