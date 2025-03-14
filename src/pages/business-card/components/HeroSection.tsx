@@ -2,7 +2,20 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { ChevronRight, Box, Palette, Download, PenTool, Crop, Phone, Mail, MapPin, Globe } from "lucide-react";
+import { 
+  ChevronRight, 
+  Box, 
+  Palette, 
+  Download, 
+  PenTool, 
+  Crop, 
+  Phone, 
+  Mail, 
+  MapPin, 
+  Globe, 
+  Building, 
+  Image
+} from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
 interface HeroSectionProps {
@@ -87,7 +100,7 @@ const HeroSection = ({
               className="relative mx-auto"
             >
               <div className="relative w-full max-w-md mx-auto">
-                {/* Card Shadow/Glow Effects */}
+                {/* Card Shadow/Glow Effect */}
                 <div className="absolute -z-10 w-full h-72 bg-gradient-to-r from-indigo-500/20 to-purple-500/20 rounded-xl blur-xl transform rotate-6"></div>
                 
                 {/* Stack of cards effect */}
@@ -103,51 +116,52 @@ const HeroSection = ({
                   style={{ top: '10%', left: '5%' }}
                 ></motion.div>
                 
-                {/* Main Card Preview */}
-                <div className="relative bg-white rounded-xl shadow-xl p-8 aspect-[1.8/1] overflow-hidden">
-                  {/* Card background with subtle gradient */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-white to-gray-50"></div>
-                  
-                  {/* Elegant accent */}
-                  <div className="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-purple-500 to-indigo-600"></div>
-                  
-                  <div className="relative">
-                    {/* Logo/Brand */}
-                    <div className="absolute top-0 right-0">
-                      <div className="h-16 w-16 bg-gradient-to-br from-purple-500 to-indigo-600 rounded-full flex items-center justify-center">
-                        <span className="text-xl font-bold text-white">JD</span>
-                      </div>
+                {/* Main Business Card */}
+                <div className="relative bg-white rounded-xl shadow-xl overflow-hidden">
+                  {/* Card has a 3.5:2 aspect ratio (standard business card) */}
+                  <div className="aspect-[3.5/2] p-6 relative">
+                    {/* Top accent bar */}
+                    <div className="absolute top-0 left-0 right-0 h-2 bg-gradient-to-r from-purple-600 to-indigo-600"></div>
+                    
+                    {/* Logo placeholder */}
+                    <div className="absolute top-6 right-6 w-16 h-16 rounded-full bg-gradient-to-br from-indigo-600 to-purple-600 flex items-center justify-center">
+                      <Building className="text-white" size={24} />
                     </div>
                     
-                    {/* Name and Title */}
-                    <div className="pt-1">
-                      <h3 className="text-xl font-bold text-gray-900">Jane Doe</h3>
-                      <p className="text-sm text-indigo-600 font-medium">Creative Director</p>
+                    {/* Company name placeholder */}
+                    <div className="mb-1 mt-3">
+                      <div className="w-32 h-3 bg-indigo-600 rounded-sm"></div>
                     </div>
                     
-                    {/* Contact Details */}
-                    <div className="absolute bottom-0 left-0 space-y-1">
-                      <div className="flex items-center text-xs text-gray-600">
-                        <Mail className="h-3 w-3 mr-2" />
-                        <span>jane@example.com</span>
+                    {/* Name and title */}
+                    <div className="mt-8">
+                      <h3 className="text-xl font-bold text-gray-900">Jane Anderson</h3>
+                      <p className="text-sm font-medium text-indigo-600">Marketing Director</p>
+                    </div>
+                    
+                    {/* Contact details */}
+                    <div className="absolute bottom-6 left-6 space-y-2">
+                      <div className="flex items-center text-sm text-gray-700">
+                        <Phone className="h-3.5 w-3.5 mr-2 text-indigo-600" />
+                        <span>(555) 123-4567</span>
                       </div>
-                      <div className="flex items-center text-xs text-gray-600">
-                        <Phone className="h-3 w-3 mr-2" />
-                        <span>+1 (555) 123-4567</span>
+                      <div className="flex items-center text-sm text-gray-700">
+                        <Mail className="h-3.5 w-3.5 mr-2 text-indigo-600" />
+                        <span>jane@company.com</span>
                       </div>
-                      <div className="flex items-center text-xs text-gray-600">
-                        <Globe className="h-3 w-3 mr-2" />
-                        <span>www.example.com</span>
+                      <div className="flex items-center text-sm text-gray-700">
+                        <Globe className="h-3.5 w-3.5 mr-2 text-indigo-600" />
+                        <span>www.company.com</span>
                       </div>
-                      <div className="flex items-center text-xs text-gray-600">
-                        <MapPin className="h-3 w-3 mr-2" />
+                      <div className="flex items-center text-sm text-gray-700">
+                        <MapPin className="h-3.5 w-3.5 mr-2 text-indigo-600" />
                         <span>San Francisco, CA</span>
                       </div>
                     </div>
                     
-                    {/* Decorative element */}
-                    <div className="absolute bottom-0 right-0 opacity-10">
-                      <div className="h-20 w-20 rounded-full border-4 border-indigo-500 transform translate-x-10 translate-y-10"></div>
+                    {/* Decorative elements */}
+                    <div className="absolute bottom-0 right-0">
+                      <div className="opacity-10 w-20 h-20 rounded-full border-4 border-indigo-500 transform translate-x-8 translate-y-8"></div>
                     </div>
                   </div>
                 </div>
