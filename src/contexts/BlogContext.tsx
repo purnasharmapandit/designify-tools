@@ -1,29 +1,20 @@
-
-import React, { createContext, useContext, ReactNode } from 'react';
+import React, { createContext, useContext, ReactNode, useEffect, useState } from 'react';
 import { BlogPostType } from '@/types/blog';
+import { fetchBlogPosts, fetchBlogPostBySlug, fetchRelatedPosts } from '@/services/blogService';
 
 interface BlogContextType {
-  getAllPosts: () => BlogPostType[];
-  getPostBySlug: (slug: string) => BlogPostType | undefined;
-  getRelatedPosts: (currentPostId: string, limit?: number) => BlogPostType[];
+  posts: BlogPostType[];
+  isLoading: boolean;
+  error: Error | null;
+  getAllPosts: () => Promise<BlogPostType[]>;
+  getPostBySlug: (slug: string) => Promise<BlogPostType | null>;
+  getRelatedPosts: (currentPostId: string, limit?: number) => Promise<BlogPostType[]>;
+  refetchPosts: () => Promise<void>;
 }
 
 const BlogContext = createContext<BlogContextType | undefined>(undefined);
 
-// This registry will store all blog posts
-const blogPostRegistry: BlogPostType[] = [];
-
-// Function to register a blog post
-export const registerBlogPost = (post: BlogPostType) => {
-  const existingPostIndex = blogPostRegistry.findIndex(p => p.id === post.id);
-  if (existingPostIndex >= 0) {
-    blogPostRegistry[existingPostIndex] = post;
-  } else {
-    blogPostRegistry.push(post);
-  }
-};
-
-// Export pre-registered blog posts
+// Legacy support for existing code - this should be removed once migration is complete
 export const blogPosts = {
   createLogo: {
     id: 'create-logo',
@@ -213,28 +204,95 @@ export const blogPosts = {
   }
 };
 
-// Register the pre-defined blog posts
-Object.values(blogPosts).forEach(post => registerBlogPost(post));
+// Legacy function for backward compatibility
+export const registerBlogPost = (post: BlogPostType) => {
+  console.warn('registerBlogPost is deprecated. Use Supabase Admin UI to manage blog posts.');
+};
 
 export const BlogProvider = ({ children }: { children: ReactNode }) => {
-  const getAllPosts = () => {
-    return [...blogPostRegistry].sort((a, b) => 
-      new Date(b.date).getTime() - new Date(a.date).getTime()
-    );
+  const [posts, setPosts] = useState<BlogPostType[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [error, setError] = useState<Error | null>(null);
+
+  useEffect(() => {
+    // Load posts when the component mounts
+    loadPosts();
+  }, []);
+
+  const loadPosts = async () => {
+    try {
+      setIsLoading(true);
+      const fetchedPosts = await fetchBlogPosts();
+      setPosts(fetchedPosts);
+    } catch (err) {
+      console.error("Failed to load blog posts:", err);
+      setError(err instanceof Error ? err : new Error(String(err)));
+    } finally {
+      setIsLoading(false);
+    }
   };
 
-  const getPostBySlug = (slug: string) => {
-    return blogPostRegistry.find(post => post.slug === slug);
+  const getAllPosts = async () => {
+    // If posts are already loaded, return them
+    if (posts.length > 0 && !isLoading) {
+      return posts;
+    }
+    
+    // Otherwise fetch them
+    try {
+      const fetchedPosts = await fetchBlogPosts();
+      setPosts(fetchedPosts);
+      return fetchedPosts;
+    } catch (err) {
+      console.error("Failed to get all blog posts:", err);
+      setError(err instanceof Error ? err : new Error(String(err)));
+      return [];
+    }
   };
 
-  const getRelatedPosts = (currentPostId: string, limit: number = 2) => {
-    const allPosts = blogPostRegistry.filter(post => post.id !== currentPostId);
-    // In a real app, you might want to implement more sophisticated logic to find related posts
-    return allPosts.slice(0, limit);
+  const getPostBySlug = async (slug: string) => {
+    try {
+      // Try to find in cache first
+      const cachedPost = posts.find(post => post.slug === slug);
+      if (cachedPost) {
+        return cachedPost;
+      }
+      
+      // Otherwise fetch from Supabase
+      return await fetchBlogPostBySlug(slug);
+    } catch (err) {
+      console.error(`Failed to get blog post with slug ${slug}:`, err);
+      setError(err instanceof Error ? err : new Error(String(err)));
+      return null;
+    }
+  };
+
+  const getRelatedPosts = async (currentPostId: string, limit: number = 2) => {
+    try {
+      return await fetchRelatedPosts(currentPostId, limit);
+    } catch (err) {
+      console.error(`Failed to get related posts for post ${currentPostId}:`, err);
+      setError(err instanceof Error ? err : new Error(String(err)));
+      return [];
+    }
+  };
+
+  const refetchPosts = async () => {
+    await loadPosts();
   };
 
   return (
-    <BlogContext.Provider value={{ getAllPosts, getPostBySlug, getRelatedPosts }}>
+    <BlogContext.Provider 
+      value={{ 
+        posts, 
+        isLoading, 
+        error, 
+        getAllPosts, 
+        getPostBySlug, 
+        getRelatedPosts,
+        refetchPosts 
+      }}
+    >
       {children}
     </BlogContext.Provider>
   );

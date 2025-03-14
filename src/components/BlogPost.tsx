@@ -1,4 +1,3 @@
-
 import { motion } from "framer-motion";
 import { ArrowLeft, Clock, Share2, BookmarkPlus, Facebook, Copy } from "lucide-react";
 import { X } from "lucide-react";
