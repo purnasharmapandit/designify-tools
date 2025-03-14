@@ -5,8 +5,8 @@ import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
-    <footer className="bg-gray-900 text-white pt-16 pb-8">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <footer className="bg-gray-900 text-white pt-16 pb-8 w-full">
+      <div className="w-full px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
           <div className="col-span-1 md:col-span-1">
             <div className="flex items-center gap-2 mb-4">
@@ -52,7 +52,7 @@ const Footer = () => {
           </div>
         </div>
         
-        <div className="border-t border-gray-800 pt-8 mt-4 text-center text-gray-400 text-sm">
+        <div className="border-t border-gray-800 pt-8 mt-4 text-left text-gray-400 text-sm">
           <p>© {new Date().getFullYear()} DesignAI. All rights reserved.</p>
         </div>
       </div>
