@@ -1,23 +1,10 @@
 
-import React, { useState, useEffect } from "react";
 import { useBlog, blogPosts } from "@/contexts/BlogContext";
 import BlogPost from "@/components/BlogPost";
-import { BlogPostType } from "@/types/blog";
 
 const ExportingDesigns = () => {
   const { getPostBySlug } = useBlog();
-  const [post, setPost] = useState<BlogPostType>(blogPosts.exportingDesigns);
-
-  useEffect(() => {
-    const fetchPost = async () => {
-      const fetchedPost = await getPostBySlug('exporting-designs');
-      if (fetchedPost) {
-        setPost(fetchedPost);
-      }
-    };
-
-    fetchPost();
-  }, [getPostBySlug]);
+  const post = getPostBySlug('exporting-designs') || blogPosts.exportingDesigns;
 
   const content = (
     <>
