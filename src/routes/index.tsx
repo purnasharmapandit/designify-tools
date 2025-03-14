@@ -35,6 +35,12 @@ import BackgroundRemover from "@/pages/background-remover/BackgroundRemover";
 
 // Admin
 import BlogAdmin from "@/pages/admin/BlogAdmin";
+import BlogPostsList from "@/pages/admin/blog/BlogPostsList";
+import BlogPostEditor from "@/pages/admin/blog/BlogPostEditor";
+import BlogCategories from "@/pages/admin/blog/BlogCategories";
+import BlogTags from "@/pages/admin/blog/BlogTags";
+import BlogAuthors from "@/pages/admin/blog/BlogAuthors";
+import SeedDatabase from "@/pages/admin/blog/SeedDatabase";
 
 const AppRoutes = () => {
   return (
@@ -79,6 +85,43 @@ const AppRoutes = () => {
           </ProtectedRoute>
         } 
       />
+      
+      {/* Admin Blog Management */}
+      <Route path="/admin/blog/posts" element={
+        <ProtectedRoute>
+          <BlogPostsList />
+        </ProtectedRoute>
+      } />
+      <Route path="/admin/blog/posts/new" element={
+        <ProtectedRoute>
+          <BlogPostEditor />
+        </ProtectedRoute>
+      } />
+      <Route path="/admin/blog/posts/edit/:id" element={
+        <ProtectedRoute>
+          <BlogPostEditor />
+        </ProtectedRoute>
+      } />
+      <Route path="/admin/blog/categories" element={
+        <ProtectedRoute>
+          <BlogCategories />
+        </ProtectedRoute>
+      } />
+      <Route path="/admin/blog/tags" element={
+        <ProtectedRoute>
+          <BlogTags />
+        </ProtectedRoute>
+      } />
+      <Route path="/admin/blog/authors" element={
+        <ProtectedRoute>
+          <BlogAuthors />
+        </ProtectedRoute>
+      } />
+      <Route path="/admin/blog/seed" element={
+        <ProtectedRoute>
+          <SeedDatabase />
+        </ProtectedRoute>
+      } />
       
       <Route path="*" element={<NotFound />} />
     </Routes>
