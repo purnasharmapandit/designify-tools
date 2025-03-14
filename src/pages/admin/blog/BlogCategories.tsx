@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
@@ -100,7 +99,6 @@ const BlogCategories = () => {
     }
     
     try {
-      // Generate slug from name if not provided
       if (!formData.slug) {
         formData.slug = formData.name.toLowerCase().replace(/[^a-z0-9\s]/g, "").replace(/\s+/g, "-");
       }
@@ -210,6 +208,8 @@ const BlogCategories = () => {
                   <Label>Category Color</Label>
                   <div className="mt-1.5">
                     <ColorPicker
+                      label="Category Color"
+                      id="category-color"
                       value={formData.color || "#4F46E5"}
                       onChange={handleColorChange}
                     />

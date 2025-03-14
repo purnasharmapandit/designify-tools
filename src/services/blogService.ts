@@ -59,10 +59,10 @@ export async function fetchBlogPosts({
   }
 
   // Transform the data to match our BlogPostType
-  return data.map(transformPostFromSupabase);
+  return data.map((post) => transformPostFromSupabase(post));
 }
 
-export async function fetchBlogPostBySlug(slug: string) {
+export async function fetchBlogPostBySlug(slug: string): Promise<BlogPostType | null> {
   const { data, error } = await supabase
     .from("blog_posts")
     .select(`
@@ -103,12 +103,12 @@ export async function fetchBlogPostBySlug(slug: string) {
   return transformPostFromSupabase(data, relatedPostsData);
 }
 
-export async function fetchRelatedPosts(postId: string, limit: number = 2) {
+export async function fetchRelatedPosts(postId: string, limit: number = 2): Promise<BlogPostType[]> {
   const { data, error } = await supabase
     .from("blog_related_posts")
     .select(`
       blog_posts!blog_related_posts_related_post_id_fkey(
-        id, title, slug, excerpt, cover_image
+        id, title, slug, date, excerpt, cover_image
       )
     `)
     .eq("post_id", postId)
@@ -120,12 +120,18 @@ export async function fetchRelatedPosts(postId: string, limit: number = 2) {
     return [];
   }
 
+  // Transform data to match our BlogPostType
   return data.map((item: any) => ({
+    id: item.blog_posts.id,
     title: item.blog_posts.title,
-    path: `/blogs/${item.blog_posts.slug}`,
-    image: item.blog_posts.cover_image,
-    excerpt: item.blog_posts.excerpt
-  }));
+    slug: item.blog_posts.slug,
+    date: item.blog_posts.date,
+    excerpt: item.blog_posts.excerpt,
+    coverImage: item.blog_posts.cover_image,
+    // Provide default values for required fields
+    category: "",
+    tags: []
+  } as BlogPostType));
 }
 
 // Helper function to transform Supabase data format to our BlogPostType

@@ -121,7 +121,7 @@ export async function seedBlogData() {
           date: new Date(post.date).toISOString(),
           reading_time: post.readingTime,
           excerpt: post.excerpt,
-          cover_image: post.coverImage,
+          cover_image: post.coverImage || null,
           author_id: authorId,
           category_id: categoryId,
           published: true

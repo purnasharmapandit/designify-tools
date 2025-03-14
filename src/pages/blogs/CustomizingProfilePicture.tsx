@@ -1,10 +1,23 @@
 
+import React, { useState, useEffect } from "react";
 import { useBlog, blogPosts } from "@/contexts/BlogContext";
 import BlogPost from "@/components/BlogPost";
+import { BlogPostType } from "@/types/blog";
 
 const CustomizingProfilePicture = () => {
   const { getPostBySlug } = useBlog();
-  const post = getPostBySlug('customizing-profile-picture') || blogPosts.customizingProfilePicture;
+  const [post, setPost] = useState<BlogPostType>(blogPosts.customizingProfilePicture);
+
+  useEffect(() => {
+    const fetchPost = async () => {
+      const fetchedPost = await getPostBySlug('customizing-profile-picture');
+      if (fetchedPost) {
+        setPost(fetchedPost);
+      }
+    };
+
+    fetchPost();
+  }, [getPostBySlug]);
 
   const content = (
     <>

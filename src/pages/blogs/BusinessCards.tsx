@@ -1,10 +1,23 @@
 
+import React, { useState, useEffect } from "react";
 import { useBlog, blogPosts } from "@/contexts/BlogContext";
 import BlogPost from "@/components/BlogPost";
+import { BlogPostType } from "@/types/blog";
 
 const BusinessCards = () => {
   const { getPostBySlug } = useBlog();
-  const post = getPostBySlug('business-cards') || blogPosts.businessCards;
+  const [post, setPost] = useState<BlogPostType>(blogPosts.businessCards);
+
+  useEffect(() => {
+    const fetchPost = async () => {
+      const fetchedPost = await getPostBySlug('business-cards');
+      if (fetchedPost) {
+        setPost(fetchedPost);
+      }
+    };
+
+    fetchPost();
+  }, [getPostBySlug]);
 
   const content = (
     <>

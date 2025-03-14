@@ -4,13 +4,18 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 
 interface ColorPickerProps {
-  label: string;
+  label?: string;
   value: string;
   onChange: (value: string) => void;
-  id: string;
+  id?: string;
 }
 
-const ColorPicker: React.FC<ColorPickerProps> = ({ label, value, onChange, id }) => {
+const ColorPicker: React.FC<ColorPickerProps> = ({ 
+  label = "Color", 
+  value, 
+  onChange, 
+  id = "color-picker" 
+}) => {
   return (
     <div className="space-y-2">
       <Label htmlFor={id} className="text-sm font-medium">{label}</Label>

@@ -1,13 +1,26 @@
 
+import React, { useState, useEffect } from "react";
 import { useBlog, blogPosts } from "@/contexts/BlogContext";
 import BlogPost from "@/components/BlogPost";
+import { BlogPostType } from "@/types/blog";
 
 const CreateLogo = () => {
   const { getPostBySlug } = useBlog();
-  const post = getPostBySlug('create-logo') || {
+  const [post, setPost] = useState<BlogPostType>({
     ...blogPosts.createLogo,
     categoryColor: "green"
-  };
+  });
+
+  useEffect(() => {
+    const fetchPost = async () => {
+      const fetchedPost = await getPostBySlug('create-logo');
+      if (fetchedPost) {
+        setPost(fetchedPost);
+      }
+    };
+
+    fetchPost();
+  }, [getPostBySlug]);
 
   const content = (
     <>

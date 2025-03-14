@@ -250,7 +250,7 @@ export const BlogProvider = ({ children }: { children: ReactNode }) => {
     }
   };
 
-  const getPostBySlug = async (slug: string) => {
+  const getPostBySlug = async (slug: string): Promise<BlogPostType | null> => {
     try {
       // Try to find in cache first
       const cachedPost = posts.find(post => post.slug === slug);
@@ -259,7 +259,8 @@ export const BlogProvider = ({ children }: { children: ReactNode }) => {
       }
       
       // Otherwise fetch from Supabase
-      return await fetchBlogPostBySlug(slug);
+      const post = await fetchBlogPostBySlug(slug);
+      return post;
     } catch (err) {
       console.error(`Failed to get blog post with slug ${slug}:`, err);
       setError(err instanceof Error ? err : new Error(String(err)));
@@ -267,9 +268,10 @@ export const BlogProvider = ({ children }: { children: ReactNode }) => {
     }
   };
 
-  const getRelatedPosts = async (currentPostId: string, limit: number = 2) => {
+  const getRelatedPosts = async (currentPostId: string, limit: number = 2): Promise<BlogPostType[]> => {
     try {
-      return await fetchRelatedPosts(currentPostId, limit);
+      const relatedPosts = await fetchRelatedPosts(currentPostId, limit);
+      return relatedPosts;
     } catch (err) {
       console.error(`Failed to get related posts for post ${currentPostId}:`, err);
       setError(err instanceof Error ? err : new Error(String(err)));
