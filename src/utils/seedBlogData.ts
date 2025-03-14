@@ -111,6 +111,10 @@ export async function seedBlogData() {
         ? insertedCategories?.find(c => c.name === post.category)?.id 
         : null;
       
+      // Use optional chaining to safely access coverImage
+      // This is the fix for the TypeScript error
+      const coverImage = 'coverImage' in post ? post.coverImage : null;
+      
       // Insert the blog post
       const { data: insertedPost, error: postError } = await supabase
         .from('blog_posts')
@@ -121,7 +125,7 @@ export async function seedBlogData() {
           date: new Date(post.date).toISOString(),
           reading_time: post.readingTime,
           excerpt: post.excerpt,
-          cover_image: post.coverImage || null,
+          cover_image: coverImage,
           author_id: authorId,
           category_id: categoryId,
           published: true
