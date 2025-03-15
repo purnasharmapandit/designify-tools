@@ -21,6 +21,9 @@ const BackgroundRemoverHero = () => {
               transition={{ duration: 0.5 }}
               className="text-center max-w-3xl mx-auto mb-8 md:mb-12"
             >
+              <div className="inline-flex p-3 bg-purple-100 rounded-full text-purple-600 mb-4">
+                <Scissors className="h-8 w-8" />
+              </div>
               <h1 className="text-3xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-purple-700 via-indigo-600 to-purple-600 bg-clip-text text-transparent">
                 Professional Background Remover
               </h1>

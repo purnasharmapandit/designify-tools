@@ -1,7 +1,7 @@
 
 import React from "react";
 import { motion } from "framer-motion";
-import { CheckCircle } from "lucide-react";
+import { Check, Mail, Briefcase, Layout } from "lucide-react";
 
 const HeroSection = () => {
   return (
@@ -21,6 +21,9 @@ const HeroSection = () => {
               transition={{ duration: 0.5 }}
               className="text-center max-w-3xl mx-auto mb-8 md:mb-12"
             >
+              <div className="inline-flex p-3 bg-indigo-100 rounded-full text-indigo-600 mb-4">
+                <Mail className="h-8 w-8" />
+              </div>
               <h1 className="text-3xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-indigo-700 via-purple-600 to-indigo-600 bg-clip-text text-transparent">
                 Professional Email Signatures
               </h1>
@@ -29,15 +32,15 @@ const HeroSection = () => {
               </p>
               <div className="flex flex-wrap items-center justify-center gap-3 text-sm font-medium">
                 <div className="flex items-center gap-1.5 bg-indigo-50 text-indigo-700 px-3 py-1.5 rounded-full">
-                  <CheckCircle className="h-4 w-4 text-indigo-500" />
+                  <Check className="h-4 w-4 text-indigo-500" />
                   <span>Works with Gmail</span>
                 </div>
                 <div className="flex items-center gap-1.5 bg-indigo-50 text-indigo-700 px-3 py-1.5 rounded-full">
-                  <CheckCircle className="h-4 w-4 text-indigo-500" />
+                  <Check className="h-4 w-4 text-indigo-500" />
                   <span>Works with Outlook</span>
                 </div>
                 <div className="flex items-center gap-1.5 bg-indigo-50 text-indigo-700 px-3 py-1.5 rounded-full">
-                  <CheckCircle className="h-4 w-4 text-indigo-500" />
+                  <Check className="h-4 w-4 text-indigo-500" />
                   <span>Works with Apple Mail</span>
                 </div>
               </div>

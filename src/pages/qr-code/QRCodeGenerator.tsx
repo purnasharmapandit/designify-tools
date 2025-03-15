@@ -1,10 +1,8 @@
-
 import React from "react";
-import { motion } from "framer-motion";
-import { QrCode } from "lucide-react";
 import { Helmet } from "react-helmet";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import HeroSection from "@/components/qr-code/HeroSection";
 import QRCodeForm from "@/components/qr-code/QRCodeForm";
 import QRCodePreview from "@/components/qr-code/QRCodePreview";
 import FeaturesSection from "@/components/qr-code/FeaturesSection";
@@ -56,26 +54,10 @@ const QRCodeGenerator = () => {
       <Navbar />
       <main className="flex-grow">
         {/* Hero Section */}
-        <section className="py-20 bg-gradient-to-b from-primary/10 to-background">
-          <div className="container mx-auto px-4">
-            <div className="max-w-5xl mx-auto text-center mb-12">
-              <motion.div
-                initial={{ opacity: 0, y: -20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5 }}
-              >
-                <div className="inline-block p-3 bg-primary/10 rounded-full text-primary mb-4">
-                  <QrCode className="h-10 w-10" />
-                </div>
-                <h1 className="text-4xl md:text-5xl font-bold font-display mb-4">
-                  Free QR Code Generator
-                </h1>
-                <p className="text-xl text-gray-600 md:max-w-3xl mx-auto">
-                  Create customizable QR codes for your business, personal, or marketing needs in seconds — no sign up required.
-                </p>
-              </motion.div>
-            </div>
+        <HeroSection />
 
+        <section className="py-16">
+          <div className="container mx-auto px-4">
             <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto mb-12">
               <QRCodeForm 
                 options={options} 
