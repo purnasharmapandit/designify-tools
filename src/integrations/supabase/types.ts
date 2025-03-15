@@ -236,6 +236,60 @@ export type Database = {
         }
         Relationships: []
       }
+      feature_costs: {
+        Row: {
+          created_at: string
+          credit_cost: number
+          description: string | null
+          feature_name: string
+          id: string
+        }
+        Insert: {
+          created_at?: string
+          credit_cost: number
+          description?: string | null
+          feature_name: string
+          id?: string
+        }
+        Update: {
+          created_at?: string
+          credit_cost?: number
+          description?: string | null
+          feature_name?: string
+          id?: string
+        }
+        Relationships: []
+      }
+      pricing_tiers: {
+        Row: {
+          created_at: string
+          credits: number
+          features: string[]
+          id: string
+          is_popular: boolean
+          name: string
+          price: number
+        }
+        Insert: {
+          created_at?: string
+          credits: number
+          features: string[]
+          id?: string
+          is_popular?: boolean
+          name: string
+          price: number
+        }
+        Update: {
+          created_at?: string
+          credits?: number
+          features?: string[]
+          id?: string
+          is_popular?: boolean
+          name?: string
+          price?: number
+        }
+        Relationships: []
+      }
       profiles: {
         Row: {
           avatar_url: string | null
@@ -260,9 +314,34 @@ export type Database = {
         }
         Relationships: []
       }
+      user_credits: {
+        Row: {
+          created_at: string
+          credits_balance: number
+          id: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          credits_balance?: number
+          id?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          credits_balance?: number
+          id?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       user_generations: {
         Row: {
           created_at: string
+          credit_cost: number
           id: string
           subscription_tier: string
           tool_type: string
@@ -270,6 +349,7 @@ export type Database = {
         }
         Insert: {
           created_at?: string
+          credit_cost?: number
           id?: string
           subscription_tier?: string
           tool_type: string
@@ -277,6 +357,7 @@ export type Database = {
         }
         Update: {
           created_at?: string
+          credit_cost?: number
           id?: string
           subscription_tier?: string
           tool_type?: string

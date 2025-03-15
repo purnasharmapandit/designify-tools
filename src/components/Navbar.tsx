@@ -1,9 +1,10 @@
 
 import { Button } from "@/components/ui/button";
-import { Menu, Wand2, X, User, LogOut, Sparkles } from "lucide-react";
+import { Menu, Wand2, X, User, LogOut, Sparkles, Coins } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useAuth } from "@/contexts/AuthContext";
+import { CreditBalance } from "@/components/CreditBalance";
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -232,6 +233,7 @@ const Navbar = () => {
               <div className="h-10 w-20 bg-gray-200 animate-pulse rounded-full"></div>
             ) : user ? (
               <div className="flex items-center gap-2">
+                <CreditBalance />
                 <Button
                   variant="ghost"
                   size="sm"
@@ -383,6 +385,9 @@ const Navbar = () => {
                   <div className="h-10 w-full bg-gray-200 animate-pulse rounded-full"></div>
                 ) : user ? (
                   <div className="space-y-2">
+                    <div className="px-3 py-2">
+                      <CreditBalance />
+                    </div>
                     <Button
                       variant="outline"
                       className="w-full justify-start"
