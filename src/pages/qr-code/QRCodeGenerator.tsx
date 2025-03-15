@@ -1,8 +1,8 @@
+
 import React from "react";
 import { Helmet } from "react-helmet";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import HeroSection from "@/components/qr-code/HeroSection";
 import QRCodeForm from "@/components/qr-code/QRCodeForm";
 import QRCodePreview from "@/components/qr-code/QRCodePreview";
 import FeaturesSection from "@/components/qr-code/FeaturesSection";
@@ -12,6 +12,8 @@ import FAQSection from "@/components/qr-code/FAQSection";
 import { Button } from "@/components/ui/button";
 import { useQRCode } from "@/hooks/use-qrcode";
 import { toast } from "sonner";
+import { Check, Scan, QrCode, LayoutGrid, Download } from "lucide-react";
+import StandardHeroSection from "@/components/shared/StandardHeroSection";
 
 const QRCodeGenerator = () => {
   const { 
@@ -43,6 +45,21 @@ const QRCodeGenerator = () => {
     toast.success("QR code downloaded successfully!");
   };
 
+  const qrCodeImage = (
+    <div className="relative w-full max-w-md mx-auto">
+      <div className="bg-white rounded-xl shadow-lg p-6 transform rotate-3 absolute -right-5 -top-5 z-10">
+        <QrCode className="w-12 h-12 text-primary" />
+      </div>
+      <div className="bg-white rounded-xl shadow-lg p-6">
+        <img 
+          src="/placeholder.svg" 
+          alt="QR Code Sample" 
+          className="w-full" 
+        />
+      </div>
+    </div>
+  );
+
   return (
     <div className="min-h-screen flex flex-col">
       <Helmet>
@@ -54,7 +71,21 @@ const QRCodeGenerator = () => {
       <Navbar />
       <main className="flex-grow">
         {/* Hero Section */}
-        <HeroSection />
+        <StandardHeroSection
+          toolLabel="Free QR Code Generator"
+          title="Create"
+          highlightedText="Custom QR Codes"
+          restOfTitle="in Seconds"
+          description="Generate professional QR codes for your business, products, or personal use. Customize colors, add logos, and download in multiple formats."
+          features={[
+            { icon: <Check className="h-4 w-4" />, text: "No Sign-up Required" },
+            { icon: <LayoutGrid className="h-4 w-4" />, text: "Multiple Formats" },
+            { icon: <Scan className="h-4 w-4" />, text: "Business Ready" }
+          ]}
+          image={qrCodeImage}
+          bgColor="bg-indigo-950"
+          textColor="text-white"
+        />
 
         <section className="py-16">
           <div className="container mx-auto px-4">
