@@ -11,10 +11,15 @@ import { motion } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Helmet } from "react-helmet";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
 const Auth = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [adminCode, setAdminCode] = useState("");
+  const [needsDemoRedirect, setNeedsDemoRedirect] = useState(false);
   const [isSignUp, setIsSignUp] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { user, signIn, signUp, isLoading } = useAuth();
@@ -52,23 +57,45 @@ const Auth = () => {
   // Redirect if already logged in
   useEffect(() => {
     if (user && !isLoading) {
-      const returnUrl = getReturnUrl();
-      navigate(returnUrl);
+      if (needsDemoRedirect) {
+        navigate("/contact-us", { state: { bookDemo: true } });
+        setNeedsDemoRedirect(false);
+      } else {
+        const returnUrl = getReturnUrl();
+        navigate(returnUrl);
+      }
     }
-  }, [user, isLoading, navigate, location]);
+  }, [user, isLoading, navigate, location, needsDemoRedirect]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
     if (!email || !password) {
-      toast.error("Please fill in all fields");
+      toast.error("Please fill in all required fields");
+      return;
+    }
+
+    if (isSignUp && (!firstName || !lastName)) {
+      toast.error("Please enter your first and last name");
       return;
     }
 
     try {
       setIsSubmitting(true);
       if (isSignUp) {
-        await signUp(email, password);
+        // Include user metadata in signup
+        const metadata = {
+          first_name: firstName,
+          last_name: lastName,
+          admin_code: adminCode
+        };
+        
+        await signUp(email, password, metadata);
+        
+        if (adminCode === "") {
+          setNeedsDemoRedirect(true);
+          toast.info("Please book a demo to receive your access code");
+        }
       } else {
         await signIn(email, password);
       }
@@ -79,7 +106,35 @@ const Auth = () => {
     }
   };
 
-  if (isLoading || user) {
+  const handleGetCodeClick = () => {
+    if (isSignUp) {
+      setNeedsDemoRedirect(true);
+      setIsSubmitting(true);
+      // Include user metadata in signup
+      const metadata = {
+        first_name: firstName,
+        last_name: lastName,
+        admin_code: ""
+      };
+      
+      // Attempt to sign up first
+      signUp(email, password, metadata)
+        .then(() => {
+          navigate("/contact-us", { state: { bookDemo: true } });
+        })
+        .catch(error => {
+          console.error("Authentication error:", error);
+          toast.error("Error creating account. Please try again.");
+        })
+        .finally(() => {
+          setIsSubmitting(false);
+        });
+    } else {
+      navigate("/contact-us", { state: { bookDemo: true } });
+    }
+  };
+
+  if (isLoading) {
     return (
       <div className="flex justify-center items-center min-h-screen">
         <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary"></div>
@@ -115,6 +170,41 @@ const Auth = () => {
 
           <div className="bg-white px-6 py-8 shadow sm:rounded-lg sm:px-8">
             <form className="space-y-6" onSubmit={handleSubmit}>
+              {isSignUp && (
+                <>
+                  <div className="grid grid-cols-2 gap-4">
+                    <div>
+                      <Label htmlFor="firstName">First Name</Label>
+                      <div className="mt-2">
+                        <Input
+                          id="firstName"
+                          name="firstName"
+                          type="text"
+                          required
+                          value={firstName}
+                          onChange={(e) => setFirstName(e.target.value)}
+                          className="w-full"
+                        />
+                      </div>
+                    </div>
+                    <div>
+                      <Label htmlFor="lastName">Last Name</Label>
+                      <div className="mt-2">
+                        <Input
+                          id="lastName"
+                          name="lastName"
+                          type="text"
+                          required
+                          value={lastName}
+                          onChange={(e) => setLastName(e.target.value)}
+                          className="w-full"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </>
+              )}
+
               <div>
                 <Label htmlFor="email">Email address</Label>
                 <div className="mt-2">
@@ -146,6 +236,32 @@ const Auth = () => {
                   />
                 </div>
               </div>
+
+              {isSignUp && (
+                <div>
+                  <div className="flex justify-between items-center mb-1">
+                    <Label htmlFor="adminCode">Admin/Owner Code</Label>
+                    <button
+                      type="button"
+                      onClick={handleGetCodeClick}
+                      className="text-xs text-primary hover:underline"
+                    >
+                      Need a code? Book a demo
+                    </button>
+                  </div>
+                  <div className="mt-2">
+                    <Input
+                      id="adminCode"
+                      name="adminCode"
+                      type="text"
+                      value={adminCode}
+                      onChange={(e) => setAdminCode(e.target.value)}
+                      className="w-full"
+                      placeholder="Enter code provided by admin (optional)"
+                    />
+                  </div>
+                </div>
+              )}
 
               <div>
                 <Button 

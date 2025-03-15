@@ -4,11 +4,12 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Mail, Phone, MapPin, Send, Github, Twitter, Linkedin, Facebook } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { useLocation } from "react-router-dom";
 
 const tools = [
   "Logo Maker",
@@ -22,6 +23,7 @@ const tools = [
 
 const ContactUs = () => {
   const { toast } = useToast();
+  const location = useLocation();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -30,6 +32,17 @@ const ContactUs = () => {
     message: "",
     selectedTool: ""
   });
+
+  // Check if we're coming from auth page with "Book A Demo" request
+  useEffect(() => {
+    if (location.state && location.state.bookDemo) {
+      setFormData(prev => ({
+        ...prev,
+        subject: "Book A Demo",
+        message: "I would like to book a demo to receive an access code for the platform."
+      }));
+    }
+  }, [location]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -74,7 +87,9 @@ const ContactUs = () => {
     
     toast({
       title: "Message Sent",
-      description: "Thank you for your message. We'll get back to you soon!",
+      description: formData.subject === "Book A Demo" 
+        ? "Thank you for booking a demo. We'll contact you soon with your access code!" 
+        : "Thank you for your message. We'll get back to you soon!",
     });
     
     setFormData({
@@ -174,7 +189,9 @@ const ContactUs = () => {
           
           {/* Contact Form Column */}
           <div className="bg-white rounded-3xl shadow-sm p-8 border border-gray-100">
-            <h2 className="text-2xl font-semibold mb-6">Send Us a Message</h2>
+            <h2 className="text-2xl font-semibold mb-6">
+              {location.state?.bookDemo ? "Book Your Demo" : "Send Us a Message"}
+            </h2>
             <form onSubmit={handleSubmit} className="space-y-6">
               <div>
                 <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
@@ -287,7 +304,7 @@ const ContactUs = () => {
               
               <Button type="submit" className="w-full flex items-center justify-center">
                 <Send className="mr-2 h-4 w-4" />
-                Send Message
+                {formData.subject === "Book A Demo" ? "Request Demo & Access Code" : "Send Message"}
               </Button>
             </form>
           </div>
