@@ -9,9 +9,14 @@ import { useToast } from "@/components/ui/use-toast";
 interface UploadSectionProps {
   onFileChange: (file: File) => void;
   imagePreview: string | null;
+  onResetImage: () => void;
 }
 
-const UploadSection: React.FC<UploadSectionProps> = ({ onFileChange, imagePreview }) => {
+const UploadSection: React.FC<UploadSectionProps> = ({ 
+  onFileChange, 
+  imagePreview,
+  onResetImage
+}) => {
   const [isUploading, setIsUploading] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const { toast } = useToast();
@@ -140,9 +145,7 @@ const UploadSection: React.FC<UploadSectionProps> = ({ onFileChange, imagePrevie
             <div className="flex justify-between">
               <Button
                 variant="outline"
-                onClick={() => {
-                  onFileChange(new File([], "")); // Reset file
-                }}
+                onClick={onResetImage}
               >
                 Remove
               </Button>

@@ -37,6 +37,12 @@ const BackgroundRemover = () => {
     }
   };
 
+  const resetImage = () => {
+    setFile(null);
+    setOriginalImage(null);
+    setProcessedImage(null);
+  };
+
   const handleRemoveBackground = async () => {
     if (!file || !originalImage) {
       toast({
@@ -101,7 +107,8 @@ const BackgroundRemover = () => {
           <div className="grid md:grid-cols-2 gap-8 lg:gap-12">
             <UploadSection 
               onFileChange={handleFileChange} 
-              imagePreview={originalImage} 
+              imagePreview={originalImage}
+              onResetImage={resetImage}
             />
             <PreviewSection 
               originalImage={originalImage}
