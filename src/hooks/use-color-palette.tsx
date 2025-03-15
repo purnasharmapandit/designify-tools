@@ -1,11 +1,7 @@
-
 import { useState } from "react";
 import { toast } from "sonner";
-import { 
-  generatePalette, 
-  copyPaletteToClipboard, 
-  exportPaletteAsFile 
-} from "@/utils/palette-generators";
+import { generatePalette } from "@/utils/palette-generators";
+import { copyPaletteToClipboard, exportPaletteAsFile } from "@/utils/palette-export";
 import { PaletteType, ExportFormat } from "@/types/color-palette";
 import { getRandomColor } from "@/utils/color-utils";
 
