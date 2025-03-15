@@ -22,12 +22,13 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 
-const Tool = ({ icon: Icon, name, description, color, link }: { 
+const Tool = ({ icon: Icon, name, description, color, link, comingSoon }: { 
   icon: any; 
   name: string; 
   description: string;
   color: string;
   link?: string;
+  comingSoon?: boolean;
 }) => (
   <motion.div
     initial={{ opacity: 0, y: 20 }}
@@ -40,10 +41,16 @@ const Tool = ({ icon: Icon, name, description, color, link }: {
     <h3 className="text-lg font-semibold mb-2">{name}</h3>
     <p className="text-gray-600">{description}</p>
     
+    {comingSoon && (
+      <div className="absolute top-4 right-4">
+        <span className="bg-yellow-100 text-yellow-800 text-xs font-medium px-2.5 py-0.5 rounded">Coming Soon</span>
+      </div>
+    )}
+    
     {link && (
       <div className="mt-4">
         <Link to={link}>
-          <Button variant="outline" size="sm">Try Now</Button>
+          <Button variant="outline" size="sm">{comingSoon ? "Learn More" : "Try Now"}</Button>
         </Link>
       </div>
     )}
@@ -95,52 +102,51 @@ const Tools = () => {
       link: "/background-remover"
     },
     {
-      icon: Image,
-      name: "Banner Designer",
-      description: "Design eye-catching banners for social media and marketing",
-      color: "bg-pink-100 text-pink-500"
-    },
-    {
-      icon: Layout,
+      icon: Share2,
       name: "Social Media Kit",
       description: "Generate complete social media graphic packages instantly",
-      color: "bg-indigo-100 text-indigo-500"
+      color: "bg-indigo-100 text-indigo-500",
+      link: "/social-media-kit",
+      comingSoon: true
     },
     {
       icon: Type,
       name: "Typography Tool",
       description: "Perfect your text layouts with advanced typography options",
-      color: "bg-orange-100 text-orange-500"
-    },
-    {
-      icon: Presentation,
-      name: "Presentation Maker",
-      description: "Design professional presentations with ready-to-use templates",
-      color: "bg-indigo-100 text-indigo-500"
-    },
-    {
-      icon: FileImage,
-      name: "Image Editor",
-      description: "Edit and enhance images with powerful tools",
-      color: "bg-red-100 text-red-500"
+      color: "bg-blue-100 text-blue-500",
+      link: "/typography-tool",
+      comingSoon: true
     },
     {
       icon: Layers,
       name: "Mock-up Generator",
       description: "Create realistic product mock-ups instantly",
-      color: "bg-cyan-100 text-cyan-500"
+      color: "bg-cyan-100 text-cyan-500",
+      link: "/mockup-generator",
+      comingSoon: true
     },
     {
-      icon: Wand2,
-      name: "Background Remover",
-      description: "Remove backgrounds from images with AI precision",
-      color: "bg-violet-100 text-violet-500"
+      icon: Presentation,
+      name: "Presentation Maker",
+      description: "Design professional presentations with ready-to-use templates",
+      color: "bg-emerald-100 text-emerald-500",
+      link: "/presentation-maker",
+      comingSoon: true
     },
     {
-      icon: Share2,
-      name: "Social Media Templates",
-      description: "Ready-to-use templates for all social platforms",
-      color: "bg-rose-100 text-rose-500"
+      icon: FileImage,
+      name: "Image Editor",
+      description: "Edit and enhance images with powerful tools",
+      color: "bg-violet-100 text-violet-500",
+      link: "/image-editor",
+      comingSoon: true
+    },
+    {
+      icon: Layout,
+      name: "Business Card Generator",
+      description: "Create professional business cards that leave a lasting impression",
+      color: "bg-pink-100 text-pink-500",
+      link: "/business-card-generator"
     }
   ];
 

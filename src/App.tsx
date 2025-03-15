@@ -1,3 +1,4 @@
+
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -33,6 +34,11 @@ import EmailSignatureGenerator from "./pages/email-signature/EmailSignatureGener
 import BackgroundRemover from "./pages/background-remover/BackgroundRemover";
 import BusinessCardGenerator from "./pages/business-card/BusinessCardGenerator";
 import BusinessCardEditor from "./pages/business-card/BusinessCardEditor";
+import SocialMediaKit from "./pages/social-media-kit/SocialMediaKit";
+import TypographyTool from "./pages/typography-tool/TypographyTool";
+import MockupGenerator from "./pages/mockup-generator/MockupGenerator";
+import PresentationMaker from "./pages/presentation-maker/PresentationMaker";
+import ImageEditor from "./pages/image-editor/ImageEditor";
 
 const queryClient = new QueryClient();
 
@@ -73,6 +79,11 @@ function App() {
                   <Route path="/background-remover" element={<BackgroundRemover />} />
                   <Route path="/business-card-generator" element={<BusinessCardGenerator />} />
                   <Route path="/business-card-editor" element={<BusinessCardEditor />} />
+                  <Route path="/social-media-kit" element={<SocialMediaKit />} />
+                  <Route path="/typography-tool" element={<TypographyTool />} />
+                  <Route path="/mockup-generator" element={<MockupGenerator />} />
+                  <Route path="/presentation-maker" element={<PresentationMaker />} />
+                  <Route path="/image-editor" element={<ImageEditor />} />
                   <Route path="/auth" element={<Auth />} />
                   <Route path="*" element={<NotFound />} />
                 </Routes>
