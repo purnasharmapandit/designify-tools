@@ -4,6 +4,15 @@ import { Menu, Wand2, X, User, LogOut } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useAuth } from "@/contexts/AuthContext";
+import {
+  NavigationMenu,
+  NavigationMenuContent,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
+  NavigationMenuTrigger,
+  navigationMenuTriggerStyle
+} from "@/components/ui/navigation-menu";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -28,12 +37,100 @@ const Navbar = () => {
             >
               Home
             </Link>
-            <Link 
-              to="/tools" 
-              className="font-medium text-gray-900 hover:text-primary transition-colors"
-            >
-              Tools
-            </Link>
+            
+            {/* Tools Dropdown Menu */}
+            <div className="relative inline-block font-medium">
+              <NavigationMenu>
+                <NavigationMenuList>
+                  <NavigationMenuItem>
+                    <NavigationMenuTrigger className="font-medium text-gray-900 hover:text-primary transition-colors">Tools</NavigationMenuTrigger>
+                    <NavigationMenuContent>
+                      <ul className="grid gap-3 p-4 w-[220px]">
+                        <li className="row-span-1">
+                          <NavigationMenuLink asChild>
+                            <Link
+                              to="/qr-code-generator"
+                              className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
+                            >
+                              <div className="text-sm font-medium leading-none">QR Code Generator</div>
+                              <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
+                                Create customizable QR codes easily
+                              </p>
+                            </Link>
+                          </NavigationMenuLink>
+                        </li>
+                        <li className="row-span-1">
+                          <NavigationMenuLink asChild>
+                            <Link
+                              to="/color-palette-generator"
+                              className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
+                            >
+                              <div className="text-sm font-medium leading-none">Color Palette Generator</div>
+                              <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
+                                Generate beautiful color schemes
+                              </p>
+                            </Link>
+                          </NavigationMenuLink>
+                        </li>
+                        <li className="row-span-1">
+                          <NavigationMenuLink asChild>
+                            <Link
+                              to="/business-card-generator"
+                              className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
+                            >
+                              <div className="text-sm font-medium leading-none">Business Card Generator</div>
+                              <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
+                                Design professional business cards
+                              </p>
+                            </Link>
+                          </NavigationMenuLink>
+                        </li>
+                        <li className="row-span-1">
+                          <NavigationMenuLink asChild>
+                            <Link
+                              to="/background-remover"
+                              className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
+                            >
+                              <div className="text-sm font-medium leading-none">Background Remover</div>
+                              <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
+                                Remove image backgrounds with AI
+                              </p>
+                            </Link>
+                          </NavigationMenuLink>
+                        </li>
+                        <li className="row-span-1">
+                          <NavigationMenuLink asChild>
+                            <Link
+                              to="/email-signature-generator"
+                              className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
+                            >
+                              <div className="text-sm font-medium leading-none">Email Signature Generator</div>
+                              <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
+                                Create professional email signatures
+                              </p>
+                            </Link>
+                          </NavigationMenuLink>
+                        </li>
+                        <li className="row-span-1">
+                          <NavigationMenuLink asChild>
+                            <Link
+                              to="/tools"
+                              className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground font-medium text-primary"
+                            >
+                              <div className="text-sm font-medium leading-none">All Tools</div>
+                              <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
+                                Explore our complete toolkit
+                              </p>
+                            </Link>
+                          </NavigationMenuLink>
+                        </li>
+                      </ul>
+                    </NavigationMenuContent>
+                  </NavigationMenuItem>
+                </NavigationMenuList>
+              </NavigationMenu>
+            </div>
+
             <Link 
               to="/pricing" 
               className="font-medium text-gray-900 hover:text-primary transition-colors"
@@ -107,13 +204,53 @@ const Navbar = () => {
               >
                 Home
               </Link>
-              <Link 
-                to="/tools"
-                className="block px-3 py-2 rounded-md text-base font-medium text-gray-900 hover:text-primary hover:bg-gray-50"
-                onClick={() => setIsMenuOpen(false)}
-              >
+              <div className="px-3 py-2 rounded-md text-base font-medium text-gray-900">
                 Tools
-              </Link>
+                <div className="pl-4 mt-2 space-y-1 border-l border-gray-200">
+                  <Link 
+                    to="/qr-code-generator"
+                    className="block px-3 py-2 rounded-md text-sm font-medium text-gray-900 hover:text-primary hover:bg-gray-50"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    QR Code Generator
+                  </Link>
+                  <Link 
+                    to="/color-palette-generator"
+                    className="block px-3 py-2 rounded-md text-sm font-medium text-gray-900 hover:text-primary hover:bg-gray-50"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    Color Palette Generator
+                  </Link>
+                  <Link 
+                    to="/business-card-generator"
+                    className="block px-3 py-2 rounded-md text-sm font-medium text-gray-900 hover:text-primary hover:bg-gray-50"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    Business Card Generator
+                  </Link>
+                  <Link 
+                    to="/background-remover"
+                    className="block px-3 py-2 rounded-md text-sm font-medium text-gray-900 hover:text-primary hover:bg-gray-50"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    Background Remover
+                  </Link>
+                  <Link 
+                    to="/email-signature-generator"
+                    className="block px-3 py-2 rounded-md text-sm font-medium text-gray-900 hover:text-primary hover:bg-gray-50"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    Email Signature Generator
+                  </Link>
+                  <Link 
+                    to="/tools"
+                    className="block px-3 py-2 rounded-md text-sm font-medium text-primary hover:text-primary hover:bg-gray-50"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    All Tools
+                  </Link>
+                </div>
+              </div>
               <Link 
                 to="/pricing"
                 className="block px-3 py-2 rounded-md text-base font-medium text-gray-900 hover:text-primary hover:bg-gray-50"
