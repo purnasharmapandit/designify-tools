@@ -1,5 +1,5 @@
 
-import React from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -10,10 +10,124 @@ import StylesGallery from "@/components/icon-generator/StylesGallery";
 import FAQSection from "@/components/icon-generator/FAQSection";
 import FeaturesSection from "@/components/icon-generator/FeaturesSection";
 import UseCasesSection from "@/components/icon-generator/UseCasesSection";
-import { Check, Wand2, Sparkles, SquarePen } from "lucide-react";
+import { Check, Wand2, Sparkles, SquarePen, Download } from "lucide-react";
 import StandardHeroSection from "@/components/shared/StandardHeroSection";
+import { toast } from "sonner";
+import { GeneratedIcon } from "@/services/runware";
+
+// Define the IconGeneratorFormData type
+export interface IconGeneratorFormData {
+  prompt: string;
+  style: string;
+  color: string;
+  backgroundColor: string;
+  count: number;
+}
+
+// Define the icon styles
+export const ICON_STYLES = [
+  { 
+    id: "flat", 
+    name: "Flat", 
+    description: "Clean, modern icons with solid colors and minimal details" 
+  },
+  { 
+    id: "gradient", 
+    name: "Gradient", 
+    description: "Smooth color transitions creating depth and dimension" 
+  },
+  { 
+    id: "outlined", 
+    name: "Outlined", 
+    description: "Simple line-based icons with a clean, minimalist aesthetic" 
+  },
+  { 
+    id: "3d", 
+    name: "3D", 
+    description: "Dimensional icons with shadows and perspective" 
+  },
+  { 
+    id: "isometric", 
+    name: "Isometric", 
+    description: "Icons with a technical, three-dimensional perspective" 
+  },
+  { 
+    id: "hand-drawn", 
+    name: "Hand Drawn", 
+    description: "Sketched, artistic icons with a personal touch" 
+  },
+  { 
+    id: "pixel", 
+    name: "Pixel", 
+    description: "Retro-style icons inspired by early digital graphics" 
+  },
+  { 
+    id: "minimalist", 
+    name: "Minimalist", 
+    description: "Ultra-simplified icons focusing on essential elements" 
+  },
+  { 
+    id: "duotone", 
+    name: "Duotone", 
+    description: "Two-color icons with overlapping elements" 
+  },
+];
 
 const IconGenerator = () => {
+  // State for form data
+  const [formData, setFormData] = useState<IconGeneratorFormData>({
+    prompt: "",
+    style: "flat",
+    color: "#3b82f6",
+    backgroundColor: "#ffffff",
+    count: 4
+  });
+
+  // State for generated icons
+  const [icons, setIcons] = useState<GeneratedIcon[]>([]);
+  const [isGenerating, setIsGenerating] = useState(false);
+
+  // Handle form changes
+  const handleFormChange = (data: Partial<IconGeneratorFormData>) => {
+    setFormData(prev => ({ ...prev, ...data }));
+  };
+
+  // Handle icon generation
+  const handleGenerateIcons = () => {
+    if (!formData.prompt.trim()) {
+      toast.error("Please provide a description for your icon");
+      return;
+    }
+
+    setIsGenerating(true);
+    
+    // Simulate API call for icon generation
+    setTimeout(() => {
+      // Mock generated icons
+      const mockIcons: GeneratedIcon[] = Array(formData.count).fill(0).map((_, index) => ({
+        id: `icon-${Date.now()}-${index}`,
+        imageURL: `https://via.placeholder.com/200x200/${formData.color.substring(1)}/ffffff?text=Icon+${index + 1}`,
+        prompt: formData.prompt,
+        style: formData.style
+      }));
+      
+      setIcons(mockIcons);
+      setIsGenerating(false);
+      toast.success(`Generated ${formData.count} icons successfully!`);
+    }, 2000);
+  };
+
+  // Handle icon download
+  const handleDownloadIcon = (iconUrl: string) => {
+    const link = document.createElement('a');
+    link.href = iconUrl;
+    link.download = `icon-${Date.now()}.png`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    toast.success("Icon downloaded!");
+  };
+
   const iconGeneratorImage = (
     <div className="relative w-full max-w-md mx-auto">
       <div className="bg-white rounded-xl shadow-lg p-4 transform rotate-3 absolute -right-5 -top-5 z-10">
@@ -61,15 +175,26 @@ const IconGenerator = () => {
           <div className="container mx-auto px-4">
             <div className="max-w-6xl mx-auto">
               <div className="grid md:grid-cols-2 gap-8">
-                <IconGeneratorForm />
-                <IconPreview />
+                <IconGeneratorForm 
+                  formData={formData}
+                  onChange={handleFormChange}
+                  onGenerate={handleGenerateIcons}
+                  isGenerating={isGenerating}
+                  styles={ICON_STYLES}
+                />
+                <IconPreview 
+                  icons={icons}
+                  isLoading={isGenerating}
+                  onDownload={handleDownloadIcon}
+                  showPlaceholder={icons.length === 0}
+                />
               </div>
             </div>
           </div>
         </section>
 
         <HowItWorksSection />
-        <StylesGallery />
+        <StylesGallery styles={ICON_STYLES} />
         <FeaturesSection />
         <UseCasesSection />
         <FAQSection />

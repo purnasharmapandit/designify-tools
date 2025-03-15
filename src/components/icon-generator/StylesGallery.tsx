@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
 
-interface StylesGalleryProps {
+export interface StylesGalleryProps {
   styles: Array<{ id: string; name: string; description: string }>;
 }
 
