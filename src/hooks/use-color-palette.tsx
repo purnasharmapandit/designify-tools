@@ -3,7 +3,8 @@ import { useState } from "react";
 import { toast } from "sonner";
 import { useGenerateColorPalette } from "./use-color-palette";
 
-export function useColorPalette() {
+// Rename this hook to avoid the circular import
+export function useColorPaletteGenerator() {
   const {
     colors,
     lockStatus,
@@ -87,4 +88,9 @@ export function useColorPalette() {
     generateFromImage,
     isGenerating,
   };
+}
+
+// Export the main hook that will be used by the components
+export function useColorPalette() {
+  return useColorPaletteGenerator();
 }

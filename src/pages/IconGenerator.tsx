@@ -103,12 +103,14 @@ const IconGenerator = () => {
     
     // Simulate API call for icon generation
     setTimeout(() => {
-      // Mock generated icons
+      // Mock generated icons - updated to match the GeneratedIcon interface
       const mockIcons: GeneratedIcon[] = Array(formData.count).fill(0).map((_, index) => ({
         id: `icon-${Date.now()}-${index}`,
         imageURL: `https://via.placeholder.com/200x200/${formData.color.substring(1)}/ffffff?text=Icon+${index + 1}`,
-        prompt: formData.prompt,
-        style: formData.style
+        positivePrompt: formData.prompt, // Changed from prompt to positivePrompt
+        style: formData.style,
+        seed: Math.floor(Math.random() * 1000000), // Added missing seed property
+        NSFWContent: false // Added missing NSFWContent property
       }));
       
       setIcons(mockIcons);
