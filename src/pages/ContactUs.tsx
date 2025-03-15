@@ -6,6 +6,19 @@ import { Mail, Phone, MapPin, Send, Github, Twitter, Linkedin, Facebook } from "
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+
+const tools = [
+  "Logo Maker",
+  "Business Card Generator",
+  "Icon Generator",
+  "Email Signature Generator",
+  "QR Code Generator",
+  "Color Palette Generator",
+  "Background Remover"
+];
 
 const ContactUs = () => {
   const { toast } = useToast();
@@ -13,7 +26,9 @@ const ContactUs = () => {
     name: "",
     email: "",
     subject: "",
-    message: ""
+    customSubject: "",
+    message: "",
+    selectedTool: ""
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -24,18 +39,51 @@ const ContactUs = () => {
     }));
   };
 
+  const handleSubjectSelect = (value: string) => {
+    setFormData(prev => ({
+      ...prev,
+      subject: value,
+      customSubject: "",
+      selectedTool: value === "Book A Demo" ? prev.selectedTool : ""
+    }));
+  };
+
+  const handleToolSelect = (value: string) => {
+    setFormData(prev => ({
+      ...prev,
+      selectedTool: value
+    }));
+  };
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Form submitted:", formData);
+    
+    // Prepare form data for submission
+    const finalSubject = formData.subject === "Others" 
+      ? formData.customSubject 
+      : formData.subject === "Book A Demo" 
+        ? `Book A Demo: ${formData.selectedTool}` 
+        : formData.subject;
+        
+    const finalFormData = {
+      ...formData,
+      subject: finalSubject
+    };
+    
+    console.log("Form submitted:", finalFormData);
+    
     toast({
       title: "Message Sent",
       description: "Thank you for your message. We'll get back to you soon!",
     });
+    
     setFormData({
       name: "",
       email: "",
       subject: "",
-      message: ""
+      customSubject: "",
+      message: "",
+      selectedTool: ""
     });
   };
 
@@ -132,14 +180,14 @@ const ContactUs = () => {
                 <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
                   Your Name
                 </label>
-                <input
+                <Input
                   type="text"
                   id="name"
                   name="name"
                   value={formData.name}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+                  className="w-full"
                   placeholder="John Doe"
                 />
               </div>
@@ -148,14 +196,14 @@ const ContactUs = () => {
                 <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
                   Your Email
                 </label>
-                <input
+                <Input
                   type="email"
                   id="email"
                   name="email"
                   value={formData.email}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+                  className="w-full"
                   placeholder="john@example.com"
                 />
               </div>
@@ -164,30 +212,75 @@ const ContactUs = () => {
                 <label htmlFor="subject" className="block text-sm font-medium text-gray-700 mb-1">
                   Subject
                 </label>
-                <input
-                  type="text"
-                  id="subject"
-                  name="subject"
+                <Select
                   value={formData.subject}
-                  onChange={handleChange}
-                  required
-                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
-                  placeholder="How can we help you?"
-                />
+                  onValueChange={handleSubjectSelect}
+                >
+                  <SelectTrigger className="w-full">
+                    <SelectValue placeholder="Select a subject" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="General Inquiry">General Inquiry</SelectItem>
+                    <SelectItem value="Technical Support">Technical Support</SelectItem>
+                    <SelectItem value="Book A Demo">Book A Demo</SelectItem>
+                    <SelectItem value="Others">Others</SelectItem>
+                  </SelectContent>
+                </Select>
               </div>
+              
+              {formData.subject === "Others" && (
+                <div>
+                  <label htmlFor="customSubject" className="block text-sm font-medium text-gray-700 mb-1">
+                    Please specify
+                  </label>
+                  <Input
+                    type="text"
+                    id="customSubject"
+                    name="customSubject"
+                    value={formData.customSubject}
+                    onChange={handleChange}
+                    required
+                    className="w-full"
+                    placeholder="Enter subject"
+                  />
+                </div>
+              )}
+              
+              {formData.subject === "Book A Demo" && (
+                <div>
+                  <label htmlFor="selectedTool" className="block text-sm font-medium text-gray-700 mb-1">
+                    Select Tool for Demo
+                  </label>
+                  <Select
+                    value={formData.selectedTool}
+                    onValueChange={handleToolSelect}
+                  >
+                    <SelectTrigger className="w-full">
+                      <SelectValue placeholder="Select a tool" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {tools.map((tool) => (
+                        <SelectItem key={tool} value={tool}>
+                          {tool}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </div>
+              )}
               
               <div>
                 <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-1">
                   Your Message
                 </label>
-                <textarea
+                <Textarea
                   id="message"
                   name="message"
                   value={formData.message}
                   onChange={handleChange}
                   required
                   rows={5}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+                  className="w-full"
                   placeholder="Tell us how we can assist you..."
                 />
               </div>
