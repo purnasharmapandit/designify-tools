@@ -3,9 +3,8 @@ import React from "react";
 import { motion } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import ComingSoonBanner from "@/components/ComingSoonBanner";
 import { Button } from "@/components/ui/button";
-import { ChevronRight, Image, PenTool, Crop, SlidersHorizontal, Wand2, Layers, Paintbrush, FileImage, Sparkles } from "lucide-react";
+import { ChevronRight, Image, Layers, Wand2, Sliders, Download, Share2, RotateCw, Scissors, PenTool } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const ImageEditor = () => {
@@ -16,7 +15,7 @@ const ImageEditor = () => {
       <main className="flex-grow pt-24 pb-16">
         {/* Hero Section */}
         <section className="relative pt-12 pb-24 overflow-hidden w-full">
-          <div className="absolute inset-0 bg-gradient-to-br from-violet-50 via-purple-50 to-fuchsia-50 z-0"></div>
+          <div className="absolute inset-0 bg-gradient-to-br from-violet-50 via-purple-50 to-pink-50 z-0"></div>
           <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiMzMjMyMzIiIGZpbGwtb3BhY2l0eT0iMC4wMyI+PHBhdGggZD0iTTMwIDBDMTMuNDMgMCAwIDEzLjQzIDAgMzBzMTMuNDMgMzAgMzAgMzAgMzAtMTMuNDMgMzAtMzBTNDYuNTcgMCAzMCAwem0wIDYwQzE1LjY3IDYwIDQgNDguMzMgNCAzNHM5LjMzLTMwIDI2LTMwIDI2IDExLjY3IDI2IDI2LTExLjY3IDMwLTI2IDMweiIvPjwvZz48L2c+PC9zdmc+')]"></div>
 
           <div className="px-4 sm:px-6 lg:px-8 relative z-10">
@@ -28,24 +27,22 @@ const ImageEditor = () => {
                   transition={{ duration: 0.5 }}
                 >
                   <span className="inline-block px-4 py-2 rounded-full bg-violet-100 text-violet-800 font-medium text-sm mb-5">
-                    Professional Image Editing
+                    Powerful Image Editing
                   </span>
                   <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6">
-                    Edit Images Like a <span className="text-transparent bg-clip-text bg-gradient-to-r from-violet-600 to-fuchsia-600">Professional</span> Designer
+                    Edit <span className="text-transparent bg-clip-text bg-gradient-to-r from-violet-600 to-purple-600">Images</span> Like a Pro
                   </h1>
                   <p className="text-xl text-gray-600 mb-8 max-w-lg">
-                    Our powerful yet intuitive Image Editor gives you all the tools you need to enhance, transform, and perfect your images with ease.
+                    Our Image Editor gives you professional editing tools that are powerful yet easy to use. Edit, enhance, and transform your images in minutes.
                   </p>
-                  
-                  <ComingSoonBanner toolName="Image Editor" expectedReleaseDate="Q3 2023" />
                   
                   <div className="flex flex-wrap gap-4 mt-8">
                     {[
-                      { icon: <Crop className="h-4 w-4" />, text: "Cropping & Resize" },
-                      { icon: <SlidersHorizontal className="h-4 w-4" />, text: "Photo Adjustment" },
-                      { icon: <Wand2 className="h-4 w-4" />, text: "AI Enhancement" },
                       { icon: <Layers className="h-4 w-4" />, text: "Layer Support" },
-                      { icon: <FileImage className="h-4 w-4" />, text: "Multiple Formats" }
+                      { icon: <Wand2 className="h-4 w-4" />, text: "AI Enhancement" },
+                      { icon: <Sliders className="h-4 w-4" />, text: "Advanced Filters" },
+                      { icon: <Scissors className="h-4 w-4" />, text: "Precise Cropping" },
+                      { icon: <PenTool className="h-4 w-4" />, text: "Drawing Tools" }
                     ].map((feature, i) => (
                       <motion.div
                         key={i}
@@ -69,91 +66,81 @@ const ImageEditor = () => {
                 >
                   <div className="relative">
                     {/* Image Editor UI Mockup */}
-                    <div className="absolute -z-10 w-full h-80 bg-gradient-to-r from-violet-500/20 to-fuchsia-500/20 rounded-xl blur-xl transform rotate-6"></div>
+                    <div className="absolute -z-10 w-full h-80 bg-gradient-to-r from-violet-500/20 to-purple-500/20 rounded-xl blur-xl transform rotate-6"></div>
                     
-                    <div className="relative bg-gray-900 rounded-xl shadow-xl overflow-hidden w-full max-w-md">
-                      {/* Editor Header */}
-                      <div className="bg-gray-800 px-4 py-3 flex items-center justify-between">
+                    <div className="relative bg-white rounded-xl shadow-lg border border-gray-200 overflow-hidden p-2 w-full max-w-md">
+                      <div className="flex justify-between items-center mb-2 px-2">
                         <div className="flex items-center">
-                          <Image className="h-5 w-5 text-violet-400 mr-2" />
-                          <span className="text-white text-sm font-medium">Image Editor</span>
+                          <Image className="h-5 w-5 text-violet-600 mr-2" />
+                          <span className="font-medium text-sm">Image Editor</span>
+                        </div>
+                        <div className="flex space-x-1.5">
+                          <div className="h-2.5 w-2.5 rounded-full bg-red-400"></div>
+                          <div className="h-2.5 w-2.5 rounded-full bg-yellow-400"></div>
+                          <div className="h-2.5 w-2.5 rounded-full bg-green-400"></div>
+                        </div>
+                      </div>
+                      
+                      <div className="relative h-48 bg-gray-100 rounded-md overflow-hidden mb-2">
+                        <div className="absolute inset-0 bg-gradient-to-br from-purple-200 to-pink-200"></div>
+                        <div className="absolute inset-0 flex items-center justify-center">
+                          <img 
+                            src="/placeholder.svg" 
+                            alt="Placeholder" 
+                            className="h-32 w-32 opacity-50"
+                          />
+                        </div>
+                      </div>
+                      
+                      <div className="flex justify-between px-2 py-1">
+                        <div className="flex space-x-2">
+                          <button className="h-8 w-8 rounded-full bg-gray-100 flex items-center justify-center">
+                            <RotateCw className="h-4 w-4 text-gray-500" />
+                          </button>
+                          <button className="h-8 w-8 rounded-full bg-gray-100 flex items-center justify-center">
+                            <Scissors className="h-4 w-4 text-gray-500" />
+                          </button>
+                          <button className="h-8 w-8 rounded-full bg-gray-100 flex items-center justify-center">
+                            <Wand2 className="h-4 w-4 text-gray-500" />
+                          </button>
                         </div>
                         <div className="flex space-x-2">
-                          <div className="h-3 w-3 rounded-full bg-red-400"></div>
-                          <div className="h-3 w-3 rounded-full bg-yellow-400"></div>
-                          <div className="h-3 w-3 rounded-full bg-green-400"></div>
+                          <button className="h-8 w-8 rounded-full bg-gray-100 flex items-center justify-center">
+                            <Download className="h-4 w-4 text-gray-500" />
+                          </button>
+                          <button className="h-8 w-8 rounded-full bg-violet-100 flex items-center justify-center">
+                            <Share2 className="h-4 w-4 text-violet-600" />
+                          </button>
                         </div>
                       </div>
                       
-                      <div className="flex h-64">
-                        {/* Toolbar */}
-                        <div className="w-12 bg-gray-800 flex flex-col items-center py-3 space-y-4">
-                          <motion.div 
-                            whileHover={{ scale: 1.1 }}
-                            className="h-8 w-8 rounded-lg bg-violet-500 flex items-center justify-center"
-                          >
-                            <Crop className="h-4 w-4 text-white" />
-                          </motion.div>
-                          <motion.div 
-                            whileHover={{ scale: 1.1 }}
-                            className="h-8 w-8 rounded-lg bg-gray-700 flex items-center justify-center"
-                          >
-                            <SlidersHorizontal className="h-4 w-4 text-gray-400" />
-                          </motion.div>
-                          <motion.div 
-                            whileHover={{ scale: 1.1 }}
-                            className="h-8 w-8 rounded-lg bg-gray-700 flex items-center justify-center"
-                          >
-                            <PenTool className="h-4 w-4 text-gray-400" />
-                          </motion.div>
-                          <motion.div 
-                            whileHover={{ scale: 1.1 }}
-                            className="h-8 w-8 rounded-lg bg-gray-700 flex items-center justify-center"
-                          >
-                            <Paintbrush className="h-4 w-4 text-gray-400" />
-                          </motion.div>
-                          <motion.div 
-                            whileHover={{ scale: 1.1 }}
-                            className="h-8 w-8 rounded-lg bg-gray-700 flex items-center justify-center"
-                          >
-                            <Wand2 className="h-4 w-4 text-gray-400" />
-                          </motion.div>
-                          <motion.div 
-                            whileHover={{ scale: 1.1 }}
-                            className="h-8 w-8 rounded-lg bg-gray-700 flex items-center justify-center"
-                          >
-                            <Layers className="h-4 w-4 text-gray-400" />
-                          </motion.div>
-                        </div>
-                        
-                        {/* Main Editor Area */}
-                        <div className="flex-1 bg-gray-700 p-4 flex items-center justify-center">
-                          <div className="relative w-full h-full rounded-lg overflow-hidden flex items-center justify-center bg-gradient-to-br from-purple-400 to-pink-500">
-                            {/* Crop Overlay Mockup */}
-                            <div className="absolute inset-0 border-2 border-dashed border-white opacity-75"></div>
-                            <div className="absolute w-4 h-4 bg-white rounded-full top-0 left-0 transform -translate-x-1/2 -translate-y-1/2"></div>
-                            <div className="absolute w-4 h-4 bg-white rounded-full top-0 right-0 transform translate-x-1/2 -translate-y-1/2"></div>
-                            <div className="absolute w-4 h-4 bg-white rounded-full bottom-0 left-0 transform -translate-x-1/2 translate-y-1/2"></div>
-                            <div className="absolute w-4 h-4 bg-white rounded-full bottom-0 right-0 transform translate-x-1/2 translate-y-1/2"></div>
-                            
-                            <Image className="h-16 w-16 text-white opacity-50" />
+                      <div className="mt-2 px-2">
+                        <div className="h-24 bg-gray-50 rounded-md border border-gray-100 p-2">
+                          <div className="flex justify-between">
+                            <span className="text-xs font-medium">Adjustments</span>
+                            <button className="text-xs text-violet-600">Reset</button>
+                          </div>
+                          <div className="mt-2 space-y-2">
+                            <div className="space-y-1">
+                              <div className="flex justify-between text-xs">
+                                <span>Brightness</span>
+                                <span>+15</span>
+                              </div>
+                              <div className="h-1 bg-gray-200 rounded-full">
+                                <div className="h-full w-3/5 bg-violet-500 rounded-full"></div>
+                              </div>
+                            </div>
+                            <div className="space-y-1">
+                              <div className="flex justify-between text-xs">
+                                <span>Contrast</span>
+                                <span>+5</span>
+                              </div>
+                              <div className="h-1 bg-gray-200 rounded-full">
+                                <div className="h-full w-2/5 bg-violet-500 rounded-full"></div>
+                              </div>
+                            </div>
                           </div>
                         </div>
-                      </div>
-                      
-                      {/* Controls Bar */}
-                      <div className="bg-gray-800 px-4 py-3 flex items-center justify-between">
-                        <div className="flex space-x-3">
-                          <div className="h-7 w-16 bg-gray-700 rounded-md flex items-center justify-center">
-                            <span className="text-gray-400 text-xs">16:9</span>
-                          </div>
-                          <div className="h-7 w-16 bg-gray-700 rounded-md flex items-center justify-center">
-                            <span className="text-gray-400 text-xs">1080p</span>
-                          </div>
-                        </div>
-                        <Button variant="default" size="sm" className="bg-violet-600 hover:bg-violet-700">
-                          Apply
-                        </Button>
                       </div>
                     </div>
                   </div>
@@ -174,34 +161,34 @@ const ImageEditor = () => {
             <div className="grid md:grid-cols-3 gap-8">
               {[
                 {
-                  icon: <Crop className="h-10 w-10 text-violet-500" />,
-                  title: "Precision Cropping",
-                  description: "Crop, resize, and transform your images with pixel-perfect accuracy using our intuitive cropping tools."
-                },
-                {
-                  icon: <SlidersHorizontal className="h-10 w-10 text-violet-500" />,
-                  title: "Advanced Adjustments",
-                  description: "Fine-tune colors, exposure, contrast, and more with professional-grade adjustment controls."
+                  icon: <Layers className="h-10 w-10 text-violet-500" />,
+                  title: "Layer Management",
+                  description: "Work with multiple layers to create complex compositions and non-destructive edits."
                 },
                 {
                   icon: <Wand2 className="h-10 w-10 text-violet-500" />,
                   title: "AI Enhancement",
-                  description: "Let our AI automatically enhance your images, fix imperfections, and optimize quality with one click."
+                  description: "Let our AI enhance your photos automatically, fixing lighting, colors, and more."
                 },
                 {
-                  icon: <Layers className="h-10 w-10 text-violet-500" />,
-                  title: "Layer-Based Editing",
-                  description: "Work with multiple layers for complex compositions, masks, and non-destructive editing workflows."
+                  icon: <Sliders className="h-10 w-10 text-violet-500" />,
+                  title: "Pro Adjustments",
+                  description: "Fine-tune exposure, contrast, saturation, and more with professional-grade controls."
                 },
                 {
-                  icon: <Paintbrush className="h-10 w-10 text-violet-500" />,
-                  title: "Creative Tools",
-                  description: "Add text, shapes, filters, and effects to transform your images into works of art."
+                  icon: <PenTool className="h-10 w-10 text-violet-500" />,
+                  title: "Selection Tools",
+                  description: "Make precise selections with smart selection tools to edit specific parts of your image."
                 },
                 {
-                  icon: <Sparkles className="h-10 w-10 text-violet-500" />,
-                  title: "Smart Selection",
-                  description: "Precisely select objects, remove backgrounds, and make targeted adjustments with AI-powered selection tools."
+                  icon: <Scissors className="h-10 w-10 text-violet-500" />,
+                  title: "Crop & Transform",
+                  description: "Crop, rotate, and transform your images with precise controls and guides."
+                },
+                {
+                  icon: <RotateCw className="h-10 w-10 text-violet-500" />,
+                  title: "Filters & Effects",
+                  description: "Apply professional filters and effects to transform the look and feel of your images."
                 }
               ].map((feature, i) => (
                 <motion.div
@@ -222,22 +209,22 @@ const ImageEditor = () => {
         </section>
         
         {/* CTA Section */}
-        <section className="py-20 bg-gradient-to-br from-violet-50 to-fuchsia-50">
+        <section className="py-20 bg-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="bg-gradient-to-r from-violet-600 to-fuchsia-600 rounded-3xl p-12 text-white shadow-xl">
+            <div className="bg-gradient-to-r from-violet-600 to-purple-600 rounded-3xl p-12 text-white shadow-xl">
               <div className="max-w-3xl mx-auto text-center">
-                <h2 className="text-3xl md:text-4xl font-bold mb-6">Transform Your Images</h2>
-                <p className="text-xl mb-8 opacity-90">Join our waitlist to be the first to know when our Image Editor launches and get exclusive early access.</p>
+                <h2 className="text-3xl md:text-4xl font-bold mb-6">Transform Your Images Today</h2>
+                <p className="text-xl mb-8 opacity-90">Sign up to be notified when our Image Editor launches and get exclusive early access.</p>
                 <Link to="/contact-us?subject=Interest%20in%20Image%20Editor">
                   <Button 
                     size="lg" 
-                    className="bg-white text-violet-600 hover:bg-gray-100 rounded-full px-8 py-6 text-lg"
+                    className="bg-white text-purple-600 hover:bg-gray-100 rounded-full px-8 py-6 text-lg"
                   >
                     Join the Waitlist
                     <ChevronRight className="ml-2 h-5 w-5" />
                   </Button>
                 </Link>
-                <p className="mt-4 text-sm opacity-80">Early access members receive special pricing</p>
+                <p className="mt-4 text-sm opacity-80">Early access members will receive special pricing</p>
               </div>
             </div>
           </div>

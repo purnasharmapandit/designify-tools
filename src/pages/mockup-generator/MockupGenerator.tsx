@@ -1,9 +1,7 @@
-
 import React from "react";
 import { motion } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import ComingSoonBanner from "@/components/ComingSoonBanner";
 import { Button } from "@/components/ui/button";
 import { ChevronRight, Smartphone, Monitor, Tablet, Laptop, Clock, Image, RotateCw, Download, ZoomIn, Sparkles } from "lucide-react";
 import { Link } from "react-router-dom";
@@ -36,8 +34,6 @@ const MockupGenerator = () => {
                   <p className="text-xl text-gray-600 mb-8 max-w-lg">
                     Transform your designs into realistic product mockups for presentations, marketing materials, and more with just a few clicks.
                   </p>
-                  
-                  <ComingSoonBanner toolName="Mockup Generator" expectedReleaseDate="Q2 2023" />
                   
                   <div className="flex flex-wrap gap-4 mt-8">
                     {[

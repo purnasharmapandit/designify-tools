@@ -1,9 +1,7 @@
-
 import React from "react";
 import { motion } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import ComingSoonBanner from "@/components/ComingSoonBanner";
 import { Button } from "@/components/ui/button";
 import { ChevronRight, Type, Sliders, Palette, LayoutGrid, Sparkles, Wand2, FileText, TextSelect } from "lucide-react";
 import { Link } from "react-router-dom";
@@ -36,8 +34,6 @@ const TypographyTool = () => {
                   <p className="text-xl text-gray-600 mb-8 max-w-lg">
                     Our Typography Tool gives you complete control over fonts, spacing, alignment, and more for beautiful, readable text in all your designs.
                   </p>
-                  
-                  <ComingSoonBanner toolName="Typography Tool" expectedReleaseDate="Q4 2023" />
                   
                   <div className="flex flex-wrap gap-4 mt-8">
                     {[

@@ -1,9 +1,7 @@
-
 import React from "react";
 import { motion } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import ComingSoonBanner from "@/components/ComingSoonBanner";
 import { Button } from "@/components/ui/button";
 import { ChevronRight, Presentation, LayoutGrid, Play, FileText, Palette, LineChart, Clock, Sparkles, Layers } from "lucide-react";
 import { Link } from "react-router-dom";
@@ -36,8 +34,6 @@ const PresentationMaker = () => {
                   <p className="text-xl text-gray-600 mb-8 max-w-lg">
                     Our Presentation Maker helps you create professional, engaging presentations with ready-to-use templates, beautiful graphics, and smart AI assistance.
                   </p>
-                  
-                  <ComingSoonBanner toolName="Presentation Maker" expectedReleaseDate="Q1 2023" />
                   
                   <div className="flex flex-wrap gap-4 mt-8">
                     {[

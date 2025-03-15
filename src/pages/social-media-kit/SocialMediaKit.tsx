@@ -1,9 +1,7 @@
-
 import React from "react";
 import { motion } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import ComingSoonBanner from "@/components/ComingSoonBanner";
 import { Button } from "@/components/ui/button";
 import { ChevronRight, Layout, Image, Share2, MessageCircle, Users, Target, BarChart3, Sparkles } from "lucide-react";
 import { Link } from "react-router-dom";
@@ -36,8 +34,6 @@ const SocialMediaKit = () => {
                   <p className="text-xl text-gray-600 mb-8 max-w-lg">
                     Design professional graphics for all your social channels in one place. Save time with templates, maintain brand consistency, and boost engagement.
                   </p>
-                  
-                  <ComingSoonBanner toolName="Social Media Kit" expectedReleaseDate="Q3 2023" />
                   
                   <div className="flex flex-wrap gap-4 mt-8">
                     {[
