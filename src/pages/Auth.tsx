@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { Wand2 } from "lucide-react";
@@ -11,14 +10,13 @@ import { motion } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Helmet } from "react-helmet";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
 const Auth = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
-  const [adminCode, setAdminCode] = useState("");
+  const [accessCode, setAccessCode] = useState("");
   const [needsDemoRedirect, setNeedsDemoRedirect] = useState(false);
   const [isSignUp, setIsSignUp] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -26,25 +24,20 @@ const Auth = () => {
   const navigate = useNavigate();
   const location = useLocation();
   
-  // Get return URL from location state or query params
   const getReturnUrl = () => {
-    // First check location state
     if (location.state && location.state.returnTo) {
       return location.state.returnTo;
     }
     
-    // Then check query params
     const searchParams = new URLSearchParams(location.search);
     const returnTo = searchParams.get("returnTo");
     if (returnTo) {
       return returnTo;
     }
     
-    // Default to home
     return "/";
   };
-  
-  // Check if user is coming from email verification
+
   useEffect(() => {
     const searchParams = new URLSearchParams(location.search);
     const verified = searchParams.get("verified");
@@ -54,7 +47,6 @@ const Auth = () => {
     }
   }, [location]);
 
-  // Redirect if already logged in
   useEffect(() => {
     if (user && !isLoading) {
       if (needsDemoRedirect) {
@@ -75,27 +67,28 @@ const Auth = () => {
       return;
     }
 
-    if (isSignUp && (!firstName || !lastName)) {
-      toast.error("Please enter your first and last name");
-      return;
+    if (isSignUp) {
+      if (!firstName || !lastName) {
+        toast.error("Please enter your first and last name");
+        return;
+      }
+
+      if (!accessCode) {
+        toast.error("Access Code is required. Please book a demo to receive one.");
+        return;
+      }
     }
 
     try {
       setIsSubmitting(true);
       if (isSignUp) {
-        // Include user metadata in signup
         const metadata = {
           first_name: firstName,
           last_name: lastName,
-          admin_code: adminCode
+          access_code: accessCode
         };
         
         await signUp(email, password, metadata);
-        
-        if (adminCode === "") {
-          setNeedsDemoRedirect(true);
-          toast.info("Please book a demo to receive your access code");
-        }
       } else {
         await signIn(email, password);
       }
@@ -107,31 +100,7 @@ const Auth = () => {
   };
 
   const handleGetCodeClick = () => {
-    if (isSignUp) {
-      setNeedsDemoRedirect(true);
-      setIsSubmitting(true);
-      // Include user metadata in signup
-      const metadata = {
-        first_name: firstName,
-        last_name: lastName,
-        admin_code: ""
-      };
-      
-      // Attempt to sign up first
-      signUp(email, password, metadata)
-        .then(() => {
-          navigate("/contact-us", { state: { bookDemo: true } });
-        })
-        .catch(error => {
-          console.error("Authentication error:", error);
-          toast.error("Error creating account. Please try again.");
-        })
-        .finally(() => {
-          setIsSubmitting(false);
-        });
-    } else {
-      navigate("/contact-us", { state: { bookDemo: true } });
-    }
+    navigate("/contact-us", { state: { bookDemo: true } });
   };
 
   if (isLoading) {
@@ -240,7 +209,7 @@ const Auth = () => {
               {isSignUp && (
                 <div>
                   <div className="flex justify-between items-center mb-1">
-                    <Label htmlFor="adminCode">Admin/Owner Code</Label>
+                    <Label htmlFor="accessCode">Access Code</Label>
                     <button
                       type="button"
                       onClick={handleGetCodeClick}
@@ -251,13 +220,14 @@ const Auth = () => {
                   </div>
                   <div className="mt-2">
                     <Input
-                      id="adminCode"
-                      name="adminCode"
+                      id="accessCode"
+                      name="accessCode"
                       type="text"
-                      value={adminCode}
-                      onChange={(e) => setAdminCode(e.target.value)}
+                      value={accessCode}
+                      onChange={(e) => setAccessCode(e.target.value)}
                       className="w-full"
-                      placeholder="Enter code provided by admin (optional)"
+                      required
+                      placeholder="Enter your access code"
                     />
                   </div>
                 </div>
