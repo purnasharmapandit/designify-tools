@@ -6,7 +6,7 @@ import Footer from "@/components/Footer";
 import { ColorPalette } from "@/components/ColorPalette";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
-import { useColorPalette } from "@/hooks/use-color-palette";
+import { useColorPalette } from "@/hooks/use-color-palette.tsx"; // Explicitly add .tsx extension
 import { Check, Palette, RefreshCw, Download, Save, Copy } from "lucide-react";
 import StandardHeroSection from "@/components/shared/StandardHeroSection";
 
