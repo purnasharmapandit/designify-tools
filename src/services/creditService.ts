@@ -190,18 +190,54 @@ export async function deductCreditsForFeature(featureName: string, toolType: str
     
     const creditCost = featureData.credit_cost;
     
-    // Begin a transaction to update credits and record generation
-    const { data, error } = await supabase.rpc('deduct_credits_and_record', {
-      p_user_id: session.user.id,
-      p_credit_cost: creditCost,
-      p_tool_type: toolType,
-      p_subscription_tier: 'credit'
-    });
+    // Instead of using RPC, we'll do this in a transaction-like way
+    // First get the current balance
+    const { data: userData, error: userError } = await supabase
+      .from('user_credits')
+      .select('id, credits_balance')
+      .eq('user_id', session.user.id)
+      .single();
     
-    if (error) {
-      console.error("Error deducting credits:", error);
-      toast.error("Failed to deduct credits. Please try again.");
+    if (userError) {
+      console.error("Error fetching user credit balance:", userError);
+      toast.error("Failed to verify credit balance");
       return false;
+    }
+    
+    // Check if user has enough credits
+    if (userData.credits_balance < creditCost) {
+      toast.error(`Not enough credits. You need ${creditCost} but have ${userData.credits_balance}`);
+      return false;
+    }
+    
+    // Update the credit balance
+    const { error: updateError } = await supabase
+      .from('user_credits')
+      .update({
+        credits_balance: userData.credits_balance - creditCost,
+        updated_at: new Date().toISOString()
+      })
+      .eq('id', userData.id);
+    
+    if (updateError) {
+      console.error("Error updating credit balance:", updateError);
+      toast.error("Failed to deduct credits");
+      return false;
+    }
+    
+    // Record the generation
+    const { error: genError } = await supabase
+      .from('user_generations')
+      .insert({
+        user_id: session.user.id,
+        tool_type: toolType,
+        subscription_tier: 'credit',
+        credit_cost: creditCost
+      });
+    
+    if (genError) {
+      console.error("Error recording generation:", genError);
+      // We won't return false here as the credits were already deducted
     }
     
     // Success, credits deducted and generation recorded
