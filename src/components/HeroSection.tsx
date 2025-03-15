@@ -1,79 +1,52 @@
-
 import { Button } from "@/components/ui/button";
-import { ChevronRight } from "lucide-react";
+import { ChevronRight, Sparkles, Zap, Star, PenTool, Wand2, Lightbulb } from "lucide-react";
 import { motion } from "framer-motion";
-import { ReactNode } from "react";
 
-interface HeroProps {
-  tagline: string;
-  title: ReactNode;
-  description: string;
-  primaryText?: string;
-  imageElement?: ReactNode;
-  features?: {
-    icon: ReactNode;
-    text: string;
-  }[];
-  className?: string;
-}
-
-const HeroSection = ({
-  tagline,
-  title,
-  description,
-  primaryText = "Get Started Now",
-  imageElement,
-  features = [],
-  className = "",
-}: HeroProps) => {
+const HeroSection = () => {
   return (
-    <section className={`pt-24 pb-16 relative overflow-hidden w-full ${className}`}>
-      <div className="absolute inset-0 bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-50 z-0"></div>
-      <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiMzMjMyMzIiIGZpbGwtb3BhY2l0eT0iMC4wMyI+PHBhdGggZD0iTTMwIDBDMTMuNDMgMCAwIDEzLjQzIDAgMzBzMTMuNDMgMzAgMzAgMzAgMzAtMTMuNDMgMzAtMzBTNDYuNTcgMCAzMCAwem0wIDYwQzE1LjY3IDYwIDQgNDguMzMgNCAzNHM5LjMzLTMwIDI2LTMwIDI2IDExLjY3IDI2IDI2LTExLjY3IDMwLTI2IDMweiIvPjwvZz48L2c+PC9zdmc+')]"></div>
-
-      <div className="px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <motion.div
+    <section className="pt-40 pb-16 px-4 sm:pt-44 sm:pb-20">
+      <div className="max-w-7xl mx-auto">
+        <div className="flex flex-col items-center justify-center text-center mb-12">
+          <div className="relative w-full max-w-3xl mx-auto">
+            <motion.h1
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-            >
-              <span className="inline-block px-4 py-2 rounded-full bg-indigo-100 text-indigo-800 font-medium text-sm mb-5">
-                {tagline}
-              </span>
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6">
-                {title}
-              </h1>
-              <p className="text-xl text-gray-600 mb-8 max-w-lg">
-                {description}
-              </p>
-              
-              <div className="flex flex-wrap gap-4 mt-8">
-                {features.map((feature, i) => (
-                  <motion.div
-                    key={i}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.3, delay: 0.4 + (i * 0.1) }}
-                    className="bg-white shadow-sm px-4 py-2 rounded-full flex items-center gap-2"
-                  >
-                    {feature.icon}
-                    <span className="text-sm font-medium">{feature.text}</span>
-                  </motion.div>
-                ))}
-              </div>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.5, delay: 0.2 }}
-              className="relative mx-auto"
+              className="text-4xl md:text-6xl font-bold font-display leading-tight mb-4"
             >
-              {imageElement}
-            </motion.div>
+              <Sparkles className="absolute hidden md:block h-12 w-12 text-brand-yellow md:-left-16 top-0 animate-float" />
+              <Star className="absolute hidden md:block h-12 w-12 text-brand-blue md:-right-16 top-0 animate-float" style={{ animationDelay: "0.5s" }} />
+              <PenTool className="absolute hidden md:block h-14 w-14 text-purple-400 md:-right-4 bottom-0 animate-float" style={{ animationDelay: "1.2s" }} />
+              <Lightbulb className="absolute hidden md:block h-14 w-14 text-green-400 md:-left-4 bottom-0 animate-float" style={{ animationDelay: "0.8s" }} />
+              <span className="bg-gradient-to-r from-purple-600 to-pink-500 text-transparent bg-clip-text">Unleash Your Creativity</span> With Our 
+              <span className="relative inline-block ml-2">
+                <span className="relative z-10">Game-Changing</span>
+                <span className="absolute bottom-1 left-0 w-full h-3 bg-yellow-300/50 -z-10 transform -rotate-1"></span>
+              </span> Design Tools
+            </motion.h1>
           </div>
+          
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.4 }}
+            className="text-lg text-gray-600 max-w-2xl mb-8"
+          >
+            Create stunning designs with our easy-to-use tools. Perfect for professionals and beginners alike.
+          </motion.p>
+          
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.6 }}
+          >
+            <Button 
+              size="lg" 
+              className="rounded-full px-8 py-6 text-base btn-shine-effect"
+            >
+              Get Started Now <ChevronRight className="ml-2 h-4 w-4" />
+            </Button>
+          </motion.div>
         </div>
       </div>
     </section>
