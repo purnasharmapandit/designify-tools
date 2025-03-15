@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
@@ -25,7 +26,14 @@ const Pricing = () => {
           getFeatureCosts()
         ]);
         
-        setPricingTiers(tiers);
+        // Sort tiers to ensure Enterprise is at the end
+        const sortedTiers = [...tiers].sort((a, b) => {
+          if (a.name === "Enterprise") return 1; // Enterprise tier always last
+          if (b.name === "Enterprise") return -1;
+          return a.price - b.price; // Otherwise sort by price
+        });
+        
+        setPricingTiers(sortedTiers);
         setFeatureCosts(costs);
       } catch (error) {
         console.error("Error fetching pricing data:", error);
@@ -46,6 +54,7 @@ const Pricing = () => {
     }
 
     if (tier.name === "Enterprise") {
+      // Redirect to contact page with a subject for Enterprise inquiry
       navigate("/contact-us?subject=Enterprise%20Plan%20Inquiry");
       return;
     }
