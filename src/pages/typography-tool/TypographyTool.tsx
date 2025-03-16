@@ -1,14 +1,34 @@
+
 import React from "react";
 import { motion } from "framer-motion";
+import { Helmet } from "react-helmet";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
-import { ChevronRight, Type, BookOpen, PenTool, Layers, Palette, Settings, Eye, Sparkles } from "lucide-react";
+import { ChevronRight, Type, BookOpen, PenTool, Layers, Palette, Settings, Eye, Sparkles, Download, Monitor, Check } from "lucide-react";
 import { Link } from "react-router-dom";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 
 const TypographyTool = () => {
   return (
     <div className="min-h-screen flex flex-col">
+      <Helmet>
+        <title>Typography Tool | Perfect Your Text Design with Professional Typography Controls</title>
+        <meta name="description" content="Create stunning typography for your designs with our Typography Tool. Experiment with font pairings, adjust kerning, check readability, and design perfect text hierarchies." />
+        <meta name="keywords" content="typography tool, font pairing, kerning adjustment, text design, typography hierarchy, readability checking, professional typography" />
+        <meta property="og:title" content="Typography Tool | Perfect Your Text Design with Professional Typography Controls" />
+        <meta property="og:description" content="Create stunning typography for your designs with our Typography Tool. Experiment with font pairings, adjust kerning, check readability, and design perfect text hierarchies." />
+        <meta property="og:type" content="website" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Typography Tool | Perfect Your Text Design with Professional Typography Controls" />
+        <meta name="twitter:description" content="Create stunning typography for your designs with our Typography Tool. Experiment with font pairings, adjust kerning, check readability, and design perfect text hierarchies." />
+      </Helmet>
+      
       <Navbar />
       
       <main className="flex-grow">
@@ -185,6 +205,183 @@ const TypographyTool = () => {
                 </motion.div>
               ))}
             </div>
+          </div>
+        </section>
+        
+        {/* How It Works Section */}
+        <section className="py-16 bg-gradient-to-br from-orange-50 to-pink-50">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-16">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5 }}
+                viewport={{ once: true }}
+              >
+                <h2 className="text-3xl md:text-4xl font-bold mb-4">How It Works</h2>
+                <p className="text-xl text-gray-600 max-w-2xl mx-auto">Perfect your typography in three simple steps</p>
+              </motion.div>
+            </div>
+            
+            <div className="grid md:grid-cols-3 gap-8 md:gap-12">
+              {[
+                {
+                  icon: <Type className="h-12 w-12 text-orange-500" />,
+                  title: "1. Choose Your Fonts",
+                  description: "Browse our extensive font library and select fonts that match your brand style. Our smart pairing system helps you find complementary typefaces."
+                },
+                {
+                  icon: <PenTool className="h-12 w-12 text-orange-500" />,
+                  title: "2. Adjust & Fine-Tune",
+                  description: "Customize every aspect of your typography including size, spacing, alignment, and color. Use our readability tools to ensure optimal legibility."
+                },
+                {
+                  icon: <Download className="h-12 w-12 text-orange-500" />,
+                  title: "3. Export & Implement",
+                  description: "Download your typography system in various formats, or get code snippets to implement directly in your website, app or design software."
+                }
+              ].map((step, i) => (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: i * 0.2 }}
+                  viewport={{ once: true }}
+                  className="flex flex-col items-center text-center"
+                >
+                  <div className="w-20 h-20 rounded-full bg-white shadow-md flex items-center justify-center mb-6">
+                    {step.icon}
+                  </div>
+                  <h3 className="text-xl font-bold mb-3">{step.title}</h3>
+                  <p className="text-gray-600">{step.description}</p>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </section>
+        
+        {/* Use Cases Section */}
+        <section className="py-16 bg-white">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-16">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5 }}
+                viewport={{ once: true }}
+              >
+                <h2 className="text-3xl md:text-4xl font-bold mb-4">Typography That Makes an Impact</h2>
+                <p className="text-xl text-gray-600 max-w-2xl mx-auto">How professionals use our typography tool to elevate their designs</p>
+              </motion.div>
+            </div>
+            
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {[
+                {
+                  icon: <Monitor className="h-10 w-10 text-orange-500" />,
+                  title: "Website Design",
+                  description: "Create consistent, readable typography systems for your website that enhance user experience and brand identity.",
+                  features: ["Content hierarchy", "Responsive text sizing", "Custom font implementation"]
+                },
+                {
+                  icon: <Layers className="h-10 w-10 text-orange-500" />,
+                  title: "Print Materials",
+                  description: "Design typography for brochures, business cards, and other print materials that command attention.",
+                  features: ["Print-optimized spacing", "High-contrast text", "Professional alignment"]
+                },
+                {
+                  icon: <BookOpen className="h-10 w-10 text-orange-500" />,
+                  title: "Editorial Design",
+                  description: "Craft elegant typography systems for magazines, books, and other long-form content.",
+                  features: ["Column layout optimization", "Pull quote styling", "Reading comfort analysis"]
+                }
+              ].map((useCase, i) => (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: i * 0.1 }}
+                  viewport={{ once: true }}
+                  className="bg-white rounded-xl p-6 shadow-sm border border-gray-100"
+                >
+                  <div className="mb-4">{useCase.icon}</div>
+                  <h3 className="text-xl font-bold mb-2">{useCase.title}</h3>
+                  <p className="text-gray-600 mb-4">{useCase.description}</p>
+                  <ul className="space-y-2">
+                    {useCase.features.map((feature, index) => (
+                      <li key={index} className="flex items-center text-gray-700">
+                        <Check className="h-4 w-4 text-orange-500 mr-2" />
+                        <span>{feature}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </section>
+        
+        {/* FAQ Section */}
+        <section className="py-16 bg-gradient-to-br from-gray-50 to-orange-50">
+          <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+              viewport={{ once: true }}
+              className="text-center mb-12"
+            >
+              <h2 className="text-3xl md:text-4xl font-bold mb-4">Frequently Asked Questions</h2>
+              <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+                Everything you need to know about our Typography Tool
+              </p>
+            </motion.div>
+            
+            <Accordion type="single" collapsible className="w-full">
+              {[
+                {
+                  question: "Do I need design experience to use the Typography Tool?",
+                  answer: "Not at all! Our Typography Tool is designed to be accessible for beginners while offering advanced features for professionals. The intuitive interface guides you through the process, and our AI-powered suggestions help you make design decisions even without formal design training."
+                },
+                {
+                  question: "What types of fonts are available in the library?",
+                  answer: "Our tool includes over 1,000 carefully curated fonts across various categories including serif, sans-serif, display, script, and monospace. We feature both popular Google Fonts and exclusive premium typefaces. For professional accounts, we also support custom font uploads."
+                },
+                {
+                  question: "Can I save my typography settings for future use?",
+                  answer: "Yes! You can save unlimited typography presets in your account. This makes it easy to maintain brand consistency across projects or experiment with different typography systems. Premium users can also share these presets with team members for collaborative design work."
+                },
+                {
+                  question: "How does the readability analyzer work?",
+                  answer: "Our readability analyzer examines multiple factors including font choice, size, line height, contrast, and character spacing. It provides a comprehensive score based on established typographic principles and accessibility guidelines, helping you create text that's easy to read across different devices and for users with various visual abilities."
+                },
+                {
+                  question: "Can I export my typography styles to use in other design tools?",
+                  answer: "Absolutely. You can export your typography styles in multiple formats including CSS for web development, style guides for design documentation, and format-specific exports for design software like Adobe XD, Figma, and Sketch. This ensures seamless integration with your existing design workflow."
+                },
+                {
+                  question: "Is there a limit to how many typography projects I can create?",
+                  answer: "Free accounts can create up to 3 typography projects. Premium subscribers enjoy unlimited project creation along with additional features like team sharing, advanced export options, and access to premium fonts."
+                }
+              ].map((faq, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 10 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.3, delay: index * 0.1 }}
+                  viewport={{ once: true }}
+                >
+                  <AccordionItem value={`item-${index}`}>
+                    <AccordionTrigger className="text-left font-medium">
+                      {faq.question}
+                    </AccordionTrigger>
+                    <AccordionContent className="text-gray-600">
+                      {faq.answer}
+                    </AccordionContent>
+                  </AccordionItem>
+                </motion.div>
+              ))}
+            </Accordion>
           </div>
         </section>
         
