@@ -140,7 +140,7 @@ const BackgroundRemover = () => {
             { icon: <Check className="h-4 w-4" />, text: "Multiple Formats" }
           ]}
           image={backgroundRemoverImage}
-          bgColor="bg-purple-950"
+          bgColor="bg-blue-900"
           textColor="text-white"
         />
         

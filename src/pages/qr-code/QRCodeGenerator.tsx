@@ -83,7 +83,7 @@ const QRCodeGenerator = () => {
             { icon: <Scan className="h-4 w-4" />, text: "Business Ready" }
           ]}
           image={qrCodeImage}
-          bgColor="bg-indigo-950"
+          bgColor="bg-blue-900"
           textColor="text-white"
         />
 

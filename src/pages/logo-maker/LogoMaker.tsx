@@ -52,7 +52,7 @@ const LogoMaker = () => {
             { icon: <Check className="h-4 w-4" />, text: "Commercial Use" }
           ]}
           image={logoMakerImage}
-          bgColor="bg-pink-900"
+          bgColor="bg-blue-900"
           textColor="text-white"
         />
 

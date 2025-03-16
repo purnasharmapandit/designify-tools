@@ -74,7 +74,7 @@ const EmailSignatureGenerator = () => {
             { icon: <Check className="h-4 w-4" />, text: "Works with Apple Mail" }
           ]}
           image={emailSignatureImage}
-          bgColor="bg-indigo-900"
+          bgColor="bg-blue-900"
           textColor="text-white"
         />
         

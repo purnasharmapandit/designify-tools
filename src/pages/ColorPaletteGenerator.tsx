@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import Navbar from "@/components/Navbar";
@@ -25,29 +24,24 @@ const ColorPaletteGenerator = () => {
   } = useColorPalette();
   
   const handleExportPalette = () => {
-    // Create a canvas element
     const canvas = document.createElement("canvas");
     canvas.width = 800;
     canvas.height = 200;
     const ctx = canvas.getContext("2d");
     
     if (ctx) {
-      // Draw each color as a rectangle
       const width = canvas.width / colors.length;
       colors.forEach((color, index) => {
         ctx.fillStyle = color;
         ctx.fillRect(index * width, 0, width, canvas.height);
         
-        // Add color hex value
         ctx.fillStyle = "#fff";
         ctx.font = "16px Arial";
         ctx.fillText(color, index * width + 10, canvas.height - 20);
       });
       
-      // Convert canvas to image data URL
       const dataUrl = canvas.toDataURL("image/png");
       
-      // Create a temporary link element and trigger download
       const link = document.createElement("a");
       link.download = "my-color-palette.png";
       link.href = dataUrl;
@@ -96,7 +90,7 @@ const ColorPaletteGenerator = () => {
             { icon: <Check className="h-4 w-4" />, text: "Image Extraction" }
           ]}
           image={paletteImage}
-          bgColor="bg-purple-900"
+          bgColor="bg-blue-900"
           textColor="text-white"
         />
 
@@ -178,8 +172,6 @@ const ColorPaletteGenerator = () => {
             </div>
           </div>
         </div>
-
-        {/* Additional sections would go here */}
       </main>
       <Footer />
     </div>
