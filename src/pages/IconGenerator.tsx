@@ -1,6 +1,6 @@
-
 import React, { useState } from "react";
 import { motion } from "framer-motion";
+import { Helmet } from "react-helmet";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import IconGeneratorForm from "@/components/icon-generator/IconGeneratorForm";
@@ -15,7 +15,6 @@ import StandardHeroSection from "@/components/shared/StandardHeroSection";
 import { toast } from "sonner";
 import { GeneratedIcon } from "@/services/runware";
 
-// Define the IconGeneratorFormData type
 export interface IconGeneratorFormData {
   prompt: string;
   style: string;
@@ -24,7 +23,6 @@ export interface IconGeneratorFormData {
   count: number;
 }
 
-// Define the icon styles
 export const ICON_STYLES = [
   { 
     id: "flat", 
@@ -74,7 +72,6 @@ export const ICON_STYLES = [
 ];
 
 const IconGenerator = () => {
-  // State for form data
   const [formData, setFormData] = useState<IconGeneratorFormData>({
     prompt: "",
     style: "flat",
@@ -83,16 +80,13 @@ const IconGenerator = () => {
     count: 4
   });
 
-  // State for generated icons
   const [icons, setIcons] = useState<GeneratedIcon[]>([]);
   const [isGenerating, setIsGenerating] = useState(false);
 
-  // Handle form changes
   const handleFormChange = (data: Partial<IconGeneratorFormData>) => {
     setFormData(prev => ({ ...prev, ...data }));
   };
 
-  // Handle icon generation
   const handleGenerateIcons = () => {
     if (!formData.prompt.trim()) {
       toast.error("Please provide a description for your icon");
@@ -101,16 +95,14 @@ const IconGenerator = () => {
 
     setIsGenerating(true);
     
-    // Simulate API call for icon generation
     setTimeout(() => {
-      // Mock generated icons - updated to match the GeneratedIcon interface
       const mockIcons: GeneratedIcon[] = Array(formData.count).fill(0).map((_, index) => ({
         id: `icon-${Date.now()}-${index}`,
         imageURL: `https://via.placeholder.com/200x200/${formData.color.substring(1)}/ffffff?text=Icon+${index + 1}`,
-        positivePrompt: formData.prompt, // Changed from prompt to positivePrompt
+        positivePrompt: formData.prompt,
         style: formData.style,
-        seed: Math.floor(Math.random() * 1000000), // Added missing seed property
-        NSFWContent: false // Added missing NSFWContent property
+        seed: Math.floor(Math.random() * 1000000),
+        NSFWContent: false
       }));
       
       setIcons(mockIcons);
@@ -119,7 +111,6 @@ const IconGenerator = () => {
     }, 2000);
   };
 
-  // Handle icon download
   const handleDownloadIcon = (iconUrl: string) => {
     const link = document.createElement('a');
     link.href = iconUrl;
@@ -155,6 +146,18 @@ const IconGenerator = () => {
 
   return (
     <div className="min-h-screen flex flex-col">
+      <Helmet>
+        <title>AI Icon Generator | Create Custom Icons in Seconds</title>
+        <meta name="description" content="Generate professional, unique icons for your apps, websites, and projects with our AI-powered icon creator. Choose from multiple styles, customize colors, and download high-quality icons." />
+        <meta name="keywords" content="icon generator, AI icon creator, custom icons, app icons, website icons, vector icons, icon design, icon maker" />
+        <meta property="og:title" content="AI Icon Generator | Create Custom Icons in Seconds" />
+        <meta property="og:description" content="Generate professional, unique icons for your apps, websites, and projects with our AI-powered icon creator. Multiple styles available." />
+        <meta property="og:type" content="website" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="AI Icon Generator | Create Custom Icons in Seconds" />
+        <meta name="twitter:description" content="Generate professional, unique icons with AI. Perfect for apps, websites, presentations, and more." />
+      </Helmet>
+      
       <Navbar />
       <main className="flex-grow">
         <StandardHeroSection
