@@ -1,14 +1,28 @@
 import React from "react";
 import { motion } from "framer-motion";
+import { Helmet } from "react-helmet";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
-import { ChevronRight, Smartphone, Monitor, Tablet, Laptop, Clock, Image, RotateCw, Download, ZoomIn, Sparkles } from "lucide-react";
+import { ChevronRight, Smartphone, Monitor, Tablet, Laptop, Clock, Image, RotateCw, Download, ZoomIn, Sparkles, Check } from "lucide-react";
 import { Link } from "react-router-dom";
+import ToolsFAQSection from "@/components/tools/ToolsFAQSection";
 
 const MockupGenerator = () => {
   return (
     <div className="min-h-screen flex flex-col">
+      <Helmet>
+        <title>Mockup Generator | Create Professional Device & Product Mockups in Seconds</title>
+        <meta name="description" content="Transform your designs into realistic mockups with our AI-powered mockup generator. Create device screens, product displays, and marketing materials with just a few clicks." />
+        <meta name="keywords" content="mockup generator, device mockups, product mockups, 3D mockups, presentation mockups, marketing mockups, realistic mockups" />
+        <meta property="og:title" content="Mockup Generator | Create Professional Device & Product Mockups in Seconds" />
+        <meta property="og:description" content="Transform your designs into realistic mockups with our AI-powered mockup generator. Perfect for presentations, social media, and marketing materials." />
+        <meta property="og:type" content="website" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Mockup Generator | Create Professional Device & Product Mockups in Seconds" />
+        <meta name="twitter:description" content="Transform your designs into realistic mockups with our AI-powered mockup generator. Perfect for presentations, social media, and marketing materials." />
+      </Helmet>
+      
       <Navbar />
       
       <main className="flex-grow">
@@ -181,6 +195,136 @@ const MockupGenerator = () => {
                 </motion.div>
               ))}
             </div>
+          </div>
+        </section>
+        
+        {/* How It Works Section */}
+        <section className="py-16 bg-gray-50">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-16">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5 }}
+                viewport={{ once: true }}
+              >
+                <h2 className="text-3xl md:text-4xl font-bold mb-4">How It Works</h2>
+                <p className="text-xl text-gray-600 max-w-2xl mx-auto">Create stunning mockups in three simple steps</p>
+              </motion.div>
+            </div>
+            
+            <div className="grid md:grid-cols-3 gap-8 md:gap-12">
+              {[
+                {
+                  icon: <Image className="h-12 w-12 text-cyan-500" />,
+                  title: "1. Upload Your Design",
+                  description: "Upload your design file (PNG, JPG, SVG) or paste a URL. Our system will automatically detect the design dimensions and prepare it for placement."
+                },
+                {
+                  icon: <Monitor className="h-12 w-12 text-cyan-500" />,
+                  title: "2. Choose Your Mockup",
+                  description: "Browse our library of device and product mockups. Select from smartphones, tablets, laptops, desktop displays, print materials, apparel, and more."
+                },
+                {
+                  icon: <ZoomIn className="h-12 w-12 text-cyan-500" />,
+                  title: "3. Customize & Download",
+                  description: "Adjust the perspective, shadows, backgrounds, and other settings. Then download your finished mockup in high resolution for your presentations or marketing materials."
+                }
+              ].map((step, i) => (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: i * 0.2 }}
+                  viewport={{ once: true }}
+                  className="flex flex-col items-center text-center"
+                >
+                  <div className="w-20 h-20 rounded-full bg-white shadow-md flex items-center justify-center mb-6">
+                    {step.icon}
+                  </div>
+                  <h3 className="text-xl font-bold mb-3">{step.title}</h3>
+                  <p className="text-gray-600">{step.description}</p>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </section>
+        
+        {/* Use Cases Section */}
+        <section className="py-16 bg-white">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-16">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5 }}
+                viewport={{ once: true }}
+              >
+                <h2 className="text-3xl md:text-4xl font-bold mb-4">Perfect for Every Presentation</h2>
+                <p className="text-xl text-gray-600 max-w-2xl mx-auto">How professionals use our mockups to showcase their designs</p>
+              </motion.div>
+            </div>
+            
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {[
+                {
+                  title: "UI/UX Designers",
+                  description: "Present your app and website designs in context to clients and stakeholders with realistic device mockups.",
+                  features: ["App screen presentations", "Responsive design demonstrations", "Portfolio showcases"]
+                },
+                {
+                  title: "Marketing Teams",
+                  description: "Create eye-catching visuals for social media, advertising campaigns, and marketing materials.",
+                  features: ["Social media campaigns", "Digital advertising", "Product launches"]
+                },
+                {
+                  title: "E-commerce Businesses",
+                  description: "Display your products in attractive, professional contexts to boost conversion rates.",
+                  features: ["Product photography enhancement", "Online store images", "Promotional materials"]
+                }
+              ].map((useCase, i) => (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: i * 0.1 }}
+                  viewport={{ once: true }}
+                  className="bg-white rounded-xl p-6 shadow-sm border border-gray-100"
+                >
+                  <h3 className="text-xl font-bold mb-2">{useCase.title}</h3>
+                  <p className="text-gray-600 mb-4">{useCase.description}</p>
+                  <ul className="space-y-2">
+                    {useCase.features.map((feature, index) => (
+                      <li key={index} className="flex items-center text-gray-700">
+                        <Check className="h-4 w-4 text-cyan-500 mr-2" />
+                        <span>{feature}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </section>
+        
+        {/* FAQ Section */}
+        <section className="py-16 bg-gray-50">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-12">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5 }}
+                viewport={{ once: true }}
+              >
+                <h2 className="text-3xl md:text-4xl font-bold mb-4">Frequently Asked Questions</h2>
+                <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+                  Everything you need to know about our Mockup Generator
+                </p>
+              </motion.div>
+            </div>
+
+            <ToolsFAQSection />
           </div>
         </section>
         
