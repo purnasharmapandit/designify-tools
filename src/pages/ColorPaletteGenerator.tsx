@@ -1,5 +1,7 @@
+
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
+import { Helmet } from "react-helmet";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { ColorPalette } from "@/components/ColorPalette";
@@ -8,6 +10,8 @@ import { toast } from "sonner";
 import { useColorPalette } from "@/hooks/use-color-palette.tsx"; // Explicitly add .tsx extension
 import { Check, Palette, RefreshCw, Download, Save, Copy } from "lucide-react";
 import StandardHeroSection from "@/components/shared/StandardHeroSection";
+import GuideSection from "@/components/color-palette/GuideSection";
+import DesignResourcesSection from "@/components/color-palette/DesignResourcesSection";
 
 const ColorPaletteGenerator = () => {
   const {
@@ -76,6 +80,18 @@ const ColorPaletteGenerator = () => {
 
   return (
     <div className="min-h-screen flex flex-col">
+      <Helmet>
+        <title>Color Palette Generator | Create Perfect Color Schemes Instantly</title>
+        <meta 
+          name="description" 
+          content="Generate beautiful, harmonious color palettes for your design projects. Create, customize, and export color schemes that work perfectly together."
+        />
+        <meta 
+          name="keywords" 
+          content="color palette generator, color scheme, design tools, color harmony, web design colors, brand colors"
+        />
+      </Helmet>
+      
       <Navbar />
       <main className="flex-grow">
         <StandardHeroSection
@@ -172,6 +188,10 @@ const ColorPaletteGenerator = () => {
             </div>
           </div>
         </div>
+
+        {/* New sections */}
+        <GuideSection />
+        <DesignResourcesSection />
       </main>
       <Footer />
     </div>
