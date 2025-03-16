@@ -1,3 +1,4 @@
+
 import { Button } from "@/components/ui/button";
 import { ChevronRight, Sparkles, Zap, Star, PenTool, Wand2, Lightbulb } from "lucide-react";
 import { motion } from "framer-motion";

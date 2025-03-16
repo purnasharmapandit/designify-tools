@@ -64,7 +64,7 @@ const StandardHeroSection = ({
                   
                   <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4 leading-tight">
                     {title}{" "}
-                    <span className="bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent">
+                    <span className="bg-gradient-to-r from-purple-300 to-pink-300 bg-clip-text text-transparent">
                       {highlightedText}
                     </span>{" "}
                     {restOfTitle}

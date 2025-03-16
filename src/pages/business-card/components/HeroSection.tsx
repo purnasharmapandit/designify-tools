@@ -1,4 +1,3 @@
-
 import React from "react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
@@ -43,7 +42,7 @@ const HeroSection = ({
 
   return (
     <section className="relative pt-32 pb-24 overflow-hidden w-full">
-      <div className="absolute inset-0 bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-50 z-0"></div>
+      <div className="absolute inset-0 bg-blue-900 z-0"></div>
       <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiMzMjMyMzIiIGZpbGwtb3BhY2l0eT0iMC4wMyI+PHBhdGggZD0iTTMwIDBDMTMuNDMgMCAwIDEzLjQzIDAgMzBzMTMuNDMgMzAgMzAgMzAgMzAtMTMuNDMgMzAtMzBTNDYuNTcgMCAzMCAwem0wIDYwQzE1LjY3IDYwIDQgNDguMzMgNCAzNHM5LjMzLTMwIDI2LTMwIDI2IDExLjY3IDI2IDI2LTExLjY3IDMwLTI2IDMweiIvPjwvZz48L2c+PC9zdmc+')]"></div>
 
       <div className="px-4 sm:px-6 lg:px-8 relative z-10">
@@ -57,10 +56,10 @@ const HeroSection = ({
               <span className="inline-block px-4 py-2 rounded-full bg-indigo-100 text-indigo-800 font-medium text-sm mb-5">
                 Professional Business Cards in Minutes
               </span>
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6">
-                Create Stunning <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-600">Business Cards</span> with AI
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6 text-white">
+                Create Stunning <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-300 to-pink-300">Business Cards</span> with AI
               </h1>
-              <p className="text-xl text-gray-600 mb-8 max-w-lg">
+              <p className="text-xl text-gray-200 mb-8 max-w-lg">
                 Design professional business cards in minutes with our AI-powered tools. Choose from multiple templates and customize to your brand.
               </p>
               <div className="flex flex-wrap gap-4">
@@ -75,7 +74,7 @@ const HeroSection = ({
                 <Button 
                   size="lg" 
                   variant="outline" 
-                  className="rounded-full border-2 h-14 px-8 text-lg"
+                  className="rounded-full border-2 h-14 px-8 text-lg bg-white/10 text-white border-white/20 hover:bg-white/20"
                   onClick={scrollToTemplates}
                 >
                   View Templates
@@ -87,7 +86,7 @@ const HeroSection = ({
                     <div key={i} className={`w-10 h-10 rounded-full border-2 border-white bg-gradient-to-br from-${i % 2 === 0 ? 'blue' : 'purple'}-400 to-${i % 2 === 0 ? 'indigo' : 'pink'}-500`}></div>
                   ))}
                 </div>
-                <p className="text-sm text-gray-600">
+                <p className="text-sm text-gray-200">
                   <span className="font-bold">5,000+</span> business professionals trust our platform
                 </p>
               </div>
@@ -173,7 +172,7 @@ const HeroSection = ({
                     key={template.id}
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
-                    className={`w-8 h-8 rounded-full shadow-sm ${activeTemplate === template.id ? 'ring-2 ring-offset-2 ring-black' : ''}`}
+                    className={`w-8 h-8 rounded-full shadow-sm ${activeTemplate === template.id ? 'ring-2 ring-offset-2 ring-white' : ''}`}
                     style={{ backgroundColor: template.color }}
                     onClick={() => handleTemplateSelect(template.id)}
                     aria-label={`Select ${template.name} template`}
@@ -201,7 +200,7 @@ const HeroSection = ({
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.3, delay: 0.4 + (i * 0.1) }}
-                className="bg-white shadow-sm px-4 py-2 rounded-full flex items-center gap-2"
+                className="bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full flex items-center gap-2 text-white"
               >
                 {feature.icon}
                 <span className="text-sm font-medium">{feature.text}</span>
