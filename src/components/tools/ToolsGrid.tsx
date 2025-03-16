@@ -13,7 +13,9 @@ import {
   Wand2,
   Share2,
   Mail,
-  Scissors
+  Scissors,
+  User,
+  MessageSquare
 } from "lucide-react";
 import ToolItem from "./ToolItem";
 
@@ -107,6 +109,27 @@ const ToolsGrid = () => {
       description: "Create professional business cards that leave a lasting impression",
       color: "bg-pink-100 text-pink-500",
       link: "/business-card-generator"
+    },
+    {
+      icon: MessageSquare,
+      name: "Infographics Generator",
+      description: "Create compelling infographics and visual data representations",
+      color: "bg-orange-100 text-orange-500",
+      link: "/infographics-generator"
+    },
+    {
+      icon: User,
+      name: "AI Headshot Generator",
+      description: "Turn regular photos into professional headshots with AI",
+      color: "bg-blue-100 text-blue-500",
+      link: "/headshot-generator"
+    },
+    {
+      icon: Share2,
+      name: "Social Banner Maker",
+      description: "Create eye-catching banners for all your social media platforms",
+      color: "bg-indigo-100 text-indigo-500",
+      link: "/social-banner-maker"
     }
   ];
 
