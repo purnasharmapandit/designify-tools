@@ -1,14 +1,33 @@
 import React from "react";
 import { motion } from "framer-motion";
+import { Helmet } from "react-helmet";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
-import { ChevronRight, Layout, Image, Share2, MessageCircle, Users, Target, BarChart3, Sparkles } from "lucide-react";
+import { ChevronRight, Layout, Image, Share2, MessageCircle, Users, Target, BarChart3, Sparkles, Clock, Zap, Palette } from "lucide-react";
 import { Link } from "react-router-dom";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 
 const SocialMediaKit = () => {
   return (
     <div className="min-h-screen flex flex-col">
+      <Helmet>
+        <title>Social Media Graphics Generator | Create Consistent Brand Graphics for All Platforms</title>
+        <meta name="description" content="Create stunning, consistent graphics for all your social media channels in one place. Save time with AI-powered templates, maintain brand consistency, and boost engagement with professional designs." />
+        <meta name="keywords" content="social media graphics, social media kit, brand consistency, social media design, Instagram posts, Facebook graphics, Twitter graphics, social media templates" />
+        <meta property="og:title" content="Social Media Graphics Generator | Create Consistent Brand Graphics for All Platforms" />
+        <meta property="og:description" content="Create stunning, consistent graphics for all your social media channels in one place. Save time with AI-powered templates, maintain brand consistency, and boost engagement with professional designs." />
+        <meta property="og:type" content="website" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Social Media Graphics Generator | Create Consistent Brand Graphics for All Platforms" />
+        <meta name="twitter:description" content="Create stunning, consistent graphics for all your social media channels in one place. Save time with AI-powered templates, maintain brand consistency, and boost engagement." />
+      </Helmet>
+      
       <Navbar />
       
       <main className="flex-grow">
@@ -179,6 +198,187 @@ const SocialMediaKit = () => {
                 </motion.div>
               ))}
             </div>
+          </div>
+        </section>
+        
+        {/* How It Works Section */}
+        <section className="py-16 bg-gradient-to-br from-purple-50 to-indigo-50">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-16">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5 }}
+                viewport={{ once: true }}
+              >
+                <h2 className="text-3xl md:text-4xl font-bold mb-4">How It Works</h2>
+                <p className="text-xl text-gray-600 max-w-2xl mx-auto">Create professional social media graphics in three simple steps</p>
+              </motion.div>
+            </div>
+            
+            <div className="grid md:grid-cols-3 gap-8 md:gap-12">
+              {[
+                {
+                  icon: <Target className="h-12 w-12 text-purple-500" />,
+                  title: "1. Choose Your Platform",
+                  description: "Select which social media platform you're creating content for. We'll automatically set up the correct dimensions and format requirements."
+                },
+                {
+                  icon: <Palette className="h-12 w-12 text-purple-500" />,
+                  title: "2. Customize Your Design",
+                  description: "Select from our templates, add your branding, images, and text. Our AI will help suggest designs that match your brand identity."
+                },
+                {
+                  icon: <Share2 className="h-12 w-12 text-purple-500" />,
+                  title: "3. Export and Share",
+                  description: "Download your graphics in high resolution or schedule them directly to your social media accounts with our integrated publishing tools."
+                }
+              ].map((step, i) => (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: i * 0.2 }}
+                  viewport={{ once: true }}
+                  className="flex flex-col items-center text-center"
+                >
+                  <div className="w-20 h-20 rounded-full bg-white shadow-md flex items-center justify-center mb-6">
+                    {step.icon}
+                  </div>
+                  <h3 className="text-xl font-bold mb-3">{step.title}</h3>
+                  <p className="text-gray-600">{step.description}</p>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </section>
+        
+        {/* Advanced Features Section */}
+        <section className="py-16 bg-white">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-16">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5 }}
+                viewport={{ once: true }}
+              >
+                <h2 className="text-3xl md:text-4xl font-bold mb-4">Advanced Features</h2>
+                <p className="text-xl text-gray-600 max-w-2xl mx-auto">Powerful tools to streamline your social media content creation</p>
+              </motion.div>
+            </div>
+            
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {[
+                {
+                  icon: <Clock className="h-10 w-10 text-purple-500" />,
+                  title: "Content Calendar",
+                  description: "Plan, schedule, and organize your social media content with our built-in calendar. Set reminders and never miss a post."
+                },
+                {
+                  icon: <Zap className="h-10 w-10 text-purple-500" />,
+                  title: "AI Post Generator",
+                  description: "Get AI-powered caption and content suggestions based on your images and brand voice to maximize engagement."
+                },
+                {
+                  icon: <Palette className="h-10 w-10 text-purple-500" />,
+                  title: "Brand Kit Integration",
+                  description: "Store your logo, colors, fonts, and brand assets in one place for consistent application across all designs."
+                },
+                {
+                  icon: <Image className="h-10 w-10 text-purple-500" />,
+                  title: "Stock Photo Library",
+                  description: "Access thousands of high-quality stock photos and illustrations directly in the editor to enhance your designs."
+                },
+                {
+                  icon: <Layout className="h-10 w-10 text-purple-500" />,
+                  title: "Bulk Creation",
+                  description: "Create multiple social media graphics at once using different templates but maintaining brand consistency."
+                },
+                {
+                  icon: <BarChart3 className="h-10 w-10 text-purple-500" />,
+                  title: "Performance Analytics",
+                  description: "Track engagement metrics for your posts and get insights on which designs perform best with your audience."
+                }
+              ].map((feature, i) => (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: i * 0.1 }}
+                  viewport={{ once: true }}
+                  className="bg-white rounded-xl p-6 shadow-sm border border-gray-100"
+                >
+                  <div className="mb-4">{feature.icon}</div>
+                  <h3 className="text-xl font-bold mb-2">{feature.title}</h3>
+                  <p className="text-gray-600">{feature.description}</p>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </section>
+        
+        {/* FAQ Section */}
+        <section className="py-16 bg-gray-50">
+          <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+              viewport={{ once: true }}
+              className="text-center mb-12"
+            >
+              <h2 className="text-3xl md:text-4xl font-bold mb-4">Frequently Asked Questions</h2>
+              <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+                Everything you need to know about our Social Media Kit
+              </p>
+            </motion.div>
+            
+            <Accordion type="single" collapsible className="w-full">
+              {[
+                {
+                  question: "What social media platforms are supported?",
+                  answer: "Our social media kit supports all major platforms including Instagram, Facebook, Twitter, LinkedIn, Pinterest, TikTok, YouTube, and more. Each platform comes with preset templates optimized for the specific dimensions and requirements."
+                },
+                {
+                  question: "Can I schedule posts directly from the platform?",
+                  answer: "Yes! Our social media kit includes an integrated scheduling tool that allows you to plan and schedule your posts directly to your connected social media accounts. You can also save drafts for later use."
+                },
+                {
+                  question: "Do I need design experience to use this tool?",
+                  answer: "Not at all! Our tool is designed to be user-friendly for beginners while offering advanced features for experienced designers. With our templates and AI-powered suggestions, anyone can create professional-looking graphics."
+                },
+                {
+                  question: "Can I upload my own images and logos?",
+                  answer: "Absolutely. You can upload your own images, logos, and graphics to use in your designs. We support various file formats including JPG, PNG, and SVG. Your uploaded assets are stored in your brand kit for easy access."
+                },
+                {
+                  question: "Is there a limit to how many graphics I can create?",
+                  answer: "Free users can create a limited number of graphics per month. Premium subscribers enjoy unlimited graphic creation along with access to premium templates, features, and priority support."
+                },
+                {
+                  question: "How do I maintain brand consistency across different platforms?",
+                  answer: "Our Brand Kit feature allows you to save your brand colors, fonts, logos, and other assets in one place. These are automatically applied to templates to ensure consistency across all your social media channels."
+                }
+              ].map((faq, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 10 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.3, delay: index * 0.1 }}
+                  viewport={{ once: true }}
+                >
+                  <AccordionItem value={`item-${index}`}>
+                    <AccordionTrigger className="text-left font-medium">
+                      {faq.question}
+                    </AccordionTrigger>
+                    <AccordionContent className="text-gray-600">
+                      {faq.answer}
+                    </AccordionContent>
+                  </AccordionItem>
+                </motion.div>
+              ))}
+            </Accordion>
           </div>
         </section>
         
