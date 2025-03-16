@@ -1,5 +1,6 @@
 
 import React, { useState } from "react";
+import { Helmet } from "react-helmet";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { EmailSignatureData } from "@/types/email-signature";
@@ -10,6 +11,7 @@ import SimpleStepsSection from "@/components/email-signature/SimpleStepsSection"
 import BenefitsSection from "@/components/email-signature/BenefitsSection";
 import StandardHeroSection from "@/components/shared/StandardHeroSection";
 import { Check, Mail, Briefcase, Layout, Settings } from "lucide-react";
+import EmailSignatureFAQSection from "@/components/email-signature/EmailSignatureFAQSection";
 
 const EmailSignatureGenerator = () => {
   const [data, setData] = useState<EmailSignatureData>({
@@ -60,6 +62,18 @@ const EmailSignatureGenerator = () => {
 
   return (
     <div className="min-h-screen flex flex-col">
+      <Helmet>
+        <title>Email Signature Generator | Create Professional Email Signatures</title>
+        <meta name="description" content="Create beautiful, professional email signatures that work with Gmail, Outlook, Apple Mail, and more. No design skills required. Free online email signature maker." />
+        <meta name="keywords" content="email signature generator, email signature maker, professional email signature, email footer, html email signature, gmail signature, outlook signature, apple mail signature" />
+        <meta property="og:title" content="Email Signature Generator | Create Professional Email Signatures" />
+        <meta property="og:description" content="Create beautiful, professional email signatures that work with Gmail, Outlook, Apple Mail, and more. Choose from multiple templates and customize to your brand." />
+        <meta property="og:type" content="website" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Email Signature Generator | Create Professional Email Signatures" />
+        <meta name="twitter:description" content="Create beautiful, professional email signatures in seconds. Works with all major email clients." />
+      </Helmet>
+      
       <Navbar />
       <main className="flex-grow">
         <StandardHeroSection
@@ -89,6 +103,7 @@ const EmailSignatureGenerator = () => {
         <EmailClientInstructions emailClientInstructions={emailClientInstructions} />
         <SimpleStepsSection />
         <BenefitsSection />
+        <EmailSignatureFAQSection />
       </main>
       <Footer />
     </div>
