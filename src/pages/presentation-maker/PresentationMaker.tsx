@@ -29,10 +29,10 @@ const PresentationMaker = () => {
                   <span className="inline-block px-4 py-2 rounded-full bg-emerald-100 text-emerald-800 font-medium text-sm mb-5">
                     Beautiful Presentations Made Easy
                   </span>
-                  <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6">
-                    Create Stunning <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-600 to-teal-600">Presentations</span> in Minutes
+                  <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6 text-white">
+                    Create Stunning <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-300 to-pink-300">Presentations</span> in Minutes
                   </h1>
-                  <p className="text-xl text-gray-600 mb-8 max-w-lg">
+                  <p className="text-xl text-gray-200 mb-8 max-w-lg">
                     Our Presentation Maker helps you create professional, engaging presentations with ready-to-use templates, beautiful graphics, and smart AI assistance.
                   </p>
                   
@@ -49,7 +49,7 @@ const PresentationMaker = () => {
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.3, delay: 0.4 + (i * 0.1) }}
-                        className="bg-white shadow-sm px-4 py-2 rounded-full flex items-center gap-2"
+                        className="bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full flex items-center gap-2 text-white"
                       >
                         {feature.icon}
                         <span className="text-sm font-medium">{feature.text}</span>

@@ -24,8 +24,8 @@ const BackgroundRemoverHero = () => {
               <div className="inline-flex p-3 bg-purple-800/50 rounded-full text-purple-200 mb-4">
                 <Scissors className="h-8 w-8" />
               </div>
-              <h1 className="text-3xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-purple-300 via-indigo-200 to-purple-300 bg-clip-text text-transparent">
-                Professional Background Remover
+              <h1 className="text-3xl md:text-5xl font-bold mb-4 text-white">
+                Professional <span className="bg-gradient-to-r from-purple-300 to-pink-300 bg-clip-text text-transparent">Background Remover</span>
               </h1>
               <p className="text-base md:text-lg text-gray-200 mb-6 max-w-2xl mx-auto">
                 Remove backgrounds from your images with AI precision in seconds. Perfect for professional photos, product shots, and more.
