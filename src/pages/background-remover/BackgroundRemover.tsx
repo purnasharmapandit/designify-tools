@@ -1,6 +1,7 @@
 
 import React, { useState, useRef } from "react";
 import { motion } from "framer-motion";
+import { Helmet } from "react-helmet";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { useToast } from "@/components/ui/use-toast";
@@ -126,6 +127,18 @@ const BackgroundRemover = () => {
 
   return (
     <div className="min-h-screen flex flex-col">
+      <Helmet>
+        <title>AI Background Remover | Remove Image Backgrounds for Free</title>
+        <meta name="description" content="Remove backgrounds from images with our AI-powered tool. Perfect for product photos, portraits, and design work. Get pixel-perfect results in seconds." />
+        <meta name="keywords" content="background remover, remove background, transparent background, photo editor, AI background remover, free background remover" />
+        <meta property="og:title" content="AI Background Remover | Remove Image Backgrounds for Free" />
+        <meta property="og:description" content="Remove backgrounds from images with our AI-powered tool. Perfect for product photos, portraits, and design work. Get pixel-perfect results in seconds." />
+        <meta property="og:type" content="website" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="AI Background Remover | Remove Image Backgrounds for Free" />
+        <meta name="twitter:description" content="Remove backgrounds from images with our AI-powered tool. Get transparent backgrounds in seconds." />
+      </Helmet>
+      
       <Navbar />
       <main className="flex-grow">
         <StandardHeroSection
