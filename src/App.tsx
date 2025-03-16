@@ -40,6 +40,7 @@ import MockupGenerator from "./pages/mockup-generator/MockupGenerator";
 import PresentationMaker from "./pages/presentation-maker/PresentationMaker";
 import ImageEditor from "./pages/image-editor/ImageEditor";
 import InfographicsGenerator from "./pages/infographics/InfographicsGenerator";
+import HeadshotGenerator from "./pages/headshot-generator/HeadshotGenerator";
 
 const queryClient = new QueryClient();
 
@@ -86,6 +87,7 @@ function App() {
                   <Route path="/presentation-maker" element={<PresentationMaker />} />
                   <Route path="/image-editor" element={<ImageEditor />} />
                   <Route path="/infographics-generator" element={<InfographicsGenerator />} />
+                  <Route path="/headshot-generator" element={<HeadshotGenerator />} />
                   <Route path="/auth" element={<Auth />} />
                   <Route path="*" element={<NotFound />} />
                 </Routes>
