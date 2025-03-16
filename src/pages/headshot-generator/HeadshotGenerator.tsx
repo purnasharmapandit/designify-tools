@@ -1,12 +1,14 @@
 
 import React from "react";
 import { motion } from "framer-motion";
+import { Helmet } from "react-helmet";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
-import { ChevronRight, Check, Camera, User, Image, Download, ImagePlus } from "lucide-react";
+import { ChevronRight, Check, Camera, User, Image, Download, ImagePlus, Sparkle, Upload, Wand2 } from "lucide-react";
 import { Link } from "react-router-dom";
 import StandardHeroSection from "@/components/shared/StandardHeroSection";
+import HeadshotGeneratorTool from "./components/HeadshotGeneratorTool";
 
 const HeadshotGenerator = () => {
   const headshotImage = (
@@ -35,6 +37,18 @@ const HeadshotGenerator = () => {
 
   return (
     <div className="min-h-screen flex flex-col">
+      <Helmet>
+        <title>AI Headshot Generator | Professional Headshots in Minutes</title>
+        <meta name="description" content="Transform your casual photos into professional headshots for LinkedIn, resumes, and business profiles using our AI-powered headshot generator. No photoshoot needed." />
+        <meta name="keywords" content="AI headshot, professional headshot, headshot generator, LinkedIn photo, professional profile picture, AI photo generator" />
+        <meta property="og:title" content="AI Headshot Generator | Professional Headshots in Minutes" />
+        <meta property="og:description" content="Transform your casual photos into professional headshots for LinkedIn, resumes, and business profiles using our AI-powered headshot generator." />
+        <meta property="og:type" content="website" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="AI Headshot Generator | Professional Headshots in Minutes" />
+        <meta name="twitter:description" content="Transform your casual photos into professional headshots for LinkedIn, resumes, and business profiles using our AI-powered headshot generator." />
+      </Helmet>
+      
       <Navbar />
       
       <main className="flex-grow">
@@ -53,6 +67,67 @@ const HeadshotGenerator = () => {
           bgColor="bg-blue-900"
           textColor="text-white"
         />
+        
+        {/* Generator Tool Section */}
+        <section className="py-16 bg-slate-50">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl md:text-4xl font-bold mb-4">Create Your AI Headshot</h2>
+              <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+                Upload your photo and let our AI transform it into a professional headshot
+              </p>
+            </div>
+            
+            <HeadshotGeneratorTool />
+          </div>
+        </section>
+
+        {/* How It Works Section */}
+        <section className="py-16 bg-white">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-16">
+              <h2 className="text-3xl md:text-4xl font-bold mb-4">How It Works</h2>
+              <p className="text-xl text-gray-600 max-w-2xl mx-auto">Three simple steps to your professional headshot</p>
+            </div>
+            
+            <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+              {[
+                {
+                  icon: <Upload className="h-12 w-12 text-blue-500" />,
+                  title: "Upload Your Photo",
+                  description: "Choose a clear photo of your face. Selfies work great!"
+                },
+                {
+                  icon: <Wand2 className="h-12 w-12 text-purple-500" />,
+                  title: "AI Enhancement",
+                  description: "Our AI transforms your photo into a professional headshot."
+                },
+                {
+                  icon: <Download className="h-12 w-12 text-green-500" />,
+                  title: "Download & Share",
+                  description: "Get your headshot in high resolution, ready to use."
+                }
+              ].map((step, i) => (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: i * 0.2 }}
+                  viewport={{ once: true }}
+                  className="text-center"
+                >
+                  <div className="bg-white rounded-full w-24 h-24 mx-auto mb-6 flex items-center justify-center shadow-md">
+                    {step.icon}
+                  </div>
+                  <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100 h-full">
+                    <h3 className="text-xl font-bold mb-3">{step.title}</h3>
+                    <p className="text-gray-600">{step.description}</p>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </section>
         
         {/* Features Section */}
         <section className="py-16 bg-white">
@@ -111,6 +186,92 @@ const HeadshotGenerator = () => {
             </div>
           </div>
         </section>
+
+        {/* Use Cases Section */}
+        <section className="py-16 bg-slate-50">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-16">
+              <h2 className="text-3xl md:text-4xl font-bold mb-4">Perfect For</h2>
+              <p className="text-xl text-gray-600 max-w-2xl mx-auto">Professional headshots for every situation</p>
+            </div>
+            
+            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
+              {[
+                { title: "LinkedIn Profiles", description: "Make a positive first impression on potential employers" },
+                { title: "Corporate Websites", description: "Maintain a professional team section on your company website" },
+                { title: "Job Applications", description: "Stand out with a professional appearance in your resume" },
+                { title: "Social Media", description: "Present yourself professionally across all platforms" },
+                { title: "Professional Bios", description: "Complete your speaker profiles and professional bios" },
+                { title: "ID Badges", description: "Create consistent, professional photos for company badges" },
+                { title: "Conference Profiles", description: "Look your best in event programs and speaker listings" },
+                { title: "Personal Branding", description: "Elevate your personal brand with a polished appearance" }
+              ].map((useCase, i) => (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: i * 0.1 }}
+                  viewport={{ once: true }}
+                  className="bg-white rounded-xl p-6 shadow-sm"
+                >
+                  <h3 className="text-lg font-bold mb-2">{useCase.title}</h3>
+                  <p className="text-gray-600 text-sm">{useCase.description}</p>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* FAQ Section */}
+        <section className="py-16 bg-white">
+          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl md:text-4xl font-bold mb-4">Frequently Asked Questions</h2>
+              <p className="text-xl text-gray-600">Common questions about our AI Headshot Generator</p>
+            </div>
+            
+            <div className="space-y-6">
+              {[
+                {
+                  q: "How does the AI headshot generator work?",
+                  a: "Our AI headshot generator uses advanced machine learning algorithms to analyze your uploaded photo and transform it into a professional headshot. It enhances features, adjusts lighting, and applies professional styling while maintaining your natural appearance."
+                },
+                {
+                  q: "What kind of photos work best?",
+                  a: "For best results, upload a clear, well-lit photo of your face. Front-facing photos with neutral backgrounds work best, but our AI can work with most decent quality selfies or portraits."
+                },
+                {
+                  q: "How long does it take to generate a headshot?",
+                  a: "Most headshots are generated within 30-60 seconds, depending on the complexity of the transformation and current system load."
+                },
+                {
+                  q: "Can I customize the style of my headshot?",
+                  a: "Yes! You can choose from various professional styles including corporate, creative, casual, and more. You can also select different backgrounds and lighting styles."
+                },
+                {
+                  q: "Is my photo data secure?",
+                  a: "Absolutely. We take privacy seriously. Your uploaded photos are processed securely and are never shared with third parties or used to train our AI models. Photos are automatically deleted after processing."
+                },
+                {
+                  q: "What resolution will my headshot be?",
+                  a: "Your AI-generated headshots will be high-resolution images suitable for professional use on websites, social media, and even printing."
+                }
+              ].map((faq, i) => (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, y: 10 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.3, delay: i * 0.1 }}
+                  viewport={{ once: true }}
+                  className="bg-white rounded-xl p-6 shadow-sm border border-gray-100"
+                >
+                  <h3 className="text-lg font-bold mb-2">{faq.q}</h3>
+                  <p className="text-gray-600">{faq.a}</p>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </section>
         
         {/* CTA Section */}
         <section className="py-20 bg-gradient-to-br from-blue-50 to-indigo-50">
@@ -119,7 +280,7 @@ const HeadshotGenerator = () => {
               <div className="max-w-3xl mx-auto text-center">
                 <h2 className="text-3xl md:text-4xl font-bold mb-6">Ready for Your Professional Headshot?</h2>
                 <p className="text-xl mb-8 opacity-90">Create professional headshots for your LinkedIn, resume, or business profile in minutes.</p>
-                <Link to="/contact-us?subject=Interest%20in%20AI%20Headshot%20Generator">
+                <Link to="#generator">
                   <Button 
                     size="lg" 
                     className="bg-white text-blue-600 hover:bg-gray-100 rounded-full px-8 py-6 text-lg"
