@@ -1,14 +1,29 @@
+
 import React from "react";
 import { motion } from "framer-motion";
+import { Helmet } from "react-helmet";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
-import { ChevronRight, Presentation, LayoutGrid, Play, FileText, Palette, LineChart, Clock, Sparkles, Layers } from "lucide-react";
+import { ChevronRight, Presentation, LayoutGrid, Play, FileText, Palette, LineChart, Clock, Sparkles, Layers, Check, Download, ZoomIn, Brain, Users, Code } from "lucide-react";
 import { Link } from "react-router-dom";
+import ToolsFAQSection from "@/components/tools/ToolsFAQSection";
 
 const PresentationMaker = () => {
   return (
     <div className="min-h-screen flex flex-col">
+      <Helmet>
+        <title>AI Presentation Maker | Create Stunning Slide Decks in Minutes</title>
+        <meta name="description" content="Transform your ideas into professional presentations with our AI-powered slide maker. Create engaging presentations for business, education, and social media with beautiful templates." />
+        <meta name="keywords" content="presentation maker, slide deck creator, AI presentations, business slides, presentation templates, pitch deck, animated slides" />
+        <meta property="og:title" content="AI Presentation Maker | Create Stunning Slide Decks in Minutes" />
+        <meta property="og:description" content="Transform your ideas into professional presentations with our AI-powered slide maker. Perfect for business pitches, educational content, and social media." />
+        <meta property="og:type" content="website" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="AI Presentation Maker | Create Stunning Slide Decks in Minutes" />
+        <meta name="twitter:description" content="Transform your ideas into professional presentations with our AI-powered slide maker. Perfect for business pitches, educational content, and social media." />
+      </Helmet>
+      
       <Navbar />
       
       <main className="flex-grow">
@@ -197,6 +212,228 @@ const PresentationMaker = () => {
                   <p className="text-gray-600">{feature.description}</p>
                 </motion.div>
               ))}
+            </div>
+          </div>
+        </section>
+        
+        {/* How It Works Section - New Section */}
+        <section className="py-16 bg-gray-50">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-16">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5 }}
+                viewport={{ once: true }}
+              >
+                <h2 className="text-3xl md:text-4xl font-bold mb-4">Create Presentations in Three Simple Steps</h2>
+                <p className="text-xl text-gray-600 max-w-2xl mx-auto">Our intuitive platform makes it easy to design professional presentations</p>
+              </motion.div>
+            </div>
+            
+            <div className="grid md:grid-cols-3 gap-10">
+              {[
+                {
+                  step: "01",
+                  title: "Choose a Template",
+                  description: "Browse our extensive library of professionally designed templates and select one that matches your needs and style.",
+                  icon: <LayoutGrid className="h-10 w-10 text-emerald-500" />
+                },
+                {
+                  step: "02",
+                  title: "Add Your Content",
+                  description: "Insert your text, images, charts, and videos. Our AI assistant can help generate content and suggest improvements.",
+                  icon: <FileText className="h-10 w-10 text-emerald-500" />
+                },
+                {
+                  step: "03",
+                  title: "Customize & Download",
+                  description: "Apply your branding, adjust layouts, and customize animations. Then download or share your presentation with your audience.",
+                  icon: <Download className="h-10 w-10 text-emerald-500" />
+                }
+              ].map((item, i) => (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: i * 0.1 }}
+                  viewport={{ once: true }}
+                  className="relative"
+                >
+                  <div className="bg-gradient-to-br from-emerald-50 to-teal-50 rounded-3xl p-8 h-full">
+                    <div className="text-5xl font-bold text-emerald-100 mb-4">{item.step}</div>
+                    <div className="mb-4">{item.icon}</div>
+                    <h3 className="text-xl font-bold mb-4">{item.title}</h3>
+                    <p className="text-gray-600">{item.description}</p>
+                  </div>
+                  {i < 2 && (
+                    <div className="hidden md:block absolute top-1/2 -right-5 transform -translate-y-1/2 z-10">
+                      <div className="h-10 w-10 bg-white rounded-full shadow-lg flex items-center justify-center">
+                        <ChevronRight className="h-6 w-6 text-emerald-500" />
+                      </div>
+                    </div>
+                  )}
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </section>
+        
+        {/* Advanced Features Section - New Section */}
+        <section className="py-16 bg-white">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-16">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5 }}
+                viewport={{ once: true }}
+              >
+                <h2 className="text-3xl md:text-4xl font-bold mb-4">Advanced Presentation Capabilities</h2>
+                <p className="text-xl text-gray-600 max-w-2xl mx-auto">Take your presentations to the next level with these powerful features</p>
+              </motion.div>
+            </div>
+            
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {[
+                {
+                  icon: <Brain className="h-10 w-10 text-white" />,
+                  title: "AI Content Generation",
+                  description: "Generate professional slide content with our AI assistant. Transform bullet points into engaging narratives.",
+                  bgGradient: "bg-gradient-to-br from-emerald-500 to-teal-500",
+                  textColor: "text-white"
+                },
+                {
+                  icon: <ZoomIn className="h-10 w-10 text-white" />,
+                  title: "Interactive Elements",
+                  description: "Add interactive elements like clickable regions, embedded videos, and animated transitions to engage your audience.",
+                  bgGradient: "bg-gradient-to-br from-blue-500 to-indigo-500",
+                  textColor: "text-white"
+                },
+                {
+                  icon: <Users className="h-10 w-10 text-white" />,
+                  title: "Collaboration Tools",
+                  description: "Work together with your team in real-time with comments, suggestions, and version history tracking.",
+                  bgGradient: "bg-gradient-to-br from-purple-500 to-pink-500",
+                  textColor: "text-white"
+                },
+                {
+                  icon: <Code className="h-10 w-10 text-white" />,
+                  title: "Export Options",
+                  description: "Export your presentations in multiple formats including PDF, PowerPoint, Google Slides, or as a standalone web presentation.",
+                  bgGradient: "bg-gradient-to-br from-orange-500 to-amber-500",
+                  textColor: "text-white"
+                },
+                {
+                  icon: <Palette className="h-10 w-10 text-white" />,
+                  title: "Design System Integration",
+                  description: "Connect to your company's design system to ensure all presentations follow your brand guidelines perfectly.",
+                  bgGradient: "bg-gradient-to-br from-rose-500 to-red-500",
+                  textColor: "text-white"
+                },
+                {
+                  icon: <LineChart className="h-10 w-10 text-white" />,
+                  title: "Analytics Dashboard",
+                  description: "Track presentation performance with viewer analytics, engagement metrics, and audience feedback tools.",
+                  bgGradient: "bg-gradient-to-br from-cyan-500 to-blue-500",
+                  textColor: "text-white"
+                }
+              ].map((feature, i) => (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: i * 0.1 }}
+                  viewport={{ once: true }}
+                  className={`rounded-xl p-6 shadow-sm ${feature.bgGradient} ${feature.textColor}`}
+                >
+                  <div className="p-3 rounded-full w-fit mb-4 bg-white/20">
+                    {feature.icon}
+                  </div>
+                  <h3 className="text-xl font-bold mb-2">{feature.title}</h3>
+                  <p className="opacity-90">{feature.description}</p>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </section>
+        
+        {/* Use Cases Section - New Section */}
+        <section className="py-16 bg-gray-50">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-16">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5 }}
+                viewport={{ once: true }}
+              >
+                <h2 className="text-3xl md:text-4xl font-bold mb-4">Perfect for Every Presentation Need</h2>
+                <p className="text-xl text-gray-600 max-w-2xl mx-auto">How professionals use our presentation maker</p>
+              </motion.div>
+            </div>
+            
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {[
+                {
+                  title: "Business Pitches",
+                  description: "Create compelling pitch decks that win over investors and clients with professional designs and data visualizations.",
+                  features: ["Investor pitch templates", "Financial chart builders", "Executive summary layouts"]
+                },
+                {
+                  title: "Education & Training",
+                  description: "Design engaging lessons and training materials that keep students and employees focused and interested.",
+                  features: ["Interactive quiz features", "Step-by-step tutorials", "Visual learning aids"]
+                },
+                {
+                  title: "Marketing Presentations",
+                  description: "Showcase your products, campaigns, and results with eye-catching slides that communicate your value proposition.",
+                  features: ["Product showcase templates", "Campaign result layouts", "Brand storytelling formats"]
+                }
+              ].map((useCase, i) => (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: i * 0.1 }}
+                  viewport={{ once: true }}
+                  className="bg-white rounded-xl p-6 shadow-sm border border-gray-100"
+                >
+                  <h3 className="text-xl font-bold mb-2">{useCase.title}</h3>
+                  <p className="text-gray-600 mb-4">{useCase.description}</p>
+                  <ul className="space-y-2">
+                    {useCase.features.map((feature, index) => (
+                      <li key={index} className="flex items-center text-gray-700">
+                        <Check className="h-4 w-4 text-emerald-500 mr-2" />
+                        <span>{feature}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </section>
+        
+        {/* FAQ Section - New Section */}
+        <section className="py-16 bg-white">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-12">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5 }}
+                viewport={{ once: true }}
+              >
+                <h2 className="text-3xl md:text-4xl font-bold mb-4">Frequently Asked Questions</h2>
+                <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+                  Everything you need to know about our Presentation Maker
+                </p>
+              </motion.div>
+            </div>
+
+            <div className="mt-8 max-w-4xl mx-auto">
+              <ToolsFAQSection />
             </div>
           </div>
         </section>
