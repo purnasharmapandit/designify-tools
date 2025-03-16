@@ -1,6 +1,7 @@
 
 import React, { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
+import { Helmet } from "react-helmet";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import HeroSection from "./components/HeroSection";
@@ -48,6 +49,18 @@ const BusinessCardGenerator = () => {
 
   return (
     <div className="min-h-screen flex flex-col">
+      <Helmet>
+        <title>Business Card Generator | Create Professional Business Cards</title>
+        <meta name="description" content="Design custom, professional business cards in minutes with our easy-to-use business card maker. Choose from multiple templates, customize colors, and download print-ready files." />
+        <meta name="keywords" content="business card generator, business card maker, custom business cards, professional business cards, digital business cards, printable business cards" />
+        <meta property="og:title" content="Business Card Generator | Create Professional Business Cards" />
+        <meta property="og:description" content="Design custom, professional business cards in minutes with our easy-to-use business card maker. Choose from multiple templates and customize to your brand." />
+        <meta property="og:type" content="website" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Business Card Generator | Create Professional Business Cards" />
+        <meta name="twitter:description" content="Design custom, professional business cards in minutes with our easy-to-use business card maker. Multiple templates available." />
+      </Helmet>
+      
       <Navbar />
       
       <main className="flex-grow">
