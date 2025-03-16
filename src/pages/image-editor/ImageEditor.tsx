@@ -1,7 +1,9 @@
 import React from "react";
 import { motion } from "framer-motion";
+import { Helmet } from "react-helmet";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import ImageEditorFAQs from "./components/FAQSection";
 import { Button } from "@/components/ui/button";
 import { ChevronRight, ImageIcon, Crop, Layers, Palette, PenTool, Sliders, Download, Sparkles } from "lucide-react";
 import { Link } from "react-router-dom";
@@ -9,6 +11,18 @@ import { Link } from "react-router-dom";
 const ImageEditor = () => {
   return (
     <div className="min-h-screen flex flex-col">
+      <Helmet>
+        <title>Online Image Editor | Professional Photo Editing Tool</title>
+        <meta name="description" content="Transform your photos with our powerful yet easy-to-use online image editor. Perfect for social media graphics, marketing materials, and personal projects. Try it for free!" />
+        <meta property="og:title" content="Online Image Editor | Professional Photo Editing Tool" />
+        <meta property="og:description" content="Transform your photos with our powerful yet easy-to-use online image editor. Perfect for social media graphics, marketing materials, and personal projects." />
+        <meta property="og:type" content="website" />
+        <meta property="og:image" content="/lovable-uploads/image-editor-preview.jpg" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Online Image Editor | Professional Photo Editing Tool" />
+        <meta name="twitter:description" content="Transform your photos with our powerful yet easy-to-use online image editor. Perfect for social media graphics, marketing materials, and personal projects." />
+      </Helmet>
+      
       <Navbar />
       
       <main className="flex-grow">
@@ -74,7 +88,6 @@ const ImageEditor = () => {
                   className="relative mx-auto"
                 >
                   <div className="relative">
-                    {/* Image Editor Mockup */}
                     <div className="absolute -z-10 w-full h-80 bg-gradient-to-r from-purple-500/20 to-pink-500/20 rounded-xl blur-xl transform rotate-6"></div>
                     
                     <div className="relative bg-white rounded-xl shadow-lg border border-gray-200 overflow-hidden p-4 w-full max-w-md">
@@ -182,6 +195,147 @@ const ImageEditor = () => {
                 </motion.div>
               ))}
             </div>
+          </div>
+        </section>
+        
+        {/* How It Works Section */}
+        <section className="py-16 bg-gradient-to-br from-blue-50 to-pink-50">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-16">
+              <h2 className="text-3xl md:text-4xl font-bold mb-4">How Our Image Editor Works</h2>
+              <p className="text-xl text-gray-600 max-w-2xl mx-auto">Simple steps to perfect images</p>
+            </div>
+            
+            <div className="grid md:grid-cols-4 gap-8">
+              {[
+                {
+                  step: "01",
+                  title: "Upload Your Image",
+                  description: "Import an image from your device, cloud storage, or choose from our stock library.",
+                  icon: <ImageIcon className="h-10 w-10 text-pink-500" />
+                },
+                {
+                  step: "02",
+                  title: "Apply Edits",
+                  description: "Use our intuitive tools to adjust, enhance, crop, or add effects to your image.",
+                  icon: <Sliders className="h-10 w-10 text-pink-500" />
+                },
+                {
+                  step: "03",
+                  title: "Use AI Features",
+                  description: "Let our AI suggest enhancements or automatically remove unwanted objects.",
+                  icon: <Sparkles className="h-10 w-10 text-pink-500" />
+                },
+                {
+                  step: "04",
+                  title: "Download & Share",
+                  description: "Save your edited image in multiple formats or share directly to social media.",
+                  icon: <Download className="h-10 w-10 text-pink-500" />
+                }
+              ].map((step, i) => (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: i * 0.1 }}
+                  viewport={{ once: true }}
+                  className="relative"
+                >
+                  <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100 h-full">
+                    <div className="text-3xl font-bold text-pink-100 mb-4">{step.step}</div>
+                    <div className="mb-4">{step.icon}</div>
+                    <h3 className="text-xl font-bold mb-2">{step.title}</h3>
+                    <p className="text-gray-600">{step.description}</p>
+                  </div>
+                  
+                  {i < 3 && (
+                    <div className="hidden md:block absolute top-1/2 -right-4 transform -translate-y-1/2">
+                      <ChevronRight className="h-6 w-6 text-gray-300" />
+                    </div>
+                  )}
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </section>
+        
+        {/* Use Cases Section */}
+        <section className="py-16 bg-white">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-16">
+              <h2 className="text-3xl md:text-4xl font-bold mb-4">Perfect for Every Need</h2>
+              <p className="text-xl text-gray-600 max-w-2xl mx-auto">Our image editor helps with all your visual content needs</p>
+            </div>
+            
+            <div className="grid md:grid-cols-3 gap-6">
+              {[
+                {
+                  title: "Social Media Content",
+                  description: "Create eye-catching posts for Instagram, Facebook, Twitter, and more with perfect dimensions and filters.",
+                  color: "from-pink-500 to-purple-500",
+                  icon: <ImageIcon className="h-8 w-8 text-white" />
+                },
+                {
+                  title: "Marketing Materials",
+                  description: "Design professional visuals for your marketing campaigns, presentations, and promotional materials.",
+                  color: "from-blue-500 to-cyan-500",
+                  icon: <PenTool className="h-8 w-8 text-white" />
+                },
+                {
+                  title: "Product Photography",
+                  description: "Enhance product photos with background removal, lighting adjustments, and professional retouching.",
+                  color: "from-amber-500 to-orange-500",
+                  icon: <Crop className="h-8 w-8 text-white" />
+                },
+                {
+                  title: "Personal Projects",
+                  description: "Edit personal photos for albums, prints, or digital sharing with friends and family.",
+                  color: "from-green-500 to-emerald-500",
+                  icon: <Palette className="h-8 w-8 text-white" />
+                },
+                {
+                  title: "Web Design",
+                  description: "Create and edit images for websites, landing pages, and digital platforms with the right specifications.",
+                  color: "from-violet-500 to-indigo-500",
+                  icon: <Layers className="h-8 w-8 text-white" />
+                },
+                {
+                  title: "Print Materials",
+                  description: "Prepare images for brochures, flyers, business cards, and other printed materials with proper resolution.",
+                  color: "from-rose-500 to-red-500",
+                  icon: <Sliders className="h-8 w-8 text-white" />
+                }
+              ].map((useCase, i) => (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: i * 0.1 }}
+                  viewport={{ once: true }}
+                  className="group"
+                >
+                  <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100 h-full group-hover:shadow-md transition-all">
+                    <div className={`mb-6 inline-flex p-3 rounded-lg bg-gradient-to-br ${useCase.color}`}>
+                      {useCase.icon}
+                    </div>
+                    <h3 className="text-xl font-bold mb-2">{useCase.title}</h3>
+                    <p className="text-gray-600">{useCase.description}</p>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </section>
+        
+        {/* FAQ Section */}
+        <section className="py-16 bg-gradient-to-br from-pink-50 to-purple-50">
+          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl md:text-4xl font-bold mb-4">Frequently Asked Questions</h2>
+              <p className="text-xl text-gray-600">Everything you need to know about our image editor</p>
+            </div>
+            
+            <ImageEditorFAQs />
           </div>
         </section>
         

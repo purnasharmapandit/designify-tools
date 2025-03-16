@@ -93,6 +93,13 @@ const ToolsGrid = () => {
       link: "/social-banner-maker"
     },
     {
+      icon: FileImage,
+      name: "Image Editor",
+      description: "Edit and enhance images with powerful tools",
+      color: "bg-violet-100 text-violet-500",
+      link: "/image-editor"
+    },
+    {
       icon: Share2,
       name: "Social Media Kit",
       description: "Generate complete social media graphic packages instantly",
@@ -122,14 +129,6 @@ const ToolsGrid = () => {
       description: "Design professional presentations with ready-to-use templates",
       color: "bg-emerald-100 text-emerald-500",
       link: "/presentation-maker",
-      comingSoon: true
-    },
-    {
-      icon: FileImage,
-      name: "Image Editor",
-      description: "Edit and enhance images with powerful tools",
-      color: "bg-violet-100 text-violet-500",
-      link: "/image-editor",
       comingSoon: true
     }
   ];
