@@ -56,6 +56,7 @@ const BusinessCardGenerator = () => {
           activeTemplate={activeTemplate}
           setActiveTemplate={setActiveTemplate}
           templates={templates}
+          bgColor="bg-blue-900"
         />
         
         <StepsSection />
