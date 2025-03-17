@@ -1,10 +1,43 @@
-
 /**
  * Strapi service for fetching content from Strapi CMS
  */
 
 // The base URL for your Strapi API
 const STRAPI_URL = import.meta.env.VITE_STRAPI_URL || 'http://localhost:1337';
+const STRAPI_API_TOKEN = import.meta.env.VITE_STRAPI_API_TOKEN || '';
+
+/**
+ * Check if Strapi server is available
+ * @returns Promise<boolean> True if server is available
+ */
+export async function checkStrapiConnection(): Promise<boolean> {
+  try {
+    const response = await fetch(`${STRAPI_URL}/api/blog-posts?pagination[limit]=1`, {
+      method: 'GET',
+      headers: getHeaders(),
+    });
+    return response.ok;
+  } catch (error) {
+    console.error('Error connecting to Strapi server:', error);
+    return false;
+  }
+}
+
+/**
+ * Get headers for Strapi API requests
+ * @returns Headers object with authorization if token is available
+ */
+function getHeaders(): HeadersInit {
+  const headers: HeadersInit = {
+    'Content-Type': 'application/json',
+  };
+  
+  if (STRAPI_API_TOKEN) {
+    headers['Authorization'] = `Bearer ${STRAPI_API_TOKEN}`;
+  }
+  
+  return headers;
+}
 
 /**
  * Fetch data from Strapi API
@@ -19,15 +52,129 @@ export async function fetchFromStrapi(endpoint: string, queryParams: Record<stri
     : '';
   
   try {
-    const response = await fetch(`${STRAPI_URL}/api/${endpoint}${queryString}`);
+    const response = await fetch(`${STRAPI_URL}/api/${endpoint}${queryString}`, {
+      headers: getHeaders(),
+    });
     
     if (!response.ok) {
-      throw new Error(`Strapi API error: ${response.status}`);
+      const errorText = await response.text();
+      throw new Error(`Strapi API error: ${response.status} - ${errorText}`);
     }
     
     return await response.json();
   } catch (error) {
     console.error('Error fetching from Strapi:', error);
+    throw error;
+  }
+}
+
+/**
+ * Post data to Strapi API
+ * @param endpoint The API endpoint to post to
+ * @param data The data to post
+ * @returns The response data
+ */
+export async function postToStrapi(endpoint: string, data: any) {
+  try {
+    const response = await fetch(`${STRAPI_URL}/api/${endpoint}`, {
+      method: 'POST',
+      headers: getHeaders(),
+      body: JSON.stringify({ data }),
+    });
+    
+    if (!response.ok) {
+      const errorText = await response.text();
+      throw new Error(`Strapi API error: ${response.status} - ${errorText}`);
+    }
+    
+    return await response.json();
+  } catch (error) {
+    console.error('Error posting to Strapi:', error);
+    throw error;
+  }
+}
+
+/**
+ * Update data in Strapi API
+ * @param endpoint The API endpoint to update
+ * @param id The ID of the resource to update
+ * @param data The data to update
+ * @returns The response data
+ */
+export async function updateStrapi(endpoint: string, id: string | number, data: any) {
+  try {
+    const response = await fetch(`${STRAPI_URL}/api/${endpoint}/${id}`, {
+      method: 'PUT',
+      headers: getHeaders(),
+      body: JSON.stringify({ data }),
+    });
+    
+    if (!response.ok) {
+      const errorText = await response.text();
+      throw new Error(`Strapi API error: ${response.status} - ${errorText}`);
+    }
+    
+    return await response.json();
+  } catch (error) {
+    console.error('Error updating Strapi:', error);
+    throw error;
+  }
+}
+
+/**
+ * Delete data from Strapi API
+ * @param endpoint The API endpoint to delete from
+ * @param id The ID of the resource to delete
+ * @returns The response data
+ */
+export async function deleteFromStrapi(endpoint: string, id: string | number) {
+  try {
+    const response = await fetch(`${STRAPI_URL}/api/${endpoint}/${id}`, {
+      method: 'DELETE',
+      headers: getHeaders(),
+    });
+    
+    if (!response.ok) {
+      const errorText = await response.text();
+      throw new Error(`Strapi API error: ${response.status} - ${errorText}`);
+    }
+    
+    return await response.json();
+  } catch (error) {
+    console.error('Error deleting from Strapi:', error);
+    throw error;
+  }
+}
+
+/**
+ * Upload media to Strapi API
+ * @param file The file to upload
+ * @returns The response data with file information
+ */
+export async function uploadMedia(file: File) {
+  const formData = new FormData();
+  formData.append('files', file);
+  
+  try {
+    const headers: HeadersInit = {};
+    if (STRAPI_API_TOKEN) {
+      headers['Authorization'] = `Bearer ${STRAPI_API_TOKEN}`;
+    }
+    
+    const response = await fetch(`${STRAPI_URL}/api/upload`, {
+      method: 'POST',
+      headers,
+      body: formData,
+    });
+    
+    if (!response.ok) {
+      const errorText = await response.text();
+      throw new Error(`Strapi API error: ${response.status} - ${errorText}`);
+    }
+    
+    return await response.json();
+  } catch (error) {
+    console.error('Error uploading media to Strapi:', error);
     throw error;
   }
 }

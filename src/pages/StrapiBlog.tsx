@@ -8,11 +8,13 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { useStrapiBlog } from "@/contexts/StrapiBlogContext";
 import { BlogPostType } from "@/types/blog";
+import { Alert, AlertTitle, AlertDescription } from "@/components/ui/alert";
+import { ExternalLink, AlertCircle, Loader2 } from "lucide-react";
 
 const PLACEHOLDER_IMAGE = "/placeholder.svg";
 
 const StrapiBlog = () => {
-  const { getAllPosts, isLoading, error } = useStrapiBlog();
+  const { getAllPosts, isLoading, error, isConnected, checkConnection } = useStrapiBlog();
   const [posts, setPosts] = useState<BlogPostType[]>([]);
   
   useEffect(() => {
@@ -21,13 +23,47 @@ const StrapiBlog = () => {
       setPosts(fetchedPosts);
     };
     
-    fetchPosts();
-  }, [getAllPosts]);
+    if (isConnected) {
+      fetchPosts();
+    } else {
+      // Try to check connection again
+      checkConnection().then(connected => {
+        if (connected) {
+          fetchPosts();
+        }
+      });
+    }
+  }, [getAllPosts, isConnected, checkConnection]);
 
   const fadeIn = {
     hidden: { opacity: 0, y: 20 },
     visible: { opacity: 1, y: 0 }
   };
+
+  const handleRetry = () => {
+    checkConnection().then(connected => {
+      if (connected) {
+        getAllPosts().then(fetchedPosts => setPosts(fetchedPosts));
+      }
+    });
+  };
+
+  const renderConnectionError = () => (
+    <Alert variant="destructive" className="mb-8">
+      <AlertCircle className="h-4 w-4" />
+      <AlertTitle>Strapi Connection Error</AlertTitle>
+      <AlertDescription className="space-y-4">
+        <p>Could not connect to the Strapi CMS. To set up Strapi:</p>
+        <ol className="list-decimal ml-5 space-y-2">
+          <li>Install Strapi by running: <code className="bg-muted p-1 rounded">npx create-strapi-app@latest my-blog --quickstart</code></li>
+          <li>Once Strapi is running, create a new admin account</li>
+          <li>Add an environment variable in your app: <code className="bg-muted p-1 rounded">VITE_STRAPI_URL=http://localhost:1337</code></li>
+          <li>In Strapi admin panel, create content types for blog posts, authors, etc.</li>
+        </ol>
+        <Button onClick={handleRetry} className="mt-4">Retry Connection</Button>
+      </AlertDescription>
+    </Alert>
+  );
 
   if (isLoading) {
     return (
@@ -35,24 +71,8 @@ const StrapiBlog = () => {
         <Navbar />
         <main className="flex-grow pt-28 pb-16 flex items-center justify-center">
           <div className="text-center">
-            <div className="w-16 h-16 border-4 border-primary border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+            <Loader2 className="w-16 h-16 animate-spin text-primary mx-auto mb-4" />
             <p className="text-xl text-muted-foreground">Loading blog posts...</p>
-          </div>
-        </main>
-        <Footer />
-      </div>
-    );
-  }
-
-  if (error) {
-    return (
-      <div className="min-h-screen flex flex-col">
-        <Navbar />
-        <main className="flex-grow pt-28 pb-16 flex items-center justify-center">
-          <div className="text-center max-w-md mx-auto px-4">
-            <h2 className="text-2xl font-bold text-red-600 mb-4">Error Loading Blog</h2>
-            <p className="text-muted-foreground mb-6">{error.message || "There was a problem loading the blog posts. Please try again later."}</p>
-            <Button onClick={() => window.location.reload()}>Try Again</Button>
           </div>
         </main>
         <Footer />
@@ -84,12 +104,35 @@ const StrapiBlog = () => {
             </motion.p>
           </div>
 
-          {posts.length === 0 ? (
+          {/* Connection Error */}
+          {!isConnected && renderConnectionError()}
+
+          {/* Error Display */}
+          {error && (
+            <Alert variant="destructive" className="mb-8">
+              <AlertCircle className="h-4 w-4" />
+              <AlertTitle>Error</AlertTitle>
+              <AlertDescription>
+                {error.message || "There was a problem loading the blog posts."}
+                <Button variant="outline" className="mt-2" onClick={handleRetry}>Try Again</Button>
+              </AlertDescription>
+            </Alert>
+          )}
+
+          {isConnected && posts.length === 0 ? (
             <div className="text-center py-16">
               <p className="text-xl text-muted-foreground mb-6">No blog posts available at the moment.</p>
-              <Button size="lg" className="rounded-full" asChild>
-                <Link to="/logo-maker">Try Our Tools</Link>
-              </Button>
+              <p className="mb-6">You need to create content in your Strapi CMS</p>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <Button size="lg" className="rounded-full" asChild>
+                  <a href="http://localhost:1337/admin" target="_blank" rel="noopener noreferrer">
+                    Open Strapi Admin <ExternalLink className="ml-2 h-4 w-4" />
+                  </a>
+                </Button>
+                <Button size="lg" variant="outline" className="rounded-full" onClick={handleRetry}>
+                  Refresh Posts
+                </Button>
+              </div>
             </div>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
