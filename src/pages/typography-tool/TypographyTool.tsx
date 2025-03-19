@@ -5,7 +5,7 @@ import { Helmet } from "react-helmet";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
-import { BellPlus, Check, Type, LineHeight, AlignLeft, Wand2 } from "lucide-react";
+import { BellPlus, Check, Type, Text, AlignLeft, Wand2 } from "lucide-react";
 import { Link } from "react-router-dom";
 import StandardHeroSection from "@/components/shared/StandardHeroSection";
 
@@ -65,7 +65,7 @@ const TypographyTool = () => {
           description="Create stunning text designs with our advanced typography tool. Adjust fonts, spacing, line height, and more with precise controls and real-time preview."
           features={[
             { icon: <Type className="h-4 w-4" />, text: "Font Control" },
-            { icon: <LineHeight className="h-4 w-4" />, text: "Spacing Controls" },
+            { icon: <Text className="h-4 w-4" />, text: "Spacing Controls" },
             { icon: <AlignLeft className="h-4 w-4" />, text: "Text Layouts" },
             { icon: <Wand2 className="h-4 w-4" />, text: "AI Suggestions" }
           ]}

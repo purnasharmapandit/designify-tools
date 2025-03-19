@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button";
 import { BellPlus, Check, Presentation, Layout, ImagePlus, Sparkles } from "lucide-react";
 import { Link } from "react-router-dom";
 import StandardHeroSection from "@/components/shared/StandardHeroSection";
-import { PresentationMakerFAQSection } from "@/components/presentation-maker/FAQSection";
+import PresentationMakerFAQs from "@/components/presentation-maker/FAQSection";
 
 const PresentationMaker = () => {
   const presentationImage = (
