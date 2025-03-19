@@ -1,3 +1,4 @@
+
 import React from "react";
 import { Helmet } from "react-helmet";
 import Navbar from "@/components/Navbar";
@@ -15,7 +16,7 @@ import { useQRCode } from "@/hooks/use-qrcode";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
 import { toast } from "sonner";
-import { checkGenerationEligibility } from "@/services/generationLimits";
+import { checkGenerationEligibility, recordGeneration } from "@/services/generationLimits";
 
 const PaidQRCodeGenerator = () => {
   const navigate = useNavigate();
@@ -76,6 +77,13 @@ const PaidQRCodeGenerator = () => {
       }
       
       toast.error(eligibility.message);
+      return;
+    }
+    
+    // Record the generation
+    const recorded = await recordGeneration('qr_code_premium');
+    if (!recorded) {
+      toast.error("There was an issue generating your premium QR code. Please try again.");
       return;
     }
     

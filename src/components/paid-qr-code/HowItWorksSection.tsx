@@ -1,25 +1,30 @@
 
 import React from "react";
 import { motion } from "framer-motion";
+import { Lightbulb, Send, BarChart3, Download } from "lucide-react";
 
 const HowItWorksSection = () => {
   const steps = [
     {
+      icon: <Lightbulb className="h-8 w-8 text-primary" />,
       number: "01",
       title: "Create Your Premium QR Code",
       description: "Choose your content type, customize design, and enable analytics features."
     },
     {
+      icon: <Send className="h-8 w-8 text-primary" />,
       number: "02",
       title: "Deploy Your QR Codes",
       description: "Place your QR codes on marketing materials, products, or digital assets."
     },
     {
+      icon: <BarChart3 className="h-8 w-8 text-primary" />,
       number: "03",
       title: "Track Performance in Real-Time",
       description: "Monitor scans, locations, and engagement directly from your dashboard."
     },
     {
+      icon: <Download className="h-8 w-8 text-primary" />,
       number: "04",
       title: "Analyze & Optimize",
       description: "Export data, create reports, and refine your marketing strategy based on insights."
@@ -36,30 +41,28 @@ const HowItWorksSection = () => {
           </p>
         </div>
         
-        <div className="relative max-w-5xl mx-auto">
-          {/* Progress line */}
-          <div className="absolute top-24 left-0 w-full h-0.5 bg-gray-200 hidden md:block" />
-          
-          <div className="grid md:grid-cols-4 gap-8">
-            {steps.map((step, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                viewport={{ once: true }}
-                className="relative"
-              >
-                <div className="flex flex-col items-center">
-                  <div className="w-12 h-12 bg-primary text-white rounded-full flex items-center justify-center font-bold text-lg mb-6 relative z-10">
-                    {step.number}
-                  </div>
-                  <h3 className="text-xl font-bold mb-2 text-center">{step.title}</h3>
-                  <p className="text-gray-600 text-center">{step.description}</p>
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">
+          {steps.map((step, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+              viewport={{ once: true }}
+              className="bg-white rounded-xl shadow-sm p-6 border border-gray-100 relative"
+            >
+              <div className="absolute -top-4 -left-4 w-10 h-10 bg-primary text-white rounded-full flex items-center justify-center font-bold text-sm z-10">
+                {step.number}
+              </div>
+              <div className="flex flex-col items-center text-center">
+                <div className="mb-4 p-3 bg-primary/10 rounded-full">
+                  {step.icon}
                 </div>
-              </motion.div>
-            ))}
-          </div>
+                <h3 className="text-xl font-bold mb-2">{step.title}</h3>
+                <p className="text-gray-600">{step.description}</p>
+              </div>
+            </motion.div>
+          ))}
         </div>
       </div>
     </section>
