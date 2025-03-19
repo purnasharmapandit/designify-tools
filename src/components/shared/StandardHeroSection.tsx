@@ -1,19 +1,11 @@
 
 import React from "react";
 import { motion } from "framer-motion";
-import { Check, LayoutGrid, Share2, Sparkles, Palette } from "lucide-react";
 
-interface FeatureBadgeProps {
+interface FeatureItem {
   icon: React.ReactNode;
   text: string;
 }
-
-const FeatureBadge = ({ icon, text }: FeatureBadgeProps) => (
-  <div className="flex items-center gap-1.5 bg-white/20 backdrop-blur-sm px-3 py-1.5 rounded-full text-sm">
-    {icon}
-    <span>{text}</span>
-  </div>
-);
 
 interface StandardHeroSectionProps {
   toolLabel: string;
@@ -21,86 +13,74 @@ interface StandardHeroSectionProps {
   highlightedText: string;
   restOfTitle?: string;
   description: string;
-  features: Array<{
-    icon: React.ReactNode;
-    text: string;
-  }>;
-  image?: React.ReactNode;
-  bgColor: string;
-  textColor: string;
+  features: FeatureItem[];
+  image: React.ReactNode;
+  bgColor?: string;
+  textColor?: string;
+  actionButton?: React.ReactNode; // New prop for action button
 }
 
-const StandardHeroSection = ({
+const StandardHeroSection: React.FC<StandardHeroSectionProps> = ({
   toolLabel,
   title,
   highlightedText,
-  restOfTitle = "",
+  restOfTitle,
   description,
   features,
   image,
-  bgColor,
-  textColor,
-}: StandardHeroSectionProps) => {
+  bgColor = "bg-slate-900",
+  textColor = "text-white",
+  actionButton
+}) => {
   return (
-    <div className={`${bgColor} ${textColor}`}>
-      <div className="relative overflow-hidden">
-        <div className="absolute inset-0 z-0">
-          <div className="absolute w-full h-full bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgdmlld0JveD0iMCAwIDIwMCAyMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTSAwIDIwMCBDIDAgMTgwIDIwIDE4MCAyMCAxNjAgQyAyMCAxNDAgMCAxNDAgMCAxMjAgQyAwIDEwMCAyMCAxMDAgMjAgODAgQyAyMCA2MCAwIDYwIDAgNDAgQyAwIDIwIDIwIDIwIDIwIDAgTCAwIDAgWiIgZmlsbD0iI2ZmZmZmZjEwIi8+PC9zdmc+')] opacity-10"></div>
-        </div>
-
-        <div className="container mx-auto px-4 relative z-10">
-          <section className="pt-28 pb-16">
-            <div className="max-w-6xl mx-auto">
-              <div className="flex flex-col lg:flex-row items-center justify-between gap-10">
-                <motion.div 
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5 }}
-                  className="max-w-2xl flex-1"
-                >
-                  <div className="inline-flex px-3 py-1 rounded-full bg-white/20 backdrop-blur-sm text-sm mb-6">
-                    {toolLabel}
-                  </div>
-                  
-                  <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4 leading-tight">
-                    {title}{" "}
-                    <span className="bg-gradient-to-r from-purple-300 to-pink-300 bg-clip-text text-transparent">
-                      {highlightedText}
-                    </span>{" "}
-                    {restOfTitle}
-                  </h1>
-                  
-                  <p className="text-lg mb-6 opacity-90">
-                    {description}
-                  </p>
-                  
-                  <div className="flex flex-wrap gap-3 mb-6">
-                    {features.map((feature, index) => (
-                      <FeatureBadge 
-                        key={index} 
-                        icon={feature.icon} 
-                        text={feature.text} 
-                      />
-                    ))}
-                  </div>
-                </motion.div>
-                
-                {image && (
-                  <motion.div 
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ duration: 0.5, delay: 0.2 }}
-                    className="flex-1"
-                  >
-                    {image}
-                  </motion.div>
-                )}
-              </div>
+    <section className={`${bgColor} py-16 lg:py-20 overflow-hidden`}>
+      <div className="container mx-auto px-4">
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className={textColor}
+          >
+            <div className="inline-block px-4 py-1.5 rounded-full bg-primary/10 text-primary font-medium text-sm mb-5">
+              {toolLabel}
             </div>
-          </section>
+            <h1 className="text-4xl md:text-5xl font-bold mb-4">
+              {title}{" "}
+              <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary">
+                {highlightedText}
+              </span>{" "}
+              {restOfTitle}
+            </h1>
+            <p className="text-lg opacity-80 mb-8">{description}</p>
+
+            <div className="flex flex-wrap gap-3 mb-8">
+              {features.map((feature, index) => (
+                <div
+                  key={index}
+                  className="flex items-center gap-2 bg-white/10 px-4 py-2 rounded-full"
+                >
+                  {feature.icon}
+                  <span className="text-sm font-medium">{feature.text}</span>
+                </div>
+              ))}
+            </div>
+
+            {/* Render action button if provided */}
+            {actionButton && <div className="mt-6">{actionButton}</div>}
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="relative"
+          >
+            {image}
+          </motion.div>
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 

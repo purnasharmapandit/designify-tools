@@ -1,10 +1,9 @@
-
 import React from "react";
 import { motion } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
-import { ChevronRight, FileText, Check, Wand2, Layout, Layers, Download } from "lucide-react";
+import { ChevronRight, FileText, Check, Wand2, Layout, Layers, Download, BellPlus } from "lucide-react";
 import { Link } from "react-router-dom";
 import StandardHeroSection from "@/components/shared/StandardHeroSection";
 
@@ -90,6 +89,16 @@ const InfographicsGenerator = () => {
           image={infographicsImage}
           bgColor="bg-blue-900"
           textColor="text-white"
+          actionButton={
+            <Link to="/contact-us?subject=Infographics%20Generator%20Waitlist">
+              <Button 
+                size="lg" 
+                className="rounded-full px-8 font-medium"
+              >
+                Join Waitlist <BellPlus className="ml-2 h-5 w-5" />
+              </Button>
+            </Link>
+          }
         />
         
         {/* Features Section */}
@@ -162,11 +171,11 @@ const InfographicsGenerator = () => {
                     size="lg" 
                     className="bg-white text-purple-600 hover:bg-gray-100 rounded-full px-8 py-6 text-lg"
                   >
-                    Try It Free
-                    <ChevronRight className="ml-2 h-5 w-5" />
+                    Join Waitlist
+                    <BellPlus className="ml-2 h-5 w-5" />
                   </Button>
                 </Link>
-                <p className="mt-4 text-sm opacity-80">No credit card required • Get started in minutes</p>
+                <p className="mt-4 text-sm opacity-80">No credit card required • Be first in line</p>
               </div>
             </div>
           </div>

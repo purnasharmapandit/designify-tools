@@ -5,7 +5,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ImageEditorFAQs from "./components/FAQSection";
 import { Button } from "@/components/ui/button";
-import { ChevronRight, ImageIcon, Crop, Layers, Palette, PenTool, Sliders, Download, Sparkles } from "lucide-react";
+import { ChevronRight, ImageIcon, Crop, Layers, Palette, PenTool, Sliders, Download, Sparkles, BellPlus } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const ImageEditor = () => {
@@ -71,13 +71,15 @@ const ImageEditor = () => {
                   </div>
                   
                   <div className="mt-10">
-                    <Button 
-                      size="lg" 
-                      className="rounded-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-lg h-14 px-8"
-                    >
-                      Start Editing Now
-                      <ChevronRight className="ml-2 h-5 w-5" />
-                    </Button>
+                    <Link to="/contact-us?subject=Image%20Editor%20Waitlist">
+                      <Button 
+                        size="lg" 
+                        className="rounded-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-lg h-14 px-8"
+                      >
+                        Join Waitlist
+                        <BellPlus className="ml-2 h-5 w-5" />
+                      </Button>
+                    </Link>
                   </div>
                 </motion.div>
 
@@ -352,7 +354,7 @@ const ImageEditor = () => {
                     className="bg-white text-pink-600 hover:bg-gray-100 rounded-full px-8 py-6 text-lg"
                   >
                     Join the Waitlist
-                    <ChevronRight className="ml-2 h-5 w-5" />
+                    <BellPlus className="ml-2 h-5 w-5" />
                   </Button>
                 </Link>
                 <p className="mt-4 text-sm opacity-80">No credit card required • Be first in line</p>
