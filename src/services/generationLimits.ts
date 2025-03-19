@@ -3,7 +3,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import { checkCreditsForFeature, deductCreditsForFeature } from "./creditService";
 
-export type ToolType = 'icon' | 'logo' | 'business_card' | 'email_signature' | 'background_remover' | 'qr_code' | 'color_palette';
+export type ToolType = 'icon' | 'logo' | 'business_card' | 'email_signature' | 'background_remover' | 'qr_code' | 'qr_code_premium' | 'color_palette';
 
 export interface GenerationResult {
   canGenerate: boolean;
@@ -20,6 +20,7 @@ const toolTypeToFeature: Record<ToolType, string> = {
   'email_signature': 'email_signature',
   'background_remover': 'basic_logo', // Using logo cost as an example
   'qr_code': 'email_signature', // Using email signature cost as an example
+  'qr_code_premium': 'business_card', // Premium QR codes use business card credits
   'color_palette': 'email_signature' // Using email signature cost as an example
 };
 

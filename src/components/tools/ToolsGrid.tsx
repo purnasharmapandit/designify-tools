@@ -1,3 +1,4 @@
+
 import { 
   Paintbrush, 
   Image, 
@@ -43,6 +44,14 @@ const ToolsGrid = () => {
       color: "bg-green-100 text-green-500",
       link: "/qr-code-generator",
       toolType: "qr_code" as const
+    },
+    {
+      icon: QrCode,
+      name: "Premium QR Code Generator",
+      description: "Create QR codes with analytics, location tracking, and team access",
+      color: "bg-blue-100 text-blue-500",
+      link: "/qr-code/premium",
+      toolType: "qr_code_premium" as const
     },
     {
       icon: Palette,

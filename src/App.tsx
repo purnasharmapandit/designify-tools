@@ -28,6 +28,7 @@ import LogoMaker from "./pages/logo-maker/LogoMaker";
 import LogoEditor from "./pages/logo-maker/LogoEditor";
 import { BlogProvider } from "./contexts/BlogContext";
 import QRCodeGenerator from "./pages/qr-code/QRCodeGenerator";
+import PaidQRCodeGenerator from "./pages/qr-code/PaidQRCodeGenerator";
 import ColorPaletteGenerator from "./pages/ColorPaletteGenerator";
 import IconGenerator from "./pages/IconGenerator";
 import EmailSignatureGenerator from "./pages/email-signature/EmailSignatureGenerator";
@@ -76,6 +77,7 @@ function App() {
                   <Route path="/logo-maker" element={<LogoMaker />} />
                   <Route path="/logo-maker/editor/:id" element={<LogoEditor />} />
                   <Route path="/qr-code-generator" element={<QRCodeGenerator />} />
+                  <Route path="/qr-code/premium" element={<PaidQRCodeGenerator />} />
                   <Route path="/color-palette-generator" element={<ColorPaletteGenerator />} />
                   <Route path="/icon-generator" element={<IconGenerator />} />
                   <Route path="/email-signature-generator" element={<EmailSignatureGenerator />} />
