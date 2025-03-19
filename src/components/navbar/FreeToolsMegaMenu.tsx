@@ -6,10 +6,9 @@ import {
   HoverCardTrigger,
 } from "@/components/ui/hover-card";
 import FreeToolsColumn from "./FreeToolsColumn";
-import PremiumToolsColumn from "./PremiumToolsColumn";
 import ViewAllToolsFooter from "./ViewAllToolsFooter";
 
-export const ToolsMegaMenu = ({ setIsMenuOpen }: { setIsMenuOpen?: (value: boolean) => void }) => {
+export const FreeToolsMegaMenu = ({ setIsMenuOpen }: { setIsMenuOpen?: (value: boolean) => void }) => {
   return (
     <HoverCard openDelay={100} closeDelay={200}>
       <HoverCardTrigger asChild>
@@ -17,16 +16,17 @@ export const ToolsMegaMenu = ({ setIsMenuOpen }: { setIsMenuOpen?: (value: boole
           to="/tools" 
           className="font-medium text-gray-900 hover:text-primary transition-colors flex items-center"
         >
-          Tools
+          Free Tools
         </Link>
       </HoverCardTrigger>
-      <HoverCardContent className="w-[700px] p-0 bg-white shadow-lg rounded-xl border" align="start">
-        <div className="grid grid-cols-2 gap-0 w-full p-4">
-          {/* Free Tools Column */}
-          <FreeToolsColumn setIsMenuOpen={setIsMenuOpen} />
+      <HoverCardContent className="w-[400px] p-0 bg-white shadow-lg rounded-xl border" align="start">
+        <div className="p-4">
+          <div className="mb-3 px-3 py-2 bg-gray-50 rounded-lg">
+            <h3 className="text-sm font-semibold text-gray-500 uppercase tracking-wider">Free Tools</h3>
+          </div>
           
-          {/* Paid/AI Tools Column */}
-          <PremiumToolsColumn setIsMenuOpen={setIsMenuOpen} />
+          {/* Free Tools Grid */}
+          <FreeToolsColumn setIsMenuOpen={setIsMenuOpen} />
         </div>
         
         {/* View All Tools Footer */}

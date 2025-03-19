@@ -4,7 +4,8 @@ import { Menu, Wand2, X } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useAuth } from "@/contexts/AuthContext";
-import { ToolsMegaMenu } from "./navbar/ToolsMegaMenu";
+import { FreeToolsMegaMenu } from "./navbar/FreeToolsMegaMenu";
+import { PaidToolsMegaMenu } from "./navbar/PaidToolsMegaMenu";
 import UserMenu from "./navbar/UserMenu";
 import MobileMenu from "./navbar/MobileMenu";
 
@@ -32,8 +33,11 @@ const Navbar = () => {
               Home
             </Link>
             
-            {/* Tools Mega Menu */}
-            <ToolsMegaMenu />
+            {/* Free Tools Mega Menu */}
+            <FreeToolsMegaMenu />
+
+            {/* Paid Tools Mega Menu */}
+            <PaidToolsMegaMenu />
 
             <Link 
               to="/pricing" 
