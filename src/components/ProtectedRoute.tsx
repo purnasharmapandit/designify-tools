@@ -4,9 +4,10 @@ import { useAuth } from "@/contexts/AuthContext";
 
 interface ProtectedRouteProps {
   children: React.ReactNode;
+  requiresAccessCode?: boolean;
 }
 
-const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
+const ProtectedRoute = ({ children, requiresAccessCode = false }: ProtectedRouteProps) => {
   const { user, isLoading } = useAuth();
   const location = useLocation();
 
@@ -20,7 +21,7 @@ const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
 
   if (!user) {
     // Redirect to the login page but save the current location they were trying to access
-    return <Navigate to="/auth" state={{ from: location }} replace />;
+    return <Navigate to="/auth" state={{ returnTo: location.pathname, requiresSignUp: true }} replace />;
   }
 
   return <>{children}</>;

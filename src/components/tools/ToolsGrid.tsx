@@ -19,85 +19,103 @@ import {
   ChartBar
 } from "lucide-react";
 import ToolItem from "./ToolItem";
+import { useAuth } from "@/contexts/AuthContext";
+import { useNavigate } from "react-router-dom";
+import { checkGenerationEligibility } from "@/services/generationLimits";
+import { toast } from "sonner";
 
 const ToolsGrid = () => {
+  const { user } = useAuth();
+  const navigate = useNavigate();
+  
   const tools = [
     {
       icon: Paintbrush,
       name: "Logo Maker",
       description: "Create professional logos with AI-powered design suggestions",
       color: "bg-purple-100 text-purple-500",
-      link: "/logo-maker"
+      link: "/logo-maker",
+      toolType: "logo" as const
     },
     {
       icon: QrCode,
       name: "QR Code Generator",
       description: "Create customizable QR codes for your business or personal use",
       color: "bg-green-100 text-green-500",
-      link: "/qr-code-generator"
+      link: "/qr-code-generator",
+      toolType: "qr_code" as const
     },
     {
       icon: Palette,
       name: "Color Palette Generator",
       description: "Generate beautiful color schemes for your designs",
       color: "bg-yellow-100 text-yellow-500",
-      link: "/color-palette-generator"
+      link: "/color-palette-generator",
+      toolType: "color_palette" as const
     },
     {
       icon: PenTool,
       name: "Icon Generator",
       description: "Design custom icons for your projects",
       color: "bg-emerald-100 text-emerald-500",
-      link: "/icon-generator"
+      link: "/icon-generator",
+      toolType: "icon" as const
     },
     {
       icon: Mail,
       name: "Email Signature Generator",
       description: "Create professional email signatures that make an impression",
       color: "bg-blue-100 text-blue-500",
-      link: "/email-signature-generator"
+      link: "/email-signature-generator",
+      toolType: "email_signature" as const
     },
     {
       icon: Scissors,
       name: "Background Remover",
       description: "Remove backgrounds from images with AI precision",
       color: "bg-purple-100 text-purple-500",
-      link: "/background-remover"
+      link: "/background-remover",
+      toolType: "background_remover" as const
     },
     {
       icon: Layout,
       name: "Business Card Generator",
       description: "Create professional business cards that leave a lasting impression",
       color: "bg-pink-100 text-pink-500",
-      link: "/business-card-generator"
+      link: "/business-card-generator",
+      toolType: "business_card" as const
     },
     {
       icon: ChartBar,
       name: "Infographics Generator",
       description: "Create compelling infographics and visual data representations",
       color: "bg-orange-100 text-orange-500",
-      link: "/infographics-generator"
+      link: "/infographics-generator",
+      toolType: "infographics" as const
     },
     {
       icon: User,
       name: "AI Headshot Generator",
       description: "Turn regular photos into professional headshots with AI",
       color: "bg-blue-100 text-blue-500",
-      link: "/headshot-generator"
+      link: "/headshot-generator",
+      toolType: "headshot" as const
     },
     {
       icon: Share2,
       name: "Social Banner Maker",
       description: "Create eye-catching banners for all your social media platforms",
       color: "bg-indigo-100 text-indigo-500",
-      link: "/social-banner-maker"
+      link: "/social-banner-maker",
+      toolType: "social_banner" as const
     },
     {
       icon: FileImage,
       name: "Image Editor",
       description: "Edit and enhance images with powerful tools",
       color: "bg-violet-100 text-violet-500",
-      link: "/image-editor"
+      link: "/image-editor",
+      toolType: "image_editor" as const
     },
     {
       icon: Share2,
@@ -133,10 +151,54 @@ const ToolsGrid = () => {
     }
   ];
 
+  const handleToolClick = async (event: React.MouseEvent<HTMLDivElement, MouseEvent>, tool: any) => {
+    if (tool.comingSoon) {
+      event.preventDefault();
+      return;
+    }
+
+    if (!tool.toolType) {
+      return;
+    }
+
+    event.preventDefault();
+    
+    // Check if the user can use this tool
+    if (!user) {
+      // Redirect to auth page with signup mode active
+      navigate("/auth", { 
+        state: { returnTo: tool.link, requiresSignUp: true }
+      });
+      return;
+    }
+    
+    try {
+      const result = await checkGenerationEligibility(tool.toolType);
+      
+      if (result.canGenerate) {
+        navigate(tool.link);
+      } else {
+        if (result.redirectToAuth) {
+          navigate("/auth", { state: { returnTo: tool.link } });
+        } else if (result.redirectToSubscription) {
+          navigate("/pricing");
+          toast.info("Upgrade your plan to use this feature");
+        } else {
+          toast.error(result.message);
+        }
+      }
+    } catch (error) {
+      console.error("Error checking tool eligibility:", error);
+      toast.error("Something went wrong. Please try again later.");
+    }
+  };
+
   return (
     <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
       {tools.map((tool, index) => (
-        <ToolItem key={index} {...tool} />
+        <div key={index} onClick={(e) => handleToolClick(e, tool)}>
+          <ToolItem {...tool} />
+        </div>
       ))}
     </div>
   );
