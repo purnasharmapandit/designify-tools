@@ -18,6 +18,7 @@ import GenerateButton from "./GenerateButton";
 import LogoPreviewGrid from "./LogoPreviewGrid";
 import { industries, styles } from "../constants/logoOptions";
 import { useAuth } from "@/contexts/AuthContext";
+import { checkGenerationEligibility } from "@/services/generationLimits";
 
 const LogoGeneratorTool = () => {
   const navigate = useNavigate();
@@ -38,7 +39,7 @@ const LogoGeneratorTool = () => {
       return;
     }
     
-    // If user is not authenticated, redirect to auth page with signup mode
+    // Check if user is authenticated
     if (!user) {
       navigate("/auth", { 
         state: { 
@@ -47,6 +48,28 @@ const LogoGeneratorTool = () => {
         }
       });
       toast.info("Please create an account to generate logos");
+      return;
+    }
+    
+    // Check eligibility for logo generation
+    const eligibility = await checkGenerationEligibility('logo');
+    if (!eligibility.canGenerate) {
+      if (eligibility.redirectToAuth) {
+        navigate("/auth", { 
+          state: { 
+            returnTo: "/logo-maker",
+            requiresSignUp: true 
+          }
+        });
+        return;
+      }
+      
+      if (eligibility.redirectToSubscription) {
+        navigate("/pricing");
+        return;
+      }
+      
+      toast.error(eligibility.message);
       return;
     }
     

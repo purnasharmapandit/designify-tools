@@ -1,6 +1,8 @@
+
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { Helmet } from "react-helmet";
+import { useNavigate } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import IconGeneratorForm from "@/components/icon-generator/IconGeneratorForm";
@@ -14,6 +16,8 @@ import { Check, Wand2, Sparkles, SquarePen, Download } from "lucide-react";
 import StandardHeroSection from "@/components/shared/StandardHeroSection";
 import { toast } from "sonner";
 import { GeneratedIcon } from "@/services/runware";
+import { useAuth } from "@/contexts/AuthContext";
+import { checkGenerationEligibility } from "@/services/generationLimits";
 
 export interface IconGeneratorFormData {
   prompt: string;
@@ -72,6 +76,8 @@ export const ICON_STYLES = [
 ];
 
 const IconGenerator = () => {
+  const navigate = useNavigate();
+  const { user } = useAuth();
   const [formData, setFormData] = useState<IconGeneratorFormData>({
     prompt: "",
     style: "flat",
@@ -87,9 +93,43 @@ const IconGenerator = () => {
     setFormData(prev => ({ ...prev, ...data }));
   };
 
-  const handleGenerateIcons = () => {
+  const handleGenerateIcons = async () => {
     if (!formData.prompt.trim()) {
       toast.error("Please provide a description for your icon");
+      return;
+    }
+    
+    // Check if user is authenticated
+    if (!user) {
+      navigate("/auth", { 
+        state: { 
+          returnTo: "/icon-generator",
+          requiresSignUp: true 
+        }
+      });
+      toast.info("Please create an account to generate icons");
+      return;
+    }
+    
+    // Check eligibility for generation (credits, limits, etc.)
+    const eligibility = await checkGenerationEligibility('icon');
+    if (!eligibility.canGenerate) {
+      if (eligibility.redirectToAuth) {
+        navigate("/auth", { 
+          state: { 
+            returnTo: "/icon-generator",
+            requiresSignUp: true 
+          }
+        });
+        return;
+      }
+      
+      if (eligibility.redirectToSubscription) {
+        navigate("/pricing");
+        return;
+      }
+      
+      toast.error(eligibility.message);
       return;
     }
 

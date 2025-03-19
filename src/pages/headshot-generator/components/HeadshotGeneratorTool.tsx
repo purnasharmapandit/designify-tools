@@ -10,12 +10,16 @@ import {
   Download,
   RefreshCcw
 } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { useAuth } from "@/contexts/AuthContext";
+import { checkGenerationEligibility } from "@/services/generationLimits";
+import { toast } from "sonner";
 
 const HeadshotGeneratorTool = () => {
   const [uploadedImage, setUploadedImage] = useState<string | null>(null);
@@ -23,6 +27,8 @@ const HeadshotGeneratorTool = () => {
   const [generatedImages, setGeneratedImages] = useState<string[]>([]);
   const [selectedStyle, setSelectedStyle] = useState("professional");
   const [selectedBackground, setSelectedBackground] = useState("office");
+  const navigate = useNavigate();
+  const { user } = useAuth();
 
   const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -38,8 +44,42 @@ const HeadshotGeneratorTool = () => {
     }
   };
 
-  const generateHeadshots = () => {
+  const generateHeadshots = async () => {
     if (!uploadedImage) return;
+    
+    // Check if user is authenticated
+    if (!user) {
+      navigate("/auth", { 
+        state: { 
+          returnTo: "/headshot-generator", 
+          requiresSignUp: true 
+        }
+      });
+      toast.info("Please create an account to generate headshots");
+      return;
+    }
+    
+    // Check eligibility for headshot generation
+    const eligibility = await checkGenerationEligibility('business_card');
+    if (!eligibility.canGenerate) {
+      if (eligibility.redirectToAuth) {
+        navigate("/auth", { 
+          state: { 
+            returnTo: "/headshot-generator",
+            requiresSignUp: true 
+          }
+        });
+        return;
+      }
+      
+      if (eligibility.redirectToSubscription) {
+        navigate("/pricing");
+        return;
+      }
+      
+      toast.error(eligibility.message);
+      return;
+    }
     
     setIsGenerating(true);
     

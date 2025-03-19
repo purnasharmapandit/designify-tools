@@ -2,6 +2,7 @@
 import React, { useState, useRef } from "react";
 import { motion } from "framer-motion";
 import { Helmet } from "react-helmet";
+import { useNavigate } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { useToast } from "@/components/ui/use-toast";
@@ -13,6 +14,8 @@ import UseCasesSection from "@/components/background-remover/UseCasesSection";
 import { removeBackground, loadImage } from "@/utils/background-remover";
 import StandardHeroSection from "@/components/shared/StandardHeroSection";
 import { Check, Scissors, Image, Download } from "lucide-react";
+import { useAuth } from "@/contexts/AuthContext";
+import { checkGenerationEligibility } from "@/services/generationLimits";
 
 const BackgroundRemover = () => {
   const [file, setFile] = useState<File | null>(null);
@@ -22,6 +25,8 @@ const BackgroundRemover = () => {
   const [refinementLevel, setRefinementLevel] = useState(50);
   const [fileFormat, setFileFormat] = useState("png");
   const { toast } = useToast();
+  const navigate = useNavigate();
+  const { user } = useAuth();
 
   const handleFileChange = async (selectedFile: File) => {
     try {
@@ -50,6 +55,47 @@ const BackgroundRemover = () => {
       toast({
         title: "No image selected",
         description: "Please upload an image first.",
+        variant: "destructive"
+      });
+      return;
+    }
+
+    // Check if user is authenticated
+    if (!user) {
+      navigate("/auth", { 
+        state: { 
+          returnTo: "/background-remover",
+          requiresSignUp: true 
+        }
+      });
+      toast({
+        title: "Authentication required",
+        description: "Please create an account to remove backgrounds.",
+      });
+      return;
+    }
+    
+    // Check eligibility for background removal
+    const eligibility = await checkGenerationEligibility('background_remover');
+    if (!eligibility.canGenerate) {
+      if (eligibility.redirectToAuth) {
+        navigate("/auth", { 
+          state: { 
+            returnTo: "/background-remover",
+            requiresSignUp: true 
+          }
+        });
+        return;
+      }
+      
+      if (eligibility.redirectToSubscription) {
+        navigate("/pricing");
+        return;
+      }
+      
+      toast({
+        title: "Generation limit",
+        description: eligibility.message,
         variant: "destructive"
       });
       return;
