@@ -1,6 +1,6 @@
 
 import { Button } from "@/components/ui/button";
-import { ChevronRight, Sparkles, Zap, Star, PenTool, Wand2, Lightbulb } from "lucide-react";
+import { ChevronRight, Sparkles, Zap, Star, PenTool, Wand2, Lightbulb, BellPlus } from "lucide-react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 
@@ -42,7 +42,14 @@ const HeroSection = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.6 }}
           >
-            {/* Join Waitlist button removed as requested */}
+            <Link to="/contact-us?subject=Design%20Tools%20Waitlist">
+              <Button 
+                size="lg" 
+                className="rounded-full px-8 py-6 text-base btn-shine-effect"
+              >
+                Join Waitlist <BellPlus className="ml-2 h-4 w-4" />
+              </Button>
+            </Link>
           </motion.div>
         </div>
       </div>
