@@ -1,4 +1,3 @@
-
 import { 
   Paintbrush, 
   Image, 
@@ -163,34 +162,8 @@ const ToolsGrid = () => {
 
     event.preventDefault();
     
-    // Check if the user can use this tool
-    if (!user) {
-      // Redirect to auth page with signup mode active
-      navigate("/auth", { 
-        state: { returnTo: tool.link, requiresSignUp: true }
-      });
-      return;
-    }
-    
-    try {
-      const result = await checkGenerationEligibility(tool.toolType);
-      
-      if (result.canGenerate) {
-        navigate(tool.link);
-      } else {
-        if (result.redirectToAuth) {
-          navigate("/auth", { state: { returnTo: tool.link } });
-        } else if (result.redirectToSubscription) {
-          navigate("/pricing");
-          toast.info("Upgrade your plan to use this feature");
-        } else {
-          toast.error(result.message);
-        }
-      }
-    } catch (error) {
-      console.error("Error checking tool eligibility:", error);
-      toast.error("Something went wrong. Please try again later.");
-    }
+    // Simply navigate to the tool page - authentication will be checked when generating content
+    navigate(tool.link);
   };
 
   return (

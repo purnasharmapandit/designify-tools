@@ -17,10 +17,12 @@ import FormSelectors from "./FormSelectors";
 import GenerateButton from "./GenerateButton";
 import LogoPreviewGrid from "./LogoPreviewGrid";
 import { industries, styles } from "../constants/logoOptions";
+import { useAuth } from "@/contexts/AuthContext";
 
 const LogoGeneratorTool = () => {
   const navigate = useNavigate();
   const { state, dispatch } = useLogoMaker();
+  const { user } = useAuth();
   const [businessName, setBusinessName] = useState("");
   const [slogan, setSlogan] = useState("");
   const [description, setDescription] = useState("");
@@ -33,6 +35,18 @@ const LogoGeneratorTool = () => {
     
     if (!businessName) {
       toast.error("Please enter your business name");
+      return;
+    }
+    
+    // If user is not authenticated, redirect to auth page with signup mode
+    if (!user) {
+      navigate("/auth", { 
+        state: { 
+          returnTo: "/logo-maker",
+          requiresSignUp: true 
+        }
+      });
+      toast.info("Please create an account to generate logos");
       return;
     }
     
