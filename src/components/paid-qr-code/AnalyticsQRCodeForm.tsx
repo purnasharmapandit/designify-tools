@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { Input } from "@/components/ui/input";
@@ -19,7 +20,7 @@ import {
 } from "@/hooks/use-qrcode";
 import ContentTypeSelector from "../qr-code/ContentTypeSelector";
 import CenterElementSelector from "../qr-code/CenterElementSelector";
-import { ChartBar, MapPin, Download, Users } from "lucide-react";
+import { ChartBar, MapPin, Download, Users, Link } from "lucide-react";
 
 interface AnalyticsQRCodeFormProps {
   options: QRCodeOptions;
@@ -35,6 +36,8 @@ const AnalyticsQRCodeForm: React.FC<AnalyticsQRCodeFormProps> = ({
   const [activeTab, setActiveTab] = useState("content");
   const [enableAnalytics, setEnableAnalytics] = useState(true);
   const [enableLocationTracking, setEnableLocationTracking] = useState(true);
+  const [isDynamicQR, setIsDynamicQR] = useState(true);
+  const [shortCode, setShortCode] = useState("");
   
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -47,6 +50,17 @@ const AnalyticsQRCodeForm: React.FC<AnalyticsQRCodeFormProps> = ({
 
   const handleCenterElementChange = (centerElement: QRCodeCenterElement | null) => {
     onUpdateOptions({ centerElement });
+  };
+
+  const handleDynamicQRToggle = (checked: boolean) => {
+    setIsDynamicQR(checked);
+    if (checked) {
+      // Generate a random short code
+      const randomCode = Math.random().toString(36).substring(2, 8);
+      setShortCode(randomCode);
+    } else {
+      setShortCode("");
+    }
   };
 
   // Render different input fields based on content type
@@ -116,6 +130,31 @@ const AnalyticsQRCodeForm: React.FC<AnalyticsQRCodeFormProps> = ({
             </TabsList>
             
             <TabsContent value="content" className="space-y-4">
+              <div className="space-y-4 border border-slate-200 p-4 rounded-md">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <Link className="h-5 w-5 text-primary" />
+                    <Label htmlFor="dynamic-qr">Dynamic QR Code</Label>
+                  </div>
+                  <Switch 
+                    id="dynamic-qr" 
+                    checked={isDynamicQR}
+                    onCheckedChange={handleDynamicQRToggle}
+                  />
+                </div>
+                {isDynamicQR && (
+                  <div className="mt-2">
+                    <p className="text-sm text-gray-500 mb-2">
+                      Dynamic QR codes allow you to change the destination without creating a new QR code.
+                    </p>
+                    <div className="p-2 bg-slate-50 rounded-md flex items-center">
+                      <span className="text-sm font-medium text-primary mr-2">Your short code:</span>
+                      <code className="text-xs bg-slate-100 p-1 rounded">{shortCode}</code>
+                    </div>
+                  </div>
+                )}
+              </div>
+
               <div className="space-y-4">
                 <Label>QR Code Type</Label>
                 <ContentTypeSelector 

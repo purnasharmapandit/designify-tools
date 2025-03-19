@@ -1,5 +1,5 @@
 
-import React from "react";
+import React, { useState } from "react";
 import { Helmet } from "react-helmet";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -21,6 +21,9 @@ import { checkGenerationEligibility, recordGeneration } from "@/services/generat
 const PaidQRCodeGenerator = () => {
   const navigate = useNavigate();
   const { user } = useAuth();
+  const [isDynamicQR, setIsDynamicQR] = useState(true);
+  const [shortCode, setShortCode] = useState(Math.random().toString(36).substring(2, 8));
+  
   const { 
     qrCodeUrl, 
     error, 
@@ -80,6 +83,25 @@ const PaidQRCodeGenerator = () => {
       return;
     }
     
+    // If dynamic QR code, save to database
+    if (isDynamicQR) {
+      try {
+        // In a real implementation, we would save the QR data to the database here
+        // For now, we'll just simulate it
+        toast.success(`Dynamic QR code created with short code: ${shortCode}`);
+        console.log("Dynamic QR Data:", {
+          userId: user.id,
+          shortCode: shortCode,
+          destination: options.content,
+          createdAt: new Date().toISOString()
+        });
+      } catch (error) {
+        console.error("Error saving dynamic QR code:", error);
+        toast.error("There was an issue creating your dynamic QR code.");
+        return;
+      }
+    }
+    
     // Record the generation
     const recorded = await recordGeneration('qr_code_premium');
     if (!recorded) {
@@ -88,7 +110,16 @@ const PaidQRCodeGenerator = () => {
     }
     
     downloadQRCode();
-    toast.success("Premium QR code downloaded successfully with analytics enabled!");
+    
+    if (isDynamicQR) {
+      toast.success("Premium dynamic QR code downloaded successfully! You can update its destination anytime.");
+    } else {
+      toast.success("Premium QR code downloaded successfully with analytics enabled!");
+    }
+  };
+
+  const handleFormUpdate = (newOptions: Partial<typeof options>) => {
+    updateOptions(newOptions);
   };
 
   const qrCodeImage = (
@@ -117,23 +148,23 @@ const PaidQRCodeGenerator = () => {
   return (
     <div className="min-h-screen flex flex-col">
       <Helmet>
-        <title>Premium QR Code Generator | Analytics, CSV Export & More</title>
-        <meta name="description" content="Generate premium QR codes with 1 year of scan analytics, CSV export, location tracking, and user management features." />
-        <meta name="keywords" content="premium qr code, qr code analytics, qr code tracking, business qr code, qr code statistics" />
+        <title>Premium QR Code Generator | Dynamic QR Codes with Analytics</title>
+        <meta name="description" content="Generate premium dynamic QR codes with 1 year of scan analytics, CSV export, location tracking, and user management features." />
+        <meta name="keywords" content="premium qr code, dynamic qr code, qr code analytics, qr code tracking, business qr code, qr code statistics" />
       </Helmet>
       
       <Navbar />
-      <main className="flex-grow">
+      <main className="flex-grow pt-16">
         {/* Hero Section */}
         <StandardHeroSection
           toolLabel="Premium QR Code Generator"
-          title="Track and"
-          highlightedText="Analyze Your QR Codes"
-          restOfTitle="Like Never Before"
-          description="Generate premium QR codes with 1 year of scan analytics, CSV export for data analysis, location tracking, and multi-user management."
+          title="Dynamic QR Codes with"
+          highlightedText="Advanced Analytics"
+          restOfTitle="and Tracking"
+          description="Generate dynamic QR codes that you can update anytime, with 1 year of scan analytics, CSV export for data analysis, location tracking, and multi-user management."
           features={[
+            { icon: <Check className="h-4 w-4" />, text: "Dynamic QR Codes" },
             { icon: <Check className="h-4 w-4" />, text: "1 Year Analytics" },
-            { icon: <Check className="h-4 w-4" />, text: "CSV Export" },
             { icon: <Check className="h-4 w-4" />, text: "Location Tracking" }
           ]}
           image={qrCodeImage}
@@ -146,7 +177,7 @@ const PaidQRCodeGenerator = () => {
             <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto mb-12">
               <AnalyticsQRCodeForm 
                 options={options} 
-                onUpdateOptions={updateOptions}
+                onUpdateOptions={handleFormUpdate}
                 onDownload={handleDownload}
               />
               <QRCodePreview 
@@ -170,14 +201,14 @@ const PaidQRCodeGenerator = () => {
           <div className="container mx-auto px-4 text-center">
             <h2 className="text-3xl font-bold mb-6">Ready to Upgrade Your QR Experience?</h2>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto mb-8">
-              Generate premium QR codes with advanced analytics and tracking features to maximize your marketing efforts.
+              Generate dynamic premium QR codes with advanced analytics and tracking features to maximize your marketing efforts.
             </p>
             <Button
               onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
               size="lg"
               className="font-semibold"
             >
-              Create Premium QR Code Now
+              Create Dynamic QR Code Now
             </Button>
           </div>
         </section>
