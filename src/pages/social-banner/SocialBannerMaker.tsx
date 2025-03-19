@@ -5,7 +5,7 @@ import { Helmet } from "react-helmet";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
-import { ChevronRight, Check, Layout, Image, Share2, Download, ImagePlus, Paintbrush, Palette, Sparkles } from "lucide-react";
+import { ChevronRight, Check, Layout, Image, Share2, Download, ImagePlus, Paintbrush, Palette, Sparkles, BellPlus } from "lucide-react";
 import { Link } from "react-router-dom";
 import StandardHeroSection from "@/components/shared/StandardHeroSection";
 import { Card, CardContent } from "@/components/ui/card";
@@ -64,6 +64,16 @@ const SocialBannerMaker = () => {
           image={bannerImage}
           bgColor="bg-blue-900"
           textColor="text-white"
+          actionButton={
+            <Link to="/contact-us?subject=Social%20Banner%20Maker%20Waitlist">
+              <Button 
+                size="lg" 
+                className="rounded-full px-8 font-medium"
+              >
+                Join Waitlist <BellPlus className="ml-2 h-5 w-5" />
+              </Button>
+            </Link>
+          }
         />
         
         {/* Features Section */}
