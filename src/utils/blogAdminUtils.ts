@@ -49,7 +49,7 @@ export const getAllBlogPosts = async (): Promise<BlogPostType[]> => {
       }
 
       // Format the post to match BlogPostType
-      return {
+      const formattedPost: BlogPostType = {
         id: post.id,
         title: post.title,
         slug: post.slug,
@@ -75,6 +75,8 @@ export const getAllBlogPosts = async (): Promise<BlogPostType[]> => {
           slug: item.slug,
         })) || [],
       };
+
+      return formattedPost;
     })
   );
 
@@ -126,7 +128,7 @@ export const getBlogPost = async (id: string): Promise<BlogPostType | null> => {
   }
 
   // Format the post to match BlogPostType
-  return {
+  const formattedPost: BlogPostType = {
     id: post.id,
     title: post.title,
     slug: post.slug,
@@ -152,6 +154,8 @@ export const getBlogPost = async (id: string): Promise<BlogPostType | null> => {
       slug: item.slug,
     })) || [],
   };
+
+  return formattedPost;
 };
 
 export const createBlogPost = async (post: BlogPostType): Promise<string> => {
@@ -570,3 +574,4 @@ export const deleteAuthor = async (id: string) => {
     throw error;
   }
 };
+
