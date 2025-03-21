@@ -67,6 +67,7 @@ export const getAllBlogPosts = async (): Promise<BlogPostType[]> => {
           avatar: post.author.avatar,
         } : undefined,
         authorId: post.author_id,
+        // Extract category name as a string instead of using the whole category object
         category: post.category ? post.category.name : undefined,
         categoryId: post.category_id,
         categoryColor: post.category ? post.category.color : undefined,
@@ -81,7 +82,7 @@ export const getAllBlogPosts = async (): Promise<BlogPostType[]> => {
     })
   );
 
-  return postsWithTags;
+  return postsWithTags as BlogPostType[];
 };
 
 export const getBlogPost = async (id: string): Promise<BlogPostType | null> => {
@@ -146,6 +147,7 @@ export const getBlogPost = async (id: string): Promise<BlogPostType | null> => {
       avatar: post.author.avatar,
     } : undefined,
     authorId: post.author_id,
+    // Extract category name as a string instead of using the whole category object
     category: post.category ? post.category.name : undefined,
     categoryId: post.category_id,
     categoryColor: post.category ? post.category.color : undefined,
