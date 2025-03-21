@@ -1,230 +1,240 @@
 
-import React, { createContext, useContext, ReactNode, useState, useEffect } from 'react';
+import React, { createContext, useContext, ReactNode } from 'react';
 import { BlogPostType } from '@/types/blog';
-import * as strapiService from '@/services/strapiService';
 
-// Add the blogPosts object with our existing blog posts
+interface BlogContextType {
+  getAllPosts: () => BlogPostType[];
+  getPostBySlug: (slug: string) => BlogPostType | undefined;
+  getRelatedPosts: (currentPostId: string, limit?: number) => BlogPostType[];
+}
+
+const BlogContext = createContext<BlogContextType | undefined>(undefined);
+
+// This registry will store all blog posts
+const blogPostRegistry: BlogPostType[] = [];
+
+// Function to register a blog post
+export const registerBlogPost = (post: BlogPostType) => {
+  const existingPostIndex = blogPostRegistry.findIndex(p => p.id === post.id);
+  if (existingPostIndex >= 0) {
+    blogPostRegistry[existingPostIndex] = post;
+  } else {
+    blogPostRegistry.push(post);
+  }
+};
+
+// Export pre-registered blog posts
 export const blogPosts = {
   createLogo: {
     id: 'create-logo',
     title: 'How to Create Your First Logo',
     slug: 'create-logo',
-    date: '2023-10-15',
-    readingTime: '5 min',
+    date: '2023-06-15',
+    readingTime: '8 min',
     author: {
-      name: 'Jane Smith',
-      title: 'Brand Specialist',
-      avatar: '/lovable-uploads/1a43098b-f1ed-4275-9a64-0247d2c9441e.png'
+      name: 'Alex Johnson',
+      title: 'Lead Designer',
+      avatar: 'https://i.pravatar.cc/150?img=11'
     },
     coverImage: '/lovable-uploads/logo-maker.png',
-    category: 'Logo Design',
-    tags: ['Logo', 'Design', 'Branding'],
-    excerpt: 'Learn how to create your first professional logo with our AI-powered Logo Maker in just minutes. No design skills required.',
+    category: 'Design Guides',
+    categoryColor: 'blue',
+    tags: ['Logo Design', 'Branding', 'Design Tools'],
+    excerpt: 'Learn how to create a professional logo in minutes using our AI-powered Logo Maker.',
     tableOfContents: [
       { title: 'Getting Started', slug: 'getting-started' },
-      { title: 'Describe Your Brand', slug: 'describe-brand' },
-      { title: 'Choose a Style', slug: 'choose-style' },
-      { title: 'Select Colors', slug: 'select-colors' },
-      { title: 'Review and Customize', slug: 'review-customize' },
-      { title: 'Download Your Logo', slug: 'download-logo' }
-    ]
-  },
-  customizingProfilePicture: {
-    id: 'customizing-profile-picture',
-    title: 'Creating the Perfect Profile Picture',
-    slug: 'customizing-profile-picture',
-    date: '2023-10-22',
-    readingTime: '4 min',
-    author: {
-      name: 'Michael Chen',
-      title: 'Visual Designer',
-      avatar: '/lovable-uploads/57d5ad99-eb1e-4280-a64f-e837c1d3b851.png'
-    },
-    coverImage: '/lovable-uploads/profile-pic.png',
-    category: 'Profile Design',
-    categoryColor: 'blue',
-    tags: ['Profile', 'Design', 'Social Media'],
-    excerpt: 'Discover how to create and customize the perfect profile picture for any platform using our AI-powered tools.',
-    tableOfContents: [
-      { title: 'Why It Matters', slug: 'why-it-matters' },
-      { title: 'Creating the Perfect Profile Picture', slug: 'creating-perfect-pic' },
-      { title: 'Platform-Specific Tips', slug: 'platform-tips' }
-    ]
-  },
-  businessCards: {
-    id: 'business-cards',
-    title: 'Designing Professional Business Cards',
-    slug: 'business-cards',
-    date: '2023-11-05',
-    readingTime: '6 min',
-    author: {
-      name: 'Sarah Johnson',
-      title: 'Marketing Director',
-      avatar: '/lovable-uploads/db9c3f39-be59-43e9-9fda-054848781b3d.png'
-    },
-    coverImage: '/lovable-uploads/business-card.png',
-    category: 'Business Tools',
-    categoryColor: 'green',
-    tags: ['Business Card', 'Design', 'Networking'],
-    excerpt: 'Learn how to design professional business cards that make a lasting impression using our business card templates.',
-    tableOfContents: [
-      { title: 'The Importance of Business Cards', slug: 'importance' },
-      { title: 'Using Our Business Card Templates', slug: 'using-templates' },
-      { title: 'Best Practices', slug: 'best-practices' }
+      { title: 'Step 1: Describe Your Brand', slug: 'describe-brand' },
+      { title: 'Step 2: Choose a Style', slug: 'choose-style' },
+      { title: 'Step 3: Select Colors', slug: 'select-colors' },
+      { title: 'Step 4: Review and Customize', slug: 'review-customize' },
+      { title: 'Step 5: Download Your Logo', slug: 'download-logo' },
+    ],
+    relatedPosts: [
+      {
+        title: 'Exporting Designs in Different Formats',
+        path: '/blogs/exporting-designs',
+        image: '/lovable-uploads/business-card.png',
+        excerpt: 'Learn about different file formats and when to use them for your design exports.'
+      },
+      {
+        title: 'Creating Business Cards from Templates',
+        path: '/blogs/business-cards',
+        image: '/lovable-uploads/business-card.png',
+        excerpt: 'Discover how to create professional business cards using our template library.'
+      }
     ]
   },
   exportingDesigns: {
     id: 'exporting-designs',
-    title: 'How to Export Your Designs',
+    title: 'Exporting Designs in Different Formats',
     slug: 'exporting-designs',
-    date: '2023-11-18',
-    readingTime: '3 min',
+    date: '2023-07-02',
+    readingTime: '6 min',
     author: {
-      name: 'Alex Rivera',
+      name: 'Sophia Chen',
       title: 'Product Manager',
-      avatar: '/lovable-uploads/9631ab2d-6048-425b-b6ac-fd4d8e6181c0.png'
+      avatar: 'https://i.pravatar.cc/150?img=5'
     },
-    coverImage: '/lovable-uploads/4894cea5-585c-4904-82e3-fd2a5f99eed2.png',
-    category: 'Tips & Tricks',
+    category: 'Tutorials',
     categoryColor: 'yellow',
-    tags: ['Export', 'File Formats', 'Design'],
-    excerpt: 'Master the export process and choose the right file formats for your designs, whether for web, print, or other applications.',
+    tags: ['File Formats', 'Exports', 'Design Tools'],
+    excerpt: 'A comprehensive guide to exporting your designs in various formats for different use cases.',
     tableOfContents: [
       { title: 'Understanding File Formats', slug: 'file-formats' },
+      { title: 'Raster Formats', slug: 'raster-formats' },
+      { title: 'Vector Formats', slug: 'vector-formats' },
       { title: 'How to Export Your Designs', slug: 'how-to-export' },
       { title: 'Plan Options', slug: 'plan-options' }
+    ],
+    relatedPosts: [
+      {
+        title: 'How to Create Your First Logo',
+        path: '/blogs/create-logo',
+        image: '/lovable-uploads/logo-maker.png',
+        excerpt: 'Learn how to create a professional logo in minutes using our AI-powered Logo Maker.'
+      },
+      {
+        title: 'Customizing Your Profile Picture',
+        path: '/blogs/customizing-profile-picture',
+        image: '/lovable-uploads/profile-pic.png',
+        excerpt: 'Tips and tutorials for creating the perfect profile picture for different platforms.'
+      }
+    ]
+  },
+  customizingProfilePicture: {
+    id: 'customizing-profile-picture',
+    title: 'Customizing Your Profile Picture',
+    slug: 'customizing-profile-picture',
+    date: '2023-08-10',
+    readingTime: '5 min',
+    author: {
+      name: 'Miguel Reyes',
+      title: 'UX Designer',
+      avatar: 'https://i.pravatar.cc/150?img=68'
+    },
+    coverImage: '/lovable-uploads/profile-pic.png',
+    category: 'Design Tips',
+    categoryColor: 'purple',
+    tags: ['Profile Picture', 'Social Media', 'Image Editing'],
+    excerpt: 'Tips and tutorials for creating the perfect profile picture for different platforms.',
+    tableOfContents: [
+      { title: 'Why Your Profile Picture Matters', slug: 'why-it-matters' },
+      { title: 'Creating the Perfect Profile Picture', slug: 'creating-perfect-pic' },
+      { title: 'Platform-Specific Tips', slug: 'platform-tips' }
+    ],
+    relatedPosts: [
+      {
+        title: 'How to Create Your First Logo',
+        path: '/blogs/create-logo',
+        image: '/lovable-uploads/logo-maker.png',
+        excerpt: 'Learn how to create a professional logo in minutes using our AI-powered Logo Maker.'
+      },
+      {
+        title: 'Exporting Designs in Different Formats',
+        path: '/blogs/exporting-designs',
+        image: '/lovable-uploads/business-card.png',
+        excerpt: 'Learn about different file formats and when to use them for your design exports.'
+      }
+    ]
+  },
+  businessCards: {
+    id: 'business-cards',
+    title: 'Creating Business Cards from Templates',
+    slug: 'business-cards',
+    date: '2023-09-05',
+    readingTime: '7 min',
+    author: {
+      name: 'Jordan Williams',
+      title: 'Creative Director',
+      avatar: 'https://i.pravatar.cc/150?img=30'
+    },
+    coverImage: '/lovable-uploads/business-card.png',
+    category: 'Templates',
+    categoryColor: 'green',
+    tags: ['Business Cards', 'Print Design', 'Templates'],
+    excerpt: 'Discover how to create professional business cards using our template library.',
+    tableOfContents: [
+      { title: 'The Importance of Business Cards', slug: 'importance' },
+      { title: 'Using Our Business Card Templates', slug: 'using-templates' },
+      { title: 'Best Practices for Business Cards', slug: 'best-practices' }
+    ],
+    relatedPosts: [
+      {
+        title: 'Account Billing and Subscriptions',
+        path: '/blogs/billing-subscriptions',
+        image: '/lovable-uploads/profile-pic.png',
+        excerpt: 'Everything you need to know about our subscription plans and billing options.'
+      },
+      {
+        title: 'How to Create Your First Logo',
+        path: '/blogs/create-logo',
+        image: '/lovable-uploads/logo-maker.png',
+        excerpt: 'Learn how to create a professional logo in minutes using our AI-powered Logo Maker.'
+      }
     ]
   },
   billingSubscriptions: {
     id: 'billing-subscriptions',
-    title: 'Understanding Billing and Subscriptions',
+    title: 'Account Billing and Subscriptions',
     slug: 'billing-subscriptions',
-    date: '2023-12-01',
-    readingTime: '5 min',
+    date: '2023-10-12',
+    readingTime: '9 min',
     author: {
-      name: 'Taylor Washington',
-      title: 'Customer Success',
-      avatar: '/lovable-uploads/c2c476a5-d97d-45d6-8bc0-4babfc0a0178.png'
+      name: 'Olivia Martinez',
+      title: 'Customer Success Manager',
+      avatar: 'https://i.pravatar.cc/150?img=9'
     },
-    coverImage: '/lovable-uploads/821d58bb-8315-4c80-be65-f4ba367bdeae.png',
-    category: 'Account Management',
-    categoryColor: 'purple',
-    tags: ['Billing', 'Subscriptions', 'Pricing'],
-    excerpt: 'Everything you need to know about our subscription plans, billing cycles, payment methods, and cancellation policies.',
+    category: 'Account Help',
+    categoryColor: 'orange',
+    tags: ['Billing', 'Subscription', 'Pricing', 'Account'],
+    excerpt: 'Everything you need to know about our subscription plans and billing options.',
     tableOfContents: [
-      { title: 'Subscription Plans', slug: 'subscription-plans' },
+      { title: 'Understanding Our Subscription Plans', slug: 'subscription-plans' },
       { title: 'Managing Your Subscription', slug: 'managing-subscription' },
       { title: 'Payment Methods', slug: 'payment-methods' },
-      { title: 'Billing Cycle', slug: 'billing-cycle' },
+      { title: 'Billing Cycle and Invoices', slug: 'billing-cycle' },
       { title: 'Cancellation Policy', slug: 'cancellation-policy' },
-      { title: 'FAQ', slug: 'faq' }
+      { title: 'Frequently Asked Questions', slug: 'faq' }
+    ],
+    relatedPosts: [
+      {
+        title: 'Creating Business Cards from Templates',
+        path: '/blogs/business-cards',
+        image: '/lovable-uploads/business-card.png',
+        excerpt: 'Discover how to create professional business cards using our template library.'
+      },
+      {
+        title: 'Exporting Designs in Different Formats',
+        path: '/blogs/exporting-designs',
+        image: '/lovable-uploads/business-card.png',
+        excerpt: 'Learn about different file formats and when to use them for your design exports.'
+      }
     ]
   }
 };
 
-// Define a cache for registered blog posts
-const _registeredPosts: Record<string, BlogPostType> = {};
-
-// Add the registerBlogPost function
-export const registerBlogPost = (post: BlogPostType): void => {
-  _registeredPosts[post.slug] = post;
-};
-
-interface BlogContextType {
-  getAllPosts: () => Promise<BlogPostType[]>;
-  getPostBySlug: (slug: string) => Promise<BlogPostType | null>;
-  getRelatedPosts: (currentPostId: string, limit?: number) => Promise<BlogPostType[]>;
-  posts: BlogPostType[];
-  isLoading: boolean;
-  error: string | null;
-}
-
-const BlogContext = createContext<BlogContextType | undefined>(undefined);
+// Register the pre-defined blog posts
+Object.values(blogPosts).forEach(post => registerBlogPost(post));
 
 export const BlogProvider = ({ children }: { children: ReactNode }) => {
-  const [posts, setPosts] = useState<BlogPostType[]>([]);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string | null>(null);
-
-  // Fetch all posts when the context is initialized
-  useEffect(() => {
-    const fetchPosts = async () => {
-      try {
-        setIsLoading(true);
-        const allPosts = await strapiService.getAllPosts();
-        setPosts(allPosts);
-        setError(null);
-      } catch (err) {
-        console.error("Failed to fetch blog posts:", err);
-        setError("Failed to load blog posts. Please try again later.");
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    fetchPosts();
-  }, []);
-
-  const getAllPosts = async () => {
-    // Return cached posts if available
-    if (posts.length > 0) {
-      return posts;
-    }
-    
-    try {
-      const allPosts = await strapiService.getAllPosts();
-      setPosts(allPosts);
-      return allPosts;
-    } catch (err) {
-      console.error("Failed to fetch blog posts:", err);
-      setError("Failed to load blog posts. Please try again later.");
-      return [];
-    }
+  const getAllPosts = () => {
+    return [...blogPostRegistry].sort((a, b) => 
+      new Date(b.date).getTime() - new Date(a.date).getTime()
+    );
   };
 
-  const getPostBySlug = async (slug: string) => {
-    // First check if it's one of our hardcoded posts
-    if (blogPosts[slug as keyof typeof blogPosts]) {
-      return blogPosts[slug as keyof typeof blogPosts];
-    }
-    
-    // Then check if it's a registered post
-    if (_registeredPosts[slug]) {
-      return _registeredPosts[slug];
-    }
-    
-    // Check if the post is already in the cache
-    const cachedPost = posts.find(post => post.slug === slug);
-    if (cachedPost) {
-      return cachedPost;
-    }
-    
-    try {
-      return await strapiService.getPostBySlug(slug);
-    } catch (error) {
-      console.error(`Error fetching post with slug ${slug}:`, error);
-      return null;
-    }
+  const getPostBySlug = (slug: string) => {
+    return blogPostRegistry.find(post => post.slug === slug);
   };
 
-  const getRelatedPosts = async (currentPostId: string, limit: number = 2) => {
-    try {
-      return await strapiService.getRelatedPosts(currentPostId, limit);
-    } catch (error) {
-      console.error(`Error fetching related posts for post ${currentPostId}:`, error);
-      return [];
-    }
+  const getRelatedPosts = (currentPostId: string, limit: number = 2) => {
+    const allPosts = blogPostRegistry.filter(post => post.id !== currentPostId);
+    // In a real app, you might want to implement more sophisticated logic to find related posts
+    return allPosts.slice(0, limit);
   };
 
   return (
-    <BlogContext.Provider value={{ 
-      getAllPosts, 
-      getPostBySlug, 
-      getRelatedPosts,
-      posts,
-      isLoading,
-      error
-    }}>
+    <BlogContext.Provider value={{ getAllPosts, getPostBySlug, getRelatedPosts }}>
       {children}
     </BlogContext.Provider>
   );

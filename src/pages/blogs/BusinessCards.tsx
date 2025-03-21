@@ -1,29 +1,10 @@
 
-import { useEffect, useState } from "react";
 import { useBlog, blogPosts } from "@/contexts/BlogContext";
 import BlogPost from "@/components/BlogPost";
-import { BlogPostType } from "@/types/blog";
 
 const BusinessCards = () => {
   const { getPostBySlug } = useBlog();
-  const [post, setPost] = useState<BlogPostType>(blogPosts.businessCards);
-
-  useEffect(() => {
-    const fetchPost = async () => {
-      try {
-        const fetchedPost = await getPostBySlug('business-cards');
-        if (fetchedPost) {
-          setPost(fetchedPost);
-        }
-      } catch (error) {
-        console.error("Error fetching post:", error);
-        // Fallback to hardcoded post
-        setPost(blogPosts.businessCards);
-      }
-    };
-
-    fetchPost();
-  }, [getPostBySlug]);
+  const post = getPostBySlug('business-cards') || blogPosts.businessCards;
 
   const content = (
     <>

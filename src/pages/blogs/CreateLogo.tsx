@@ -1,32 +1,13 @@
 
-import { useEffect, useState } from "react";
 import { useBlog, blogPosts } from "@/contexts/BlogContext";
 import BlogPost from "@/components/BlogPost";
-import { BlogPostType } from "@/types/blog";
 
 const CreateLogo = () => {
   const { getPostBySlug } = useBlog();
-  const [post, setPost] = useState<BlogPostType>(blogPosts.createLogo);
-
-  useEffect(() => {
-    const fetchPost = async () => {
-      try {
-        const fetchedPost = await getPostBySlug('create-logo');
-        if (fetchedPost) {
-          setPost(fetchedPost);
-        }
-      } catch (error) {
-        console.error("Error fetching post:", error);
-        // Fallback to hardcoded post
-        setPost({
-          ...blogPosts.createLogo,
-          categoryColor: "green"
-        });
-      }
-    };
-
-    fetchPost();
-  }, [getPostBySlug]);
+  const post = getPostBySlug('create-logo') || {
+    ...blogPosts.createLogo,
+    categoryColor: "green"
+  };
 
   const content = (
     <>

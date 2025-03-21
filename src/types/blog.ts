@@ -1,6 +1,5 @@
 
 export interface Author {
-  id?: string;
   name: string;
   title?: string;
   avatar?: string;
@@ -23,7 +22,6 @@ export interface BlogPostType {
   title: string;
   slug: string;
   date: string;
-  content?: string;  // Added content field for Strapi
   readingTime?: string;
   author?: Author;
   coverImage?: string;
@@ -33,17 +31,4 @@ export interface BlogPostType {
   excerpt?: string;
   tableOfContents?: TableOfContentsItem[];
   relatedPosts?: RelatedPost[];
-}
-
-export interface Category {
-  id: string;
-  name: string;
-  slug: string;
-  color?: string;
-}
-
-export interface Tag {
-  id: string;
-  name: string;
-  slug: string;
 }
