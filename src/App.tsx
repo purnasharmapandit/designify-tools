@@ -17,6 +17,8 @@ import Pricing from "./pages/Pricing";
 import Tools from "./pages/Tools";
 import Careers from "./pages/Careers";
 import Blog from "./pages/Blog";
+import BlogAdmin from "./pages/BlogAdmin";
+import BlogPostEditor from "./pages/BlogPostEditor";
 import Auth from "./pages/Auth";
 import ScrollToTop from "./components/ScrollToTop";
 import CreateLogo from "./pages/blogs/CreateLogo";
@@ -69,6 +71,8 @@ function App() {
                   <Route path="/about-us" element={<AboutUs />} />
                   <Route path="/careers" element={<Careers />} />
                   <Route path="/blog" element={<Blog />} />
+                  <Route path="/blog-admin" element={<BlogAdmin />} />
+                  <Route path="/blog-admin/:id" element={<BlogPostEditor />} />
                   <Route path="/blogs/create-logo" element={<CreateLogo />} />
                   <Route path="/blogs/exporting-designs" element={<ExportingDesigns />} />
                   <Route path="/blogs/customizing-profile-picture" element={<CustomizingProfilePicture />} />
