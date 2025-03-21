@@ -32,7 +32,7 @@ export const BlogRichTextEditor = ({ value, onChange }: BlogRichTextEditorProps)
         </div>
       </div>
       <textarea
-        value={value}
+        value={value || ""}
         onChange={handleChange}
         className="w-full p-3 min-h-80 focus:outline-none"
         placeholder="Write your blog post content here..."

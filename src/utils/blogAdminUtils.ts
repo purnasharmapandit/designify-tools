@@ -1,4 +1,3 @@
-
 import { supabase } from "@/integrations/supabase/client";
 import { BlogPostType, Author, TableOfContentsItem } from "@/types/blog";
 import { generateSlug } from "./blogPostUtils";
@@ -369,7 +368,7 @@ export const deleteBlogPost = async (id: string): Promise<void> => {
   }
 };
 
-// Category CRUD operations
+// Category CRUD operations 
 export const getAllCategories = async () => {
   const { data, error } = await supabase
     .from("blog_categories")

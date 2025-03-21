@@ -1,6 +1,6 @@
 
 import { useEffect, useState } from "react";
-import { getAllCategories, deleteCategory, updateCategory } from "@/utils/blogAdminUtils";
+import { getAllCategories, deleteCategory, updateCategory, createCategory } from "@/utils/blogAdminUtils";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Edit, Trash, Check, X, Plus } from "lucide-react";
