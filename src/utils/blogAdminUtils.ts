@@ -574,4 +574,3 @@ export const deleteAuthor = async (id: string) => {
     throw error;
   }
 };
-
