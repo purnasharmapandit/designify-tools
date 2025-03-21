@@ -27,6 +27,7 @@ const HeadshotGeneratorTool = () => {
   const [generatedImages, setGeneratedImages] = useState<string[]>([]);
   const [selectedStyle, setSelectedStyle] = useState("professional");
   const [selectedBackground, setSelectedBackground] = useState("office");
+  const [activeTab, setActiveTab] = useState("upload");
   const navigate = useNavigate();
   const { user } = useAuth();
 
@@ -42,6 +43,10 @@ const HeadshotGeneratorTool = () => {
       };
       reader.readAsDataURL(file);
     }
+  };
+
+  const handleContinueToCustomize = () => {
+    setActiveTab("customize");
   };
 
   const generateHeadshots = async () => {
@@ -110,7 +115,7 @@ const HeadshotGeneratorTool = () => {
   return (
     <div id="generator" className="max-w-6xl mx-auto bg-white rounded-xl shadow-md overflow-hidden">
       <div className="p-8">
-        <Tabs defaultValue="upload" className="w-full">
+        <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
           <TabsList className="grid w-full grid-cols-3 mb-8">
             <TabsTrigger value="upload">Upload Photo</TabsTrigger>
             <TabsTrigger value="customize">Customize Style</TabsTrigger>
@@ -176,7 +181,7 @@ const HeadshotGeneratorTool = () => {
                           Change Photo
                         </Button>
                         <Button
-                          onClick={() => document.getElementById('customize-tab')?.click()}
+                          onClick={handleContinueToCustomize}
                           className="w-full max-w-[150px]"
                         >
                           Continue
