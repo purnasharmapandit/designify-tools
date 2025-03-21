@@ -12,25 +12,33 @@ import CustomizingProfilePicture from '@/pages/blogs/CustomizingProfilePicture';
 import BusinessCards from '@/pages/blogs/BusinessCards';
 import ExportingDesigns from '@/pages/blogs/ExportingDesigns';
 import BillingSubscriptions from '@/pages/blogs/BillingSubscriptions';
+import NotFound from '@/pages/NotFound';
+import ScrollToTop from '@/components/ScrollToTop';
 
 function App() {
   return (
-    <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/about" element={<About />} />
-      <Route path="/contact" element={<Contact />} />
-      <Route path="/help-center" element={<HelpCenter />} />
-      <Route path="/pricing" element={<Pricing />} />
-      
-      {/* Blog routes */}
-      <Route path="/blog" element={<Blog />} />
-      <Route path="/blog/:slug" element={<BlogPostPage />} />
-      <Route path="/blogs/create-logo" element={<CreateLogo />} />
-      <Route path="/blogs/customizing-profile-picture" element={<CustomizingProfilePicture />} />
-      <Route path="/blogs/business-cards" element={<BusinessCards />} />
-      <Route path="/blogs/exporting-designs" element={<ExportingDesigns />} />
-      <Route path="/blogs/billing-subscriptions" element={<BillingSubscriptions />} />
-    </Routes>
+    <Router>
+      <ScrollToTop />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/help-center" element={<HelpCenter />} />
+        <Route path="/pricing" element={<Pricing />} />
+        
+        {/* Blog routes */}
+        <Route path="/blog" element={<Blog />} />
+        <Route path="/blog/:slug" element={<BlogPostPage />} />
+        <Route path="/blogs/create-logo" element={<CreateLogo />} />
+        <Route path="/blogs/customizing-profile-picture" element={<CustomizingProfilePicture />} />
+        <Route path="/blogs/business-cards" element={<BusinessCards />} />
+        <Route path="/blogs/exporting-designs" element={<ExportingDesigns />} />
+        <Route path="/blogs/billing-subscriptions" element={<BillingSubscriptions />} />
+        
+        {/* 404 catch-all route */}
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </Router>
   );
 }
 
