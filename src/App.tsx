@@ -1,4 +1,3 @@
-
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -19,11 +18,7 @@ import Careers from "./pages/Careers";
 import Blog from "./pages/Blog";
 import Auth from "./pages/Auth";
 import ScrollToTop from "./components/ScrollToTop";
-import CreateLogo from "./pages/blogs/CreateLogo";
-import ExportingDesigns from "./pages/blogs/ExportingDesigns";
-import CustomizingProfilePicture from "./pages/blogs/CustomizingProfilePicture";
-import BusinessCards from "./pages/blogs/BusinessCards";
-import BillingSubscriptions from "./pages/blogs/BillingSubscriptions";
+import BlogPostPage from "./pages/BlogPostPage";
 import LogoMaker from "./pages/logo-maker/LogoMaker";
 import LogoEditor from "./pages/logo-maker/LogoEditor";
 import { BlogProvider } from "./contexts/BlogContext";
@@ -69,11 +64,12 @@ function App() {
                   <Route path="/about-us" element={<AboutUs />} />
                   <Route path="/careers" element={<Careers />} />
                   <Route path="/blog" element={<Blog />} />
-                  <Route path="/blogs/create-logo" element={<CreateLogo />} />
-                  <Route path="/blogs/exporting-designs" element={<ExportingDesigns />} />
-                  <Route path="/blogs/customizing-profile-picture" element={<CustomizingProfilePicture />} />
-                  <Route path="/blogs/business-cards" element={<BusinessCards />} />
-                  <Route path="/blogs/billing-subscriptions" element={<BillingSubscriptions />} />
+                  <Route path="/blog/:slug" element={<BlogPostPage />} />
+                  <Route path="/blogs/create-logo" element={<BlogPostPage />} />
+                  <Route path="/blogs/exporting-designs" element={<BlogPostPage />} />
+                  <Route path="/blogs/customizing-profile-picture" element={<BlogPostPage />} />
+                  <Route path="/blogs/business-cards" element={<BlogPostPage />} />
+                  <Route path="/blogs/billing-subscriptions" element={<BlogPostPage />} />
                   <Route path="/logo-maker" element={<LogoMaker />} />
                   <Route path="/logo-maker/editor/:id" element={<LogoEditor />} />
                   <Route path="/qr-code-generator" element={<QRCodeGenerator />} />
