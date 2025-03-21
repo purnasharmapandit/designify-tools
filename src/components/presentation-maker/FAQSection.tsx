@@ -31,18 +31,31 @@ const PresentationMakerFAQs = () => {
   ];
 
   return (
-    <Accordion type="single" collapsible className="bg-white rounded-lg shadow-sm">
-      {faqs.map((faq, index) => (
-        <AccordionItem key={index} value={`item-${index}`}>
-          <AccordionTrigger className="px-6 py-4 text-left font-medium">
-            {faq.question}
-          </AccordionTrigger>
-          <AccordionContent className="px-6 text-gray-600">
-            {faq.answer}
-          </AccordionContent>
-        </AccordionItem>
-      ))}
-    </Accordion>
+    <section className="py-16 bg-white">
+      <div className="container mx-auto px-4">
+        <div className="max-w-3xl mx-auto">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold mb-4">Frequently Asked Questions</h2>
+            <p className="text-lg text-gray-600">
+              Everything you need to know about our Presentation Maker
+            </p>
+          </div>
+          
+          <Accordion type="single" collapsible className="w-full">
+            {faqs.map((faq, index) => (
+              <AccordionItem key={index} value={`item-${index}`}>
+                <AccordionTrigger className="text-left font-medium">
+                  {faq.question}
+                </AccordionTrigger>
+                <AccordionContent className="text-gray-600">
+                  {faq.answer}
+                </AccordionContent>
+              </AccordionItem>
+            ))}
+          </Accordion>
+        </div>
+      </div>
+    </section>
   );
 };
 
