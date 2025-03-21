@@ -115,7 +115,8 @@ const ToolsGrid = () => {
       description: "Create eye-catching banners for all your social media platforms",
       color: "bg-indigo-100 text-indigo-500",
       link: "/social-banner-maker",
-      toolType: "social_banner" as const
+      toolType: "social_banner" as const,
+      comingSoon: true
     },
     {
       icon: FileImage,
@@ -123,7 +124,8 @@ const ToolsGrid = () => {
       description: "Edit and enhance images with powerful tools",
       color: "bg-violet-100 text-violet-500",
       link: "/image-editor",
-      toolType: "image_editor" as const
+      toolType: "image_editor" as const,
+      comingSoon: true
     },
     {
       icon: Share2,

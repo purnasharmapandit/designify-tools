@@ -2,6 +2,7 @@
 import { motion } from "framer-motion";
 import ToolCard from "./ToolCard";
 import { Link } from "react-router-dom";
+import { Badge } from "@/components/ui/badge";
 
 const ExploreToolsSection = () => {
   const tools = [
@@ -15,7 +16,8 @@ const ExploreToolsSection = () => {
       name: "Social Banner Maker",
       color: "bg-gradient-to-br from-emerald-100 to-emerald-200",
       iconColor: "text-emerald-500",
-      link: "#"
+      link: "/social-banner-maker",
+      comingSoon: true
     },
     {
       name: "QR Code Designer",
@@ -62,12 +64,21 @@ const ExploreToolsSection = () => {
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 md:gap-6">
           {tools.map((tool, index) => (
             <Link key={index} to={tool.link || "#"} className="block">
-              <ToolCard
-                name={tool.name}
-                color={tool.color}
-                iconColor={tool.iconColor}
-                className="rounded-2xl"
-              />
+              <div className="relative">
+                <ToolCard
+                  name={tool.name}
+                  color={tool.color}
+                  iconColor={tool.iconColor}
+                  className="rounded-2xl"
+                />
+                {tool.comingSoon && (
+                  <div className="absolute top-2 right-2">
+                    <Badge variant="outline" className="bg-yellow-100 text-yellow-800 border-yellow-200 text-xs">
+                      Coming Soon
+                    </Badge>
+                  </div>
+                )}
+              </div>
             </Link>
           ))}
         </div>
