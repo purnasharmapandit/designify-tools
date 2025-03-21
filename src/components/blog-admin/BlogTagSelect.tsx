@@ -5,7 +5,7 @@ import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
-import { getAllTags, createTag } from "@/utils/blogAdminUtils";
+import { getAllTags, createTag } from "@/utils/blog-admin";
 import { useToast } from "@/hooks/use-toast";
 
 interface Tag {
