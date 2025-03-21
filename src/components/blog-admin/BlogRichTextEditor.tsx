@@ -202,19 +202,22 @@ export const BlogRichTextEditor = ({ value, onChange }: BlogRichTextEditorProps)
         className="p-4 min-h-80 prose prose-sm max-w-none"
       />
       
-      <style jsx global>{`
-        .ProseMirror {
-          min-height: 300px;
-          outline: none;
-        }
-        .ProseMirror p.is-editor-empty:first-child::before {
-          content: attr(data-placeholder);
-          float: left;
-          color: #adb5bd;
-          pointer-events: none;
-          height: 0;
-        }
-      `}</style>
+      {/* Fix: Replace JSX style tag with standard style tag */}
+      <style>
+        {`
+          .ProseMirror {
+            min-height: 300px;
+            outline: none;
+          }
+          .ProseMirror p.is-editor-empty:first-child::before {
+            content: attr(data-placeholder);
+            float: left;
+            color: #adb5bd;
+            pointer-events: none;
+            height: 0;
+          }
+        `}
+      </style>
     </div>
   );
 };
