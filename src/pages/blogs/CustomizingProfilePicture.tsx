@@ -1,10 +1,29 @@
 
+import { useEffect, useState } from "react";
 import { useBlog, blogPosts } from "@/contexts/BlogContext";
 import BlogPost from "@/components/BlogPost";
+import { BlogPostType } from "@/types/blog";
 
 const CustomizingProfilePicture = () => {
   const { getPostBySlug } = useBlog();
-  const post = getPostBySlug('customizing-profile-picture') || blogPosts.customizingProfilePicture;
+  const [post, setPost] = useState<BlogPostType>(blogPosts.customizingProfilePicture);
+
+  useEffect(() => {
+    const fetchPost = async () => {
+      try {
+        const fetchedPost = await getPostBySlug('customizing-profile-picture');
+        if (fetchedPost) {
+          setPost(fetchedPost);
+        }
+      } catch (error) {
+        console.error("Error fetching post:", error);
+        // Fallback to hardcoded post
+        setPost(blogPosts.customizingProfilePicture);
+      }
+    };
+
+    fetchPost();
+  }, [getPostBySlug]);
 
   const content = (
     <>

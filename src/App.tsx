@@ -1,16 +1,17 @@
+
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import Home from './pages/Home';
-import About from './pages/About';
-import Contact from './pages/Contact';
-import Blog from './pages/Blog';
-import HelpCenter from './pages/HelpCenter';
-import Pricing from './pages/Pricing';
-import BlogPostPage from './pages/BlogPostPage';
-import CreateLogo from './pages/blogs/CreateLogo';
-import CustomizingProfilePicture from './pages/blogs/CustomizingProfilePicture';
-import BusinessCards from './pages/blogs/BusinessCards';
-import ExportingDesigns from './pages/blogs/ExportingDesigns';
-import BillingSubscriptions from './pages/blogs/BillingSubscriptions';
+import Home from '@/pages/Home';
+import About from '@/pages/About';
+import Contact from '@/pages/Contact';
+import Blog from '@/pages/Blog';
+import HelpCenter from '@/pages/HelpCenter';
+import Pricing from '@/pages/Pricing';
+import BlogPostPage from '@/pages/BlogPostPage';
+import CreateLogo from '@/pages/blogs/CreateLogo';
+import CustomizingProfilePicture from '@/pages/blogs/CustomizingProfilePicture';
+import BusinessCards from '@/pages/blogs/BusinessCards';
+import ExportingDesigns from '@/pages/blogs/ExportingDesigns';
+import BillingSubscriptions from '@/pages/blogs/BillingSubscriptions';
 
 function App() {
   return (

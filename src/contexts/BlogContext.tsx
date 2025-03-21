@@ -199,11 +199,21 @@ export const BlogProvider = ({ children }: { children: ReactNode }) => {
       return cachedPost;
     }
     
-    return strapiService.getPostBySlug(slug);
+    try {
+      return await strapiService.getPostBySlug(slug);
+    } catch (error) {
+      console.error(`Error fetching post with slug ${slug}:`, error);
+      return null;
+    }
   };
 
   const getRelatedPosts = async (currentPostId: string, limit: number = 2) => {
-    return strapiService.getRelatedPosts(currentPostId, limit);
+    try {
+      return await strapiService.getRelatedPosts(currentPostId, limit);
+    } catch (error) {
+      console.error(`Error fetching related posts for post ${currentPostId}:`, error);
+      return [];
+    }
   };
 
   return (
