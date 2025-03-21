@@ -7,8 +7,6 @@ interface ProtectedRouteProps {
   requiresAccessCode?: boolean;
 }
 
-const ADMIN_EMAIL = "accesstechjagat@gmail.com";
-
 const ProtectedRoute = ({ children, requiresAccessCode = false }: ProtectedRouteProps) => {
   const { user, isLoading } = useAuth();
   const location = useLocation();
@@ -21,15 +19,9 @@ const ProtectedRoute = ({ children, requiresAccessCode = false }: ProtectedRoute
     );
   }
 
-  // Check if user is logged in
   if (!user) {
     // Redirect to the login page but save the current location they were trying to access
     return <Navigate to="/auth" state={{ returnTo: location.pathname, requiresSignUp: true }} replace />;
-  }
-
-  // For blog admin routes, check if the user has the admin email
-  if (location.pathname.startsWith("/blog-admin") && user.email !== ADMIN_EMAIL) {
-    return <Navigate to="/" replace />;
   }
 
   return <>{children}</>;

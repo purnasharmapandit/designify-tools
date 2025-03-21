@@ -1,6 +1,5 @@
 
 export interface Author {
-  id?: string;
   name: string;
   title?: string;
   avatar?: string;
@@ -25,15 +24,11 @@ export interface BlogPostType {
   date: string;
   readingTime?: string;
   author?: Author;
-  authorId?: string;
   coverImage?: string;
   category?: string;
-  categoryId?: string;
   categoryColor?: string;
   tags?: string[];
   excerpt?: string;
-  content?: string;
-  published?: boolean;
   tableOfContents?: TableOfContentsItem[];
   relatedPosts?: RelatedPost[];
 }
