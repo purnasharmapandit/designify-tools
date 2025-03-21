@@ -5,6 +5,7 @@ import { useBlog } from '@/contexts/BlogContext';
 import BlogPost from '@/components/BlogPost';
 import { BlogPostType } from '@/types/blog';
 import { Skeleton } from '@/components/ui/skeleton';
+import { parseRichText } from '@/utils/strapiUtils';
 
 const BlogPostPage = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -90,7 +91,7 @@ const BlogPostPage = () => {
     return (
       <div 
         className="prose prose-lg max-w-none dark:prose-invert"
-        dangerouslySetInnerHTML={{ __html: post.content || '' }}
+        dangerouslySetInnerHTML={{ __html: parseRichText(post.content) }}
       />
     );
   };
