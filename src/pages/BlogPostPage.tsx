@@ -6,6 +6,7 @@ import BlogPost from '@/components/BlogPost';
 import { BlogPostType } from '@/types/blog';
 import { Skeleton } from '@/components/ui/skeleton';
 import { parseRichText } from '@/utils/strapiUtils';
+import { useToast } from '@/hooks/use-toast';
 
 const BlogPostPage = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -14,33 +15,45 @@ const BlogPostPage = () => {
   const [post, setPost] = useState<BlogPostType | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
+  const { toast } = useToast();
 
   useEffect(() => {
     const fetchPost = async () => {
       if (!slug) return;
       
       setIsLoading(true);
+      setError(null);
+      
       try {
         const postData = await getPostBySlug(slug);
         
         if (!postData) {
           setError('Blog post not found');
+          toast({
+            title: "Blog post not found",
+            description: "The requested blog post could not be found.",
+            variant: "destructive"
+          });
           navigate('/blog', { replace: true });
           return;
         }
         
         setPost(postData);
-        setError(null);
       } catch (err) {
         console.error(`Error fetching post with slug ${slug}:`, err);
         setError('Failed to load blog post. Please try again later.');
+        toast({
+          title: "Error loading blog post",
+          description: "There was a problem loading the blog post. Please try again later.",
+          variant: "destructive"
+        });
       } finally {
         setIsLoading(false);
       }
     };
 
     fetchPost();
-  }, [slug, getPostBySlug, navigate]);
+  }, [slug, getPostBySlug, navigate, toast]);
 
   if (isLoading) {
     return (
@@ -84,10 +97,8 @@ const BlogPostPage = () => {
     );
   }
 
-  // This component will be dynamic based on the content from Strapi
+  // This component will render the content from Strapi with proper parsing
   const ContentComponent = () => {
-    // Here you would parse and render the content from Strapi
-    // For now, we'll use a simple div with the content
     return (
       <div 
         className="prose prose-lg max-w-none dark:prose-invert"

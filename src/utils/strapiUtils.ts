@@ -1,3 +1,5 @@
+import { marked } from 'marked';
+
 /**
  * Builds a full URL for a Strapi media asset
  * @param url The relative URL from Strapi
@@ -22,19 +24,67 @@ export const getStrapiMedia = (url: string | null | undefined): string => {
  * @returns HTML string
  */
 export const parseRichText = (content: any): string => {
-  // Simple implementation - in a real app you would use a proper markdown or rich text parser
   if (!content) return '';
   
-  // If content is a string, assume it's already HTML or plain text
+  // If content is a string, check if it's markdown or HTML
   if (typeof content === 'string') {
-    return content;
+    // Try to parse it as markdown
+    try {
+      return marked(content);
+    } catch (error) {
+      console.warn('Failed to parse content as markdown, returning as-is:', error);
+      return content;
+    }
   }
   
-  // If it's an object, it might be Strapi's rich text format
+  // If it's an object, it might be Strapi's rich text format (blocks format)
   if (typeof content === 'object') {
-    // This is a simplistic approach - you would want to use a Strapi-specific
-    // parser like 'react-markdown' with appropriate plugins
-    return JSON.stringify(content);
+    try {
+      // Handle Strapi v4 blocks format if present
+      if (content.blocks && Array.isArray(content.blocks)) {
+        let html = '';
+        
+        content.blocks.forEach((block: any) => {
+          switch (block.type) {
+            case 'paragraph':
+              html += `<p>${block.text}</p>`;
+              break;
+            case 'heading':
+              const level = block.level || 1;
+              html += `<h${level}>${block.text}</h${level}>`;
+              break;
+            case 'list':
+              const listType = block.format === 'ordered' ? 'ol' : 'ul';
+              html += `<${listType}>`;
+              block.items.forEach((item: string) => {
+                html += `<li>${item}</li>`;
+              });
+              html += `</${listType}>`;
+              break;
+            case 'image':
+              const imgUrl = getStrapiMedia(block.url);
+              html += `<img src="${imgUrl}" alt="${block.alt || ''}" />`;
+              break;
+            case 'code':
+              html += `<pre><code>${block.code}</code></pre>`;
+              break;
+            case 'quote':
+              html += `<blockquote>${block.text}</blockquote>`;
+              break;
+            default:
+              html += block.text || '';
+          }
+        });
+        
+        return html;
+      }
+      
+      // If not blocks format, try to stringify and parse as markdown
+      return marked(JSON.stringify(content));
+    } catch (error) {
+      console.error('Error parsing Strapi rich text content:', error);
+      return '';
+    }
   }
   
   return '';
@@ -52,4 +102,25 @@ export const slugify = (text: string): string => {
     .replace(/\s+/g, '-')
     .replace(/-+/g, '-')
     .trim();
+};
+
+/**
+ * Validates that environment variables needed for Strapi are set
+ * @returns Object with validation result and any error messages
+ */
+export const validateStrapiConfig = (): { isValid: boolean; errors: string[] } => {
+  const errors: string[] = [];
+  
+  if (!import.meta.env.VITE_STRAPI_URL) {
+    errors.push('VITE_STRAPI_URL environment variable is not set');
+  }
+  
+  if (!import.meta.env.VITE_STRAPI_API_TOKEN) {
+    errors.push('VITE_STRAPI_API_TOKEN environment variable is not set');
+  }
+  
+  return {
+    isValid: errors.length === 0,
+    errors
+  };
 };

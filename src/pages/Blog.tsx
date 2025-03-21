@@ -9,6 +9,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { useBlog } from "@/contexts/BlogContext";
 import { cn } from "@/lib/utils";
 import { BlogPostType } from "@/types/blog";
+import StrapiConnectionStatus from "@/components/StrapiConnectionStatus";
 
 const PLACEHOLDER_IMAGE = "/placeholder.svg";
 
@@ -65,6 +66,9 @@ const Blog = () => {
       <Navbar />
       <main className="flex-grow pt-28 pb-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          {/* Strapi Connection Status */}
+          <StrapiConnectionStatus />
+          
           <div className="text-center mb-16">
             <motion.h1 
               className="text-4xl md:text-5xl font-bold font-display mb-4"
