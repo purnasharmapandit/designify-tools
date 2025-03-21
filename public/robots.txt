@@ -1,0 +1,9 @@
+
+User-agent: *
+Disallow: /blog-admin/
+Disallow: /blog-admin/*
+Allow: /blogs/
+Allow: /blog/
+Allow: /
+
+Sitemap: https://yourdomain.com/sitemap.xml

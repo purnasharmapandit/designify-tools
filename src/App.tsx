@@ -45,6 +45,7 @@ import ImageEditor from "./pages/image-editor/ImageEditor";
 import InfographicsGenerator from "./pages/infographics/InfographicsGenerator";
 import HeadshotGenerator from "./pages/headshot-generator/HeadshotGenerator";
 import SocialBannerMaker from "./pages/social-banner/SocialBannerMaker";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 const queryClient = new QueryClient();
 
@@ -71,8 +72,16 @@ function App() {
                   <Route path="/about-us" element={<AboutUs />} />
                   <Route path="/careers" element={<Careers />} />
                   <Route path="/blog" element={<Blog />} />
-                  <Route path="/blog-admin" element={<BlogAdmin />} />
-                  <Route path="/blog-admin/:id" element={<BlogPostEditor />} />
+                  <Route path="/blog-admin" element={
+                    <ProtectedRoute>
+                      <BlogAdmin />
+                    </ProtectedRoute>
+                  } />
+                  <Route path="/blog-admin/:id" element={
+                    <ProtectedRoute>
+                      <BlogPostEditor />
+                    </ProtectedRoute>
+                  } />
                   <Route path="/blogs/create-logo" element={<CreateLogo />} />
                   <Route path="/blogs/exporting-designs" element={<ExportingDesigns />} />
                   <Route path="/blogs/customizing-profile-picture" element={<CustomizingProfilePicture />} />
