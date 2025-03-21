@@ -30,7 +30,15 @@ export const parseRichText = (content: any): string => {
   if (typeof content === 'string') {
     // Try to parse it as markdown
     try {
-      return marked(content);
+      // Handle marked returning a Promise
+      const html = marked.parse(content);
+      // If it's a Promise, return an empty string - the actual parsing
+      // will happen asynchronously in a useEffect
+      if (html instanceof Promise) {
+        console.warn('Markdown parsing is async, use parseRichTextAsync instead');
+        return content;
+      }
+      return html;
     } catch (error) {
       console.warn('Failed to parse content as markdown, returning as-is:', error);
       return content;
@@ -80,7 +88,88 @@ export const parseRichText = (content: any): string => {
       }
       
       // If not blocks format, try to stringify and parse as markdown
-      return marked(JSON.stringify(content));
+      const jsonString = JSON.stringify(content);
+      const html = marked.parse(jsonString);
+      
+      // Handle marked returning a Promise
+      if (html instanceof Promise) {
+        console.warn('Markdown parsing is async, use parseRichTextAsync instead');
+        return jsonString;
+      }
+      
+      return html;
+    } catch (error) {
+      console.error('Error parsing Strapi rich text content:', error);
+      return '';
+    }
+  }
+  
+  return '';
+};
+
+/**
+ * Asynchronous version of parseRichText for use in async contexts
+ * @param content The Strapi content to parse
+ * @returns Promise resolving to HTML string
+ */
+export const parseRichTextAsync = async (content: any): Promise<string> => {
+  if (!content) return '';
+  
+  // If content is a string, check if it's markdown or HTML
+  if (typeof content === 'string') {
+    try {
+      return await marked.parse(content);
+    } catch (error) {
+      console.warn('Failed to parse content as markdown, returning as-is:', error);
+      return content;
+    }
+  }
+  
+  // If it's an object, handle special formats
+  if (typeof content === 'object') {
+    try {
+      // Handle Strapi v4 blocks format
+      if (content.blocks && Array.isArray(content.blocks)) {
+        // Use the same block parsing logic as in parseRichText
+        let html = '';
+        
+        content.blocks.forEach((block: any) => {
+          switch (block.type) {
+            case 'paragraph':
+              html += `<p>${block.text}</p>`;
+            break;
+            case 'heading':
+              const level = block.level || 1;
+              html += `<h${level}>${block.text}</h${level}>`;
+              break;
+            case 'list':
+              const listType = block.format === 'ordered' ? 'ol' : 'ul';
+              html += `<${listType}>`;
+              block.items.forEach((item: string) => {
+                html += `<li>${item}</li>`;
+              });
+              html += `</${listType}>`;
+              break;
+            case 'image':
+              const imgUrl = getStrapiMedia(block.url);
+              html += `<img src="${imgUrl}" alt="${block.alt || ''}" />`;
+              break;
+            case 'code':
+              html += `<pre><code>${block.code}</code></pre>`;
+              break;
+            case 'quote':
+              html += `<blockquote>${block.text}</blockquote>`;
+              break;
+            default:
+              html += block.text || '';
+          }
+        });
+        
+        return html;
+      }
+      
+      // If not blocks format, parse as markdown
+      return await marked.parse(JSON.stringify(content));
     } catch (error) {
       console.error('Error parsing Strapi rich text content:', error);
       return '';

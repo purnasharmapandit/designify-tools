@@ -1,11 +1,10 @@
-
 import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useBlog } from '@/contexts/BlogContext';
 import BlogPost from '@/components/BlogPost';
 import { BlogPostType } from '@/types/blog';
 import { Skeleton } from '@/components/ui/skeleton';
-import { parseRichText } from '@/utils/strapiUtils';
+import { parseRichText, parseRichTextAsync } from '@/utils/strapiUtils';
 import { useToast } from '@/hooks/use-toast';
 
 const BlogPostPage = () => {
@@ -13,6 +12,7 @@ const BlogPostPage = () => {
   const navigate = useNavigate();
   const { getPostBySlug } = useBlog();
   const [post, setPost] = useState<BlogPostType | null>(null);
+  const [parsedContent, setParsedContent] = useState<string>('');
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   const { toast } = useToast();
@@ -39,6 +39,16 @@ const BlogPostPage = () => {
         }
         
         setPost(postData);
+        
+        if (postData.content) {
+          try {
+            const htmlContent = await parseRichTextAsync(postData.content);
+            setParsedContent(htmlContent);
+          } catch (parseError) {
+            console.error('Error parsing rich text:', parseError);
+            setParsedContent(parseRichText(postData.content));
+          }
+        }
       } catch (err) {
         console.error(`Error fetching post with slug ${slug}:`, err);
         setError('Failed to load blog post. Please try again later.');
@@ -97,12 +107,11 @@ const BlogPostPage = () => {
     );
   }
 
-  // This component will render the content from Strapi with proper parsing
   const ContentComponent = () => {
     return (
       <div 
         className="prose prose-lg max-w-none dark:prose-invert"
-        dangerouslySetInnerHTML={{ __html: parseRichText(post.content) }}
+        dangerouslySetInnerHTML={{ __html: parsedContent || parseRichText(post.content) }}
       />
     );
   };
