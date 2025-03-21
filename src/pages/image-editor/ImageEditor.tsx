@@ -7,6 +7,7 @@ import ImageEditorFAQs from "./components/FAQSection";
 import { Button } from "@/components/ui/button";
 import { ChevronRight, ImageIcon, Crop, Layers, Palette, PenTool, Sliders, Download, Sparkles, BellPlus } from "lucide-react";
 import { Link } from "react-router-dom";
+import ComingSoonBanner from "@/components/ComingSoonBanner";
 
 const ImageEditor = () => {
   return (
@@ -362,6 +363,14 @@ const ImageEditor = () => {
             </div>
           </div>
         </section>
+
+        {/* Coming Soon Banner */}
+        <div className="my-12">
+          <ComingSoonBanner 
+            toolName="Image Editor" 
+            expectedReleaseDate="Q3 2023" 
+          />
+        </div>
       </main>
       
       <Footer />
