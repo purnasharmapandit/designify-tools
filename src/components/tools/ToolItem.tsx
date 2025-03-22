@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { LucideIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
+import { Badge } from "@/components/ui/badge";
 
 interface ToolItemProps { 
   icon: LucideIcon; 
@@ -11,9 +12,11 @@ interface ToolItemProps {
   color: string;
   link?: string;
   comingSoon?: boolean;
+  badge?: React.ReactNode;
+  category?: string;
 }
 
-const ToolItem = ({ icon: Icon, name, description, color, link, comingSoon }: ToolItemProps) => (
+const ToolItem = ({ icon: Icon, name, description, color, link, comingSoon, badge }: ToolItemProps) => (
   <motion.div
     initial={{ opacity: 0, y: 20 }}
     animate={{ opacity: 1, y: 0 }}
@@ -22,7 +25,14 @@ const ToolItem = ({ icon: Icon, name, description, color, link, comingSoon }: To
     <div className={`${color} p-3 rounded-lg w-fit mb-4 group-hover:scale-110 transition-transform`}>
       <Icon className="h-6 w-6" />
     </div>
-    <h3 className="text-lg font-semibold mb-2">{name}</h3>
+    
+    <div className="flex items-center justify-between mb-2">
+      <h3 className="text-lg font-semibold">{name}</h3>
+      {badge && (
+        <div>{badge}</div>
+      )}
+    </div>
+    
     <p className="text-gray-600">{description}</p>
     
     {comingSoon && (
