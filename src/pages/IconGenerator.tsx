@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { Helmet } from "react-helmet";
@@ -7,11 +8,10 @@ import Footer from "@/components/Footer";
 import IconGeneratorForm from "@/components/icon-generator/IconGeneratorForm";
 import IconPreview from "@/components/icon-generator/IconPreview";
 import HowItWorksSection from "@/components/icon-generator/HowItWorksSection";
-import StylesGallery from "@/components/icon-generator/StylesGallery";
 import FAQSection from "@/components/icon-generator/FAQSection";
 import FeaturesSection from "@/components/icon-generator/FeaturesSection";
 import UseCasesSection from "@/components/icon-generator/UseCasesSection";
-import { Check } from "lucide-react";
+import { Check, Zap, Heart, Lightbulb, Trophy } from "lucide-react";
 import StandardHeroSection from "@/components/shared/StandardHeroSection";
 import { toast } from "sonner";
 import { GeneratedIcon } from "@/services/runware";
@@ -160,12 +160,38 @@ const IconGenerator = () => {
 
   const iconGeneratorImage = (
     <div className="relative w-full max-w-md mx-auto">
-      <div className="bg-white rounded-xl shadow-lg p-6">
-        <img 
-          src="/lovable-uploads/881e4853-0a3c-4840-9265-a9ad83a5640a.png" 
-          alt="Icon Generator" 
-          className="w-full rounded-lg"
-        />
+      <div className="relative bg-white rounded-xl shadow-lg p-8 flex items-center justify-center">
+        <motion.div
+          animate={{ rotate: 360 }}
+          transition={{ duration: 60, repeat: Infinity, ease: "linear" }}
+          className="absolute -top-6 -right-6 text-blue-500"
+        >
+          <Lightbulb size={40} />
+        </motion.div>
+        
+        <motion.div
+          animate={{ rotate: -360 }}
+          transition={{ duration: 50, repeat: Infinity, ease: "linear" }}
+          className="absolute -bottom-8 -left-8 text-amber-500"
+        >
+          <Trophy size={48} />
+        </motion.div>
+        
+        <motion.div
+          animate={{ rotate: 360 }}
+          transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
+          className="absolute -bottom-4 -right-12 text-pink-500"
+        >
+          <Heart size={36} />
+        </motion.div>
+        
+        <motion.div
+          initial={{ scale: 0.9 }}
+          animate={{ scale: [0.9, 1.1, 0.9] }}
+          transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+        >
+          <Zap className="w-48 h-48 text-primary" />
+        </motion.div>
       </div>
     </div>
   );
@@ -185,7 +211,7 @@ const IconGenerator = () => {
       </Helmet>
       
       <Navbar />
-      <main className="flex-grow pt-8">
+      <main className="flex-grow pt-16">
         <StandardHeroSection
           toolLabel="AI Icon Generator"
           title="Create"
@@ -226,7 +252,6 @@ const IconGenerator = () => {
         </section>
 
         <HowItWorksSection />
-        <StylesGallery styles={ICON_STYLES} />
         <FeaturesSection />
         <UseCasesSection />
         <FAQSection />
