@@ -4,11 +4,12 @@ import { Helmet } from "react-helmet";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
-import { Check, Instagram, Facebook, Twitter, Linkedin, Youtube } from "lucide-react";
+import { Check, Instagram, Facebook, Twitter, Linkedin } from "lucide-react";
 import FeaturesSection from "@/components/social-media-kit/FeaturesSection";
 import HowItWorksSection from "@/components/social-media-kit/HowItWorksSection";
 import FAQSection from "@/components/social-media-kit/FAQSection";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 
 const SocialMediaKit = () => {
   return (
@@ -23,9 +24,9 @@ const SocialMediaKit = () => {
 
       <Navbar />
       
-      <main className="flex-grow">
+      <main className="flex-grow pt-8">
         {/* Hero Section */}
-        <section className="bg-gradient-to-r from-blue-600 to-indigo-700 text-white py-20">
+        <section className="bg-gradient-to-r from-blue-600 to-indigo-700 text-white py-20 pt-28">
           <div className="container mx-auto px-4">
             <div className="grid lg:grid-cols-2 gap-12 items-center">
               <div>
@@ -49,8 +50,8 @@ const SocialMediaKit = () => {
                     <span>Ready-made Templates</span>
                   </div>
                 </div>
-                <Button size="lg" className="bg-white text-blue-700 hover:bg-gray-100">
-                  Join Waitlist
+                <Button size="lg" className="bg-white text-blue-700 hover:bg-gray-100" asChild>
+                  <Link to="/contact-us">Join Waitlist</Link>
                 </Button>
               </div>
               
@@ -128,8 +129,8 @@ const SocialMediaKit = () => {
             <p className="text-xl text-gray-700 max-w-2xl mx-auto mb-8">
               Join our waitlist to be the first to know when our Social Media Kit is available.
             </p>
-            <Button size="lg" className="bg-blue-600 text-white hover:bg-blue-700">
-              Join Waitlist
+            <Button size="lg" className="bg-blue-600 text-white hover:bg-blue-700" asChild>
+              <Link to="/contact-us">Join Waitlist</Link>
             </Button>
           </div>
         </section>
