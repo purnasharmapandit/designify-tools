@@ -1,3 +1,4 @@
+
 import React from "react";
 import { Helmet } from "react-helmet";
 import Navbar from "@/components/Navbar";
@@ -69,7 +70,7 @@ const QRCodeGenerator = () => {
       </Helmet>
       
       <Navbar />
-      <main className="flex-grow pt-28">
+      <main className="flex-grow">
         <StandardHeroSection
           toolLabel="Free QR Code Generator"
           title="Create"
