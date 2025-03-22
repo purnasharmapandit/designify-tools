@@ -11,7 +11,7 @@ import StylesGallery from "@/components/icon-generator/StylesGallery";
 import FAQSection from "@/components/icon-generator/FAQSection";
 import FeaturesSection from "@/components/icon-generator/FeaturesSection";
 import UseCasesSection from "@/components/icon-generator/UseCasesSection";
-import { Check, Wand2, Sparkles, SquarePen, Download, Star, Zap, Gem } from "lucide-react";
+import { Check, Wand2, Sparkles, SquarePen, Lightbulb, Rocket, Trophy, Heart } from "lucide-react";
 import StandardHeroSection from "@/components/shared/StandardHeroSection";
 import { toast } from "sonner";
 import { GeneratedIcon } from "@/services/runware";
@@ -160,42 +160,38 @@ const IconGenerator = () => {
 
   const iconGeneratorImage = (
     <div className="relative w-full max-w-md mx-auto">
-      <div className="bg-white rounded-xl shadow-lg p-4 transform rotate-3 absolute -right-5 -top-5 z-10">
-        <Wand2 className="w-12 h-12 text-blue-600" />
-      </div>
-      
       <div className="relative bg-white rounded-xl shadow-lg p-6">
         <div className="relative grid grid-cols-3 gap-4">
           <motion.div 
-            className="absolute -top-8 left-1/2 -translate-x-1/2"
-            animate={{ y: [0, -10, 0] }}
+            className="absolute -top-12 left-1/2 -translate-x-1/2"
+            animate={{ y: [0, -15, 0] }}
             transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
           >
-            <Star className="w-8 h-8 text-yellow-500" />
+            <Rocket className="w-12 h-12 text-blue-500" />
           </motion.div>
           
           <motion.div 
-            className="absolute -left-8 top-1/2 -translate-y-1/2"
-            animate={{ x: [0, -10, 0] }}
-            transition={{ duration: 3, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
+            className="absolute -left-12 top-1/2 -translate-y-1/2"
+            animate={{ x: [0, -15, 0] }}
+            transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
           >
-            <Zap className="w-8 h-8 text-purple-500" />
+            <Lightbulb className="w-12 h-12 text-yellow-500" />
           </motion.div>
           
           <motion.div 
-            className="absolute -right-8 top-1/2 -translate-y-1/2"
-            animate={{ x: [0, 10, 0] }}
-            transition={{ duration: 3, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+            className="absolute -right-12 top-1/2 -translate-y-1/2"
+            animate={{ x: [0, 15, 0] }}
+            transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 1 }}
           >
-            <Sparkles className="w-8 h-8 text-blue-500" />
+            <Heart className="w-12 h-12 text-pink-500" />
           </motion.div>
           
           <motion.div 
-            className="absolute -bottom-8 left-1/2 -translate-x-1/2"
-            animate={{ y: [0, 10, 0] }}
-            transition={{ duration: 3, repeat: Infinity, ease: "easeInOut", delay: 1.5 }}
+            className="absolute -bottom-12 left-1/2 -translate-x-1/2"
+            animate={{ y: [0, 15, 0] }}
+            transition={{ duration: 3.2, repeat: Infinity, ease: "easeInOut", delay: 1.5 }}
           >
-            <Gem className="w-8 h-8 text-pink-500" />
+            <Trophy className="w-12 h-12 text-purple-500" />
           </motion.div>
           
           {[...Array(6)].map((_, index) => (
@@ -231,7 +227,7 @@ const IconGenerator = () => {
       </Helmet>
       
       <Navbar />
-      <main className="flex-grow">
+      <main className="flex-grow pt-8">
         <StandardHeroSection
           toolLabel="AI Icon Generator"
           title="Create"
