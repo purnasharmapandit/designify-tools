@@ -1,4 +1,3 @@
-
 import React from "react";
 import { motion } from "framer-motion";
 import { Helmet } from "react-helmet";
@@ -10,7 +9,6 @@ import { Link } from "react-router-dom";
 import StandardHeroSection from "@/components/shared/StandardHeroSection";
 import { Card, CardContent } from "@/components/ui/card";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
-import ComingSoonBanner from "@/components/ComingSoonBanner";
 
 const SocialBannerMaker = () => {
   const bannerImage = (
@@ -77,7 +75,6 @@ const SocialBannerMaker = () => {
           }
         />
         
-        {/* Features Section */}
         <section className="py-16 bg-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-16">
@@ -135,7 +132,6 @@ const SocialBannerMaker = () => {
           </div>
         </section>
         
-        {/* How It Works Section */}
         <section className="py-16 bg-gradient-to-br from-blue-50 to-indigo-50">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-16">
@@ -187,7 +183,6 @@ const SocialBannerMaker = () => {
           </div>
         </section>
         
-        {/* Enhanced Features Section */}
         <section className="py-16 bg-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-16">
@@ -251,7 +246,6 @@ const SocialBannerMaker = () => {
           </div>
         </section>
         
-        {/* FAQ Section */}
         <section className="py-16 bg-gray-50">
           <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
             <motion.div
@@ -315,7 +309,6 @@ const SocialBannerMaker = () => {
           </div>
         </section>
         
-        {/* CTA Section */}
         <section className="py-20 bg-gradient-to-br from-blue-50 to-indigo-50">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="bg-gradient-to-r from-blue-600 to-indigo-600 rounded-3xl p-12 text-white shadow-xl">
@@ -336,12 +329,6 @@ const SocialBannerMaker = () => {
             </div>
           </div>
         </section>
-
-        {/* Coming Soon Banner */}
-        <ComingSoonBanner 
-          toolName="Social Banner Maker" 
-          expectedReleaseDate="Q3 2023" 
-        />
       </main>
       
       <Footer />
