@@ -22,16 +22,16 @@ const ToolItem = ({ icon: Icon, name, description, color, link, comingSoon, badg
     animate={{ opacity: 1, y: 0 }}
     className="relative p-6 bg-white rounded-2xl shadow-sm hover:shadow-md transition-shadow border border-gray-100 group"
   >
-    <div className={`${color} p-3 rounded-lg w-fit mb-4 group-hover:scale-110 transition-transform`}>
-      <Icon className="h-6 w-6" />
-    </div>
-    
-    <div className="flex items-center justify-between mb-2">
-      <h3 className="text-lg font-semibold">{name}</h3>
+    <div className="flex items-center justify-between mb-4">
+      <div className={`${color} p-3 rounded-lg w-fit group-hover:scale-110 transition-transform`}>
+        <Icon className="h-6 w-6" />
+      </div>
       {badge && (
         <div>{badge}</div>
       )}
     </div>
+    
+    <h3 className="text-lg font-semibold mb-2">{name}</h3>
     
     <p className="text-gray-600">{description}</p>
     
