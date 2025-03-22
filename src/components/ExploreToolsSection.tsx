@@ -4,9 +4,18 @@ import ToolCard from "./ToolCard";
 import { Link } from "react-router-dom";
 import { Badge } from "@/components/ui/badge";
 
+interface Tool {
+  name: string;
+  color: string;
+  iconColor: string;
+  link: string;
+  badge?: string;
+  comingSoon?: boolean;
+}
+
 const ExploreToolsSection = () => {
   // Premium tools
-  const premiumTools = [
+  const premiumTools: Tool[] = [
     {
       name: "Logo Maker",
       color: "bg-gradient-to-br from-purple-100 to-purple-200",
@@ -38,7 +47,7 @@ const ExploreToolsSection = () => {
   ];
 
   // Free tools
-  const freeTools = [
+  const freeTools: Tool[] = [
     {
       name: "Color Palette Generator",
       color: "bg-gradient-to-br from-yellow-100 to-yellow-200",
@@ -61,8 +70,7 @@ const ExploreToolsSection = () => {
       name: "Social Banner Maker",
       color: "bg-gradient-to-br from-emerald-100 to-emerald-200",
       iconColor: "text-emerald-500",
-      link: "/social-banner-maker",
-      comingSoon: true
+      link: "/social-banner-maker"
     }
   ];
 

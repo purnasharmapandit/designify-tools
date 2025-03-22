@@ -29,16 +29,15 @@ const FeatureCard = ({
       transition={{ duration: 0.5, delay: delay * 0.1 }}
       viewport={{ once: true }}
       className={cn(
-        "rounded-3xl p-6 card-hover flex flex-col items-center text-center h-full",
-        bgGradient,
+        "rounded-3xl p-6 card-hover flex flex-col items-center text-center h-full text-gray-800 border border-gray-100 shadow-sm",
         className
       )}
     >
-      <div className={cn("p-3 rounded-full mb-4 backdrop-blur-sm bg-white/30", iconColor)}>
-        <Icon className="h-6 w-6" />
+      <div className={cn("p-3 rounded-full mb-4", bgGradient)}>
+        <Icon className="h-6 w-6 text-white" />
       </div>
       <h3 className="text-lg font-semibold mb-2">{title}</h3>
-      <p className="text-sm text-gray-700">{description}</p>
+      <p className="text-sm text-gray-600">{description}</p>
     </motion.div>
   );
 };
