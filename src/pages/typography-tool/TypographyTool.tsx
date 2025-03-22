@@ -8,6 +8,7 @@ import { Check } from "lucide-react";
 import FeaturesSection from "@/components/typography-tool/FeaturesSection";
 import HowItWorksSection from "@/components/typography-tool/HowItWorksSection";
 import FAQSection from "@/components/typography-tool/FAQSection";
+import { Link } from "react-router-dom";
 
 const TypographyTool = () => {
   return (
@@ -24,7 +25,7 @@ const TypographyTool = () => {
       
       <main className="flex-grow">
         {/* Hero Section */}
-        <section className="bg-gradient-to-r from-purple-900 to-blue-900 text-white py-20">
+        <section className="bg-gradient-to-r from-purple-900 to-blue-900 text-white py-20 pt-28">
           <div className="container mx-auto px-4">
             <div className="grid lg:grid-cols-2 gap-12 items-center">
               <div>
@@ -48,8 +49,8 @@ const TypographyTool = () => {
                     <span>CSS Export</span>
                   </div>
                 </div>
-                <Button size="lg" className="bg-white text-purple-900 hover:bg-gray-100">
-                  Launch Typography Tool
+                <Button size="lg" className="bg-white text-purple-900 hover:bg-gray-100" asChild>
+                  <Link to="/contact-us">Join Waitlist</Link>
                 </Button>
               </div>
               
@@ -88,10 +89,10 @@ const TypographyTool = () => {
           <div className="container mx-auto px-4 text-center">
             <h2 className="text-3xl font-bold mb-6">Ready to Perfect Your Typography?</h2>
             <p className="text-xl text-gray-600 max-w-2xl mx-auto mb-8">
-              Start creating beautiful, consistent typography systems for your brand today.
+              Join our waitlist to be the first to know when our Typography Tool is available.
             </p>
-            <Button size="lg" className="bg-purple-600 text-white hover:bg-purple-700">
-              Get Started Now
+            <Button size="lg" className="bg-purple-600 text-white hover:bg-purple-700" asChild>
+              <Link to="/contact-us">Join Waitlist</Link>
             </Button>
           </div>
         </section>
