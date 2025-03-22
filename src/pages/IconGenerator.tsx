@@ -160,29 +160,29 @@ const IconGenerator = () => {
 
   const iconGeneratorImage = (
     <div className="relative w-full max-w-md mx-auto">
-      <div className="relative bg-white rounded-xl shadow-lg p-8 flex items-center justify-center">
+      <div className="relative flex items-center justify-center p-8">
         <motion.div
           animate={{ rotate: 360 }}
           transition={{ duration: 60, repeat: Infinity, ease: "linear" }}
-          className="absolute -top-6 -right-6 text-blue-500"
+          className="absolute -top-6 -right-6"
         >
-          <Lightbulb size={40} />
+          <Lightbulb size={40} className="text-amber-400 filter drop-shadow-md" />
         </motion.div>
         
         <motion.div
           animate={{ rotate: -360 }}
           transition={{ duration: 50, repeat: Infinity, ease: "linear" }}
-          className="absolute -bottom-8 -left-8 text-amber-500"
+          className="absolute -bottom-8 -left-8"
         >
-          <Trophy size={48} />
+          <Trophy size={48} className="text-purple-400 filter drop-shadow-md" />
         </motion.div>
         
         <motion.div
           animate={{ rotate: 360 }}
           transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
-          className="absolute -bottom-4 -right-12 text-pink-500"
+          className="absolute -bottom-4 -right-12"
         >
-          <Heart size={36} />
+          <Heart size={36} className="text-pink-400 filter drop-shadow-md" />
         </motion.div>
         
         <motion.div
@@ -190,7 +190,7 @@ const IconGenerator = () => {
           animate={{ scale: [0.9, 1.1, 0.9] }}
           transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
         >
-          <Zap className="w-48 h-48 text-primary" />
+          <Zap className="w-48 h-48 text-orange-500 filter drop-shadow-lg" />
         </motion.div>
       </div>
     </div>
