@@ -70,7 +70,7 @@ const QRCodeGenerator = () => {
       </Helmet>
       
       <Navbar />
-      <main className="flex-grow">
+      <main className="flex-grow pt-8">
         <StandardHeroSection
           toolLabel="Free QR Code Generator"
           title="Create"
