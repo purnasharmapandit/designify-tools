@@ -5,8 +5,8 @@ import { Link } from "react-router-dom";
 import { Badge } from "@/components/ui/badge";
 
 const ExploreToolsSection = () => {
-  const tools = [
-    // Premium tools first
+  // Premium tools
+  const premiumTools = [
     {
       name: "Logo Maker",
       color: "bg-gradient-to-br from-purple-100 to-purple-200",
@@ -21,6 +21,24 @@ const ExploreToolsSection = () => {
       link: "/background-remover",
       badge: "premium"
     },
+    {
+      name: "Presentation Maker",
+      color: "bg-gradient-to-br from-blue-100 to-blue-200",
+      iconColor: "text-blue-500",
+      link: "/presentation-maker",
+      badge: "premium" 
+    },
+    {
+      name: "Business Card Generator",
+      color: "bg-gradient-to-br from-green-100 to-green-200",
+      iconColor: "text-green-500",
+      link: "/business-card-generator",
+      badge: "premium"
+    }
+  ];
+
+  // Free tools
+  const freeTools = [
     {
       name: "Color Palette Generator",
       color: "bg-gradient-to-br from-yellow-100 to-yellow-200",
@@ -64,33 +82,68 @@ const ExploreToolsSection = () => {
           </p>
         </motion.div>
         
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 md:gap-6">
-          {tools.map((tool, index) => (
-            <Link key={index} to={tool.link || "#"} className="block">
-              <div className="relative">
-                <ToolCard
-                  name={tool.name}
-                  color={tool.color}
-                  iconColor={tool.iconColor}
-                  className="rounded-2xl"
-                />
-                {tool.comingSoon && (
-                  <div className="absolute top-2 right-2">
-                    <Badge variant="outline" className="bg-yellow-100 text-yellow-800 border-yellow-200 text-xs">
-                      Coming Soon
-                    </Badge>
-                  </div>
-                )}
-                {tool.badge === "premium" && (
-                  <div className="absolute top-2 right-2">
-                    <Badge className="bg-gradient-to-r from-amber-400 to-amber-600 text-white text-xs">
-                      Premium
-                    </Badge>
-                  </div>
-                )}
-              </div>
-            </Link>
-          ))}
+        {/* Premium tools row */}
+        <div className="mb-10">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+            {premiumTools.map((tool, index) => (
+              <Link key={index} to={tool.link || "#"} className="block">
+                <div className="relative">
+                  <ToolCard
+                    name={tool.name}
+                    color={tool.color}
+                    iconColor={tool.iconColor}
+                    className="rounded-2xl"
+                  />
+                  {tool.comingSoon && (
+                    <div className="absolute top-2 right-2">
+                      <Badge variant="outline" className="bg-yellow-100 text-yellow-800 border-yellow-200 text-xs">
+                        Coming Soon
+                      </Badge>
+                    </div>
+                  )}
+                  {tool.badge === "premium" && (
+                    <div className="absolute top-2 right-2">
+                      <Badge className="bg-gradient-to-r from-amber-400 to-amber-600 text-white text-xs">
+                        Premium
+                      </Badge>
+                    </div>
+                  )}
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+        
+        {/* Free tools row */}
+        <div>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+            {freeTools.map((tool, index) => (
+              <Link key={index} to={tool.link || "#"} className="block">
+                <div className="relative">
+                  <ToolCard
+                    name={tool.name}
+                    color={tool.color}
+                    iconColor={tool.iconColor}
+                    className="rounded-2xl"
+                  />
+                  {tool.comingSoon && (
+                    <div className="absolute top-2 right-2">
+                      <Badge variant="outline" className="bg-yellow-100 text-yellow-800 border-yellow-200 text-xs">
+                        Coming Soon
+                      </Badge>
+                    </div>
+                  )}
+                  {tool.badge === "premium" && (
+                    <div className="absolute top-2 right-2">
+                      <Badge className="bg-gradient-to-r from-amber-400 to-amber-600 text-white text-xs">
+                        Premium
+                      </Badge>
+                    </div>
+                  )}
+                </div>
+              </Link>
+            ))}
+          </div>
         </div>
       </div>
     </section>
