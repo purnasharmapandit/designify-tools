@@ -103,12 +103,47 @@ const HeroSection = ({
                 {/* Card Shadow/Glow Effect */}
                 <div className="absolute -z-10 w-full h-72 bg-gradient-to-r from-indigo-500/20 to-purple-500/20 rounded-xl blur-xl transform rotate-6"></div>
                 
-                {/* New business cards image */}
-                <img 
-                  src="/lovable-uploads/8e42a692-0d62-4db7-b2b5-ca0cabe78369.png" 
-                  alt="Creative business cards with colorful design" 
-                  className="w-full relative z-10"
-                />
+                {/* Stacked Card Display - similar to CustomizeSection */}
+                <div className="relative h-[500px]">
+                  <div className="absolute w-64 h-40 bg-white shadow-xl rounded-lg transform rotate-6 top-12 left-12 z-10">
+                    <div className="h-full p-4 flex flex-col justify-between bg-gradient-to-br from-purple-500 to-indigo-600 rounded-lg text-white">
+                      <div>
+                        <div className="text-lg font-bold">Sarah Johnson</div>
+                        <div className="text-xs opacity-90">Marketing Director</div>
+                      </div>
+                      <div className="text-xs">
+                        <div>sarah@company.com</div>
+                        <div>+1 (555) 987-6543</div>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div className="absolute w-64 h-40 bg-white shadow-xl rounded-lg transform -rotate-3 top-36 left-32 z-20">
+                    <div className="h-full p-4 flex flex-col justify-between bg-white rounded-lg border-2 border-gray-200">
+                      <div>
+                        <div className="text-lg font-bold text-gray-900">Michael Chen</div>
+                        <div className="text-xs text-gray-600">Software Engineer</div>
+                      </div>
+                      <div className="text-xs text-gray-700">
+                        <div>michael@techfirm.com</div>
+                        <div>+1 (555) 123-4567</div>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div className="absolute w-64 h-40 bg-white shadow-xl rounded-lg transform rotate-12 top-60 left-48 z-30">
+                    <div className="h-full p-4 flex flex-col justify-between bg-gradient-to-r from-yellow-400 to-orange-500 rounded-lg text-white">
+                      <div>
+                        <div className="text-lg font-bold">Alex Rivera</div>
+                        <div className="text-xs opacity-90">Creative Director</div>
+                      </div>
+                      <div className="text-xs">
+                        <div>alex@design.co</div>
+                        <div>+1 (555) 234-5678</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
 
               <div className="flex justify-center mt-6 gap-4">
