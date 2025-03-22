@@ -1,4 +1,3 @@
-
 import React from "react";
 import { Helmet } from "react-helmet";
 import Navbar from "@/components/Navbar";
@@ -70,8 +69,7 @@ const QRCodeGenerator = () => {
       </Helmet>
       
       <Navbar />
-      <main className="flex-grow">
-        {/* Hero Section */}
+      <main className="flex-grow pt-28">
         <StandardHeroSection
           toolLabel="Free QR Code Generator"
           title="Create"
@@ -86,6 +84,7 @@ const QRCodeGenerator = () => {
           image={qrCodeImage}
           bgColor="bg-blue-900"
           textColor="text-white"
+          toolLabelClassName="bg-white/20 text-white font-medium"
         />
 
         <section className="py-16">
@@ -106,13 +105,11 @@ const QRCodeGenerator = () => {
           </div>
         </section>
 
-        {/* Other Sections */}
         <StepsSection />
         <FeaturesSection />
         <UseCasesSection />
         <FAQSection />
 
-        {/* CTA Section */}
         <section className="py-16 bg-primary/10">
           <div className="container mx-auto px-4 text-center">
             <h2 className="text-3xl font-bold mb-6">Need More Advanced Features?</h2>

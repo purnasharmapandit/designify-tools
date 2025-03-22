@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { Helmet } from "react-helmet";
 import Navbar from "@/components/Navbar";
@@ -50,7 +49,6 @@ const PaidQRCodeGenerator = () => {
       return;
     }
     
-    // Check if user is authenticated
     if (!user) {
       navigate("/auth", { 
         state: { 
@@ -62,7 +60,6 @@ const PaidQRCodeGenerator = () => {
       return;
     }
     
-    // Check eligibility for premium QR code generation
     const eligibility = await checkGenerationEligibility('qr_code_premium');
     if (!eligibility.canGenerate) {
       if (eligibility.redirectToAuth) {
@@ -84,11 +81,8 @@ const PaidQRCodeGenerator = () => {
       return;
     }
     
-    // If dynamic QR code, save to database
     if (isDynamicQR) {
       try {
-        // In a real implementation, we would save the QR data to the database here
-        // For now, we'll just simulate it
         toast.success(`Dynamic QR code created with short code: ${shortCode}`);
         console.log("Dynamic QR Data:", {
           userId: user.id,
@@ -103,7 +97,6 @@ const PaidQRCodeGenerator = () => {
       }
     }
     
-    // Record the generation
     const recorded = await recordGeneration('qr_code_premium');
     if (!recorded) {
       toast.error("There was an issue generating your premium QR code. Please try again.");
@@ -155,8 +148,7 @@ const PaidQRCodeGenerator = () => {
       </Helmet>
       
       <Navbar />
-      <main className="flex-grow pt-16">
-        {/* Hero Section */}
+      <main className="flex-grow pt-28">
         <StandardHeroSection
           toolLabel="Premium QR Code Generator"
           title="Dynamic QR Codes with"
@@ -171,6 +163,7 @@ const PaidQRCodeGenerator = () => {
           image={qrCodeImage}
           bgColor="bg-blue-900"
           textColor="text-white"
+          toolLabelClassName="bg-white/20 text-white font-medium"
         />
 
         <section className="py-16">
@@ -191,13 +184,11 @@ const PaidQRCodeGenerator = () => {
           </div>
         </section>
 
-        {/* Other Sections */}
         <FeaturesList />
         <BenefitsSection />
         <HowItWorksSection />
         <FAQSection />
 
-        {/* CTA Section */}
         <section className="py-16 bg-primary/10">
           <div className="container mx-auto px-4 text-center">
             <h2 className="text-3xl font-bold mb-6">Need a Simple QR Code Instead?</h2>
