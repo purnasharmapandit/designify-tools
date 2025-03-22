@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { Helmet } from "react-helmet";
@@ -12,7 +11,7 @@ import StylesGallery from "@/components/icon-generator/StylesGallery";
 import FAQSection from "@/components/icon-generator/FAQSection";
 import FeaturesSection from "@/components/icon-generator/FeaturesSection";
 import UseCasesSection from "@/components/icon-generator/UseCasesSection";
-import { Check, Wand2, Sparkles, SquarePen, Download } from "lucide-react";
+import { Check, Wand2, Sparkles, SquarePen, Download, Star, Zap, Gem } from "lucide-react";
 import StandardHeroSection from "@/components/shared/StandardHeroSection";
 import { toast } from "sonner";
 import { GeneratedIcon } from "@/services/runware";
@@ -99,7 +98,6 @@ const IconGenerator = () => {
       return;
     }
     
-    // Check if user is authenticated
     if (!user) {
       navigate("/auth", { 
         state: { 
@@ -111,7 +109,6 @@ const IconGenerator = () => {
       return;
     }
     
-    // Check eligibility for generation (credits, limits, etc.)
     const eligibility = await checkGenerationEligibility('icon');
     if (!eligibility.canGenerate) {
       if (eligibility.redirectToAuth) {
@@ -166,20 +163,55 @@ const IconGenerator = () => {
       <div className="bg-white rounded-xl shadow-lg p-4 transform rotate-3 absolute -right-5 -top-5 z-10">
         <Wand2 className="w-12 h-12 text-blue-600" />
       </div>
-      <div className="bg-white rounded-xl shadow-lg p-6 grid grid-cols-3 gap-4">
-        {[...Array(6)].map((_, index) => (
-          <div 
-            key={index}
-            className="aspect-square rounded-lg flex items-center justify-center"
-            style={{ 
-              backgroundColor: ["#e0f2fe", "#f0f9ff", "#e0e7ff", "#f5f3ff", "#fce7f3", "#f0fdf4"][index % 6]
-            }}
+      
+      <div className="relative bg-white rounded-xl shadow-lg p-6">
+        <div className="relative grid grid-cols-3 gap-4">
+          <motion.div 
+            className="absolute -top-8 left-1/2 -translate-x-1/2"
+            animate={{ y: [0, -10, 0] }}
+            transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
           >
-            <SquarePen className="w-8 h-8" style={{ 
-              color: ["#0284c7", "#0369a1", "#4f46e5", "#7c3aed", "#db2777", "#16a34a"][index % 6]
-            }} />
-          </div>
-        ))}
+            <Star className="w-8 h-8 text-yellow-500" />
+          </motion.div>
+          
+          <motion.div 
+            className="absolute -left-8 top-1/2 -translate-y-1/2"
+            animate={{ x: [0, -10, 0] }}
+            transition={{ duration: 3, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
+          >
+            <Zap className="w-8 h-8 text-purple-500" />
+          </motion.div>
+          
+          <motion.div 
+            className="absolute -right-8 top-1/2 -translate-y-1/2"
+            animate={{ x: [0, 10, 0] }}
+            transition={{ duration: 3, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+          >
+            <Sparkles className="w-8 h-8 text-blue-500" />
+          </motion.div>
+          
+          <motion.div 
+            className="absolute -bottom-8 left-1/2 -translate-x-1/2"
+            animate={{ y: [0, 10, 0] }}
+            transition={{ duration: 3, repeat: Infinity, ease: "easeInOut", delay: 1.5 }}
+          >
+            <Gem className="w-8 h-8 text-pink-500" />
+          </motion.div>
+          
+          {[...Array(6)].map((_, index) => (
+            <div 
+              key={index}
+              className="aspect-square rounded-lg flex items-center justify-center"
+              style={{ 
+                backgroundColor: ["#e0f2fe", "#f0f9ff", "#e0e7ff", "#f5f3ff", "#fce7f3", "#f0fdf4"][index % 6]
+              }}
+            >
+              <SquarePen className="w-8 h-8" style={{ 
+                color: ["#0284c7", "#0369a1", "#4f46e5", "#7c3aed", "#db2777", "#16a34a"][index % 6]
+              }} />
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );
@@ -214,6 +246,7 @@ const IconGenerator = () => {
           image={iconGeneratorImage}
           bgColor="bg-blue-900"
           textColor="text-white"
+          toolLabelClassName="bg-blue-400/30 text-blue-100 font-semibold border border-blue-400/40"
         />
 
         <section className="py-12 bg-white">
