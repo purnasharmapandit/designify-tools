@@ -6,24 +6,20 @@ import { Badge } from "@/components/ui/badge";
 
 const ExploreToolsSection = () => {
   const tools = [
+    // Premium tools first
     {
       name: "Logo Maker",
       color: "bg-gradient-to-br from-purple-100 to-purple-200",
       iconColor: "text-purple-500",
-      link: "/logo-maker"
+      link: "/logo-maker",
+      badge: "premium"
     },
     {
-      name: "Social Banner Maker",
-      color: "bg-gradient-to-br from-emerald-100 to-emerald-200",
-      iconColor: "text-emerald-500",
-      link: "/social-banner-maker",
-      comingSoon: true
-    },
-    {
-      name: "QR Code Designer",
-      color: "bg-gradient-to-br from-amber-100 to-amber-200",
-      iconColor: "text-amber-500",
-      link: "/qr-code-generator"
+      name: "Background Remover",
+      color: "bg-gradient-to-br from-purple-100 to-purple-200",
+      iconColor: "text-purple-500",
+      link: "/background-remover",
+      badge: "premium"
     },
     {
       name: "Color Palette Generator",
@@ -32,16 +28,23 @@ const ExploreToolsSection = () => {
       link: "/color-palette-generator"
     },
     {
+      name: "QR Code Designer",
+      color: "bg-gradient-to-br from-amber-100 to-amber-200",
+      iconColor: "text-amber-500",
+      link: "/qr-code-generator"
+    },
+    {
       name: "Email Signature",
       color: "bg-gradient-to-br from-blue-100 to-blue-200",
       iconColor: "text-blue-500",
       link: "/email-signature-generator"
     },
     {
-      name: "Background Remover",
-      color: "bg-gradient-to-br from-purple-100 to-purple-200",
-      iconColor: "text-purple-500",
-      link: "/background-remover"
+      name: "Social Banner Maker",
+      color: "bg-gradient-to-br from-emerald-100 to-emerald-200",
+      iconColor: "text-emerald-500",
+      link: "/social-banner-maker",
+      comingSoon: true
     }
   ];
 
@@ -75,6 +78,13 @@ const ExploreToolsSection = () => {
                   <div className="absolute top-2 right-2">
                     <Badge variant="outline" className="bg-yellow-100 text-yellow-800 border-yellow-200 text-xs">
                       Coming Soon
+                    </Badge>
+                  </div>
+                )}
+                {tool.badge === "premium" && (
+                  <div className="absolute top-2 right-2">
+                    <Badge className="bg-gradient-to-r from-amber-400 to-amber-600 text-white text-xs">
+                      Premium
                     </Badge>
                   </div>
                 )}
