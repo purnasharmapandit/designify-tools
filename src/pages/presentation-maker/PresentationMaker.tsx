@@ -8,6 +8,7 @@ import { Check, Presentation, LineChart, Image, Type, Layout } from "lucide-reac
 import FeaturesSection from "@/components/presentation-maker/FeaturesSection";
 import HowItWorksSection from "@/components/presentation-maker/HowItWorksSection";
 import PresentationMakerFAQs from "@/components/presentation-maker/FAQSection";
+import { Link } from "react-router-dom";
 
 const PresentationMaker = () => {
   return (
@@ -24,7 +25,7 @@ const PresentationMaker = () => {
       
       <main className="flex-grow">
         {/* Hero Section */}
-        <section className="bg-gradient-to-r from-teal-700 to-emerald-700 text-white py-20">
+        <section className="bg-gradient-to-r from-teal-700 to-emerald-700 text-white py-20 pt-28">
           <div className="container mx-auto px-4">
             <div className="grid lg:grid-cols-2 gap-12 items-center">
               <div>
@@ -48,8 +49,8 @@ const PresentationMaker = () => {
                     <span>Data Visualization</span>
                   </div>
                 </div>
-                <Button size="lg" className="bg-white text-teal-700 hover:bg-gray-100">
-                  Start Creating Now
+                <Button size="lg" className="bg-white text-teal-700 hover:bg-gray-100" asChild>
+                  <Link to="/contact-us">Join Waitlist</Link>
                 </Button>
               </div>
               
@@ -96,10 +97,10 @@ const PresentationMaker = () => {
           <div className="container mx-auto px-4 text-center">
             <h2 className="text-3xl font-bold mb-6">Ready to Create Impactful Presentations?</h2>
             <p className="text-xl text-gray-700 max-w-2xl mx-auto mb-8">
-              Start designing professional slide decks that will captivate your audience.
+              Join our waitlist to be the first to know when our Presentation Maker is available.
             </p>
-            <Button size="lg" className="bg-teal-600 text-white hover:bg-teal-700">
-              Create Your First Presentation
+            <Button size="lg" className="bg-teal-600 text-white hover:bg-teal-700" asChild>
+              <Link to="/contact-us">Join Waitlist</Link>
             </Button>
           </div>
         </section>

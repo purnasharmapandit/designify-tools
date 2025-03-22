@@ -15,44 +15,52 @@ import {
 const FeaturesSection = () => {
   const features = [
     {
-      icon: <Layout className="h-10 w-10 text-primary" />,
+      icon: <Layout className="h-10 w-10 text-white" />,
       title: "Professional Templates",
-      description: "Choose from hundreds of professionally designed slide templates for any presentation purpose."
+      description: "Choose from hundreds of professionally designed slide templates for any presentation purpose.",
+      bgColor: "bg-gradient-to-br from-teal-500 to-emerald-400"
     },
     {
-      icon: <Type className="h-10 w-10 text-primary" />,
+      icon: <Type className="h-10 w-10 text-white" />,
       title: "Smart Layouts",
-      description: "Auto-arrange content with intelligent layouts that maintain visual balance and hierarchy."
+      description: "Auto-arrange content with intelligent layouts that maintain visual balance and hierarchy.",
+      bgColor: "bg-gradient-to-br from-blue-500 to-cyan-400"
     },
     {
-      icon: <LineChart className="h-10 w-10 text-primary" />,
+      icon: <LineChart className="h-10 w-10 text-white" />,
       title: "Data Visualization",
-      description: "Create impactful charts and graphs that automatically update when your data changes."
+      description: "Create impactful charts and graphs that automatically update when your data changes.",
+      bgColor: "bg-gradient-to-br from-purple-500 to-indigo-400"
     },
     {
-      icon: <Image className="h-10 w-10 text-primary" />,
+      icon: <Image className="h-10 w-10 text-white" />,
       title: "AI Image Enhancement",
-      description: "Automatically enhance and resize images to fit perfectly within your slides."
+      description: "Automatically enhance and resize images to fit perfectly within your slides.",
+      bgColor: "bg-gradient-to-br from-pink-500 to-rose-400"
     },
     {
-      icon: <Users className="h-10 w-10 text-primary" />,
+      icon: <Users className="h-10 w-10 text-white" />,
       title: "Real-time Collaboration",
-      description: "Work simultaneously with team members on the same presentation with live editing."
+      description: "Work simultaneously with team members on the same presentation with live editing.",
+      bgColor: "bg-gradient-to-br from-amber-500 to-yellow-400"
     },
     {
-      icon: <Sparkles className="h-10 w-10 text-primary" />,
+      icon: <Sparkles className="h-10 w-10 text-white" />,
       title: "AI Content Generation",
-      description: "Generate slide content, talking points, and speaker notes with our AI assistant."
+      description: "Generate slide content, talking points, and speaker notes with our AI assistant.",
+      bgColor: "bg-gradient-to-br from-green-500 to-emerald-400"
     },
     {
-      icon: <Layers className="h-10 w-10 text-primary" />,
+      icon: <Layers className="h-10 w-10 text-white" />,
       title: "Master Slides",
-      description: "Create consistent branding across all slides with customizable master slides."
+      description: "Create consistent branding across all slides with customizable master slides.",
+      bgColor: "bg-gradient-to-br from-violet-500 to-purple-400"
     },
     {
-      icon: <Download className="h-10 w-10 text-primary" />,
+      icon: <Download className="h-10 w-10 text-white" />,
       title: "Multiple Export Formats",
-      description: "Export to PowerPoint, PDF, or present directly from our online platform."
+      description: "Export to PowerPoint, PDF, or present directly from our online platform.",
+      bgColor: "bg-gradient-to-br from-red-500 to-orange-400"
     }
   ];
 
@@ -82,7 +90,9 @@ const FeaturesSection = () => {
               viewport={{ once: true }}
               className="bg-white p-6 rounded-xl shadow-sm border hover:shadow-md transition-shadow"
             >
-              <div className="mb-4 text-primary">{feature.icon}</div>
+              <div className={`mb-4 p-3 rounded-full w-16 h-16 flex items-center justify-center ${feature.bgColor}`}>
+                {feature.icon}
+              </div>
               <h3 className="text-xl font-bold mb-2">{feature.title}</h3>
               <p className="text-gray-600">{feature.description}</p>
             </motion.div>
