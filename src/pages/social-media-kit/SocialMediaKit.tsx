@@ -8,6 +8,7 @@ import { Check, Instagram, Facebook, Twitter, Linkedin, Youtube } from "lucide-r
 import FeaturesSection from "@/components/social-media-kit/FeaturesSection";
 import HowItWorksSection from "@/components/social-media-kit/HowItWorksSection";
 import FAQSection from "@/components/social-media-kit/FAQSection";
+import { motion } from "framer-motion";
 
 const SocialMediaKit = () => {
   return (
@@ -49,23 +50,68 @@ const SocialMediaKit = () => {
                   </div>
                 </div>
                 <Button size="lg" className="bg-white text-blue-700 hover:bg-gray-100">
-                  Create Your Social Content
+                  Join Waitlist
                 </Button>
               </div>
               
-              <div className="grid grid-cols-2 gap-4">
-                <div className="bg-gradient-to-br from-pink-500 to-orange-400 rounded-lg p-4 aspect-square flex items-center justify-center">
-                  <Instagram className="h-12 w-12 text-white" />
-                </div>
-                <div className="bg-gradient-to-br from-blue-500 to-blue-700 rounded-lg p-4 aspect-square flex items-center justify-center">
-                  <Facebook className="h-12 w-12 text-white" />
-                </div>
-                <div className="bg-gradient-to-br from-blue-400 to-cyan-300 rounded-lg p-4 aspect-square flex items-center justify-center">
-                  <Twitter className="h-12 w-12 text-white" />
-                </div>
-                <div className="bg-gradient-to-br from-blue-700 to-blue-900 rounded-lg p-4 aspect-square flex items-center justify-center">
-                  <Linkedin className="h-12 w-12 text-white" />
-                </div>
+              <div className="relative h-[300px]">
+                {/* Animated floating social icons */}
+                <motion.div 
+                  className="grid grid-cols-2 gap-4 absolute"
+                  style={{ width: "50%" }}
+                  animate={{ y: [0, -10, 0] }}
+                  transition={{ 
+                    duration: 4, 
+                    repeat: Infinity, 
+                    repeatType: "reverse"
+                  }}
+                >
+                  <motion.div 
+                    className="bg-gradient-to-br from-pink-500 to-orange-400 rounded-lg p-4 aspect-square flex items-center justify-center"
+                    whileHover={{ scale: 1.05 }}
+                  >
+                    <Instagram className="h-8 w-8 text-white" />
+                  </motion.div>
+                  <motion.div 
+                    className="bg-gradient-to-br from-blue-500 to-blue-700 rounded-lg p-4 aspect-square flex items-center justify-center"
+                    whileHover={{ scale: 1.05 }}
+                    animate={{ y: [0, 8, 0] }}
+                    transition={{ 
+                      duration: 3.5, 
+                      repeat: Infinity, 
+                      repeatType: "reverse",
+                      delay: 0.5
+                    }}
+                  >
+                    <Facebook className="h-8 w-8 text-white" />
+                  </motion.div>
+                  <motion.div 
+                    className="bg-gradient-to-br from-blue-400 to-cyan-300 rounded-lg p-4 aspect-square flex items-center justify-center"
+                    whileHover={{ scale: 1.05 }}
+                    animate={{ y: [0, 5, 0] }}
+                    transition={{ 
+                      duration: 3, 
+                      repeat: Infinity, 
+                      repeatType: "reverse",
+                      delay: 0.3
+                    }}
+                  >
+                    <Twitter className="h-8 w-8 text-white" />
+                  </motion.div>
+                  <motion.div 
+                    className="bg-gradient-to-br from-blue-700 to-blue-900 rounded-lg p-4 aspect-square flex items-center justify-center"
+                    whileHover={{ scale: 1.05 }}
+                    animate={{ y: [0, 10, 0] }}
+                    transition={{ 
+                      duration: 4.5, 
+                      repeat: Infinity, 
+                      repeatType: "reverse",
+                      delay: 0.8
+                    }}
+                  >
+                    <Linkedin className="h-8 w-8 text-white" />
+                  </motion.div>
+                </motion.div>
               </div>
             </div>
           </div>
@@ -80,10 +126,10 @@ const SocialMediaKit = () => {
           <div className="container mx-auto px-4 text-center">
             <h2 className="text-3xl font-bold mb-6">Ready to Transform Your Social Media?</h2>
             <p className="text-xl text-gray-700 max-w-2xl mx-auto mb-8">
-              Start creating consistent, professional content across all your social platforms today.
+              Join our waitlist to be the first to know when our Social Media Kit is available.
             </p>
             <Button size="lg" className="bg-blue-600 text-white hover:bg-blue-700">
-              Get Started Now
+              Join Waitlist
             </Button>
           </div>
         </section>
