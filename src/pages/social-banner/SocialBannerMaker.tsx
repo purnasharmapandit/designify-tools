@@ -10,6 +10,7 @@ import { Link } from "react-router-dom";
 import StandardHeroSection from "@/components/shared/StandardHeroSection";
 import { Card, CardContent } from "@/components/ui/card";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import ComingSoonBanner from "@/components/ComingSoonBanner";
 
 const SocialBannerMaker = () => {
   const bannerImage = (
@@ -49,7 +50,7 @@ const SocialBannerMaker = () => {
       
       <Navbar />
       
-      <main className="flex-grow">
+      <main className="flex-grow pt-8">
         <StandardHeroSection
           toolLabel="Social Banner Maker"
           title="Create"
@@ -319,22 +320,28 @@ const SocialBannerMaker = () => {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="bg-gradient-to-r from-blue-600 to-indigo-600 rounded-3xl p-12 text-white shadow-xl">
               <div className="max-w-3xl mx-auto text-center">
-                <h2 className="text-3xl md:text-4xl font-bold mb-6">Ready to Create Your Social Media Banners?</h2>
-                <p className="text-xl mb-8 opacity-90">Make professional banners that grab attention and boost your social media presence.</p>
-                <Link to="/contact-us?subject=Interest%20in%20Social%20Banner%20Maker">
+                <h2 className="text-3xl md:text-4xl font-bold mb-6">Be the First to Try Our Social Banner Maker</h2>
+                <p className="text-xl mb-8 opacity-90">Join our exclusive waitlist to get early access when we launch. Create professional banners that stand out on every platform.</p>
+                <Link to="/contact-us?subject=Social%20Banner%20Maker%20Waitlist">
                   <Button 
                     size="lg" 
                     className="bg-white text-blue-600 hover:bg-gray-100 rounded-full px-8 py-6 text-lg"
                   >
-                    Try It Free
-                    <ChevronRight className="ml-2 h-5 w-5" />
+                    Join Waitlist
+                    <BellPlus className="ml-2 h-5 w-5" />
                   </Button>
                 </Link>
-                <p className="mt-4 text-sm opacity-80">No credit card required • Get started in minutes</p>
+                <p className="mt-4 text-sm opacity-80">Be notified as soon as we launch • Limited spots available</p>
               </div>
             </div>
           </div>
         </section>
+
+        {/* Coming Soon Banner */}
+        <ComingSoonBanner 
+          toolName="Social Banner Maker" 
+          expectedReleaseDate="Q3 2023" 
+        />
       </main>
       
       <Footer />
