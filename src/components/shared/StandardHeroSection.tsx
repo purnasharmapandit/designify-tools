@@ -32,7 +32,7 @@ const StandardHeroSection: React.FC<StandardHeroSectionProps> = ({
   bgColor = "bg-slate-900",
   textColor = "text-white",
   actionButton,
-  toolLabelClassName = "bg-primary/10 text-primary font-medium" // Default styling
+  toolLabelClassName = "bg-white/20 text-white font-semibold" // Updated default styling for better visibility
 }) => {
   return (
     <section className={`${bgColor} py-16 lg:py-20 overflow-hidden`}>
@@ -60,7 +60,7 @@ const StandardHeroSection: React.FC<StandardHeroSectionProps> = ({
               {features.map((feature, index) => (
                 <div
                   key={index}
-                  className="flex items-center gap-2 bg-white/10 px-4 py-2 rounded-full"
+                  className="flex items-center gap-2 bg-white/20 px-4 py-2 rounded-full"
                 >
                   {feature.icon}
                   <span className="text-sm font-medium">{feature.text}</span>

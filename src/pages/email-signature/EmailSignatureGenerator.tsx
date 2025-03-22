@@ -90,6 +90,7 @@ const EmailSignatureGenerator = () => {
           image={emailSignatureImage}
           bgColor="bg-blue-900"
           textColor="text-white"
+          toolLabelClassName="bg-white/30 text-white font-semibold backdrop-blur-sm border border-white/20"
         />
         
         <div className="bg-white">

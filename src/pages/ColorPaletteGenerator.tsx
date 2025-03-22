@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Helmet } from "react-helmet";
@@ -108,6 +107,7 @@ const ColorPaletteGenerator = () => {
           image={paletteImage}
           bgColor="bg-blue-900"
           textColor="text-white"
+          toolLabelClassName="bg-white/30 text-white font-semibold backdrop-blur-sm border border-white/20"
         />
 
         <div className="py-10 bg-gray-50">
@@ -189,7 +189,6 @@ const ColorPaletteGenerator = () => {
           </div>
         </div>
 
-        {/* New sections */}
         <GuideSection />
         <DesignResourcesSection />
       </main>

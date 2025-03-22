@@ -24,7 +24,7 @@ const HeroSection = ({ onGenerateNewPalette }: HeroSectionProps) => {
           transition={{ duration: 0.5 }}
           className="max-w-3xl mx-auto text-center mb-8 pt-8"
         >
-          <div className="inline-flex p-3 bg-primary/10 rounded-full text-primary mb-4">
+          <div className="inline-flex p-3 bg-primary/20 rounded-full text-primary mb-4 shadow-sm border border-primary/10">
             <Palette className="h-8 w-8" />
           </div>
           <h1 className="text-3xl md:text-4xl font-bold mb-3 bg-gradient-to-r from-purple-600 via-primary to-blue-600 bg-clip-text text-transparent">
