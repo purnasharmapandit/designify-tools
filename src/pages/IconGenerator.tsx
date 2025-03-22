@@ -11,7 +11,7 @@ import StylesGallery from "@/components/icon-generator/StylesGallery";
 import FAQSection from "@/components/icon-generator/FAQSection";
 import FeaturesSection from "@/components/icon-generator/FeaturesSection";
 import UseCasesSection from "@/components/icon-generator/UseCasesSection";
-import { Check, Wand2, Sparkles, SquarePen, Lightbulb, Rocket, Trophy, Heart } from "lucide-react";
+import { Check } from "lucide-react";
 import StandardHeroSection from "@/components/shared/StandardHeroSection";
 import { toast } from "sonner";
 import { GeneratedIcon } from "@/services/runware";
@@ -160,54 +160,12 @@ const IconGenerator = () => {
 
   const iconGeneratorImage = (
     <div className="relative w-full max-w-md mx-auto">
-      <div className="relative bg-white rounded-xl shadow-lg p-6">
-        <div className="relative grid grid-cols-3 gap-4">
-          <motion.div 
-            className="absolute -top-12 left-1/2 -translate-x-1/2"
-            animate={{ y: [0, -15, 0] }}
-            transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-          >
-            <Rocket className="w-12 h-12 text-blue-500" />
-          </motion.div>
-          
-          <motion.div 
-            className="absolute -left-12 top-1/2 -translate-y-1/2"
-            animate={{ x: [0, -15, 0] }}
-            transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
-          >
-            <Lightbulb className="w-12 h-12 text-yellow-500" />
-          </motion.div>
-          
-          <motion.div 
-            className="absolute -right-12 top-1/2 -translate-y-1/2"
-            animate={{ x: [0, 15, 0] }}
-            transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-          >
-            <Heart className="w-12 h-12 text-pink-500" />
-          </motion.div>
-          
-          <motion.div 
-            className="absolute -bottom-12 left-1/2 -translate-x-1/2"
-            animate={{ y: [0, 15, 0] }}
-            transition={{ duration: 3.2, repeat: Infinity, ease: "easeInOut", delay: 1.5 }}
-          >
-            <Trophy className="w-12 h-12 text-purple-500" />
-          </motion.div>
-          
-          {[...Array(6)].map((_, index) => (
-            <div 
-              key={index}
-              className="aspect-square rounded-lg flex items-center justify-center"
-              style={{ 
-                backgroundColor: ["#e0f2fe", "#f0f9ff", "#e0e7ff", "#f5f3ff", "#fce7f3", "#f0fdf4"][index % 6]
-              }}
-            >
-              <SquarePen className="w-8 h-8" style={{ 
-                color: ["#0284c7", "#0369a1", "#4f46e5", "#7c3aed", "#db2777", "#16a34a"][index % 6]
-              }} />
-            </div>
-          ))}
-        </div>
+      <div className="bg-white rounded-xl shadow-lg p-6">
+        <img 
+          src="/lovable-uploads/881e4853-0a3c-4840-9265-a9ad83a5640a.png" 
+          alt="Icon Generator" 
+          className="w-full rounded-lg"
+        />
       </div>
     </div>
   );
