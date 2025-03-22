@@ -21,7 +21,7 @@ const BackgroundRemoverHero = () => {
               transition={{ duration: 0.5 }}
               className="text-center max-w-3xl mx-auto mb-8 md:mb-12"
             >
-              <div className="inline-flex p-3 bg-purple-800/50 rounded-full text-purple-200 mb-4">
+              <div className="inline-flex p-3 bg-blue-600/40 border border-blue-500/70 rounded-full text-blue-50 mb-4 shadow-sm">
                 <Scissors className="h-8 w-8" />
               </div>
               <h1 className="text-3xl md:text-5xl font-bold mb-4 text-white">

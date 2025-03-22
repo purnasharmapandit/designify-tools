@@ -1,4 +1,3 @@
-
 import React, { useState, useRef } from "react";
 import { motion } from "framer-motion";
 import { Helmet } from "react-helmet";
@@ -33,7 +32,7 @@ const BackgroundRemover = () => {
       setFile(selectedFile);
       const imageUrl = URL.createObjectURL(selectedFile);
       setOriginalImage(imageUrl);
-      setProcessedImage(null); // Reset processed image when new file is uploaded
+      setProcessedImage(null);
     } catch (error) {
       console.error("Error handling file:", error);
       toast({
@@ -60,7 +59,6 @@ const BackgroundRemover = () => {
       return;
     }
 
-    // Check if user is authenticated
     if (!user) {
       navigate("/auth", { 
         state: { 
@@ -75,7 +73,6 @@ const BackgroundRemover = () => {
       return;
     }
     
-    // Check eligibility for background removal
     const eligibility = await checkGenerationEligibility('background_remover');
     if (!eligibility.canGenerate) {
       if (eligibility.redirectToAuth) {
@@ -201,6 +198,7 @@ const BackgroundRemover = () => {
           image={backgroundRemoverImage}
           bgColor="bg-blue-900"
           textColor="text-white"
+          toolLabelClassName="bg-blue-600/40 text-blue-50 font-semibold border border-blue-500/70 px-5 shadow-sm"
         />
         
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
