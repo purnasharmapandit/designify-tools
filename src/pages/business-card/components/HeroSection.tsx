@@ -103,9 +103,9 @@ const HeroSection = ({
                 {/* Card Shadow/Glow Effect */}
                 <div className="absolute -z-10 w-full h-72 bg-gradient-to-r from-indigo-500/20 to-purple-500/20 rounded-xl blur-xl transform rotate-6"></div>
                 
-                {/* Stacked Card Display - similar to CustomizeSection */}
+                {/* Stacked Card Display - moved more to the left */}
                 <div className="relative h-[500px]">
-                  <div className="absolute w-64 h-40 bg-white shadow-xl rounded-lg transform rotate-6 top-12 left-12 z-10">
+                  <div className="absolute w-64 h-40 bg-white shadow-xl rounded-lg transform rotate-6 top-12 left-0 z-10">
                     <div className="h-full p-4 flex flex-col justify-between bg-gradient-to-br from-purple-500 to-indigo-600 rounded-lg text-white">
                       <div>
                         <div className="text-lg font-bold">Sarah Johnson</div>
@@ -118,7 +118,7 @@ const HeroSection = ({
                     </div>
                   </div>
                   
-                  <div className="absolute w-64 h-40 bg-white shadow-xl rounded-lg transform -rotate-3 top-36 left-32 z-20">
+                  <div className="absolute w-64 h-40 bg-white shadow-xl rounded-lg transform -rotate-3 top-36 left-20 z-20">
                     <div className="h-full p-4 flex flex-col justify-between bg-white rounded-lg border-2 border-gray-200">
                       <div>
                         <div className="text-lg font-bold text-gray-900">Michael Chen</div>
@@ -131,7 +131,7 @@ const HeroSection = ({
                     </div>
                   </div>
                   
-                  <div className="absolute w-64 h-40 bg-white shadow-xl rounded-lg transform rotate-12 top-60 left-48 z-30">
+                  <div className="absolute w-64 h-40 bg-white shadow-xl rounded-lg transform rotate-12 top-60 left-36 z-30">
                     <div className="h-full p-4 flex flex-col justify-between bg-gradient-to-r from-yellow-400 to-orange-500 rounded-lg text-white">
                       <div>
                         <div className="text-lg font-bold">Alex Rivera</div>
@@ -144,20 +144,6 @@ const HeroSection = ({
                     </div>
                   </div>
                 </div>
-              </div>
-
-              <div className="flex justify-center mt-6 gap-4">
-                {templates.slice(0, 4).map((template) => (
-                  <motion.button
-                    key={template.id}
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    className={`w-8 h-8 rounded-full shadow-sm ${activeTemplate === template.id ? 'ring-2 ring-offset-2 ring-white' : ''}`}
-                    style={{ backgroundColor: template.color }}
-                    onClick={() => handleTemplateSelect(template.id)}
-                    aria-label={`Select ${template.name} template`}
-                  ></motion.button>
-                ))}
               </div>
             </motion.div>
           </div>
