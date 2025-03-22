@@ -14,6 +14,7 @@ import { useQRCode } from "@/hooks/use-qrcode";
 import { toast } from "sonner";
 import { Check, Scan, QrCode, LayoutGrid, Download } from "lucide-react";
 import StandardHeroSection from "@/components/shared/StandardHeroSection";
+import { Link } from "react-router-dom";
 
 const QRCodeGenerator = () => {
   const { 
@@ -52,7 +53,7 @@ const QRCodeGenerator = () => {
       </div>
       <div className="bg-white rounded-xl shadow-lg p-6">
         <img 
-          src="/placeholder.svg" 
+          src="/lovable-uploads/881e4853-0a3c-4840-9265-a9ad83a5640a.png" 
           alt="QR Code Sample" 
           className="w-full" 
         />
@@ -114,17 +115,19 @@ const QRCodeGenerator = () => {
         {/* CTA Section */}
         <section className="py-16 bg-primary/10">
           <div className="container mx-auto px-4 text-center">
-            <h2 className="text-3xl font-bold mb-6">Ready to Create Your QR Code?</h2>
+            <h2 className="text-3xl font-bold mb-6">Need More Advanced Features?</h2>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto mb-8">
-              Our free, easy-to-use QR code generator helps you create custom QR codes in seconds. No sign-up required.
+              Upgrade to our Premium QR Code Generator for dynamic codes that can be updated anytime, 
+              detailed scan analytics, location tracking, and more professional features to maximize your marketing impact.
             </p>
-            <Button
-              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-              size="lg"
-              className="font-semibold"
-            >
-              Generate QR Code Now
-            </Button>
+            <Link to="/qr-code/premium">
+              <Button
+                size="lg"
+                className="font-semibold"
+              >
+                Try Premium QR Code Generator
+              </Button>
+            </Link>
           </div>
         </section>
       </main>

@@ -29,9 +29,9 @@ const BenefitsSection = () => {
             className="relative"
           >
             <img 
-              src="/placeholder.svg" 
+              src="/lovable-uploads/881e4853-0a3c-4840-9265-a9ad83a5640a.png" 
               alt="QR Analytics Dashboard" 
-              className="rounded-lg shadow-lg w-full"
+              className="rounded-lg shadow-lg w-full bg-white p-6"
             />
             <div className="absolute -bottom-6 -right-6 bg-primary p-4 rounded-lg shadow-lg">
               <LineChart className="h-12 w-12 text-white" />

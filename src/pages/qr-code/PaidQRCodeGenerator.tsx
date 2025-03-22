@@ -17,6 +17,7 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
 import { toast } from "sonner";
 import { checkGenerationEligibility, recordGeneration } from "@/services/generationLimits";
+import { Link } from "react-router-dom";
 
 const PaidQRCodeGenerator = () => {
   const navigate = useNavigate();
@@ -130,7 +131,7 @@ const PaidQRCodeGenerator = () => {
       <div className="bg-white rounded-xl shadow-lg p-6">
         <div className="grid grid-cols-1 gap-4">
           <img 
-            src="/placeholder.svg" 
+            src="/lovable-uploads/881e4853-0a3c-4840-9265-a9ad83a5640a.png" 
             alt="QR Code Sample" 
             className="w-full" 
           />
@@ -199,17 +200,20 @@ const PaidQRCodeGenerator = () => {
         {/* CTA Section */}
         <section className="py-16 bg-primary/10">
           <div className="container mx-auto px-4 text-center">
-            <h2 className="text-3xl font-bold mb-6">Ready to Upgrade Your QR Experience?</h2>
+            <h2 className="text-3xl font-bold mb-6">Need a Simple QR Code Instead?</h2>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto mb-8">
-              Generate dynamic premium QR codes with advanced analytics and tracking features to maximize your marketing efforts.
+              Try our free QR code generator for quick and simple static QR codes. Perfect for small businesses, 
+              personal projects, or if you just need a basic QR code without analytics features.
             </p>
-            <Button
-              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-              size="lg"
-              className="font-semibold"
-            >
-              Create Dynamic QR Code Now
-            </Button>
+            <Link to="/qr-code">
+              <Button
+                size="lg"
+                variant="outline"
+                className="font-semibold"
+              >
+                Use Free QR Code Generator
+              </Button>
+            </Link>
           </div>
         </section>
       </main>
