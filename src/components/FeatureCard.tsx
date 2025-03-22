@@ -29,7 +29,7 @@ const FeatureCard = ({
       transition={{ duration: 0.5, delay: delay * 0.1 }}
       viewport={{ once: true }}
       className={cn(
-        "rounded-3xl p-6 card-hover flex flex-col items-center text-center h-full text-gray-800 border border-gray-100 shadow-sm",
+        "rounded-3xl p-6 card-hover flex flex-col items-start text-left h-full text-gray-800 border border-gray-100 shadow-sm",
         className
       )}
     >
