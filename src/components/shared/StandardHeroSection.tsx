@@ -46,11 +46,11 @@ const StandardHeroSection: React.FC<StandardHeroSectionProps> = ({
               {toolLabel}
             </div>
             <h1 className="text-4xl md:text-5xl font-bold mb-4">
-              <span className="text-white brightness-125">{title}</span>{" "}
-              <span className="bg-clip-text text-transparent bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 brightness-110">
+              {title}{" "}
+              <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary">
                 {highlightedText}
               </span>{" "}
-              <span className="text-white brightness-125">{restOfTitle}</span>
+              {restOfTitle}
             </h1>
             <p className="text-lg opacity-80 mb-8">{description}</p>
 
