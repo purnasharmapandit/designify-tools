@@ -43,6 +43,7 @@ const LogoMaker = () => {
           image={<LogoMakerHero />}
           bgColor="bg-blue-900"
           textColor="text-white"
+          toolLabelClassName="bg-white/20 text-white font-medium"
         />
 
         <GeneratorSection />

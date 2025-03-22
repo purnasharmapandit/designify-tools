@@ -17,7 +17,8 @@ interface StandardHeroSectionProps {
   image: React.ReactNode;
   bgColor?: string;
   textColor?: string;
-  actionButton?: React.ReactNode; // New prop for action button
+  actionButton?: React.ReactNode;
+  toolLabelClassName?: string; // New prop for custom styling of the tool label
 }
 
 const StandardHeroSection: React.FC<StandardHeroSectionProps> = ({
@@ -30,7 +31,8 @@ const StandardHeroSection: React.FC<StandardHeroSectionProps> = ({
   image,
   bgColor = "bg-slate-900",
   textColor = "text-white",
-  actionButton
+  actionButton,
+  toolLabelClassName = "bg-primary/10 text-primary font-medium" // Default styling
 }) => {
   return (
     <section className={`${bgColor} py-16 lg:py-20 overflow-hidden`}>
@@ -42,7 +44,7 @@ const StandardHeroSection: React.FC<StandardHeroSectionProps> = ({
             transition={{ duration: 0.5 }}
             className={textColor}
           >
-            <div className="inline-block px-4 py-1.5 rounded-full bg-primary/10 text-primary font-medium text-sm mb-5">
+            <div className={`inline-block px-4 py-1.5 rounded-full ${toolLabelClassName} text-sm mb-5`}>
               {toolLabel}
             </div>
             <h1 className="text-4xl md:text-5xl font-bold mb-4">
