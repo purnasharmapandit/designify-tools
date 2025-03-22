@@ -196,7 +196,7 @@ const PaidQRCodeGenerator = () => {
               Try our free QR code generator for quick and simple static QR codes. Perfect for small businesses, 
               personal projects, or if you just need a basic QR code without analytics features.
             </p>
-            <Link to="/qr-code">
+            <Link to="/qr-code-generator">
               <Button
                 size="lg"
                 variant="outline"
