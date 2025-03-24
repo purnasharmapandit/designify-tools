@@ -9,7 +9,7 @@ import MeshGradientFAQ from "@/components/mesh-gradient/MeshGradientFAQ";
 import { Helmet } from "react-helmet";
 import { Button } from "@/components/ui/button";
 import { Download, Copy, RefreshCw, Palette, Plus, X, Sliders, Square, Move } from "lucide-react";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Slider } from "@/components/ui/slider";
 import { ColorPicker } from "@/components/ui/color-picker";
 import { toast } from "sonner";
@@ -56,6 +56,7 @@ const MeshGradientGenerator = () => {
   const [selectedSize, setSelectedSize] = useState(canvasSizes[0]); // Default to 1:1
   const [showSizeDropdown, setShowSizeDropdown] = useState(false);
   const [activeColorIndex, setActiveColorIndex] = useState<number | null>(null);
+  const [isDragging, setIsDragging] = useState(false);
   
   const previewRef = useRef<HTMLDivElement>(null);
   
@@ -120,6 +121,42 @@ const MeshGradientGenerator = () => {
     newColors[index] = { ...newColors[index], size };
     setColors(newColors);
   };
+  
+  // Handle drag interactions for color position markers
+  const handleMouseDown = (index: number) => {
+    setActiveColorIndex(index);
+    setIsDragging(true);
+  };
+  
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (isDragging && activeColorIndex !== null && previewRef.current) {
+      const rect = previewRef.current.getBoundingClientRect();
+      
+      // Calculate position as percentage of the container
+      const x = Math.max(0, Math.min(100, ((e.clientX - rect.left) / rect.width) * 100));
+      const y = Math.max(0, Math.min(100, ((e.clientY - rect.top) / rect.height) * 100));
+      
+      // Update the position of the active color
+      updateColorPosition(activeColorIndex, { x, y });
+    }
+  };
+  
+  const handleMouseUp = () => {
+    setIsDragging(false);
+  };
+  
+  // Clean up event listeners
+  useEffect(() => {
+    const handleGlobalMouseUp = () => {
+      setIsDragging(false);
+    };
+    
+    window.addEventListener('mouseup', handleGlobalMouseUp);
+    
+    return () => {
+      window.removeEventListener('mouseup', handleGlobalMouseUp);
+    };
+  }, []);
   
   const copyCSS = () => {
     let gradients = colors.map(({ color, position, size }) => 
@@ -374,12 +411,14 @@ ${grain > 0 ? 'background-blend-mode: multiply;' : ''}`;
               </div>
               
               <div className="md:col-span-2">
-                <div className="bg-white p-6 rounded-xl shadow-sm h-full">
+                <div className="bg-white p-6 rounded-xl shadow-sm sticky top-24">
                   <h3 className="text-lg font-semibold mb-4">Preview</h3>
                   <div 
                     ref={previewRef}
                     className="relative rounded-lg overflow-hidden mb-4 cursor-pointer"
                     style={gradientStyle}
+                    onMouseMove={handleMouseMove}
+                    onMouseUp={handleMouseUp}
                   >
                     <div style={grainOverlay}></div>
                     
@@ -393,8 +432,13 @@ ${grain > 0 ? 'background-blend-mode: multiply;' : ''}`;
                           left: `${colorData.position.x}%`,
                           top: `${colorData.position.y}%`,
                           zIndex: 10,
+                          transform: isDragging && activeColorIndex === index ? 'scale(1.1)' : 'scale(1)',
+                          transition: 'transform 0.1s ease'
                         }}
-                        onClick={() => setActiveColorIndex(index)}
+                        onMouseDown={(e) => {
+                          e.stopPropagation();
+                          handleMouseDown(index);
+                        }}
                       >
                         <Move className="h-3 w-3 text-white opacity-80" />
                       </div>
