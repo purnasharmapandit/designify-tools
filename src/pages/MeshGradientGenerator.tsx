@@ -50,12 +50,14 @@ const MeshGradientGenerator = () => {
     { color: "#EC4899", position: { x: 50, y: 80 }, size: 60 },
   ]);
   const [grain, setGrain] = useState(0);
+  const [grainColor, setGrainColor] = useState("#000000");
   const [blur, setBlur] = useState(0);
   const [selectedSize, setSelectedSize] = useState(canvasSizes[0]);
   const [showSizeDropdown, setShowSizeDropdown] = useState(false);
   const [activeColorIndex, setActiveColorIndex] = useState<number | null>(null);
   const [isDragging, setIsDragging] = useState(false);
   const previewRef = useRef<HTMLDivElement>(null);
+  const gradientRef = useRef<HTMLDivElement>(null);
   const isMobile = useIsMobile();
 
   const generateRandomColor = () => {
@@ -221,21 +223,35 @@ const MeshGradientGenerator = () => {
     
     const cssText = `background: ${gradients};
 filter: blur(${blur}px);
-${grain > 0 ? 'background-blend-mode: multiply;' : ''}`;
+${grain > 0 ? `background-blend-mode: multiply;
+${grain > 0 ? `/* Grain Effect CSS */
+position: relative;
+&::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  opacity: ${grain / 100};
+  mix-blend-mode: multiply;
+  z-index: 1;
+}` : ''}` : ''}`;
     
     navigator.clipboard.writeText(cssText);
     toast.success("CSS copied to clipboard!");
   };
 
   const downloadGradient = () => {
-    if (previewRef.current) {
+    if (previewRef.current && gradientRef.current) {
       const markersElements = previewRef.current.querySelectorAll('.color-marker');
       
       markersElements.forEach(marker => {
         (marker as HTMLElement).style.display = 'none';
       });
       
-      html2canvas(previewRef.current).then(canvas => {
+      html2canvas(gradientRef.current).then(canvas => {
         markersElements.forEach(marker => {
           (marker as HTMLElement).style.display = 'flex';
         });
@@ -268,6 +284,7 @@ ${grain > 0 ? 'background-blend-mode: multiply;' : ''}`;
     left: 0,
     right: 0,
     bottom: 0,
+    backgroundColor: grainColor,
   } : {};
 
   const aspectRatio = selectedSize.value.width / selectedSize.value.height;
@@ -313,23 +330,27 @@ ${grain > 0 ? 'background-blend-mode: multiply;' : ''}`;
                     <div 
                       ref={previewRef}
                       className="relative overflow-hidden mb-4 cursor-move mx-auto touch-none"
-                      style={updatedGradientStyle}
                       onMouseMove={handleMouseMove}
                       onMouseUp={handleMouseUp}
                       onTouchMove={handleTouchMove}
                       onTouchEnd={handleTouchEnd}
                     >
-                      <div style={grainOverlay}></div>
+                      <div 
+                        ref={gradientRef}
+                        className="absolute inset-0"
+                        style={updatedGradientStyle}
+                      >
+                        <div style={grainOverlay}></div>
+                      </div>
                       
                       {colors.map((colorData, index) => (
                         <div 
                           key={`position-${index}`}
-                          className="absolute w-6 h-6 -ml-3 -mt-3 rounded-full border-2 border-white shadow-md flex items-center justify-center cursor-move color-marker"
+                          className="absolute w-6 h-6 -ml-3 -mt-3 rounded-full border-2 border-white shadow-md flex items-center justify-center cursor-move color-marker z-10"
                           style={{
                             backgroundColor: colorData.color,
                             left: `${colorData.position.x}%`,
                             top: `${colorData.position.y}%`,
-                            zIndex: 10,
                             transform: isDragging && activeColorIndex === index ? 'scale(1.1)' : 'scale(1)',
                             transition: 'transform 0.1s ease'
                           }}
@@ -477,6 +498,19 @@ ${grain > 0 ? 'background-blend-mode: multiply;' : ''}`;
                     />
                   </div>
                   
+                  {grain > 0 && (
+                    <div className="space-y-2 md:space-y-3">
+                      <div className="flex items-center justify-between">
+                        <label className="text-sm font-medium">Grain Color</label>
+                      </div>
+                      <ColorPicker
+                        id="grain-color"
+                        value={grainColor}
+                        onChange={setGrainColor}
+                      />
+                    </div>
+                  )}
+                  
                   <div className="space-y-2 md:space-y-3">
                     <div className="flex items-center justify-between">
                       <label className="text-sm font-medium">Blur</label>
@@ -550,23 +584,28 @@ ${grain > 0 ? 'background-blend-mode: multiply;' : ''}`;
                   <div 
                     ref={previewRef}
                     className="relative overflow-hidden mb-4 cursor-move mx-auto"
-                    style={updatedGradientStyle}
+                    style={{ height: `${previewHeight}px`, maxWidth: typeof previewWidth === "number" ? `${previewWidth}px` : previewWidth }}
                     onMouseMove={handleMouseMove}
                     onMouseUp={handleMouseUp}
                     onTouchMove={handleTouchMove}
                     onTouchEnd={handleTouchEnd}
                   >
-                    <div style={grainOverlay}></div>
+                    <div 
+                      ref={gradientRef}
+                      className="absolute inset-0"
+                      style={updatedGradientStyle}
+                    >
+                      <div style={grainOverlay}></div>
+                    </div>
                     
                     {colors.map((colorData, index) => (
                       <div 
                         key={`position-${index}`}
-                        className="absolute w-6 h-6 -ml-3 -mt-3 rounded-full border-2 border-white shadow-md flex items-center justify-center cursor-move color-marker"
+                        className="absolute w-6 h-6 -ml-3 -mt-3 rounded-full border-2 border-white shadow-md flex items-center justify-center cursor-move color-marker z-10"
                         style={{
                           backgroundColor: colorData.color,
                           left: `${colorData.position.x}%`,
                           top: `${colorData.position.y}%`,
-                          zIndex: 10,
                           transform: isDragging && activeColorIndex === index ? 'scale(1.1)' : 'scale(1)',
                           transition: 'transform 0.1s ease'
                         }}
@@ -593,7 +632,22 @@ ${grain > 0 ? 'background-blend-mode: multiply;' : ''}`;
                         `radial-gradient(circle at ${position.x}% ${position.y}%, ${color} 0%, transparent ${size}%)`
                       ).join(',\n             ')};
 filter: blur(${blur}px);
-${grain > 0 ? 'background-blend-mode: multiply;' : ''}`}
+${grain > 0 ? `background-blend-mode: multiply;
+${grain > 0 ? `/* Grain Effect with color */
+position: relative;
+&::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  background-color: ${grainColor};
+  opacity: ${grain / 100};
+  mix-blend-mode: multiply;
+  z-index: 1;
+}` : ''}` : ''}`}
                     </pre>
                   </div>
                 </div>
