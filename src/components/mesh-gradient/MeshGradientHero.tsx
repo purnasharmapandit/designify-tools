@@ -90,22 +90,22 @@ ${grain > 0 ? 'background-blend-mode: multiply;' : ''}`;
     toast.success("Gradient downloaded!");
   };
 
-  const gradientStyle = {
+  const gradientStyle: React.CSSProperties = {
     background: `radial-gradient(circle at 50% 50%, ${colors.map((color, index) => 
       `${color} ${Math.round(index * (100 / (colors.length - 1)))}%`
     ).join(', ')})`,
     filter: `blur(${blur}px)`,
     width: `${selectedSize.value.width / 4}px`,
     height: `${selectedSize.value.height / 4}px`,
-    position: "relative",
+    position: "relative" as "relative", // Type assertion
   };
 
   // Add grain effect if grain value is greater than 0
-  const grainOverlay = grain > 0 ? {
+  const grainOverlay: React.CSSProperties = grain > 0 ? {
     backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
     opacity: grain / 100,
-    mixBlendMode: "multiply",
-    position: "absolute",
+    mixBlendMode: "multiply" as "multiply", // Type assertion
+    position: "absolute" as "absolute", // Type assertion
     top: 0,
     left: 0,
     right: 0,
@@ -258,8 +258,8 @@ ${grain > 0 ? 'background-blend-mode: multiply;' : ''}`;
           </div>
         </div>
       }
-      bgColor="bg-gradient-to-b from-purple-50 to-white"
-      textColor="text-gray-900"
+      bgColor="bg-blue-800"
+      textColor="text-white"
       toolLabelClassName="bg-primary/10 text-primary"
     />
   );
