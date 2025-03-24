@@ -12,163 +12,41 @@ import HeadshotGeneratorTool from "./components/HeadshotGeneratorTool";
 
 const HeadshotGenerator = () => {
   const beforeAfterImage = (
-    <div className="relative w-full max-w-4xl mx-auto">
-      <div className="bg-white rounded-xl shadow-lg p-6">
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          {/* First Row */}
-          <div className="flex items-center justify-between gap-2 p-4 bg-white rounded-lg shadow-sm">
-            {/* Before Image */}
-            <div className="relative">
-              <div className="absolute -top-6 left-0 bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-xs font-medium">
-                Before
-              </div>
-              <div className="w-24 h-24 sm:w-28 sm:h-28 overflow-hidden rounded-lg border-2 border-gray-100">
-                <img 
-                  src="/lovable-uploads/0e9ae0d9-fe21-4c61-ad05-0efc6f3acdf5.png" 
-                  alt="Original photo" 
-                  className="w-full h-full object-cover"
-                />
-              </div>
-            </div>
-            
-            {/* Arrow */}
-            <div className="flex flex-col items-center">
-              <ArrowRight className="h-5 w-5 text-blue-500" />
-              <div className="mt-1 bg-blue-50 text-blue-700 px-2 py-0.5 rounded-full text-xs">
-                AI
-              </div>
-            </div>
-            
-            {/* After Image */}
-            <div className="relative">
-              <div className="absolute -top-6 left-0 bg-green-100 text-green-700 px-3 py-1 rounded-full text-xs font-medium">
-                After
-              </div>
-              <div className="w-24 h-24 sm:w-28 sm:h-28 overflow-hidden rounded-lg border-2 border-gray-100">
-                <img 
-                  src="/lovable-uploads/185c6d0e-b12b-4ba2-8374-2c1c5749fd1d.png" 
-                  alt="AI enhanced professional headshot" 
-                  className="w-full h-full object-cover"
-                />
-              </div>
-            </div>
+    <div className="relative w-full max-w-md mx-auto">
+      <div className="flex items-center justify-between gap-4 p-6 bg-white rounded-xl shadow-lg">
+        {/* Before Image */}
+        <div className="relative">
+          <div className="absolute -top-10 left-0 bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-sm font-medium">
+            Before
           </div>
-          
-          {/* Second Row */}
-          <div className="flex items-center justify-between gap-2 p-4 bg-white rounded-lg shadow-sm">
-            {/* Before Image */}
-            <div className="relative">
-              <div className="absolute -top-6 left-0 bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-xs font-medium">
-                Before
-              </div>
-              <div className="w-24 h-24 sm:w-28 sm:h-28 overflow-hidden rounded-lg border-2 border-gray-100">
-                <img 
-                  src="/lovable-uploads/ad773163-0e7f-4f92-b290-351b0c446ab9.png" 
-                  alt="Original photo 2" 
-                  className="w-full h-full object-cover"
-                />
-              </div>
-            </div>
-            
-            {/* Arrow */}
-            <div className="flex flex-col items-center">
-              <ArrowRight className="h-5 w-5 text-blue-500" />
-              <div className="mt-1 bg-blue-50 text-blue-700 px-2 py-0.5 rounded-full text-xs">
-                AI
-              </div>
-            </div>
-            
-            {/* After Image */}
-            <div className="relative">
-              <div className="absolute -top-6 left-0 bg-green-100 text-green-700 px-3 py-1 rounded-full text-xs font-medium">
-                After
-              </div>
-              <div className="w-24 h-24 sm:w-28 sm:h-28 overflow-hidden rounded-lg border-2 border-gray-100">
-                <img 
-                  src="/lovable-uploads/1a43098b-f1ed-4275-9a64-0247d2c9441e.png" 
-                  alt="AI enhanced professional headshot 2" 
-                  className="w-full h-full object-cover"
-                />
-              </div>
-            </div>
+          <div className="w-36 h-36 sm:w-44 sm:h-44 overflow-hidden rounded-lg border-2 border-gray-100">
+            <img 
+              src="/lovable-uploads/1b13003a-4a58-4d24-a71f-136916ddeeb4.png" 
+              alt="Original photo" 
+              className="w-full h-full object-cover"
+            />
           </div>
-          
-          {/* Third Row */}
-          <div className="flex items-center justify-between gap-2 p-4 bg-white rounded-lg shadow-sm">
-            {/* Before Image */}
-            <div className="relative">
-              <div className="absolute -top-6 left-0 bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-xs font-medium">
-                Before
-              </div>
-              <div className="w-24 h-24 sm:w-28 sm:h-28 overflow-hidden rounded-lg border-2 border-gray-100">
-                <img 
-                  src="/lovable-uploads/881e4853-0a3c-4840-9265-a9ad83a5640a.png" 
-                  alt="Original photo 3" 
-                  className="w-full h-full object-cover"
-                />
-              </div>
-            </div>
-            
-            {/* Arrow */}
-            <div className="flex flex-col items-center">
-              <ArrowRight className="h-5 w-5 text-blue-500" />
-              <div className="mt-1 bg-blue-50 text-blue-700 px-2 py-0.5 rounded-full text-xs">
-                AI
-              </div>
-            </div>
-            
-            {/* After Image */}
-            <div className="relative">
-              <div className="absolute -top-6 left-0 bg-green-100 text-green-700 px-3 py-1 rounded-full text-xs font-medium">
-                After
-              </div>
-              <div className="w-24 h-24 sm:w-28 sm:h-28 overflow-hidden rounded-lg border-2 border-gray-100">
-                <img 
-                  src="/lovable-uploads/9631ab2d-6048-425b-b6ac-fd4d8e6181c0.png" 
-                  alt="AI enhanced professional headshot 3" 
-                  className="w-full h-full object-cover"
-                />
-              </div>
-            </div>
+        </div>
+        
+        {/* Arrow */}
+        <div className="flex flex-col items-center">
+          <ArrowRight className="h-8 w-8 text-blue-500" />
+          <div className="mt-2 bg-blue-50 text-blue-700 px-3 py-1 rounded-full text-xs">
+            AI Magic
           </div>
-          
-          {/* Fourth Row */}
-          <div className="flex items-center justify-between gap-2 p-4 bg-white rounded-lg shadow-sm">
-            {/* Before Image */}
-            <div className="relative">
-              <div className="absolute -top-6 left-0 bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-xs font-medium">
-                Before
-              </div>
-              <div className="w-24 h-24 sm:w-28 sm:h-28 overflow-hidden rounded-lg border-2 border-gray-100">
-                <img 
-                  src="/lovable-uploads/db9c3f39-be59-43e9-9fda-054848781b3d.png" 
-                  alt="Original photo 4" 
-                  className="w-full h-full object-cover"
-                />
-              </div>
-            </div>
-            
-            {/* Arrow */}
-            <div className="flex flex-col items-center">
-              <ArrowRight className="h-5 w-5 text-blue-500" />
-              <div className="mt-1 bg-blue-50 text-blue-700 px-2 py-0.5 rounded-full text-xs">
-                AI
-              </div>
-            </div>
-            
-            {/* After Image */}
-            <div className="relative">
-              <div className="absolute -top-6 left-0 bg-green-100 text-green-700 px-3 py-1 rounded-full text-xs font-medium">
-                After
-              </div>
-              <div className="w-24 h-24 sm:w-28 sm:h-28 overflow-hidden rounded-lg border-2 border-gray-100">
-                <img 
-                  src="/lovable-uploads/4894cea5-585c-4904-82e3-fd2a5f99eed2.png" 
-                  alt="AI enhanced professional headshot 4" 
-                  className="w-full h-full object-cover"
-                />
-              </div>
-            </div>
+        </div>
+        
+        {/* After Image */}
+        <div className="relative">
+          <div className="absolute -top-10 left-0 bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm font-medium">
+            After
+          </div>
+          <div className="w-36 h-36 sm:w-44 sm:h-44 overflow-hidden rounded-lg border-2 border-gray-100">
+            <img 
+              src="/lovable-uploads/717fefed-29e0-4e71-ab55-1f03d85a2755.png" 
+              alt="AI enhanced professional headshot" 
+              className="w-full h-full object-cover"
+            />
           </div>
         </div>
       </div>
