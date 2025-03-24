@@ -1,31 +1,31 @@
 
 import React from "react";
 import { motion } from "framer-motion";
-import { RefreshCw, Copy, Download, ArrowRight } from "lucide-react";
+import { RefreshCw, Copy, Download, ArrowRight, Palette, Sliders } from "lucide-react";
 
 const steps = [
   {
     number: "01",
-    title: "Generate a Gradient",
-    description: "Click the 'Generate New' button to create a unique mesh gradient with beautiful color combinations.",
-    icon: <RefreshCw className="h-5 w-5" />
+    title: "Choose Your Colors",
+    description: "Select up to 6 colors for your gradient, or click 'Randomize' to generate a unique color palette.",
+    icon: <Palette className="h-5 w-5" />
   },
   {
     number: "02",
-    title: "Customize (Optional)",
-    description: "Fine-tune your gradient by adjusting colors and positions until you achieve your desired look.",
-    icon: <ArrowRight className="h-5 w-5" />
+    title: "Customize Effects",
+    description: "Adjust the grain and blur levels to achieve your desired look and feel.",
+    icon: <Sliders className="h-5 w-5" />
   },
   {
     number: "03",
-    title: "Copy the CSS Code",
-    description: "Click 'Copy CSS' to get the code for your gradient that you can use directly in your website projects.",
-    icon: <Copy className="h-5 w-5" />
+    title: "Select Canvas Size",
+    description: "Choose from 15 different aspect ratios to fit your specific project needs.",
+    icon: <ArrowRight className="h-5 w-5" />
   },
   {
     number: "04",
-    title: "Download as Image",
-    description: "Save your gradient as a high-quality image file for use in graphics, presentations, or social media.",
+    title: "Copy or Download",
+    description: "Copy the CSS code for your web projects or download as an image for your designs.",
     icon: <Download className="h-5 w-5" />
   }
 ];

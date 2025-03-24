@@ -1,38 +1,59 @@
 
 import React from "react";
 import { motion } from "framer-motion";
-import { Palette, Download, Copy, Layers, Sparkles, Sliders } from "lucide-react";
+import { 
+  Palette, 
+  Download, 
+  Copy, 
+  Layers, 
+  Sparkles, 
+  Sliders,
+  GalleryThumbnails,
+  MousePointerSquare,
+  Grain,
+  BlurIcon
+} from "lucide-react";
 
 const features = [
   {
     icon: <Palette className="h-6 w-6 text-purple-500" />,
-    title: "Beautiful Gradients",
-    description: "Create stunning mesh gradients that add depth and visual interest to your designs."
+    title: "Custom Color Palette",
+    description: "Add up to 6 colors to create complex, beautiful mesh gradients for your designs."
   },
   {
     icon: <Sparkles className="h-6 w-6 text-blue-500" />,
     title: "One-Click Generation",
-    description: "Generate unique gradient combinations with a single click without any design skills."
+    description: "Instantly generate unique gradient combinations with a single click."
   },
   {
-    icon: <Copy className="h-6 w-6 text-green-500" />,
+    icon: <Grain className="h-6 w-6 text-amber-500" />,
+    title: "Grain Control",
+    description: "Add texture to your gradients with adjustable grain effect intensity."
+  },
+  {
+    icon: <BlurIcon className="h-6 w-6 text-green-500" />,
+    title: "Blur Adjustment",
+    description: "Fine-tune the softness of your gradient with precise blur controls."
+  },
+  {
+    icon: <GalleryThumbnails className="h-6 w-6 text-indigo-500" />,
+    title: "Multiple Canvas Sizes",
+    description: "Choose from 15 different aspect ratios to create the perfect gradient for any use case."
+  },
+  {
+    icon: <Copy className="h-6 w-6 text-pink-500" />,
     title: "Copy CSS Code",
     description: "Easily copy the CSS code for your gradient to use in your web projects."
   },
   {
-    icon: <Download className="h-6 w-6 text-pink-500" />,
+    icon: <Download className="h-6 w-6 text-cyan-500" />,
     title: "Download as Image",
-    description: "Save your gradient as a high-quality PNG or JPG for use in any design software."
+    description: "Save your gradient as a high-quality image for use in any design software."
   },
   {
-    icon: <Sliders className="h-6 w-6 text-amber-500" />,
-    title: "Customizable",
-    description: "Fine-tune your gradient colors and positions to get exactly the look you want."
-  },
-  {
-    icon: <Layers className="h-6 w-6 text-indigo-500" />,
-    title: "Multiple Formats",
-    description: "Create gradients for various use cases including web backgrounds, UI elements, and more."
+    icon: <Sliders className="h-6 w-6 text-red-500" />,
+    title: "Full Customization",
+    description: "Fine-tune every aspect of your gradient to get exactly the look you want."
   }
 ];
 
@@ -61,7 +82,7 @@ const MeshGradientFeatures = () => {
           </motion.p>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {features.map((feature, index) => (
             <motion.div
               key={index}
