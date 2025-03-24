@@ -1,3 +1,4 @@
+
 import React from "react";
 import { motion } from "framer-motion";
 import { Helmet } from "react-helmet";
@@ -18,7 +19,7 @@ const HeadshotGenerator = () => {
           <div className="absolute -top-10 left-0 bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-sm font-medium">
             Before
           </div>
-          <div className="w-28 h-28 sm:w-36 sm:h-36 overflow-hidden rounded-lg border-2 border-gray-100">
+          <div className="w-36 h-36 sm:w-44 sm:h-44 overflow-hidden rounded-lg border-2 border-gray-100">
             <img 
               src="/lovable-uploads/1b13003a-4a58-4d24-a71f-136916ddeeb4.png" 
               alt="Original photo" 
@@ -40,7 +41,7 @@ const HeadshotGenerator = () => {
           <div className="absolute -top-10 left-0 bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm font-medium">
             After
           </div>
-          <div className="w-28 h-28 sm:w-36 sm:h-36 overflow-hidden rounded-lg border-2 border-gray-100">
+          <div className="w-36 h-36 sm:w-44 sm:h-44 overflow-hidden rounded-lg border-2 border-gray-100">
             <img 
               src="/lovable-uploads/717fefed-29e0-4e71-ab55-1f03d85a2755.png" 
               alt="AI enhanced professional headshot" 
@@ -93,6 +94,7 @@ const HeadshotGenerator = () => {
           textColor="text-white"
         />
         
+        {/* Generator Tool Section */}
         <section className="py-16 bg-slate-50">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-12">
@@ -106,6 +108,7 @@ const HeadshotGenerator = () => {
           </div>
         </section>
 
+        {/* How It Works Section */}
         <section className="py-16 bg-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-16">
@@ -152,6 +155,7 @@ const HeadshotGenerator = () => {
           </div>
         </section>
         
+        {/* Features Section */}
         <section className="py-16 bg-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-16">
@@ -209,6 +213,7 @@ const HeadshotGenerator = () => {
           </div>
         </section>
 
+        {/* Use Cases Section */}
         <section className="py-16 bg-slate-50">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-16">
@@ -243,6 +248,7 @@ const HeadshotGenerator = () => {
           </div>
         </section>
 
+        {/* FAQ Section */}
         <section className="py-16 bg-white">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-12">
@@ -293,6 +299,7 @@ const HeadshotGenerator = () => {
           </div>
         </section>
         
+        {/* CTA Section */}
         <section className="py-20 bg-gradient-to-br from-blue-50 to-indigo-50">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="bg-gradient-to-r from-blue-600 to-indigo-600 rounded-3xl p-12 text-white shadow-xl">
@@ -321,4 +328,3 @@ const HeadshotGenerator = () => {
 };
 
 export default HeadshotGenerator;
-
