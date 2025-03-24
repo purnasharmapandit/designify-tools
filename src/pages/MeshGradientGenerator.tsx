@@ -1,4 +1,3 @@
-
 import { motion } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -15,17 +14,15 @@ import { ColorPicker } from "@/components/ui/color-picker";
 import { toast } from "sonner";
 import html2canvas from "html2canvas";
 
-// Define the color type with position
 interface GradientColor {
   color: string;
   position: {
-    x: number; // 0-100 for percentage across width
-    y: number; // 0-100 for percentage across height
+    x: number;
+    y: number;
   };
-  size: number; // 0-100 for size of the color blob
+  size: number;
 }
 
-// Canvas size options
 const canvasSizes = [
   { label: "1:1", value: { width: 800, height: 800 } },
   { label: "2:1", value: { width: 1000, height: 500 } },
@@ -45,42 +42,40 @@ const canvasSizes = [
 ];
 
 const MeshGradientGenerator = () => {
-  // Initialize with random positions for each color
   const [colors, setColors] = useState<GradientColor[]>([
-    { color: "#8B5CF6", position: { x: 70, y: 20 }, size: 50 }, // Purple
-    { color: "#3B82F6", position: { x: 20, y: 60 }, size: 50 }, // Blue
-    { color: "#EC4899", position: { x: 50, y: 80 }, size: 60 }, // Pink
+    { color: "#8B5CF6", position: { x: 70, y: 20 }, size: 50 },
+    { color: "#3B82F6", position: { x: 20, y: 60 }, size: 50 },
+    { color: "#EC4899", position: { x: 50, y: 80 }, size: 60 },
   ]);
   const [grain, setGrain] = useState(0);
   const [blur, setBlur] = useState(0);
-  const [selectedSize, setSelectedSize] = useState(canvasSizes[0]); // Default to 1:1
+  const [selectedSize, setSelectedSize] = useState(canvasSizes[0]);
   const [showSizeDropdown, setShowSizeDropdown] = useState(false);
   const [activeColorIndex, setActiveColorIndex] = useState<number | null>(null);
   const [isDragging, setIsDragging] = useState(false);
-  
   const previewRef = useRef<HTMLDivElement>(null);
-  
+
   const generateRandomColor = () => {
     return `#${Math.floor(Math.random() * 16777215).toString(16).padStart(6, '0')}`;
   };
-  
+
   const generateRandomPosition = () => {
     return {
       x: Math.floor(Math.random() * 100),
       y: Math.floor(Math.random() * 100),
     };
   };
-  
+
   const randomizeColors = () => {
     const newColors = colors.map(color => ({
       color: generateRandomColor(),
       position: generateRandomPosition(),
-      size: Math.floor(Math.random() * 30) + 40, // Random size between 40-70
+      size: Math.floor(Math.random() * 30) + 40,
     }));
     setColors(newColors);
     toast.success("Generated new colors and positions!");
   };
-  
+
   const addColor = () => {
     if (colors.length < 6) {
       const newColor: GradientColor = {
@@ -93,7 +88,7 @@ const MeshGradientGenerator = () => {
       toast.error("Maximum 6 colors allowed");
     }
   };
-  
+
   const removeColor = (index: number) => {
     if (colors.length > 2) {
       const newColors = [...colors];
@@ -103,46 +98,41 @@ const MeshGradientGenerator = () => {
       toast.error("Minimum 2 colors required");
     }
   };
-  
+
   const updateColor = (index: number, newColor: string) => {
     const newColors = [...colors];
     newColors[index] = { ...newColors[index], color: newColor };
     setColors(newColors);
   };
-  
+
   const updateColorPosition = (index: number, position: { x: number, y: number }) => {
     const newColors = [...colors];
     newColors[index] = { ...newColors[index], position };
     setColors(newColors);
   };
-  
+
   const updateColorSize = (index: number, size: number) => {
     const newColors = [...colors];
     newColors[index] = { ...newColors[index], size };
     setColors(newColors);
   };
-  
-  // Handle drag interactions for color position markers
+
   const handleMouseDown = (index: number, e: React.MouseEvent) => {
-    e.preventDefault(); // Prevent default behavior
-    e.stopPropagation(); // Stop propagation to parent elements
+    e.preventDefault();
+    e.stopPropagation();
     setActiveColorIndex(index);
     setIsDragging(true);
   };
-  
+
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     if (isDragging && activeColorIndex !== null && previewRef.current) {
       const rect = previewRef.current.getBoundingClientRect();
-      
-      // Calculate position as percentage of the container
       const x = Math.max(0, Math.min(100, ((e.clientX - rect.left) / rect.width) * 100));
       const y = Math.max(0, Math.min(100, ((e.clientY - rect.top) / rect.height) * 100));
-      
-      // Update the position of the active color
       updateColorPosition(activeColorIndex, { x, y });
     }
   };
-  
+
   const handleMouseUp = () => {
     if (isDragging && activeColorIndex !== null) {
       toast.success(`Color ${activeColorIndex + 1} position updated`);
@@ -150,37 +140,32 @@ const MeshGradientGenerator = () => {
     setIsDragging(false);
     setActiveColorIndex(null);
   };
-  
-  // Clean up event listeners
+
   useEffect(() => {
     const handleGlobalMouseUp = () => {
       if (isDragging) {
         handleMouseUp();
       }
     };
-    
+
     const handleGlobalMouseMove = (e: MouseEvent) => {
       if (isDragging && activeColorIndex !== null && previewRef.current) {
         const rect = previewRef.current.getBoundingClientRect();
-        
-        // Calculate position as percentage of the container
         const x = Math.max(0, Math.min(100, ((e.clientX - rect.left) / rect.width) * 100));
         const y = Math.max(0, Math.min(100, ((e.clientY - rect.top) / rect.height) * 100));
-        
-        // Update the position of the active color
         updateColorPosition(activeColorIndex, { x, y });
       }
     };
-    
+
     window.addEventListener('mouseup', handleGlobalMouseUp);
     window.addEventListener('mousemove', handleGlobalMouseMove);
-    
+
     return () => {
       window.removeEventListener('mouseup', handleGlobalMouseUp);
       window.removeEventListener('mousemove', handleGlobalMouseMove);
     };
   }, [isDragging, activeColorIndex]);
-  
+
   const copyCSS = () => {
     let gradients = colors.map(({ color, position, size }) => 
       `radial-gradient(circle at ${position.x}% ${position.y}%, ${color} 0%, transparent ${size}%)`
@@ -193,10 +178,20 @@ ${grain > 0 ? 'background-blend-mode: multiply;' : ''}`;
     navigator.clipboard.writeText(cssText);
     toast.success("CSS copied to clipboard!");
   };
-  
+
   const downloadGradient = () => {
     if (previewRef.current) {
+      const markersElements = previewRef.current.querySelectorAll('.color-marker');
+      
+      markersElements.forEach(marker => {
+        (marker as HTMLElement).style.display = 'none';
+      });
+      
       html2canvas(previewRef.current).then(canvas => {
+        markersElements.forEach(marker => {
+          (marker as HTMLElement).style.display = 'flex';
+        });
+        
         const link = document.createElement('a');
         link.download = `mesh-gradient-${new Date().getTime()}.png`;
         link.href = canvas.toDataURL('image/png');
@@ -216,7 +211,6 @@ ${grain > 0 ? 'background-blend-mode: multiply;' : ''}`;
     position: "relative",
   };
 
-  // Add grain effect if grain value is greater than 0
   const grainOverlay: React.CSSProperties = grain > 0 ? {
     backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
     opacity: grain / 100,
@@ -228,12 +222,10 @@ ${grain > 0 ? 'background-blend-mode: multiply;' : ''}`;
     bottom: 0,
   } : {};
 
-  // Calculate aspect ratio for preview based on selected size
   const aspectRatio = selectedSize.value.width / selectedSize.value.height;
   const previewHeight = aspectRatio < 1 ? 300 : Math.floor(300 / aspectRatio);
   const previewWidth = aspectRatio > 1 ? 300 * aspectRatio : 300;
 
-  // Update gradient style with new dimensions
   const updatedGradientStyle: React.CSSProperties = {
     ...gradientStyle,
     height: `${previewHeight}px`,
@@ -253,7 +245,6 @@ ${grain > 0 ? 'background-blend-mode: multiply;' : ''}`;
       <main className="flex-grow">
         <MeshGradientHero />
         
-        {/* Actual Tool Section */}
         <section className="py-16 bg-gray-50">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-12">
@@ -457,11 +448,10 @@ ${grain > 0 ? 'background-blend-mode: multiply;' : ''}`;
                   >
                     <div style={grainOverlay}></div>
                     
-                    {/* Position markers */}
                     {colors.map((colorData, index) => (
                       <div 
                         key={`position-${index}`}
-                        className="absolute w-6 h-6 -ml-3 -mt-3 rounded-full border-2 border-white shadow-md flex items-center justify-center cursor-move"
+                        className="absolute w-6 h-6 -ml-3 -mt-3 rounded-full border-2 border-white shadow-md flex items-center justify-center cursor-move color-marker"
                         style={{
                           backgroundColor: colorData.color,
                           left: `${colorData.position.x}%`,
@@ -478,13 +468,13 @@ ${grain > 0 ? 'background-blend-mode: multiply;' : ''}`;
                       </div>
                     ))}
                     
-                    {/* Instruction overlay when canvas is empty */}
                     {colors.length === 0 && (
                       <div className="absolute inset-0 flex items-center justify-center bg-gray-100/50 text-gray-500">
                         <p>Add colors to start creating your gradient</p>
                       </div>
                     )}
                   </div>
+                  
                   <div className="text-sm text-gray-500">
                     <p className="font-medium mb-1">CSS Code:</p>
                     <pre className="bg-gray-100 p-3 rounded-md overflow-x-auto text-xs">
