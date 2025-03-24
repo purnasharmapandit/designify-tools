@@ -13,6 +13,7 @@ import { Slider } from "@/components/ui/slider";
 import { ColorPicker } from "@/components/ui/color-picker";
 import { toast } from "sonner";
 import html2canvas from "html2canvas";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 interface GradientColor {
   color: string;
@@ -54,6 +55,7 @@ const MeshGradientGenerator = () => {
   const [activeColorIndex, setActiveColorIndex] = useState<number | null>(null);
   const [isDragging, setIsDragging] = useState(false);
   const previewRef = useRef<HTMLDivElement>(null);
+  const isMobile = useIsMobile();
 
   const generateRandomColor = () => {
     return `#${Math.floor(Math.random() * 16777215).toString(16).padStart(6, '0')}`;
@@ -124,6 +126,13 @@ const MeshGradientGenerator = () => {
     setIsDragging(true);
   };
 
+  const handleTouchStart = (index: number, e: React.TouchEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setActiveColorIndex(index);
+    setIsDragging(true);
+  };
+
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     if (isDragging && activeColorIndex !== null && previewRef.current) {
       const rect = previewRef.current.getBoundingClientRect();
@@ -133,7 +142,25 @@ const MeshGradientGenerator = () => {
     }
   };
 
+  const handleTouchMove = (e: React.TouchEvent<HTMLDivElement>) => {
+    if (isDragging && activeColorIndex !== null && previewRef.current) {
+      const touch = e.touches[0];
+      const rect = previewRef.current.getBoundingClientRect();
+      const x = Math.max(0, Math.min(100, ((touch.clientX - rect.left) / rect.width) * 100));
+      const y = Math.max(0, Math.min(100, ((touch.clientY - rect.top) / rect.height) * 100));
+      updateColorPosition(activeColorIndex, { x, y });
+    }
+  };
+
   const handleMouseUp = () => {
+    if (isDragging && activeColorIndex !== null) {
+      toast.success(`Color ${activeColorIndex + 1} position updated`);
+    }
+    setIsDragging(false);
+    setActiveColorIndex(null);
+  };
+
+  const handleTouchEnd = () => {
     if (isDragging && activeColorIndex !== null) {
       toast.success(`Color ${activeColorIndex + 1} position updated`);
     }
@@ -148,6 +175,12 @@ const MeshGradientGenerator = () => {
       }
     };
 
+    const handleGlobalTouchEnd = () => {
+      if (isDragging) {
+        handleTouchEnd();
+      }
+    };
+
     const handleGlobalMouseMove = (e: MouseEvent) => {
       if (isDragging && activeColorIndex !== null && previewRef.current) {
         const rect = previewRef.current.getBoundingClientRect();
@@ -157,12 +190,26 @@ const MeshGradientGenerator = () => {
       }
     };
 
+    const handleGlobalTouchMove = (e: TouchEvent) => {
+      if (isDragging && activeColorIndex !== null && previewRef.current) {
+        const touch = e.touches[0];
+        const rect = previewRef.current.getBoundingClientRect();
+        const x = Math.max(0, Math.min(100, ((touch.clientX - rect.left) / rect.width) * 100));
+        const y = Math.max(0, Math.min(100, ((touch.clientY - rect.top) / rect.height) * 100));
+        updateColorPosition(activeColorIndex, { x, y });
+      }
+    };
+
     window.addEventListener('mouseup', handleGlobalMouseUp);
+    window.addEventListener('touchend', handleGlobalTouchEnd);
     window.addEventListener('mousemove', handleGlobalMouseMove);
+    window.addEventListener('touchmove', handleGlobalTouchMove, { passive: false });
 
     return () => {
       window.removeEventListener('mouseup', handleGlobalMouseUp);
+      window.removeEventListener('touchend', handleGlobalTouchEnd);
       window.removeEventListener('mousemove', handleGlobalMouseMove);
+      window.removeEventListener('touchmove', handleGlobalTouchMove);
     };
   }, [isDragging, activeColorIndex]);
 
@@ -224,12 +271,12 @@ ${grain > 0 ? 'background-blend-mode: multiply;' : ''}`;
 
   const aspectRatio = selectedSize.value.width / selectedSize.value.height;
   const previewHeight = aspectRatio < 1 ? 300 : Math.floor(300 / aspectRatio);
-  const previewWidth = aspectRatio > 1 ? 300 * aspectRatio : 300;
+  const previewWidth = isMobile ? "100%" : (aspectRatio > 1 ? Math.min(300 * aspectRatio, 600) : 300);
 
   const updatedGradientStyle: React.CSSProperties = {
     ...gradientStyle,
     height: `${previewHeight}px`,
-    maxWidth: `${previewWidth}px`,
+    maxWidth: typeof previewWidth === "number" ? `${previewWidth}px` : previewWidth,
   };
 
   return (
@@ -240,34 +287,93 @@ ${grain > 0 ? 'background-blend-mode: multiply;' : ''}`;
           name="description" 
           content="Create stunning mesh gradients for your designs with our free mesh gradient generator tool. Perfect for web designs, presentations, and social media."
         />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
       </Helmet>
       <Navbar />
       <main className="flex-grow">
         <MeshGradientHero />
         
-        <section className="py-16 bg-gray-50">
+        <section className="py-12 md:py-16 bg-gray-50">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold font-display mb-4">
+            <div className="text-center mb-8 md:mb-12">
+              <h2 className="text-2xl md:text-3xl font-bold font-display mb-3 md:mb-4">
                 Generate Your Mesh Gradient
               </h2>
-              <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+              <p className="text-base md:text-lg text-gray-600 max-w-2xl mx-auto">
                 Customize your gradient with the controls below
               </p>
             </div>
             
-            <div className="grid md:grid-cols-3 gap-8">
-              <div className="md:col-span-1 space-y-6 bg-white p-6 rounded-xl shadow-sm">
+            <div className="flex flex-col lg:grid lg:grid-cols-3 gap-6 lg:gap-8">
+              {isMobile && (
+                <div className="lg:hidden order-first mb-4">
+                  <div className="bg-white p-4 md:p-6 rounded-xl shadow-sm">
+                    <h3 className="text-lg font-semibold mb-3">Preview</h3>
+                    <div 
+                      ref={previewRef}
+                      className="relative rounded-lg overflow-hidden mb-4 cursor-move mx-auto touch-none"
+                      style={updatedGradientStyle}
+                      onMouseMove={handleMouseMove}
+                      onMouseUp={handleMouseUp}
+                      onTouchMove={handleTouchMove}
+                      onTouchEnd={handleTouchEnd}
+                    >
+                      <div style={grainOverlay}></div>
+                      
+                      {colors.map((colorData, index) => (
+                        <div 
+                          key={`position-${index}`}
+                          className="absolute w-6 h-6 -ml-3 -mt-3 rounded-full border-2 border-white shadow-md flex items-center justify-center cursor-move color-marker"
+                          style={{
+                            backgroundColor: colorData.color,
+                            left: `${colorData.position.x}%`,
+                            top: `${colorData.position.y}%`,
+                            zIndex: 10,
+                            transform: isDragging && activeColorIndex === index ? 'scale(1.1)' : 'scale(1)',
+                            transition: 'transform 0.1s ease'
+                          }}
+                          onMouseDown={(e) => handleMouseDown(index, e)}
+                          onTouchStart={(e) => handleTouchStart(index, e)}
+                          aria-label={`Drag to move color ${index + 1}`}
+                          title={`Drag to move color ${index + 1}`}
+                        >
+                          <Move className="h-3 w-3 text-white opacity-80 pointer-events-none" />
+                        </div>
+                      ))}
+                      
+                      {colors.length === 0 && (
+                        <div className="absolute inset-0 flex items-center justify-center bg-gray-100/50 text-gray-500">
+                          <p>Add colors to start creating your gradient</p>
+                        </div>
+                      )}
+                    </div>
+                    
+                    <div className="flex gap-2 mb-3">
+                      <Button onClick={copyCSS} className="flex-1 text-xs py-1 h-auto">
+                        <Copy className="h-3 w-3 mr-1" />
+                        Copy CSS
+                      </Button>
+                      <Button onClick={downloadGradient} variant="outline" className="flex-1 text-xs py-1 h-auto">
+                        <Download className="h-3 w-3 mr-1" />
+                        Download
+                      </Button>
+                    </div>
+                  </div>
+                </div>
+              )}
+              
+              <div className="lg:col-span-1 space-y-4 md:space-y-6 bg-white p-4 md:p-6 rounded-xl shadow-sm">
                 <div className="space-y-4">
                   <div className="flex items-center justify-between">
-                    <h3 className="text-lg font-semibold">Colors</h3>
+                    <h3 className="text-base md:text-lg font-semibold">Colors</h3>
                     <div className="flex gap-2">
                       <Button 
                         size="sm" 
                         variant="outline" 
                         onClick={randomizeColors}
+                        className="h-8 text-xs"
                       >
-                        <RefreshCw className="h-4 w-4 mr-1" />
+                        <RefreshCw className="h-3 w-3 mr-1" />
                         Randomize
                       </Button>
                       <Button 
@@ -275,29 +381,30 @@ ${grain > 0 ? 'background-blend-mode: multiply;' : ''}`;
                         variant="outline" 
                         onClick={addColor}
                         disabled={colors.length >= 6}
+                        className="h-8 text-xs"
                       >
-                        <Plus className="h-4 w-4 mr-1" />
+                        <Plus className="h-3 w-3 mr-1" />
                         Add
                       </Button>
                     </div>
                   </div>
                   
-                  <div className="grid grid-cols-1 gap-6">
+                  <div className="grid grid-cols-1 gap-4 md:gap-6 max-h-[300px] overflow-y-auto pr-1 pb-1">
                     {colors.map((colorData, index) => (
-                      <div key={index} className="bg-gray-50 p-4 rounded-lg">
-                        <div className="flex justify-between items-center mb-4">
-                          <h4 className="font-medium">Color {index + 1}</h4>
+                      <div key={index} className="bg-gray-50 p-3 md:p-4 rounded-lg">
+                        <div className="flex justify-between items-center mb-3">
+                          <h4 className="font-medium text-sm">Color {index + 1}</h4>
                           {colors.length > 2 && (
                             <button
                               className="bg-white rounded-full shadow-sm p-1 hover:bg-gray-100"
                               onClick={() => removeColor(index)}
                             >
-                              <X className="h-4 w-4 text-gray-500" />
+                              <X className="h-3 w-3 text-gray-500" />
                             </button>
                           )}
                         </div>
                         
-                        <div className="space-y-4">
+                        <div className="space-y-3">
                           <ColorPicker
                             label="Color"
                             id={`color-${index}`}
@@ -305,10 +412,10 @@ ${grain > 0 ? 'background-blend-mode: multiply;' : ''}`;
                             onChange={(value) => updateColor(index, value)}
                           />
                           
-                          <div className="space-y-2">
+                          <div className="space-y-1">
                             <div className="flex items-center justify-between">
-                              <label className="text-sm font-medium">Position X</label>
-                              <span className="text-sm text-gray-500">{colorData.position.x}%</span>
+                              <label className="text-xs font-medium">Position X</label>
+                              <span className="text-xs text-gray-500">{colorData.position.x}%</span>
                             </div>
                             <Slider
                               value={[colorData.position.x]}
@@ -319,10 +426,10 @@ ${grain > 0 ? 'background-blend-mode: multiply;' : ''}`;
                             />
                           </div>
                           
-                          <div className="space-y-2">
+                          <div className="space-y-1">
                             <div className="flex items-center justify-between">
-                              <label className="text-sm font-medium">Position Y</label>
-                              <span className="text-sm text-gray-500">{colorData.position.y}%</span>
+                              <label className="text-xs font-medium">Position Y</label>
+                              <span className="text-xs text-gray-500">{colorData.position.y}%</span>
                             </div>
                             <Slider
                               value={[colorData.position.y]}
@@ -333,10 +440,10 @@ ${grain > 0 ? 'background-blend-mode: multiply;' : ''}`;
                             />
                           </div>
                           
-                          <div className="space-y-2">
+                          <div className="space-y-1">
                             <div className="flex items-center justify-between">
-                              <label className="text-sm font-medium">Size</label>
-                              <span className="text-sm text-gray-500">{colorData.size}%</span>
+                              <label className="text-xs font-medium">Size</label>
+                              <span className="text-xs text-gray-500">{colorData.size}%</span>
                             </div>
                             <Slider
                               value={[colorData.size]}
@@ -352,13 +459,13 @@ ${grain > 0 ? 'background-blend-mode: multiply;' : ''}`;
                   </div>
                 </div>
                 
-                <div className="space-y-4">
-                  <h3 className="text-lg font-semibold">Effects</h3>
+                <div className="space-y-3 md:space-y-4">
+                  <h3 className="text-base md:text-lg font-semibold">Effects</h3>
                   
-                  <div className="space-y-3">
+                  <div className="space-y-2 md:space-y-3">
                     <div className="flex items-center justify-between">
-                      <label className="font-medium">Grain</label>
-                      <span className="text-sm text-gray-500">{grain}%</span>
+                      <label className="text-sm font-medium">Grain</label>
+                      <span className="text-xs text-gray-500">{grain}%</span>
                     </div>
                     <Slider
                       value={[grain]}
@@ -369,10 +476,10 @@ ${grain > 0 ? 'background-blend-mode: multiply;' : ''}`;
                     />
                   </div>
                   
-                  <div className="space-y-3">
+                  <div className="space-y-2 md:space-y-3">
                     <div className="flex items-center justify-between">
-                      <label className="font-medium">Blur</label>
-                      <span className="text-sm text-gray-500">{blur}px</span>
+                      <label className="text-sm font-medium">Blur</label>
+                      <span className="text-xs text-gray-500">{blur}px</span>
                     </div>
                     <Slider
                       value={[blur]}
@@ -384,16 +491,16 @@ ${grain > 0 ? 'background-blend-mode: multiply;' : ''}`;
                   </div>
                 </div>
                 
-                <div className="space-y-4">
-                  <h3 className="text-lg font-semibold">Canvas Size</h3>
+                <div className="space-y-3 md:space-y-4">
+                  <h3 className="text-base md:text-lg font-semibold">Canvas Size</h3>
                   <div className="relative">
                     <Button 
                       variant="outline" 
                       onClick={() => setShowSizeDropdown(!showSizeDropdown)}
-                      className="w-full justify-between"
+                      className="w-full justify-between text-sm"
                     >
                       <div className="flex items-center">
-                        <Square className="h-4 w-4 mr-2" />
+                        <Square className="h-3 w-3 mr-2" />
                         {selectedSize.label}
                       </div>
                       <span className="text-xs text-gray-500">
@@ -402,14 +509,14 @@ ${grain > 0 ? 'background-blend-mode: multiply;' : ''}`;
                     </Button>
                     
                     {showSizeDropdown && (
-                      <div className="absolute z-10 mt-1 w-full bg-white rounded-md shadow-lg p-2 max-h-[300px] overflow-y-auto border">
+                      <div className="absolute z-10 mt-1 w-full bg-white rounded-md shadow-lg p-2 max-h-[250px] overflow-y-auto border">
                         <div className="grid grid-cols-3 gap-1">
                           {canvasSizes.map((size, index) => (
                             <Button
                               key={index}
                               variant="ghost"
                               size="sm"
-                              className={`justify-center ${selectedSize.label === size.label ? 'bg-primary/10' : ''}`}
+                              className={`justify-center text-xs py-1 h-8 ${selectedSize.label === size.label ? 'bg-primary/10' : ''}`}
                               onClick={() => {
                                 setSelectedSize(size);
                                 setShowSizeDropdown(false);
@@ -424,7 +531,7 @@ ${grain > 0 ? 'background-blend-mode: multiply;' : ''}`;
                   </div>
                 </div>
                 
-                <div className="pt-4 space-y-3">
+                <div className="pt-3 md:pt-4 space-y-2 md:space-y-3 lg:block hidden">
                   <Button onClick={copyCSS} className="w-full">
                     <Copy className="h-4 w-4 mr-2" />
                     Copy CSS
@@ -436,7 +543,7 @@ ${grain > 0 ? 'background-blend-mode: multiply;' : ''}`;
                 </div>
               </div>
               
-              <div className="md:col-span-2">
+              <div className="hidden lg:block lg:col-span-2">
                 <div className="bg-white p-6 rounded-xl shadow-sm sticky top-24">
                   <h3 className="text-lg font-semibold mb-4">Preview</h3>
                   <div 
@@ -445,6 +552,8 @@ ${grain > 0 ? 'background-blend-mode: multiply;' : ''}`;
                     style={updatedGradientStyle}
                     onMouseMove={handleMouseMove}
                     onMouseUp={handleMouseUp}
+                    onTouchMove={handleTouchMove}
+                    onTouchEnd={handleTouchEnd}
                   >
                     <div style={grainOverlay}></div>
                     
@@ -461,6 +570,7 @@ ${grain > 0 ? 'background-blend-mode: multiply;' : ''}`;
                           transition: 'transform 0.1s ease'
                         }}
                         onMouseDown={(e) => handleMouseDown(index, e)}
+                        onTouchStart={(e) => handleTouchStart(index, e)}
                         aria-label={`Drag to move color ${index + 1}`}
                         title={`Drag to move color ${index + 1}`}
                       >
