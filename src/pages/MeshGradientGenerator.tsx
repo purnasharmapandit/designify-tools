@@ -1,3 +1,4 @@
+
 import { motion } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -311,7 +312,7 @@ ${grain > 0 ? 'background-blend-mode: multiply;' : ''}`;
                     <h3 className="text-lg font-semibold mb-3">Preview</h3>
                     <div 
                       ref={previewRef}
-                      className="relative rounded-lg overflow-hidden mb-4 cursor-move mx-auto touch-none"
+                      className="relative overflow-hidden mb-4 cursor-move mx-auto touch-none"
                       style={updatedGradientStyle}
                       onMouseMove={handleMouseMove}
                       onMouseUp={handleMouseUp}
@@ -544,11 +545,11 @@ ${grain > 0 ? 'background-blend-mode: multiply;' : ''}`;
               </div>
               
               <div className="hidden lg:block lg:col-span-2">
-                <div className="bg-white p-6 rounded-xl shadow-sm sticky top-24">
+                <div className="bg-white p-6 rounded-xl shadow-sm">
                   <h3 className="text-lg font-semibold mb-4">Preview</h3>
                   <div 
                     ref={previewRef}
-                    className="relative rounded-lg overflow-hidden mb-4 cursor-move mx-auto"
+                    className="relative overflow-hidden mb-4 cursor-move mx-auto"
                     style={updatedGradientStyle}
                     onMouseMove={handleMouseMove}
                     onMouseUp={handleMouseUp}

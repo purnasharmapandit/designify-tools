@@ -24,7 +24,7 @@ const MeshGradientHero = () => {
         ]}
         image={
           <div className="w-full flex flex-col items-center justify-center">
-            <div className="relative w-full max-w-md h-60 md:h-80 rounded-lg overflow-hidden shadow-lg">
+            <div className="relative w-full max-w-md h-60 md:h-80 overflow-hidden shadow-lg">
               <Palette className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white/80 z-10" size={isMobile ? 60 : 80} />
               <div 
                 className="absolute inset-0" 
