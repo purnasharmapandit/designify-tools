@@ -21,7 +21,7 @@ const HeadshotGenerator = () => {
           </div>
           <div className="w-36 h-36 sm:w-44 sm:h-44 overflow-hidden rounded-lg border-2 border-gray-100">
             <img 
-              src="/lovable-uploads/1b13003a-4a58-4d24-a71f-136916ddeeb4.png" 
+              src="/lovable-uploads/0e9ae0d9-fe21-4c61-ad05-0efc6f3acdf5.png" 
               alt="Original photo" 
               className="w-full h-full object-cover"
             />
@@ -43,7 +43,7 @@ const HeadshotGenerator = () => {
           </div>
           <div className="w-36 h-36 sm:w-44 sm:h-44 overflow-hidden rounded-lg border-2 border-gray-100">
             <img 
-              src="/lovable-uploads/717fefed-29e0-4e71-ab55-1f03d85a2755.png" 
+              src="/lovable-uploads/185c6d0e-b12b-4ba2-8374-2c1c5749fd1d.png" 
               alt="AI enhanced professional headshot" 
               className="w-full h-full object-cover"
             />
