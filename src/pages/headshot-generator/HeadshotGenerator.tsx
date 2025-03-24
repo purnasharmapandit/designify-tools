@@ -5,32 +5,58 @@ import { Helmet } from "react-helmet";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
-import { ChevronRight, Check, Camera, User, Image, Download, ImagePlus, Sparkle, Upload, Wand2 } from "lucide-react";
+import { ChevronRight, Check, Camera, User, Image, Download, ImagePlus, Sparkle, Upload, Wand2, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import StandardHeroSection from "@/components/shared/StandardHeroSection";
 import HeadshotGeneratorTool from "./components/HeadshotGeneratorTool";
 
 const HeadshotGenerator = () => {
-  const headshotImage = (
+  const beforeAfterImage = (
     <div className="relative w-full max-w-md mx-auto">
-      <div className="bg-white rounded-xl shadow-lg p-4 transform rotate-3 absolute -right-5 -top-5 z-10">
-        <Camera className="w-12 h-12 text-blue-500" />
-      </div>
-      <div className="bg-white rounded-xl shadow-lg p-6">
-        <div className="grid grid-cols-2 gap-4">
-          <div className="aspect-square rounded-lg bg-gray-100 flex items-center justify-center">
-            <User className="w-16 h-16 text-gray-300" />
+      <div className="flex items-center justify-between gap-4 p-6 bg-white rounded-xl shadow-lg">
+        {/* Before Image */}
+        <div className="relative">
+          <div className="absolute -top-10 left-0 bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-sm font-medium">
+            Before
           </div>
-          <div className="aspect-square rounded-lg bg-gradient-to-br from-blue-100 to-purple-100 flex items-center justify-center">
-            <Image className="w-16 h-16 text-blue-500" />
-          </div>
-          <div className="aspect-square rounded-lg bg-gradient-to-br from-purple-100 to-pink-100 flex items-center justify-center">
-            <User className="w-16 h-16 text-purple-500" />
-          </div>
-          <div className="aspect-square rounded-lg bg-gradient-to-br from-pink-100 to-blue-100 flex items-center justify-center">
-            <User className="w-16 h-16 text-pink-500" />
+          <div className="w-36 h-36 sm:w-44 sm:h-44 overflow-hidden rounded-lg border-2 border-gray-100">
+            <img 
+              src="/lovable-uploads/1b13003a-4a58-4d24-a71f-136916ddeeb4.png" 
+              alt="Original photo" 
+              className="w-full h-full object-cover"
+            />
           </div>
         </div>
+        
+        {/* Arrow */}
+        <div className="flex flex-col items-center">
+          <ArrowRight className="h-8 w-8 text-blue-500" />
+          <div className="mt-2 bg-blue-50 text-blue-700 px-3 py-1 rounded-full text-xs">
+            AI Magic
+          </div>
+        </div>
+        
+        {/* After Image */}
+        <div className="relative">
+          <div className="absolute -top-10 left-0 bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm font-medium">
+            After
+          </div>
+          <div className="w-36 h-36 sm:w-44 sm:h-44 overflow-hidden rounded-lg border-2 border-gray-100">
+            <img 
+              src="/lovable-uploads/717fefed-29e0-4e71-ab55-1f03d85a2755.png" 
+              alt="AI enhanced professional headshot" 
+              className="w-full h-full object-cover"
+            />
+          </div>
+        </div>
+      </div>
+      
+      {/* Decorative elements */}
+      <div className="absolute -right-4 -top-4 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full p-3 shadow-lg">
+        <Sparkle className="w-6 h-6 text-white" />
+      </div>
+      <div className="absolute -left-4 -bottom-4 bg-blue-50 rounded-full p-3 shadow-md border border-blue-100">
+        <Camera className="w-6 h-6 text-blue-500" />
       </div>
     </div>
   );
@@ -63,7 +89,7 @@ const HeadshotGenerator = () => {
             { icon: <Check className="h-4 w-4" />, text: "High Resolution" },
             { icon: <Check className="h-4 w-4" />, text: "Fast Generation" }
           ]}
-          image={headshotImage}
+          image={beforeAfterImage}
           bgColor="bg-blue-900"
           textColor="text-white"
         />
