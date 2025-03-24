@@ -11,42 +11,84 @@ import StandardHeroSection from "@/components/shared/StandardHeroSection";
 import HeadshotGeneratorTool from "./components/HeadshotGeneratorTool";
 
 const HeadshotGenerator = () => {
-  const beforeAfterImage = (
-    <div className="relative w-full max-w-md mx-auto">
-      <div className="flex items-center justify-between gap-4 p-6 bg-white rounded-xl shadow-lg">
-        {/* Before Image */}
-        <div className="relative">
-          <div className="absolute -top-10 left-0 bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-sm font-medium">
-            Before
+  const beforeAfterImages = (
+    <div className="relative w-full max-w-4xl mx-auto">
+      <div className="flex flex-col md:flex-row items-center justify-center gap-8">
+        {/* First Pair */}
+        <div className="flex items-center justify-between gap-4 p-6 bg-white rounded-xl shadow-lg">
+          {/* Before Image 1 */}
+          <div className="relative">
+            <div className="absolute -top-10 left-0 bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-sm font-medium">
+              Before
+            </div>
+            <div className="w-32 h-32 sm:w-40 sm:h-40 overflow-hidden rounded-lg border-2 border-gray-100">
+              <img 
+                src="/lovable-uploads/0e9ae0d9-fe21-4c61-ad05-0efc6f3acdf5.png" 
+                alt="Original photo 1" 
+                className="w-full h-full object-cover"
+              />
+            </div>
           </div>
-          <div className="w-36 h-36 sm:w-44 sm:h-44 overflow-hidden rounded-lg border-2 border-gray-100">
-            <img 
-              src="/lovable-uploads/0e9ae0d9-fe21-4c61-ad05-0efc6f3acdf5.png" 
-              alt="Original photo" 
-              className="w-full h-full object-cover"
-            />
+          
+          {/* Arrow */}
+          <div className="flex flex-col items-center">
+            <ArrowRight className="h-6 w-6 text-blue-500" />
+            <div className="mt-2 bg-blue-50 text-blue-700 px-3 py-1 rounded-full text-xs">
+              AI Magic
+            </div>
+          </div>
+          
+          {/* After Image 1 */}
+          <div className="relative">
+            <div className="absolute -top-10 left-0 bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm font-medium">
+              After
+            </div>
+            <div className="w-32 h-32 sm:w-40 sm:h-40 overflow-hidden rounded-lg border-2 border-gray-100">
+              <img 
+                src="/lovable-uploads/185c6d0e-b12b-4ba2-8374-2c1c5749fd1d.png" 
+                alt="AI enhanced professional headshot 1" 
+                className="w-full h-full object-cover"
+              />
+            </div>
           </div>
         </div>
-        
-        {/* Arrow */}
-        <div className="flex flex-col items-center">
-          <ArrowRight className="h-8 w-8 text-blue-500" />
-          <div className="mt-2 bg-blue-50 text-blue-700 px-3 py-1 rounded-full text-xs">
-            AI Magic
+
+        {/* Second Pair */}
+        <div className="flex items-center justify-between gap-4 p-6 bg-white rounded-xl shadow-lg">
+          {/* Before Image 2 */}
+          <div className="relative">
+            <div className="absolute -top-10 left-0 bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-sm font-medium">
+              Before
+            </div>
+            <div className="w-32 h-32 sm:w-40 sm:h-40 overflow-hidden rounded-lg border-2 border-gray-100">
+              <img 
+                src="/lovable-uploads/1b13003a-4a58-4d24-a71f-136916ddeeb4.png" 
+                alt="Original photo 2" 
+                className="w-full h-full object-cover"
+              />
+            </div>
           </div>
-        </div>
-        
-        {/* After Image */}
-        <div className="relative">
-          <div className="absolute -top-10 left-0 bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm font-medium">
-            After
+          
+          {/* Arrow */}
+          <div className="flex flex-col items-center">
+            <ArrowRight className="h-6 w-6 text-blue-500" />
+            <div className="mt-2 bg-blue-50 text-blue-700 px-3 py-1 rounded-full text-xs">
+              AI Magic
+            </div>
           </div>
-          <div className="w-36 h-36 sm:w-44 sm:h-44 overflow-hidden rounded-lg border-2 border-gray-100">
-            <img 
-              src="/lovable-uploads/185c6d0e-b12b-4ba2-8374-2c1c5749fd1d.png" 
-              alt="AI enhanced professional headshot" 
-              className="w-full h-full object-cover"
-            />
+          
+          {/* After Image 2 */}
+          <div className="relative">
+            <div className="absolute -top-10 left-0 bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm font-medium">
+              After
+            </div>
+            <div className="w-32 h-32 sm:w-40 sm:h-40 overflow-hidden rounded-lg border-2 border-gray-100">
+              <img 
+                src="/lovable-uploads/717fefed-29e0-4e71-ab55-1f03d85a2755.png" 
+                alt="AI enhanced professional headshot 2" 
+                className="w-full h-full object-cover"
+              />
+            </div>
           </div>
         </div>
       </div>
@@ -89,7 +131,7 @@ const HeadshotGenerator = () => {
             { icon: <Check className="h-4 w-4" />, text: "High Resolution" },
             { icon: <Check className="h-4 w-4" />, text: "Fast Generation" }
           ]}
-          image={beforeAfterImage}
+          image={beforeAfterImages}
           bgColor="bg-blue-900"
           textColor="text-white"
         />
