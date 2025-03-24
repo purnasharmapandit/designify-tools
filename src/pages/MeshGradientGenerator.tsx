@@ -8,11 +8,22 @@ import MeshGradientHowItWorks from "@/components/mesh-gradient/MeshGradientHowIt
 import MeshGradientFAQ from "@/components/mesh-gradient/MeshGradientFAQ";
 import { Helmet } from "react-helmet";
 import { Button } from "@/components/ui/button";
-import { Download, Copy, RefreshCw, Palette, Plus, X, Sliders, Image, Square } from "lucide-react";
-import { useState } from "react";
+import { Download, Copy, RefreshCw, Palette, Plus, X, Sliders, Square, Move } from "lucide-react";
+import { useState, useRef } from "react";
 import { Slider } from "@/components/ui/slider";
 import { ColorPicker } from "@/components/ui/color-picker";
 import { toast } from "sonner";
+import html2canvas from "html2canvas";
+
+// Define the color type with position
+interface GradientColor {
+  color: string;
+  position: {
+    x: number; // 0-100 for percentage across width
+    y: number; // 0-100 for percentage across height
+  };
+  size: number; // 0-100 for size of the color blob
+}
 
 // Canvas size options
 const canvasSizes = [
@@ -34,35 +45,55 @@ const canvasSizes = [
 ];
 
 const MeshGradientGenerator = () => {
-  const [colors, setColors] = useState([
-    "#8B5CF6", // Purple
-    "#3B82F6", // Blue
-    "#EC4899", // Pink
+  // Initialize with random positions for each color
+  const [colors, setColors] = useState<GradientColor[]>([
+    { color: "#8B5CF6", position: { x: 70, y: 20 }, size: 50 }, // Purple
+    { color: "#3B82F6", position: { x: 20, y: 60 }, size: 50 }, // Blue
+    { color: "#EC4899", position: { x: 50, y: 80 }, size: 60 }, // Pink
   ]);
   const [grain, setGrain] = useState(0);
   const [blur, setBlur] = useState(0);
   const [selectedSize, setSelectedSize] = useState(canvasSizes[0]); // Default to 1:1
   const [showSizeDropdown, setShowSizeDropdown] = useState(false);
+  const [activeColorIndex, setActiveColorIndex] = useState<number | null>(null);
+  
+  const previewRef = useRef<HTMLDivElement>(null);
   
   const generateRandomColor = () => {
     return `#${Math.floor(Math.random() * 16777215).toString(16).padStart(6, '0')}`;
   };
   
+  const generateRandomPosition = () => {
+    return {
+      x: Math.floor(Math.random() * 100),
+      y: Math.floor(Math.random() * 100),
+    };
+  };
+  
   const randomizeColors = () => {
-    const newColors = colors.map(() => generateRandomColor());
+    const newColors = colors.map(color => ({
+      color: generateRandomColor(),
+      position: generateRandomPosition(),
+      size: Math.floor(Math.random() * 30) + 40, // Random size between 40-70
+    }));
     setColors(newColors);
-    toast.success("Generated new colors!");
+    toast.success("Generated new colors and positions!");
   };
   
   const addColor = () => {
     if (colors.length < 6) {
-      setColors([...colors, generateRandomColor()]);
+      const newColor: GradientColor = {
+        color: generateRandomColor(),
+        position: generateRandomPosition(),
+        size: 50,
+      };
+      setColors([...colors, newColor]);
     } else {
       toast.error("Maximum 6 colors allowed");
     }
   };
   
-  const removeColor = (index) => {
+  const removeColor = (index: number) => {
     if (colors.length > 2) {
       const newColors = [...colors];
       newColors.splice(index, 1);
@@ -72,18 +103,30 @@ const MeshGradientGenerator = () => {
     }
   };
   
-  const updateColor = (index, newColor) => {
+  const updateColor = (index: number, newColor: string) => {
     const newColors = [...colors];
-    newColors[index] = newColor;
+    newColors[index] = { ...newColors[index], color: newColor };
+    setColors(newColors);
+  };
+  
+  const updateColorPosition = (index: number, position: { x: number, y: number }) => {
+    const newColors = [...colors];
+    newColors[index] = { ...newColors[index], position };
+    setColors(newColors);
+  };
+  
+  const updateColorSize = (index: number, size: number) => {
+    const newColors = [...colors];
+    newColors[index] = { ...newColors[index], size };
     setColors(newColors);
   };
   
   const copyCSS = () => {
-    let colorStops = colors.map((color, index) => 
-      `${color} ${Math.round(index * (100 / (colors.length - 1)))}%`
+    let gradients = colors.map(({ color, position, size }) => 
+      `radial-gradient(circle at ${position.x}% ${position.y}%, ${color} 0%, transparent ${size}%)`
     ).join(', ');
     
-    const cssText = `background: radial-gradient(circle at 50% 50%, ${colorStops});
+    const cssText = `background: ${gradients};
 filter: blur(${blur}px);
 ${grain > 0 ? 'background-blend-mode: multiply;' : ''}`;
     
@@ -92,18 +135,25 @@ ${grain > 0 ? 'background-blend-mode: multiply;' : ''}`;
   };
   
   const downloadGradient = () => {
-    // This would be implemented with html2canvas or similar library
-    toast.success("Gradient downloaded!");
+    if (previewRef.current) {
+      html2canvas(previewRef.current).then(canvas => {
+        const link = document.createElement('a');
+        link.download = `mesh-gradient-${new Date().getTime()}.png`;
+        link.href = canvas.toDataURL('image/png');
+        link.click();
+        toast.success("Gradient downloaded!");
+      });
+    }
   };
 
   const gradientStyle: React.CSSProperties = {
-    background: `radial-gradient(circle at 50% 50%, ${colors.map((color, index) => 
-      `${color} ${Math.round(index * (100 / (colors.length - 1)))}%`
-    ).join(', ')})`,
+    background: colors.map(({ color, position, size }) => 
+      `radial-gradient(circle at ${position.x}% ${position.y}%, ${color} 0%, transparent ${size}%)`
+    ).join(', '),
     filter: `blur(${blur}px)`,
     width: "100%",
     height: "300px",
-    position: "relative" as "relative",
+    position: "relative",
   };
 
   // Add grain effect if grain value is greater than 0
@@ -169,23 +219,71 @@ ${grain > 0 ? 'background-blend-mode: multiply;' : ''}`;
                     </div>
                   </div>
                   
-                  <div className="grid grid-cols-2 gap-2">
-                    {colors.map((color, index) => (
-                      <div key={index} className="relative">
-                        <ColorPicker
-                          label={`Color ${index + 1}`}
-                          id={`color-${index}`}
-                          value={color}
-                          onChange={(value) => updateColor(index, value)}
-                        />
-                        {colors.length > 2 && (
-                          <button
-                            className="absolute -top-1 -right-1 bg-white rounded-full shadow-sm p-0.5"
-                            onClick={() => removeColor(index)}
-                          >
-                            <X className="h-3 w-3 text-gray-500" />
-                          </button>
-                        )}
+                  <div className="grid grid-cols-1 gap-6">
+                    {colors.map((colorData, index) => (
+                      <div key={index} className="bg-gray-50 p-4 rounded-lg">
+                        <div className="flex justify-between items-center mb-4">
+                          <h4 className="font-medium">Color {index + 1}</h4>
+                          {colors.length > 2 && (
+                            <button
+                              className="bg-white rounded-full shadow-sm p-1 hover:bg-gray-100"
+                              onClick={() => removeColor(index)}
+                            >
+                              <X className="h-4 w-4 text-gray-500" />
+                            </button>
+                          )}
+                        </div>
+                        
+                        <div className="space-y-4">
+                          <ColorPicker
+                            label="Color"
+                            id={`color-${index}`}
+                            value={colorData.color}
+                            onChange={(value) => updateColor(index, value)}
+                          />
+                          
+                          <div className="space-y-2">
+                            <div className="flex items-center justify-between">
+                              <label className="text-sm font-medium">Position X</label>
+                              <span className="text-sm text-gray-500">{colorData.position.x}%</span>
+                            </div>
+                            <Slider
+                              value={[colorData.position.x]}
+                              min={0}
+                              max={100}
+                              step={1}
+                              onValueChange={(value) => updateColorPosition(index, { ...colorData.position, x: value[0] })}
+                            />
+                          </div>
+                          
+                          <div className="space-y-2">
+                            <div className="flex items-center justify-between">
+                              <label className="text-sm font-medium">Position Y</label>
+                              <span className="text-sm text-gray-500">{colorData.position.y}%</span>
+                            </div>
+                            <Slider
+                              value={[colorData.position.y]}
+                              min={0}
+                              max={100}
+                              step={1}
+                              onValueChange={(value) => updateColorPosition(index, { ...colorData.position, y: value[0] })}
+                            />
+                          </div>
+                          
+                          <div className="space-y-2">
+                            <div className="flex items-center justify-between">
+                              <label className="text-sm font-medium">Size</label>
+                              <span className="text-sm text-gray-500">{colorData.size}%</span>
+                            </div>
+                            <Slider
+                              value={[colorData.size]}
+                              min={10}
+                              max={100}
+                              step={1}
+                              onValueChange={(value) => updateColorSize(index, value[0])}
+                            />
+                          </div>
+                        </div>
                       </div>
                     ))}
                   </div>
@@ -278,15 +376,36 @@ ${grain > 0 ? 'background-blend-mode: multiply;' : ''}`;
               <div className="md:col-span-2">
                 <div className="bg-white p-6 rounded-xl shadow-sm h-full">
                   <h3 className="text-lg font-semibold mb-4">Preview</h3>
-                  <div className="relative rounded-lg overflow-hidden mb-4" style={gradientStyle}>
+                  <div 
+                    ref={previewRef}
+                    className="relative rounded-lg overflow-hidden mb-4 cursor-pointer"
+                    style={gradientStyle}
+                  >
                     <div style={grainOverlay}></div>
+                    
+                    {/* Position markers */}
+                    {colors.map((colorData, index) => (
+                      <div 
+                        key={`position-${index}`}
+                        className="absolute w-6 h-6 -ml-3 -mt-3 rounded-full border-2 border-white shadow-md flex items-center justify-center cursor-move"
+                        style={{
+                          backgroundColor: colorData.color,
+                          left: `${colorData.position.x}%`,
+                          top: `${colorData.position.y}%`,
+                          zIndex: 10,
+                        }}
+                        onClick={() => setActiveColorIndex(index)}
+                      >
+                        <Move className="h-3 w-3 text-white opacity-80" />
+                      </div>
+                    ))}
                   </div>
                   <div className="text-sm text-gray-500">
                     <p className="font-medium mb-1">CSS Code:</p>
-                    <pre className="bg-gray-100 p-3 rounded-md overflow-x-auto">
-                      {`background: radial-gradient(circle at 50% 50%, ${colors.map((color, index) => 
-                        `${color} ${Math.round(index * (100 / (colors.length - 1)))}%`
-                      ).join(', ')});
+                    <pre className="bg-gray-100 p-3 rounded-md overflow-x-auto text-xs">
+                      {`background: ${colors.map(({ color, position, size }) => 
+                        `radial-gradient(circle at ${position.x}% ${position.y}%, ${color} 0%, transparent ${size}%)`
+                      ).join(',\n             ')};
 filter: blur(${blur}px);
 ${grain > 0 ? 'background-blend-mode: multiply;' : ''}`}
                     </pre>

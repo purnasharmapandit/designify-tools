@@ -11,7 +11,8 @@ import {
   Image,
   Square,
   RefreshCw,
-  ArrowDown
+  ArrowDown,
+  Move
 } from "lucide-react";
 
 const features = [
@@ -21,39 +22,39 @@ const features = [
     description: "Add up to 6 colors to create complex, beautiful mesh gradients for your designs."
   },
   {
-    icon: <Sparkles className="h-6 w-6 text-blue-500" />,
+    icon: <Move className="h-6 w-6 text-blue-500" />,
+    title: "Adjustable Positions",
+    description: "Fine-tune the position of each color to create the exact gradient pattern you want."
+  },
+  {
+    icon: <Sparkles className="h-6 w-6 text-amber-500" />,
     title: "One-Click Generation",
     description: "Instantly generate unique gradient combinations with a single click."
   },
   {
-    icon: <RefreshCw className="h-6 w-6 text-amber-500" />,
+    icon: <RefreshCw className="h-6 w-6 text-green-500" />,
     title: "Grain Control",
     description: "Add texture to your gradients with adjustable grain effect intensity."
   },
   {
-    icon: <Sliders className="h-6 w-6 text-green-500" />,
+    icon: <Sliders className="h-6 w-6 text-indigo-500" />,
     title: "Blur Adjustment",
     description: "Fine-tune the softness of your gradient with precise blur controls."
   },
   {
-    icon: <Square className="h-6 w-6 text-indigo-500" />,
+    icon: <Square className="h-6 w-6 text-pink-500" />,
     title: "Multiple Canvas Sizes",
     description: "Choose from 15 different aspect ratios to create the perfect gradient for any use case."
   },
   {
-    icon: <Copy className="h-6 w-6 text-pink-500" />,
+    icon: <Copy className="h-6 w-6 text-cyan-500" />,
     title: "Copy CSS Code",
     description: "Easily copy the CSS code for your gradient to use in your web projects."
   },
   {
-    icon: <Download className="h-6 w-6 text-cyan-500" />,
+    icon: <Download className="h-6 w-6 text-red-500" />,
     title: "Download as Image",
     description: "Save your gradient as a high-quality image for use in any design software."
-  },
-  {
-    icon: <Sliders className="h-6 w-6 text-red-500" />,
-    title: "Full Customization",
-    description: "Fine-tune every aspect of your gradient to get exactly the look you want."
   }
 ];
 
