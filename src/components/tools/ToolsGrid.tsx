@@ -19,7 +19,8 @@ import {
   ChartBar,
   Award,
   Tag,
-  Clock
+  Clock,
+  CircleDashed
 } from "lucide-react";
 import ToolItem from "./ToolItem";
 import { useAuth } from "@/contexts/AuthContext";
@@ -136,6 +137,15 @@ const ToolsGrid = () => {
       color: "bg-purple-100 text-purple-500",
       link: "/background-remover",
       toolType: "background_remover",
+      category: "free"
+    },
+    {
+      icon: CircleDashed,
+      name: "Mesh Gradient Generator",
+      description: "Create beautiful, unique mesh gradients for your designs",
+      color: "bg-teal-100 text-teal-500",
+      link: "/mesh-gradient-generator",
+      toolType: "mesh_gradient",
       category: "free"
     },
 

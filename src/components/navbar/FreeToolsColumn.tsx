@@ -86,6 +86,22 @@ const FreeToolsColumn = ({ setIsMenuOpen }: FreeToolsColumnProps) => {
         link="/email-signature-generator"
         onClick={() => setIsMenuOpen && setIsMenuOpen(false)}
       />
+      
+      <ToolMenuItem 
+        icon={(props) => (
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-teal-600 h-5 w-5" {...props}>
+            <circle cx="12" cy="12" r="9" stroke="currentColor" strokeWidth="2" />
+            <circle cx="7" cy="10" r="2" fill="currentColor" />
+            <circle cx="14" cy="7" r="2" fill="currentColor" />
+            <circle cx="17" cy="14" r="2" fill="currentColor" />
+            <circle cx="10" cy="17" r="2" fill="currentColor" />
+          </svg>
+        )} 
+        name="Mesh Gradient Generator" 
+        color="bg-teal-100"
+        link="/mesh-gradient-generator"
+        onClick={() => setIsMenuOpen && setIsMenuOpen(false)}
+      />
     </div>
   );
 };

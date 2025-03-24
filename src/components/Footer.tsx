@@ -9,7 +9,8 @@ const Footer = () => {
     { name: "QR Code Generator", link: "/qr-code-generator" },
     { name: "Color Palette Generator", link: "/color-palette-generator" },
     { name: "Email Signature Generator", link: "/email-signature-generator" },
-    { name: "Background Remover", link: "/background-remover" }
+    { name: "Background Remover", link: "/background-remover" },
+    { name: "Mesh Gradient Generator", link: "/mesh-gradient-generator" }
   ];
 
   const premiumTools = [

@@ -43,6 +43,7 @@ import ImageEditor from "./pages/image-editor/ImageEditor";
 import InfographicsGenerator from "./pages/infographics/InfographicsGenerator";
 import HeadshotGenerator from "./pages/headshot-generator/HeadshotGenerator";
 import SocialBannerMaker from "./pages/social-banner/SocialBannerMaker";
+import MeshGradientGenerator from "./pages/MeshGradientGenerator";
 
 const queryClient = new QueryClient();
 
@@ -92,6 +93,7 @@ function App() {
                   <Route path="/infographics-generator" element={<InfographicsGenerator />} />
                   <Route path="/headshot-generator" element={<HeadshotGenerator />} />
                   <Route path="/social-banner-maker" element={<SocialBannerMaker />} />
+                  <Route path="/mesh-gradient-generator" element={<MeshGradientGenerator />} />
                   <Route path="/auth" element={<Auth />} />
                   <Route path="*" element={<NotFound />} />
                 </Routes>

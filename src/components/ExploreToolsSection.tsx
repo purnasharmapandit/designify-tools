@@ -67,10 +67,10 @@ const ExploreToolsSection = () => {
       link: "/email-signature-generator"
     },
     {
-      name: "Social Banner Maker",
-      color: "bg-gradient-to-br from-emerald-100 to-emerald-200",
-      iconColor: "text-emerald-500",
-      link: "/social-banner-maker"
+      name: "Mesh Gradient Maker",
+      color: "bg-gradient-to-br from-teal-100 to-teal-200",
+      iconColor: "text-teal-500",
+      link: "/mesh-gradient-generator"
     }
   ];
 

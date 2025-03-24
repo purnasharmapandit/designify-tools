@@ -65,6 +65,13 @@ const MobileMenu = ({ isMenuOpen, setIsMenuOpen, user, signOut, isLoading }: Mob
             >
               Email Signature Generator
             </Link>
+            <Link 
+              to="/mesh-gradient-generator"
+              className="block px-3 py-2 rounded-md text-sm font-medium text-gray-900 hover:text-primary hover:bg-gray-50"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              Mesh Gradient Generator
+            </Link>
           </div>
         </div>
         
