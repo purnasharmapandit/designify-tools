@@ -1,3 +1,4 @@
+
 import { motion } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -243,23 +244,73 @@ position: relative;
   };
 
   const downloadGradient = () => {
-    if (previewRef.current && gradientRef.current) {
-      const markersElements = previewRef.current.querySelectorAll('.color-marker');
+    if (gradientRef.current) {
+      toast.loading("Preparing your gradient...");
       
-      markersElements.forEach(marker => {
-        (marker as HTMLElement).style.display = 'none';
-      });
+      // Create a temporary container for rendering at the selected size
+      const tempContainer = document.createElement('div');
+      const { width, height } = selectedSize.value;
       
-      html2canvas(gradientRef.current).then(canvas => {
-        markersElements.forEach(marker => {
-          (marker as HTMLElement).style.display = 'flex';
-        });
-        
+      // Apply styles to the container
+      tempContainer.style.width = `${width}px`;
+      tempContainer.style.height = `${height}px`;
+      tempContainer.style.position = 'absolute';
+      tempContainer.style.left = '-9999px';
+      tempContainer.style.top = '-9999px';
+      
+      // Create the gradient div
+      const gradientDiv = document.createElement('div');
+      gradientDiv.style.width = '100%';
+      gradientDiv.style.height = '100%';
+      gradientDiv.style.position = 'absolute';
+      gradientDiv.style.inset = '0';
+      
+      // Apply the gradient styles
+      gradientDiv.style.background = colors.map(({ color, position, size }) => 
+        `radial-gradient(circle at ${position.x}% ${position.y}%, ${color} 0%, transparent ${size}%)`
+      ).join(', ');
+      gradientDiv.style.filter = `blur(${blur}px)`;
+      
+      // Add grain if needed
+      if (grain > 0) {
+        const grainDiv = document.createElement('div');
+        grainDiv.style.position = 'absolute';
+        grainDiv.style.inset = '0';
+        grainDiv.style.backgroundImage = `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`;
+        grainDiv.style.opacity = (grain / 100).toString();
+        grainDiv.style.mixBlendMode = 'multiply';
+        grainDiv.style.backgroundColor = grainColor;
+        gradientDiv.appendChild(grainDiv);
+      }
+      
+      // Add the gradient to the container
+      tempContainer.appendChild(gradientDiv);
+      
+      // Add the container to the body
+      document.body.appendChild(tempContainer);
+      
+      // Render the canvas
+      html2canvas(tempContainer, {
+        width,
+        height,
+        scale: 1,
+        useCORS: true,
+        allowTaint: true,
+      }).then(canvas => {
+        // Create download link
         const link = document.createElement('a');
-        link.download = `mesh-gradient-${new Date().getTime()}.png`;
+        link.download = `mesh-gradient-${width}x${height}-${new Date().getTime()}.png`;
         link.href = canvas.toDataURL('image/png');
         link.click();
-        toast.success("Gradient downloaded!");
+        
+        // Clean up
+        document.body.removeChild(tempContainer);
+        toast.dismiss();
+        toast.success(`Gradient downloaded at ${width}×${height} resolution!`);
+      }).catch(error => {
+        console.error("Error generating canvas:", error);
+        toast.dismiss();
+        toast.error("Failed to download gradient. Please try again.");
       });
     }
   };
