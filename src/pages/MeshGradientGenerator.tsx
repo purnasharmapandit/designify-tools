@@ -123,7 +123,9 @@ const MeshGradientGenerator = () => {
   };
   
   // Handle drag interactions for color position markers
-  const handleMouseDown = (index: number) => {
+  const handleMouseDown = (index: number, e: React.MouseEvent) => {
+    e.preventDefault(); // Prevent default behavior
+    e.stopPropagation(); // Stop propagation to parent elements
     setActiveColorIndex(index);
     setIsDragging(true);
   };
@@ -142,21 +144,42 @@ const MeshGradientGenerator = () => {
   };
   
   const handleMouseUp = () => {
+    if (isDragging && activeColorIndex !== null) {
+      toast.success(`Color ${activeColorIndex + 1} position updated`);
+    }
     setIsDragging(false);
+    setActiveColorIndex(null);
   };
   
   // Clean up event listeners
   useEffect(() => {
     const handleGlobalMouseUp = () => {
-      setIsDragging(false);
+      if (isDragging) {
+        handleMouseUp();
+      }
+    };
+    
+    const handleGlobalMouseMove = (e: MouseEvent) => {
+      if (isDragging && activeColorIndex !== null && previewRef.current) {
+        const rect = previewRef.current.getBoundingClientRect();
+        
+        // Calculate position as percentage of the container
+        const x = Math.max(0, Math.min(100, ((e.clientX - rect.left) / rect.width) * 100));
+        const y = Math.max(0, Math.min(100, ((e.clientY - rect.top) / rect.height) * 100));
+        
+        // Update the position of the active color
+        updateColorPosition(activeColorIndex, { x, y });
+      }
     };
     
     window.addEventListener('mouseup', handleGlobalMouseUp);
+    window.addEventListener('mousemove', handleGlobalMouseMove);
     
     return () => {
       window.removeEventListener('mouseup', handleGlobalMouseUp);
+      window.removeEventListener('mousemove', handleGlobalMouseMove);
     };
-  }, []);
+  }, [isDragging, activeColorIndex]);
   
   const copyCSS = () => {
     let gradients = colors.map(({ color, position, size }) => 
@@ -204,6 +227,18 @@ ${grain > 0 ? 'background-blend-mode: multiply;' : ''}`;
     right: 0,
     bottom: 0,
   } : {};
+
+  // Calculate aspect ratio for preview based on selected size
+  const aspectRatio = selectedSize.value.width / selectedSize.value.height;
+  const previewHeight = aspectRatio < 1 ? 300 : Math.floor(300 / aspectRatio);
+  const previewWidth = aspectRatio > 1 ? 300 * aspectRatio : 300;
+
+  // Update gradient style with new dimensions
+  const updatedGradientStyle: React.CSSProperties = {
+    ...gradientStyle,
+    height: `${previewHeight}px`,
+    maxWidth: `${previewWidth}px`,
+  };
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -415,8 +450,8 @@ ${grain > 0 ? 'background-blend-mode: multiply;' : ''}`;
                   <h3 className="text-lg font-semibold mb-4">Preview</h3>
                   <div 
                     ref={previewRef}
-                    className="relative rounded-lg overflow-hidden mb-4 cursor-pointer"
-                    style={gradientStyle}
+                    className="relative rounded-lg overflow-hidden mb-4 cursor-move mx-auto"
+                    style={updatedGradientStyle}
                     onMouseMove={handleMouseMove}
                     onMouseUp={handleMouseUp}
                   >
@@ -435,14 +470,20 @@ ${grain > 0 ? 'background-blend-mode: multiply;' : ''}`;
                           transform: isDragging && activeColorIndex === index ? 'scale(1.1)' : 'scale(1)',
                           transition: 'transform 0.1s ease'
                         }}
-                        onMouseDown={(e) => {
-                          e.stopPropagation();
-                          handleMouseDown(index);
-                        }}
+                        onMouseDown={(e) => handleMouseDown(index, e)}
+                        aria-label={`Drag to move color ${index + 1}`}
+                        title={`Drag to move color ${index + 1}`}
                       >
-                        <Move className="h-3 w-3 text-white opacity-80" />
+                        <Move className="h-3 w-3 text-white opacity-80 pointer-events-none" />
                       </div>
                     ))}
+                    
+                    {/* Instruction overlay when canvas is empty */}
+                    {colors.length === 0 && (
+                      <div className="absolute inset-0 flex items-center justify-center bg-gray-100/50 text-gray-500">
+                        <p>Add colors to start creating your gradient</p>
+                      </div>
+                    )}
                   </div>
                   <div className="text-sm text-gray-500">
                     <p className="font-medium mb-1">CSS Code:</p>
