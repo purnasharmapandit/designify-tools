@@ -20,6 +20,27 @@ const SocialMediaKit = () => {
           name="description"
           content="Design beautiful and consistent social media content for multiple platforms with our Social Media Kit. Pre-sized templates, brand consistency tools, and more."
         />
+        <meta property="og:title" content="Social Media Kit | Create Consistent Social Content" />
+        <meta property="og:description" content="Design beautiful and consistent social media content for multiple platforms with our Social Media Kit." />
+        <meta property="og:type" content="website" />
+        <link rel="canonical" href="https://designifytools.com/social-media-kit" />
+        <script type="application/ld+json">
+          {`
+            {
+              "@context": "https://schema.org",
+              "@type": "SoftwareApplication",
+              "name": "Social Media Kit",
+              "applicationCategory": "DesignApplication",
+              "operatingSystem": "Web",
+              "offers": {
+                "@type": "Offer",
+                "price": "0",
+                "priceCurrency": "USD"
+              },
+              "description": "Design beautiful and consistent social media content for multiple platforms with pre-sized templates and brand consistency tools."
+            }
+          `}
+        </script>
       </Helmet>
 
       <Navbar />

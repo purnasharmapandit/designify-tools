@@ -67,6 +67,29 @@ const QRCodeGenerator = () => {
         <title>Free QR Code Generator | Create Custom QR Codes Online</title>
         <meta name="description" content="Generate free custom QR codes for websites, text, contact info, WiFi, and more. Download in PNG, SVG, or JPG formats. No sign-up required." />
         <meta name="keywords" content="qr code generator, free qr code, custom qr code, qr code maker, create qr code" />
+        <link rel="canonical" href="https://designifytools.com/qr-code-generator" />
+        <script type="application/ld+json">
+          {`
+            {
+              "@context": "https://schema.org",
+              "@type": "WebApplication",
+              "name": "QR Code Generator",
+              "applicationCategory": "UtilityApplication",
+              "operatingSystem": "Web",
+              "offers": {
+                "@type": "Offer",
+                "price": "0",
+                "priceCurrency": "USD"
+              },
+              "description": "Generate free custom QR codes for websites, text, contact info, WiFi, and more. Download in multiple formats.",
+              "featureList": [
+                "Custom colors",
+                "Add logos",
+                "Multiple formats"
+              ]
+            }
+          `}
+        </script>
       </Helmet>
       
       <Navbar />

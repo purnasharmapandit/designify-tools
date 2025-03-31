@@ -19,6 +19,27 @@ const PresentationMaker = () => {
           name="description"
           content="Create stunning professional presentations with our AI-powered Presentation Maker. Beautiful templates, smart layouts, and built-in data visualization."
         />
+        <meta property="og:title" content="Presentation Maker | Create Professional Slide Decks" />
+        <meta property="og:description" content="Create stunning professional presentations with our AI-powered Presentation Maker." />
+        <meta property="og:type" content="website" />
+        <link rel="canonical" href="https://designifytools.com/presentation-maker" />
+        <script type="application/ld+json">
+          {`
+            {
+              "@context": "https://schema.org",
+              "@type": "SoftwareApplication",
+              "name": "Presentation Maker",
+              "applicationCategory": "DesignApplication",
+              "operatingSystem": "Web",
+              "offers": {
+                "@type": "Offer",
+                "price": "0",
+                "priceCurrency": "USD"
+              },
+              "description": "Create stunning professional presentations with beautiful templates, smart layouts, and built-in data visualization."
+            }
+          `}
+        </script>
       </Helmet>
 
       <Navbar />

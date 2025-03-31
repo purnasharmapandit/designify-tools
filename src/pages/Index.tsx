@@ -30,6 +30,23 @@ const Index = () => {
           content="Discover our collection of free and premium AI-powered design tools for logos, color palettes, email signatures, background removal, and more."
         />
         <meta property="og:type" content="website" />
+        <link rel="canonical" href="https://designifytools.com/" />
+        <script type="application/ld+json">
+          {`
+            {
+              "@context": "https://schema.org",
+              "@type": "WebSite",
+              "name": "Designify Tools",
+              "url": "https://designifytools.com/",
+              "description": "AI-Powered Design Tools for Creators",
+              "potentialAction": {
+                "@type": "SearchAction",
+                "target": "https://designifytools.com/tools?search={search_term_string}",
+                "query-input": "required name=search_term_string"
+              }
+            }
+          `}
+        </script>
       </Helmet>
       <Navbar />
       <main>

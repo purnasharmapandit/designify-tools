@@ -19,6 +19,27 @@ const TypographyTool = () => {
           name="description"
           content="Design consistent and beautiful typography systems for your brand with our Typography Tool. Font pairing, scale generation, and CSS export."
         />
+        <meta property="og:title" content="Typography Tool | Create Perfect Typography Systems" />
+        <meta property="og:description" content="Design consistent and beautiful typography systems for your brand with our Typography Tool." />
+        <meta property="og:type" content="website" />
+        <link rel="canonical" href="https://designifytools.com/typography-tool" />
+        <script type="application/ld+json">
+          {`
+            {
+              "@context": "https://schema.org",
+              "@type": "SoftwareApplication",
+              "name": "Typography Tool",
+              "applicationCategory": "DesignApplication",
+              "operatingSystem": "Web",
+              "offers": {
+                "@type": "Offer",
+                "price": "0",
+                "priceCurrency": "USD"
+              },
+              "description": "Design consistent and beautiful typography systems for your brand with font pairing, scale generation, and CSS export."
+            }
+          `}
+        </script>
       </Helmet>
 
       <Navbar />
