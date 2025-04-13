@@ -1,6 +1,7 @@
 
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
+import { Database } from "@/integrations/supabase/types";
 
 export interface Credit {
   id: string;
@@ -205,8 +206,8 @@ export async function deductCreditsForFeature(featureName: string, toolType: str
     }
     
     // Check if user has enough credits
-    if (userData.credits_balance < creditCost) {
-      toast.error(`Not enough credits. You need ${creditCost} but have ${userData.credits_balance}`);
+    if (!userData || userData.credits_balance < creditCost) {
+      toast.error(`Not enough credits. You need ${creditCost} but have ${userData?.credits_balance || 0}`);
       return false;
     }
     
@@ -287,10 +288,10 @@ export async function addCreditsToUser(userId: string, creditsToAdd: number): Pr
       const { error: updateError } = await supabase
         .from('user_credits')
         .update({
-          credits_balance: existingCredit.credits_balance + creditsToAdd,
+          credits_balance: existingCredit ? existingCredit.credits_balance + creditsToAdd : creditsToAdd,
           updated_at: new Date().toISOString()
         })
-        .eq('id', existingCredit.id);
+        .eq('id', existingCredit ? existingCredit.id : '');
       
       if (updateError) {
         console.error("Error updating user credit record:", updateError);
