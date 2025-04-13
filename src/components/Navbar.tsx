@@ -1,4 +1,3 @@
-
 import { Button } from "@/components/ui/button";
 import { Menu, Wand2, X } from "lucide-react";
 import { Link } from "react-router-dom";
@@ -20,11 +19,10 @@ const Navbar = () => {
           <div className="flex items-center">
             <Link to="/" className="flex items-center space-x-2 text-primary">
               <Wand2 className="h-6 w-6" />
-              <span className="text-xl font-bold font-display">Designify</span>
+              <span className="text-xl font-bold font-display">MyDesignly</span>
             </Link>
           </div>
           
-          {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-8">
             <Link 
               to="/" 
@@ -33,10 +31,8 @@ const Navbar = () => {
               Home
             </Link>
             
-            {/* Free Tools Mega Menu */}
             <FreeToolsMegaMenu />
 
-            {/* Paid Tools Mega Menu */}
             <PaidToolsMegaMenu />
 
             <Link 
@@ -54,10 +50,8 @@ const Navbar = () => {
           </nav>
           
           <div className="flex items-center space-x-4">
-            {/* User Menu */}
             <UserMenu user={user} signOut={signOut} isLoading={isLoading} />
             
-            {/* Mobile Menu Button */}
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               className="md:hidden p-2 text-gray-600 hover:text-gray-900"
@@ -72,7 +66,6 @@ const Navbar = () => {
           </div>
         </div>
 
-        {/* Mobile Navigation */}
         <MobileMenu 
           isMenuOpen={isMenuOpen}
           setIsMenuOpen={setIsMenuOpen}

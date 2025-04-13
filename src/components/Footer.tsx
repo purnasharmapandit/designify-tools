@@ -30,7 +30,7 @@ const Footer = () => {
           <div className="col-span-1 md:col-span-1">
             <div className="flex items-center gap-2 mb-4">
               <Sparkles className="h-6 w-6 text-brand-yellow" />
-              <span className="text-xl font-bold">DesignAI</span>
+              <span className="text-xl font-bold">MyDesignly</span>
             </div>
             <p className="text-gray-400 mb-4">
               Creating beautiful designs has never been easier with our suite of AI-powered tools.
@@ -97,7 +97,7 @@ const Footer = () => {
         </div>
         
         <div className="border-t border-gray-800 pt-8 mt-4 text-center text-gray-400 text-sm">
-          <p>© {new Date().getFullYear()} DesignAI. All rights reserved.</p>
+          <p>© {new Date().getFullYear()} MyDesignly. All rights reserved.</p>
         </div>
       </div>
     </footer>

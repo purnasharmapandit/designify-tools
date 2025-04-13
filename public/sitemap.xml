@@ -1,162 +1,161 @@
-
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <!-- Home Page -->
   <url>
-    <loc>https://designifytools.com/</loc>
+    <loc>https://mydesignly.com/</loc>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   
   <!-- Main Pages -->
   <url>
-    <loc>https://designifytools.com/tools</loc>
+    <loc>https://mydesignly.com/tools</loc>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://designifytools.com/pricing</loc>
+    <loc>https://mydesignly.com/pricing</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://designifytools.com/about-us</loc>
+    <loc>https://mydesignly.com/about-us</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://designifytools.com/contact-us</loc>
+    <loc>https://mydesignly.com/contact-us</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   
   <!-- Tool Pages -->
   <url>
-    <loc>https://designifytools.com/logo-maker</loc>
+    <loc>https://mydesignly.com/logo-maker</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://designifytools.com/qr-code-generator</loc>
+    <loc>https://mydesignly.com/qr-code-generator</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://designifytools.com/color-palette-generator</loc>
+    <loc>https://mydesignly.com/color-palette-generator</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://designifytools.com/icon-generator</loc>
+    <loc>https://mydesignly.com/icon-generator</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://designifytools.com/email-signature-generator</loc>
+    <loc>https://mydesignly.com/email-signature-generator</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://designifytools.com/background-remover</loc>
+    <loc>https://mydesignly.com/background-remover</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://designifytools.com/business-card-generator</loc>
+    <loc>https://mydesignly.com/business-card-generator</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://designifytools.com/social-media-kit</loc>
+    <loc>https://mydesignly.com/social-media-kit</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://designifytools.com/typography-tool</loc>
+    <loc>https://mydesignly.com/typography-tool</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://designifytools.com/mockup-generator</loc>
+    <loc>https://mydesignly.com/mockup-generator</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://designifytools.com/presentation-maker</loc>
+    <loc>https://mydesignly.com/presentation-maker</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://designifytools.com/image-editor</loc>
+    <loc>https://mydesignly.com/image-editor</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://designifytools.com/infographics-generator</loc>
+    <loc>https://mydesignly.com/infographics-generator</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://designifytools.com/headshot-generator</loc>
+    <loc>https://mydesignly.com/headshot-generator</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://designifytools.com/social-banner-maker</loc>
+    <loc>https://mydesignly.com/social-banner-maker</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://designifytools.com/mesh-gradient-generator</loc>
+    <loc>https://mydesignly.com/mesh-gradient-generator</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   
   <!-- Blog Pages -->
   <url>
-    <loc>https://designifytools.com/blog</loc>
+    <loc>https://mydesignly.com/blog</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://designifytools.com/blogs/create-logo</loc>
+    <loc>https://mydesignly.com/blogs/create-logo</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://designifytools.com/blogs/exporting-designs</loc>
+    <loc>https://mydesignly.com/blogs/exporting-designs</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://designifytools.com/blogs/customizing-profile-picture</loc>
+    <loc>https://mydesignly.com/blogs/customizing-profile-picture</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://designifytools.com/blogs/business-cards</loc>
+    <loc>https://mydesignly.com/blogs/business-cards</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://designifytools.com/blogs/billing-subscriptions</loc>
+    <loc>https://mydesignly.com/blogs/billing-subscriptions</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   
   <!-- Policy Pages -->
   <url>
-    <loc>https://designifytools.com/terms-of-service</loc>
+    <loc>https://mydesignly.com/terms-of-service</loc>
     <changefreq>yearly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://designifytools.com/privacy-policy</loc>
+    <loc>https://mydesignly.com/privacy-policy</loc>
     <changefreq>yearly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://designifytools.com/refund-policy</loc>
+    <loc>https://mydesignly.com/refund-policy</loc>
     <changefreq>yearly</changefreq>
     <priority>0.5</priority>
   </url>

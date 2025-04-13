@@ -1,4 +1,3 @@
-
 import { motion } from "framer-motion";
 import { Helmet } from "react-helmet";
 import Navbar from "@/components/Navbar";
@@ -19,29 +18,29 @@ const Index = () => {
       className="min-h-screen bg-white"
     >
       <Helmet>
-        <title>Designify Tools | AI-Powered Design Tools for Creators</title>
+        <title>MyDesignly Tools | AI-Powered Design Tools for Creators</title>
         <meta 
           name="description" 
           content="Discover our collection of free and premium AI-powered design tools for logos, color palettes, email signatures, background removal, and more. Create professional designs in minutes."
         />
-        <meta property="og:title" content="Designify Tools | AI-Powered Design Tools for Creators" />
+        <meta property="og:title" content="MyDesignly Tools | AI-Powered Design Tools for Creators" />
         <meta 
           property="og:description" 
           content="Discover our collection of free and premium AI-powered design tools for logos, color palettes, email signatures, background removal, and more."
         />
         <meta property="og:type" content="website" />
-        <link rel="canonical" href="https://designifytools.com/" />
+        <link rel="canonical" href="https://mydesignly.com/" />
         <script type="application/ld+json">
           {`
             {
               "@context": "https://schema.org",
               "@type": "WebSite",
-              "name": "Designify Tools",
-              "url": "https://designifytools.com/",
+              "name": "MyDesignly",
+              "url": "https://mydesignly.com/",
               "description": "AI-Powered Design Tools for Creators",
               "potentialAction": {
                 "@type": "SearchAction",
-                "target": "https://designifytools.com/tools?search={search_term_string}",
+                "target": "https://mydesignly.com/tools?search={search_term_string}",
                 "query-input": "required name=search_term_string"
               }
             }
