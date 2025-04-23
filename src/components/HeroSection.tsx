@@ -1,4 +1,3 @@
-
 import { Button } from "@/components/ui/button";
 import { ChevronRight, Sparkles, Zap, Star, PenTool, Wand2, Lightbulb } from "lucide-react";
 import { motion } from "framer-motion";
@@ -6,8 +5,7 @@ import { Link } from "react-router-dom";
 
 const HeroSection = () => {
   return (
-    <section className="pt-40 pb-2 px-4 sm:pt-44 sm:pb-4">
-      {/* further reduced pb-8 to pb-2 and sm:pb-10 to sm:pb-4 */}
+    <section className="pt-36 pb-0 px-4 sm:pt-40 sm:pb-1">
       <div className="max-w-7xl mx-auto">
         <div className="flex flex-col items-center justify-center text-center mb-12">
           <div className="relative w-full max-w-3xl mx-auto">

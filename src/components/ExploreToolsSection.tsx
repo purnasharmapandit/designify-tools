@@ -1,8 +1,6 @@
 
 import { motion } from "framer-motion";
-import ExploreToolsCard from "./ExploreToolsCard";
 import { Link } from "react-router-dom";
-import { Badge } from "@/components/ui/badge";
 import {
   Paintbrush,
   QrCode,
@@ -12,8 +10,9 @@ import {
   Scissors,
   CircleDashed
 } from "lucide-react";
+import ToolCard from "./ToolCard";
 
-// All tool data moved here, matching Icon & description from /tools page where possible
+// All tool data in one array
 const TOOLS = [
   {
     name: "Logo Maker",
@@ -33,15 +32,6 @@ const TOOLS = [
     link: "/background-remover",
     badge: "premium" as "premium"
   },
-  // {
-  //   name: "Presentation Maker",
-  //   icon: Presentation,
-  //   description: "Design professional presentations with ready-to-use templates.",
-  //   color: "bg-blue-100",
-  //   iconColor: "text-blue-500",
-  //   link: "/presentation-maker",
-  //   badge: "premium" as "premium"
-  // },
   {
     name: "Business Card Generator",
     icon: Layout,
@@ -77,50 +67,43 @@ const TOOLS = [
     iconColor: "text-blue-500",
     link: "/email-signature-generator",
     badge: "free" as "free"
-  },
-  // 7th tool - Mesh Gradient Maker (not shown on homepage)
-  // {
-  //   name: "Mesh Gradient Maker",
-  //   icon: CircleDashed,
-  //   description: "Create beautiful, unique mesh gradients for your designs.",
-  //   color: "bg-teal-100",
-  //   iconColor: "text-teal-500",
-  //   link: "/mesh-gradient-generator",
-  //   badge: "free" as "free"
-  // }
+  }
 ];
 
-const ExploreToolsSection = () => {
-  // Take only the first 6 tools (presentation maker commented out, so mesh gradient also not shown)
-  const visibleTools = TOOLS.slice(0, 6);
+// Only show the first 6 tools
+const visibleTools = TOOLS.slice(0, 6);
 
+const ExploreToolsSection = () => {
   return (
-    <section className="py-8 bg-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="py-6 bg-[#eee]">
+      {/* Changed background to off-white and reduced top/bottom padding */}
+      <div className="max-w-7xl mx-auto px-2 sm:px-4 lg:px-6">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 15 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
+          transition={{ duration: 0.45 }}
           viewport={{ once: true }}
-          className="text-center mb-12"
+          className="text-center mb-6"
         >
-          <h2 className="text-3xl md:text-4xl font-bold font-display mb-4">Explore Our Tools</h2>
+          <h2 className="text-3xl md:text-4xl font-bold font-display mb-2">Explore Our Tools</h2>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
             Discover our full suite of design tools to enhance your creative workflow
           </p>
         </motion.div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 md:gap-5">
           {visibleTools.map((tool, index) => (
-            <ExploreToolsCard
+            <ToolCard
               key={tool.name}
-              icon={tool.icon}
               name={tool.name}
-              description={tool.description}
               color={tool.color}
               iconColor={tool.iconColor}
               link={tool.link}
-              badge={tool.badge}
-            />
+              className="h-full px-2 py-2 sm:px-3 sm:py-3" // more compact on desktop
+              // Compact design: uses smaller padding within each card
+              // Can't set icon here, so we'll adjust the card below
+            >
+              {/* Intentionally left blank: ToolCard renders icon internally as ✦ for now */}
+            </ToolCard>
           ))}
         </div>
       </div>
