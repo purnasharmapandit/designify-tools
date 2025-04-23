@@ -6,7 +6,8 @@ import { Link } from "react-router-dom";
 
 const HeroSection = () => {
   return (
-    <section className="pt-40 pb-16 px-4 sm:pt-44 sm:pb-20">
+    <section className="pt-40 pb-8 px-4 sm:pt-44 sm:pb-10">
+      {/* reduced pb-16 to pb-8 and sm:pb-20 to sm:pb-10 */}
       <div className="max-w-7xl mx-auto">
         <div className="flex flex-col items-center justify-center text-center mb-12">
           <div className="relative w-full max-w-3xl mx-auto">
