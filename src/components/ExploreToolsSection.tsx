@@ -23,7 +23,7 @@ const TOOLS = [
     color: "bg-purple-100",
     iconColor: "text-purple-500",
     link: "/logo-maker",
-    badge: "premium"
+    badge: "premium" as "premium"
   },
   {
     name: "Background Remover",
@@ -32,7 +32,7 @@ const TOOLS = [
     color: "bg-purple-100",
     iconColor: "text-purple-500",
     link: "/background-remover",
-    badge: "premium"
+    badge: "premium" as "premium"
   },
   {
     name: "Presentation Maker",
@@ -41,7 +41,7 @@ const TOOLS = [
     color: "bg-blue-100",
     iconColor: "text-blue-500",
     link: "/presentation-maker",
-    badge: "premium"
+    badge: "premium" as "premium"
   },
   {
     name: "Business Card Generator",
@@ -50,7 +50,7 @@ const TOOLS = [
     color: "bg-green-100",
     iconColor: "text-green-500",
     link: "/business-card-generator",
-    badge: "premium"
+    badge: "premium" as "premium"
   },
   {
     name: "Color Palette Generator",
@@ -59,7 +59,7 @@ const TOOLS = [
     color: "bg-yellow-100",
     iconColor: "text-yellow-500",
     link: "/color-palette-generator",
-    badge: "free"
+    badge: "free" as "free"
   },
   {
     name: "QR Code Designer",
@@ -68,7 +68,7 @@ const TOOLS = [
     color: "bg-amber-100",
     iconColor: "text-amber-500",
     link: "/qr-code-generator",
-    badge: "free"
+    badge: "free" as "free"
   },
   {
     name: "Email Signature",
@@ -77,7 +77,7 @@ const TOOLS = [
     color: "bg-blue-100",
     iconColor: "text-blue-500",
     link: "/email-signature-generator",
-    badge: "free"
+    badge: "free" as "free"
   },
   {
     name: "Mesh Gradient Maker",
@@ -86,7 +86,7 @@ const TOOLS = [
     color: "bg-teal-100",
     iconColor: "text-teal-500",
     link: "/mesh-gradient-generator",
-    badge: "free"
+    badge: "free" as "free"
   }
 ];
 
