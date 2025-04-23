@@ -6,8 +6,8 @@ import { Link } from "react-router-dom";
 
 const HeroSection = () => {
   return (
-    <section className="pt-40 pb-8 px-4 sm:pt-44 sm:pb-10">
-      {/* reduced pb-16 to pb-8 and sm:pb-20 to sm:pb-10 */}
+    <section className="pt-40 pb-2 px-4 sm:pt-44 sm:pb-4">
+      {/* further reduced pb-8 to pb-2 and sm:pb-10 to sm:pb-4 */}
       <div className="max-w-7xl mx-auto">
         <div className="flex flex-col items-center justify-center text-center mb-12">
           <div className="relative w-full max-w-3xl mx-auto">
@@ -28,7 +28,6 @@ const HeroSection = () => {
               </span> Design Tools
             </motion.h1>
           </div>
-          
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -37,7 +36,6 @@ const HeroSection = () => {
           >
             Create stunning designs with our easy-to-use tools. Perfect for professionals and beginners alike.
           </motion.p>
-          
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}

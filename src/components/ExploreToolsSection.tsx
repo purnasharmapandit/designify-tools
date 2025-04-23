@@ -6,7 +6,6 @@ import { Badge } from "@/components/ui/badge";
 import {
   Paintbrush,
   QrCode,
-  Presentation,
   Layout,
   Palette,
   Mail,
@@ -34,15 +33,15 @@ const TOOLS = [
     link: "/background-remover",
     badge: "premium" as "premium"
   },
-  {
-    name: "Presentation Maker",
-    icon: Presentation,
-    description: "Design professional presentations with ready-to-use templates.",
-    color: "bg-blue-100",
-    iconColor: "text-blue-500",
-    link: "/presentation-maker",
-    badge: "premium" as "premium"
-  },
+  // {
+  //   name: "Presentation Maker",
+  //   icon: Presentation,
+  //   description: "Design professional presentations with ready-to-use templates.",
+  //   color: "bg-blue-100",
+  //   iconColor: "text-blue-500",
+  //   link: "/presentation-maker",
+  //   badge: "premium" as "premium"
+  // },
   {
     name: "Business Card Generator",
     icon: Layout,
@@ -79,21 +78,24 @@ const TOOLS = [
     link: "/email-signature-generator",
     badge: "free" as "free"
   },
-  {
-    name: "Mesh Gradient Maker",
-    icon: CircleDashed,
-    description: "Create beautiful, unique mesh gradients for your designs.",
-    color: "bg-teal-100",
-    iconColor: "text-teal-500",
-    link: "/mesh-gradient-generator",
-    badge: "free" as "free"
-  }
+  // 7th tool - Mesh Gradient Maker (not shown on homepage)
+  // {
+  //   name: "Mesh Gradient Maker",
+  //   icon: CircleDashed,
+  //   description: "Create beautiful, unique mesh gradients for your designs.",
+  //   color: "bg-teal-100",
+  //   iconColor: "text-teal-500",
+  //   link: "/mesh-gradient-generator",
+  //   badge: "free" as "free"
+  // }
 ];
 
 const ExploreToolsSection = () => {
+  // Take only the first 6 tools (presentation maker commented out, so mesh gradient also not shown)
+  const visibleTools = TOOLS.slice(0, 6);
+
   return (
     <section className="py-8 bg-white">
-      {/* reduced from py-16 to py-8 to match new padding */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -107,8 +109,8 @@ const ExploreToolsSection = () => {
             Discover our full suite of design tools to enhance your creative workflow
           </p>
         </motion.div>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
-          {TOOLS.map((tool, index) => (
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+          {visibleTools.map((tool, index) => (
             <ExploreToolsCard
               key={tool.name}
               icon={tool.icon}
