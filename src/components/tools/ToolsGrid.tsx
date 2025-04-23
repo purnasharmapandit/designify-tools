@@ -1,4 +1,3 @@
-
 import { 
   Paintbrush, 
   Image, 
@@ -29,7 +28,6 @@ import { checkGenerationEligibility } from "@/services/generationLimits";
 import { toast } from "sonner";
 import { Badge } from "@/components/ui/badge";
 
-// Tool item type
 interface Tool {
   icon: any;
   name: string;
@@ -46,7 +44,6 @@ const ToolsGrid = () => {
   const navigate = useNavigate();
   
   const tools: Tool[] = [
-    // Premium Tools
     {
       icon: Paintbrush,
       name: "Logo Maker",
@@ -101,14 +98,12 @@ const ToolsGrid = () => {
       toolType: "infographics",
       category: "premium"
     },
-
-    // Free Tools
     {
       icon: QrCode,
       name: "QR Code Generator",
       description: "Create customizable QR codes for your business or personal use",
       color: "bg-green-100 text-green-500",
-      link: "/qr-code-generator",
+      link: "/free-qr-code-generator",
       toolType: "qr_code",
       category: "free"
     },
@@ -117,7 +112,7 @@ const ToolsGrid = () => {
       name: "Color Palette Generator",
       description: "Generate beautiful color schemes for your designs",
       color: "bg-yellow-100 text-yellow-500",
-      link: "/color-palette-generator",
+      link: "/free-color-palette-generator",
       toolType: "color_palette",
       category: "free"
     },
@@ -126,7 +121,7 @@ const ToolsGrid = () => {
       name: "Email Signature Generator",
       description: "Create professional email signatures that make an impression",
       color: "bg-blue-100 text-blue-500",
-      link: "/email-signature-generator",
+      link: "/free-email-signature-generator",
       toolType: "email_signature",
       category: "free"
     },
@@ -148,8 +143,6 @@ const ToolsGrid = () => {
       toolType: "mesh_gradient",
       category: "free"
     },
-
-    // Coming Soon Tools
     {
       icon: Share2,
       name: "Social Banner Maker",
@@ -208,7 +201,6 @@ const ToolsGrid = () => {
     }
   ];
 
-  // Group tools by category
   const premiumTools = tools.filter(tool => tool.category === "premium");
   const freeTools = tools.filter(tool => tool.category === "free");
   const comingSoonTools = tools.filter(tool => tool.category === "coming-soon");
@@ -225,11 +217,9 @@ const ToolsGrid = () => {
 
     event.preventDefault();
     
-    // Simply navigate to the tool page - authentication will be checked when generating content
     navigate(tool.link!);
   };
 
-  // Render a section of tools
   const renderToolSection = (sectionTools: Tool[], title: string, badgeContent: React.ReactNode) => (
     <div className="mb-12">
       <div className="flex items-center mb-6">

@@ -1,4 +1,3 @@
-
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -94,6 +93,9 @@ function App() {
                   <Route path="/headshot-generator" element={<HeadshotGenerator />} />
                   <Route path="/social-banner-maker" element={<SocialBannerMaker />} />
                   <Route path="/mesh-gradient-generator" element={<MeshGradientGenerator />} />
+                  <Route path="/free-qr-code-generator" element={<QRCodeGenerator />} />
+                  <Route path="/free-color-palette-generator" element={<ColorPaletteGenerator />} />
+                  <Route path="/free-email-signature-generator" element={<EmailSignatureGenerator />} />
                   <Route path="/auth" element={<Auth />} />
                   <Route path="*" element={<NotFound />} />
                 </Routes>

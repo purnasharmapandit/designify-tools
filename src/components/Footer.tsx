@@ -1,4 +1,3 @@
-
 import { motion } from "framer-motion";
 import { Sparkles, Award, Tag } from "lucide-react";
 import { Link } from "react-router-dom";
@@ -6,9 +5,9 @@ import { Link } from "react-router-dom";
 const Footer = () => {
   // Define Free tools and Premium tools
   const freeTools = [
-    { name: "QR Code Generator", link: "/qr-code-generator" },
-    { name: "Color Palette Generator", link: "/color-palette-generator" },
-    { name: "Email Signature Generator", link: "/email-signature-generator" },
+    { name: "QR Code Generator", link: "/free-qr-code-generator" },
+    { name: "Color Palette Generator", link: "/free-color-palette-generator" },
+    { name: "Email Signature Generator", link: "/free-email-signature-generator" },
     { name: "Background Remover", link: "/background-remover" },
     { name: "Mesh Gradient Generator", link: "/mesh-gradient-generator" }
   ];

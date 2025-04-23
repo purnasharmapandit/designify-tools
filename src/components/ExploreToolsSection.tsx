@@ -1,4 +1,3 @@
-
 import { motion } from "framer-motion";
 import ExploreToolsCard from "./ExploreToolsCard";
 import { Link } from "react-router-dom";
@@ -57,16 +56,16 @@ const TOOLS = [
     description: "Generate beautiful color schemes for your designs.",
     color: "bg-yellow-100",
     iconColor: "text-yellow-500",
-    link: "/color-palette-generator",
+    link: "/free-color-palette-generator",
     badge: "free" as "free"
   },
   {
-    name: "QR Code Designer",
+    name: "QR Code Generator",
     icon: QrCode,
     description: "Create customizable QR codes for your business or personal use.",
-    color: "bg-amber-100",
-    iconColor: "text-amber-500",
-    link: "/qr-code-generator",
+    color: "bg-green-100",
+    iconColor: "text-green-500",
+    link: "/free-qr-code-generator",
     badge: "free" as "free"
   },
   {
@@ -75,7 +74,7 @@ const TOOLS = [
     description: "Create professional email signatures that make an impression.",
     color: "bg-blue-100",
     iconColor: "text-blue-500",
-    link: "/email-signature-generator",
+    link: "/free-email-signature-generator",
     badge: "free" as "free"
   },
   // 7th tool - Mesh Gradient Maker (not shown on homepage)
