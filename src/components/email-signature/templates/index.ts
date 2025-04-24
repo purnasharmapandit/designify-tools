@@ -6,6 +6,18 @@ import ExecutiveTemplate from "./ExecutiveTemplate";
 import { EmailSignatureData, EmailSignatureTemplate } from "@/types/email-signature";
 import React from "react";
 
+// Add mapping for social icon URLs for better email client compatibility
+export const socialIconUrls = {
+  facebook: "https://cdn.jsdelivr.net/npm/simple-icons@v7/icons/facebook.svg",
+  twitter: "https://cdn.jsdelivr.net/npm/simple-icons@v7/icons/twitter.svg",
+  linkedin: "https://cdn.jsdelivr.net/npm/simple-icons@v7/icons/linkedin.svg",
+  instagram: "https://cdn.jsdelivr.net/npm/simple-icons@v7/icons/instagram.svg",
+  youtube: "https://cdn.jsdelivr.net/npm/simple-icons@v7/icons/youtube.svg",
+  github: "https://cdn.jsdelivr.net/npm/simple-icons@v7/icons/github.svg",
+  dribble: "https://cdn.jsdelivr.net/npm/simple-icons@v7/icons/dribbble.svg",
+  behance: "https://cdn.jsdelivr.net/npm/simple-icons@v7/icons/behance.svg"
+};
+
 export function renderTemplate(template: EmailSignatureTemplate, data: EmailSignatureData, isPreview = false): React.ReactNode | string {
   switch (template) {
     case "professional":

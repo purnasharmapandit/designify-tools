@@ -2,6 +2,7 @@ import React from "react";
 import { EmailSignatureData } from "@/types/email-signature";
 import { generateImageUrl } from "@/utils/email-signature-utils";
 import { Facebook, Twitter, Linkedin, Instagram, Youtube, Github } from "lucide-react";
+import { socialIconUrls } from "./index";
 
 interface MinimalistTemplateProps {
   data: EmailSignatureData;
@@ -120,44 +121,11 @@ const MinimalistTemplate: React.FC<MinimalistTemplateProps> = ({ data, isPreview
 
   // For HTML export (no React components, only inline styles)
   const socialIconHtml = (platform: string, url: string) => {
-    const iconSvgs: Record<string, string> = {
-      facebook: `<img src="https://cdn.jsdelivr.net/npm/simple-icons@v4/icons/facebook.svg" alt="Facebook" width="14" height="14" style="filter: invert(1);" />`,
-      twitter: `<img src="https://cdn.jsdelivr.net/npm/simple-icons@v4/icons/twitter.svg" alt="Twitter" width="14" height="14" style="filter: invert(1);" />`,
-      linkedin: `<img src="https://cdn.jsdelivr.net/npm/simple-icons@v4/icons/linkedin.svg" alt="LinkedIn" width="14" height="14" style="filter: invert(1);" />`,
-      instagram: `<img src="https://cdn.jsdelivr.net/npm/simple-icons@v4/icons/instagram.svg" alt="Instagram" width="14" height="14" style="filter: invert(1);" />`,
-      youtube: `<img src="https://cdn.jsdelivr.net/npm/simple-icons@v4/icons/youtube.svg" alt="YouTube" width="14" height="14" style="filter: invert(1);" />`,
-      github: `<img src="https://cdn.jsdelivr.net/npm/simple-icons@v4/icons/github.svg" alt="GitHub" width="14" height="14" style="filter: invert(1);" />`,
-    };
-
-    return `<a href="${url}" target="_blank" style="text-decoration:none;padding:0;margin:0;">${iconSvgs[platform] || iconSvgs.linkedin}</a>`;
+    // Use the CDN icon URLs instead of SVG components for better email client compatibility
+    const iconUrl = socialIconUrls[platform as keyof typeof socialIconUrls] || socialIconUrls.linkedin;
+    
+    return `<a href="${url}" target="_blank" style="text-decoration:none;padding:0;margin:0;display:inline-block;"><img src="${iconUrl}" alt="${platform}" width="14" height="14" style="filter: brightness(0) saturate(100%) invert(25%) sepia(95%) saturate(1467%) hue-rotate(210deg) brightness(94%) contrast(96%);width:14px;height:14px;border:0;" /></a>`;
   };
-
-  const getImageSrc = (file: File | null | undefined): string => {
-    if (!file) return '';
-    // @ts-ignore - we added this property in the SignaturePreview component
-    return (file as any).base64 || '';
-  };
-
-  const socialLinksHtml = data.socialLinks.length > 0 
-    ? `<td style="vertical-align:middle;text-align:right;">
-        <table style="border-collapse:collapse;display:inline-block;">
-          <tbody>
-            <tr>
-              ${data.socialLinks.map((link) => 
-                `<td style="padding-left:8px;">${socialIconHtml(link.platform, link.url)}</td>`
-              ).join('')}
-            </tr>
-          </tbody>
-        </table>
-      </td>` 
-    : '';
-
-  const contactInfoHtml = `
-    ${data.phoneNumber ? `<tr><td style="font-size:13px;color:#888;padding-bottom:2px;"><a href="tel:${data.phoneNumber}" style="color:${data.secondaryColor};text-decoration:none;">${data.phoneNumber}</a></td></tr>` : ''}
-    ${data.email ? `<tr><td style="font-size:13px;color:#888;padding-bottom:2px;"><a href="mailto:${data.email}" style="color:${data.secondaryColor};text-decoration:none;">${data.email}</a></td></tr>` : ''}
-    ${data.website ? `<tr><td style="font-size:13px;color:#888;padding-bottom:2px;"><a href="${data.website}" style="color:${data.secondaryColor};text-decoration:none;">${data.website.replace(/^https?:\/\//, '')}</a></td></tr>` : ''}
-    ${data.showAddress && data.address ? `<tr><td style="font-size:13px;color:#888;padding-bottom:2px;">${data.address}</td></tr>` : ''}
-  `;
 
   return `
     <table cellpadding="0" cellspacing="0" border="0" style="background-color:transparent;margin:0;padding:0;width:100%;max-width:500px;font-family:${data.font},-apple-system,system-ui,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;">
