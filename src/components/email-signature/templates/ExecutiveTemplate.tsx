@@ -1,8 +1,8 @@
-
 import React from "react";
 import { EmailSignatureData } from "@/types/email-signature";
 import { generateImageUrl } from "@/utils/email-signature-utils";
 import { Facebook, Twitter, Linkedin, Instagram, Youtube, Github } from "lucide-react";
+import { socialIconPngUrls } from "./index";
 
 interface ExecutiveTemplateProps {
   data: EmailSignatureData;
@@ -226,16 +226,9 @@ const ExecutiveTemplate: React.FC<ExecutiveTemplateProps> = ({ data, isPreview =
 
   // For HTML export (no React components, only inline styles)
   const socialIconHtml = (platform: string, url: string) => {
-    const iconSvgs: Record<string, string> = {
-      facebook: `<img src="https://cdn.jsdelivr.net/npm/simple-icons@v4/icons/facebook.svg" alt="Facebook" width="14" height="14" style="filter: invert(1);" />`,
-      twitter: `<img src="https://cdn.jsdelivr.net/npm/simple-icons@v4/icons/twitter.svg" alt="Twitter" width="14" height="14" style="filter: invert(1);" />`,
-      linkedin: `<img src="https://cdn.jsdelivr.net/npm/simple-icons@v4/icons/linkedin.svg" alt="LinkedIn" width="14" height="14" style="filter: invert(1);" />`,
-      instagram: `<img src="https://cdn.jsdelivr.net/npm/simple-icons@v4/icons/instagram.svg" alt="Instagram" width="14" height="14" style="filter: invert(1);" />`,
-      youtube: `<img src="https://cdn.jsdelivr.net/npm/simple-icons@v4/icons/youtube.svg" alt="YouTube" width="14" height="14" style="filter: invert(1);" />`,
-      github: `<img src="https://cdn.jsdelivr.net/npm/simple-icons@v4/icons/github.svg" alt="GitHub" width="14" height="14" style="filter: invert(1);" />`,
-    };
-
-    return `<a href="${url}" target="_blank" style="color:#fff;text-decoration:none;background-color:${data.primaryColor};width:26px;height:26px;border-radius:3px;display:inline-block;text-align:center;line-height:26px;">${iconSvgs[platform] || iconSvgs.linkedin}</a>`;
+    const iconUrl = socialIconPngUrls[platform as keyof typeof socialIconPngUrls] || socialIconPngUrls.linkedin;
+    
+    return `<a href="${url}" target="_blank" style="color:#fff;text-decoration:none;background-color:${data.primaryColor};width:26px;height:26px;border-radius:3px;display:inline-block;text-align:center;line-height:26px;"><img src="${iconUrl}" alt="${platform}" width="14" height="14" style="filter: invert(1);width:14px;height:14px;" /></a>`;
   };
 
   const bulletPoint = `<span style="display:inline-block;width:8px;height:8px;background-color:${data.secondaryColor};margin-right:8px;"></span>`;

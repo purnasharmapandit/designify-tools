@@ -1,8 +1,9 @@
+
 import React from "react";
 import { EmailSignatureData } from "@/types/email-signature";
 import { generateImageUrl } from "@/utils/email-signature-utils";
 import { Facebook, Twitter, Linkedin, Instagram, Youtube, Github } from "lucide-react";
-import { socialIconUrls } from "./index";
+import { socialIconUrls, socialIconPngUrls } from "./index";
 
 interface MinimalistTemplateProps {
   data: EmailSignatureData;
@@ -121,10 +122,10 @@ const MinimalistTemplate: React.FC<MinimalistTemplateProps> = ({ data, isPreview
 
   // For HTML export (no React components, only inline styles)
   const socialIconHtml = (platform: string, url: string) => {
-    // Use the CDN icon URLs instead of SVG components for better email client compatibility
-    const iconUrl = socialIconUrls[platform as keyof typeof socialIconUrls] || socialIconUrls.linkedin;
+    // Use PNG icons instead of SVG for better email client compatibility
+    const iconUrl = socialIconPngUrls[platform as keyof typeof socialIconPngUrls] || socialIconPngUrls.linkedin;
     
-    return `<a href="${url}" target="_blank" style="text-decoration:none;padding:0;margin:0;display:inline-block;"><img src="${iconUrl}" alt="${platform}" width="14" height="14" style="filter: brightness(0) saturate(100%) invert(25%) sepia(95%) saturate(1467%) hue-rotate(210deg) brightness(94%) contrast(96%);width:14px;height:14px;border:0;" /></a>`;
+    return `<a href="${url}" target="_blank" style="text-decoration:none;padding:0;margin:0;display:inline-block;"><img src="${iconUrl}" alt="${platform}" width="14" height="14" style="width:14px;height:14px;border:0;" /></a>`;
   };
 
   return `

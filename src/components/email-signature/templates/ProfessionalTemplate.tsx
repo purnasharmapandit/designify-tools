@@ -3,7 +3,7 @@ import React from "react";
 import { EmailSignatureData } from "@/types/email-signature";
 import { generateImageUrl } from "@/utils/email-signature-utils";
 import { Facebook, Twitter, Linkedin, Instagram, Youtube, Github } from "lucide-react";
-import { socialIconUrls } from "./index";
+import { socialIconUrls, socialIconPngUrls } from "./index";
 
 interface ProfessionalTemplateProps {
   data: EmailSignatureData;
@@ -131,10 +131,10 @@ const ProfessionalTemplate: React.FC<ProfessionalTemplateProps> = ({ data, isPre
 
   // For HTML export (no React components, only inline styles)
   const socialIconHtml = (platform: string, url: string) => {
-    // Use the CDN icon URLs instead of SVG components for better email client compatibility
-    const iconUrl = socialIconUrls[platform as keyof typeof socialIconUrls] || socialIconUrls.linkedin;
+    // Use PNG icons for better email client compatibility
+    const iconUrl = socialIconPngUrls[platform as keyof typeof socialIconPngUrls] || socialIconPngUrls.linkedin;
     
-    return `<a href="${url}" target="_blank" style="text-decoration:none;padding:0;margin:0;display:inline-block;"><img src="${iconUrl}" alt="${platform}" width="16" height="16" style="filter: brightness(0) saturate(100%) invert(25%) sepia(95%) saturate(1467%) hue-rotate(210deg) brightness(94%) contrast(96%);width:16px;height:16px;border:0;" /></a>`;
+    return `<a href="${url}" target="_blank" style="text-decoration:none;padding:0;margin:0;display:inline-block;"><img src="${iconUrl}" alt="${platform}" width="16" height="16" style="width:16px;height:16px;border:0;" /></a>`;
   };
 
   return `

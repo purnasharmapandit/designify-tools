@@ -18,6 +18,19 @@ export const socialIconUrls = {
   behance: "https://cdn.jsdelivr.net/npm/simple-icons@v7/icons/behance.svg"
 };
 
+// Using direct PNG icons from a reliable CDN for better email client compatibility
+export const socialIconPngUrls = {
+  facebook: "https://cdn.iconscout.com/icon/free/png-24/facebook-224-498412.png",
+  twitter: "https://cdn.iconscout.com/icon/free/png-24/twitter-241-721979.png", 
+  linkedin: "https://cdn.iconscout.com/icon/free/png-24/linkedin-162-498418.png",
+  instagram: "https://cdn.iconscout.com/icon/free/png-24/instagram-188-498425.png",
+  youtube: "https://cdn.iconscout.com/icon/free/png-24/youtube-85-226402.png",
+  github: "https://cdn.iconscout.com/icon/free/png-24/github-153-675523.png",
+  dribble: "https://cdn.iconscout.com/icon/free/png-24/dribbble-3-459731.png",
+  behance: "https://cdn.iconscout.com/icon/free/png-24/behance-2-569456.png"
+};
+
+// Update the renderTemplate and getTemplate functions to use the PNG icons in the HTML output
 export function renderTemplate(template: EmailSignatureTemplate, data: EmailSignatureData, isPreview = false): React.ReactNode | string {
   switch (template) {
     case "professional":
