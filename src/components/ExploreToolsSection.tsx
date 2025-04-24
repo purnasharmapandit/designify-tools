@@ -94,7 +94,7 @@ const ExploreToolsSection = () => {
   const visibleTools = TOOLS.slice(0, 6);
 
   return (
-    <section className="py-8 bg-white">
+    <section className="py-8 bg-[#eee]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
