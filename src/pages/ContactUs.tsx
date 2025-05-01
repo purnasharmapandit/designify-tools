@@ -2,7 +2,7 @@
 import { motion } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { Mail, Phone, MapPin, Send, Github, Twitter, Linkedin, Facebook } from "lucide-react";
+import { Mail, Send, Github, Twitter, Linkedin, Facebook } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useState, useEffect } from "react";
 import { useToast } from "@/hooks/use-toast";
@@ -161,37 +161,8 @@ const ContactUs = () => {
                 </div>
                 <div>
                   <h3 className="font-semibold text-lg">Email</h3>
-                  <p className="text-gray-700">support@aidesigntools.com</p>
-                </div>
-              </motion.div>
-              
-              <motion.div 
-                className="flex items-start space-x-4"
-                whileHover={{ y: -5, transition: { duration: 0.2 } }}
-              >
-                <div className="p-3 rounded-full bg-gradient-to-r from-brand-pink/30 to-brand-purple/30 shadow-md">
-                  <Phone className="h-6 w-6 text-brand-pink" />
-                </div>
-                <div>
-                  <h3 className="font-semibold text-lg">Phone</h3>
-                  <p className="text-gray-700">+1 (555) 123-4567</p>
-                </div>
-              </motion.div>
-              
-              <motion.div 
-                className="flex items-start space-x-4"
-                whileHover={{ y: -5, transition: { duration: 0.2 } }}
-              >
-                <div className="p-3 rounded-full bg-gradient-to-r from-brand-blue/30 to-brand-yellow/30 shadow-md">
-                  <MapPin className="h-6 w-6 text-brand-blue" />
-                </div>
-                <div>
-                  <h3 className="font-semibold text-lg">Office</h3>
-                  <p className="text-gray-700">
-                    123 Innovation Drive<br />
-                    Suite 400<br />
-                    San Francisco, CA 94103
-                  </p>
+                  <p className="text-gray-700">support@mydesignly.com</p>
+                  <p className="text-gray-700 mt-2">sales@mydesignly.com</p>
                 </div>
               </motion.div>
             </div>
