@@ -1,4 +1,3 @@
-
 import { motion } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -180,31 +179,19 @@ const AboutUs = () => {
               </p>
             </div>
             
-            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div className="grid sm:grid-cols-2 lg:grid-cols-2 gap-8">
               {[
                 {
-                  name: "Alex Johnson",
+                  name: "Oliver Reynolds",
                   role: "Founder & CEO",
-                  bio: "With over 15 years in design and tech, Alex founded AI Design Tools to democratize access to professional design.",
+                  bio: "With over 15 years in design and tech, Oliver founded AI Design Tools to democratize access to professional design.",
                   gradient: "from-brand-purple to-brand-blue"
                 },
                 {
-                  name: "Sarah Chen",
+                  name: "Maya Lin",
                   role: "CTO",
-                  bio: "Sarah leads our technical team, bringing expertise in AI and machine learning to create our innovative design tools.",
+                  bio: "Maya leads our technical team, bringing expertise in AI and machine learning to create our innovative design tools.",
                   gradient: "from-brand-pink to-brand-purple"
-                },
-                {
-                  name: "Michael Rodriguez",
-                  role: "Chief Design Officer",
-                  bio: "Michael ensures all our tools maintain the highest design standards while remaining intuitive and user-friendly.",
-                  gradient: "from-brand-blue to-brand-yellow"
-                },
-                {
-                  name: "Priya Patel",
-                  role: "Head of Product",
-                  bio: "Priya works closely with users to understand their needs and translate them into valuable product features.",
-                  gradient: "from-brand-yellow to-brand-pink"
                 }
               ].map((member, index) => (
                 <motion.div 
