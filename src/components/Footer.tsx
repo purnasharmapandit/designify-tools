@@ -1,3 +1,4 @@
+
 import { motion } from "framer-motion";
 import { Sparkles, Award, Tag } from "lucide-react";
 import { Link } from "react-router-dom";
@@ -86,7 +87,6 @@ const Footer = () => {
             <ul className="space-y-2">
               <li><Link to="/about-us" className="text-gray-400 hover:text-white transition-colors">About Us</Link></li>
               <li><Link to="/pricing" className="text-gray-400 hover:text-white transition-colors">Pricing</Link></li>
-              <li><a href="#" className="text-gray-400 hover:text-white transition-colors">Blog</a></li>
               <li><Link to="/contact-us" className="text-gray-400 hover:text-white transition-colors">Contact Us</Link></li>
               <li><Link to="/careers" className="text-gray-400 hover:text-white transition-colors">Careers</Link></li>
               <li><Link to="/terms-of-service" className="text-gray-400 hover:text-white transition-colors">Terms of Service</Link></li>
