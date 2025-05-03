@@ -65,7 +65,7 @@ const Pricing = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen flex flex-col bg-gradient-to-b from-white via-purple-50/30 to-pink-50/30">
       <Navbar />
       
       <main className="flex-grow pt-24 pb-16">
@@ -76,7 +76,7 @@ const Pricing = () => {
             transition={{ duration: 0.5 }}
             className="text-center mb-12"
           >
-            <h1 className="text-4xl font-bold font-display mb-4">Simple, Transparent Pricing</h1>
+            <h1 className="text-4xl md:text-5xl font-bold font-display mb-4 bg-clip-text text-transparent bg-gradient-to-r from-brand-purple via-brand-pink to-brand-blue">Simple, Transparent Pricing</h1>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
               Purchase credits and use them across all our tools. No subscriptions or hidden fees.
             </p>
@@ -90,18 +90,19 @@ const Pricing = () => {
                 <div key={i} className="bg-gray-100 rounded-lg p-8 h-96 animate-pulse"></div>
               ))
             ) : (
-              pricingTiers.map((tier) => (
+              pricingTiers.map((tier, index) => (
                 <motion.div
                   key={tier.id}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: 0.1 }}
-                  className={`bg-white rounded-xl shadow-sm border p-8 flex flex-col ${
-                    tier.is_popular ? 'ring-2 ring-primary' : ''
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  className={`bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 border p-8 flex flex-col ${
+                    tier.is_popular ? 'ring-2 ring-brand-purple' : ''
                   }`}
+                  whileHover={{ y: -5, transition: { duration: 0.2 } }}
                 >
                   {tier.is_popular && (
-                    <div className="bg-primary/10 text-primary text-xs font-bold uppercase tracking-wider py-1 px-3 rounded-full self-start mb-4">
+                    <div className="bg-gradient-to-r from-brand-purple to-brand-pink text-white text-xs font-bold uppercase tracking-wider py-1 px-3 rounded-full self-start mb-4">
                       Most Popular
                     </div>
                   )}
@@ -109,10 +110,10 @@ const Pricing = () => {
                   <h3 className="text-xl font-bold">{tier.name}</h3>
                   
                   {tier.name === "Enterprise" ? (
-                    <div className="my-4 text-3xl font-bold">Custom</div>
+                    <div className="my-4 text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-brand-purple to-brand-blue">Custom</div>
                   ) : (
                     <div className="my-4">
-                      <span className="text-3xl font-bold">${tier.price}</span>
+                      <span className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-brand-purple to-brand-pink">${tier.price}</span>
                       <span className="text-gray-500 ml-1">one-time</span>
                     </div>
                   )}
@@ -133,7 +134,7 @@ const Pricing = () => {
                   <Button 
                     onClick={() => handlePurchase(tier)}
                     variant={tier.is_popular ? "default" : "outline"}
-                    className="w-full"
+                    className={`w-full ${tier.is_popular ? 'bg-gradient-to-r from-brand-purple to-brand-pink hover:from-brand-purple/90 hover:to-brand-pink/90 text-white' : 'border-brand-purple text-brand-purple hover:bg-brand-purple/10'}`}
                     size="lg"
                   >
                     {tier.name === "Enterprise" ? "Contact Sales" : "Buy Credits"}
@@ -150,13 +151,13 @@ const Pricing = () => {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="text-center mb-12"
           >
-            <h2 className="text-3xl font-bold font-display mb-4">Credit Costs Per Feature</h2>
+            <h2 className="text-3xl font-bold font-display mb-4 bg-clip-text text-transparent bg-gradient-to-r from-brand-blue to-brand-yellow">Credit Costs Per Feature</h2>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
               See exactly how many credits each feature costs
             </p>
           </motion.div>
           
-          <div className="bg-white rounded-xl shadow-sm border p-8 mb-16">
+          <div className="bg-white rounded-xl shadow-md border p-8 mb-16 bg-gradient-to-br from-white to-purple-50/40">
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
               {isLoading ? (
                 // Loading skeletons
@@ -164,19 +165,20 @@ const Pricing = () => {
                   <div key={i} className="bg-gray-100 rounded-lg p-4 h-24 animate-pulse"></div>
                 ))
               ) : (
-                featureCosts.map((feature) => (
+                featureCosts.map((feature, index) => (
                   <motion.div
                     key={feature.id}
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.3, delay: 0.1 }}
-                    className="bg-gray-50 rounded-lg p-4 flex items-center justify-between"
+                    transition={{ duration: 0.3, delay: 0.1 * index }}
+                    className="bg-white rounded-lg p-4 flex items-center justify-between border border-gray-100 shadow-sm hover:shadow-md transition-all duration-300"
+                    whileHover={{ y: -3, transition: { duration: 0.2 } }}
                   >
                     <div>
                       <h3 className="font-medium">{feature.description}</h3>
                       <p className="text-sm text-gray-500">{feature.feature_name}</p>
                     </div>
-                    <div className="flex items-center space-x-2 text-primary font-bold">
+                    <div className="flex items-center space-x-2 text-brand-purple font-bold bg-gradient-to-r from-brand-purple/10 to-brand-pink/10 px-3 py-1 rounded-full">
                       <Coins className="h-4 w-4" />
                       <span>{feature.credit_cost} credits</span>
                     </div>
@@ -193,28 +195,39 @@ const Pricing = () => {
             transition={{ duration: 0.5, delay: 0.3 }}
             className="max-w-3xl mx-auto"
           >
-            <h2 className="text-3xl font-bold font-display mb-8 text-center">Frequently Asked Questions</h2>
+            <h2 className="text-3xl font-bold font-display mb-8 text-center bg-clip-text text-transparent bg-gradient-to-r from-brand-pink to-brand-purple">Frequently Asked Questions</h2>
             
             <div className="space-y-6">
-              <div className="bg-white rounded-lg shadow-sm border p-6">
-                <h3 className="text-lg font-bold mb-2">Do credits expire?</h3>
-                <p className="text-gray-600">No, your credits never expire. Use them whenever you need them.</p>
-              </div>
-              
-              <div className="bg-white rounded-lg shadow-sm border p-6">
-                <h3 className="text-lg font-bold mb-2">Can I get a refund for unused credits?</h3>
-                <p className="text-gray-600">We don't offer refunds for purchased credits, but they never expire so you can use them anytime.</p>
-              </div>
-              
-              <div className="bg-white rounded-lg shadow-sm border p-6">
-                <h3 className="text-lg font-bold mb-2">How do I know how many credits I have left?</h3>
-                <p className="text-gray-600">Your credit balance is always visible in the top navigation bar when you're logged in.</p>
-              </div>
-              
-              <div className="bg-white rounded-lg shadow-sm border p-6">
-                <h3 className="text-lg font-bold mb-2">What if I need more than 1000 credits?</h3>
-                <p className="text-gray-600">For larger credit needs, please contact our sales team for our Enterprise plan options.</p>
-              </div>
+              {[
+                {
+                  question: "Do credits expire?",
+                  answer: "No, your credits never expire. Use them whenever you need them."
+                },
+                {
+                  question: "Can I get a refund for unused credits?",
+                  answer: "We don't offer refunds for purchased credits, but they never expire so you can use them anytime."
+                },
+                {
+                  question: "How do I know how many credits I have left?",
+                  answer: "Your credit balance is always visible in the top navigation bar when you're logged in."
+                },
+                {
+                  question: "What if I need more than 1000 credits?",
+                  answer: "For larger credit needs, please contact our sales team for our Enterprise plan options."
+                }
+              ].map((faq, index) => (
+                <motion.div 
+                  key={index}
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.3, delay: 0.1 * index + 0.3 }}
+                  className="bg-white rounded-lg shadow-sm border border-gray-100 p-6 hover:shadow-md transition-all duration-300"
+                  whileHover={{ y: -3, transition: { duration: 0.2 } }}
+                >
+                  <h3 className="text-lg font-bold mb-2 bg-clip-text text-transparent bg-gradient-to-r from-brand-purple to-brand-blue">{faq.question}</h3>
+                  <p className="text-gray-600">{faq.answer}</p>
+                </motion.div>
+              ))}
             </div>
           </motion.div>
           
