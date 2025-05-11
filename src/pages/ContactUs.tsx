@@ -111,7 +111,7 @@ const ContactUs = () => {
     >
       <Navbar />
       {/* Hero Section with vibrant gradient background */}
-      <div className="pt-28 pb-12 bg-gradient-to-r from-brand-purple/20 via-brand-pink/20 to-brand-blue/20">
+      <div className="pt-28 pb-12 bg-gradient-to-r from-primary/10 via-brand-purple/20 to-brand-pink/10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             <motion.h1 
@@ -168,7 +168,7 @@ const ContactUs = () => {
             </div>
             
             <div>
-              <h3 className="text-2xl font-semibold font-display mb-6 bg-clip-text text-transparent bg-gradient-to-r from-brand-pink to-brand-yellow">Follow Us</h3>
+              <h3 className="text-2xl font-semibold font-display mb-6 bg-clip-text text-transparent bg-gradient-to-r from-brand-pink to-brand-purple">Follow Us</h3>
               <motion.div 
                 className="flex space-x-4"
                 initial={{ y: 20, opacity: 0 }}

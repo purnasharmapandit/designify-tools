@@ -1,3 +1,4 @@
+
 import { motion } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -15,7 +16,7 @@ const AboutUs = () => {
     >
       <Navbar />
       {/* Hero Section with gradient background */}
-      <div className="pt-28 pb-12 bg-gradient-to-r from-brand-purple/20 to-brand-pink/20">
+      <div className="pt-28 pb-12 bg-gradient-to-r from-primary/10 via-brand-purple/20 to-brand-pink/10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             <motion.h1 
@@ -56,7 +57,7 @@ const AboutUs = () => {
                   <h2 className="text-3xl font-bold font-display bg-clip-text text-transparent bg-gradient-to-r from-brand-purple to-brand-blue">Our Mission</h2>
                 </div>
                 <p className="text-gray-700 mb-6 leading-relaxed">
-                  At AI Design Tools, our mission is to make professional-quality design accessible to everyone. We believe that great design shouldn't require years of training or expensive software.
+                  At MyDesignly, our mission is to make professional-quality design accessible to everyone. We believe that great design shouldn't require years of training or expensive software.
                 </p>
                 <p className="text-gray-700 mb-6 leading-relaxed">
                   By harnessing the power of artificial intelligence, we're creating intuitive tools that help individuals and businesses bring their creative visions to life quickly and affordably.
@@ -72,7 +73,7 @@ const AboutUs = () => {
                 transition={{ duration: 0.7, delay: 0.2 }}
                 viewport={{ once: true }}
               >
-                <div className="bg-gradient-to-br from-brand-purple/20 to-brand-pink/20 rounded-2xl p-8 h-full border border-brand-purple/10 shadow-lg">
+                <div className="bg-gradient-to-br from-brand-purple/10 to-brand-pink/10 rounded-2xl p-8 h-full border border-brand-purple/10 shadow-lg">
                   <Palette className="h-8 w-8 text-brand-purple mb-4 opacity-70" />
                   <blockquote className="italic text-lg text-gray-700">
                     "We envision a world where anyone can create beautiful, professional designs regardless of their technical skills or background."
@@ -85,7 +86,7 @@ const AboutUs = () => {
         </section>
 
         {/* Our Values Section */}
-        <section className="py-16 bg-gradient-to-r from-slate-50 to-gray-50">
+        <section className="py-16 bg-gradient-to-r from-slate-50 to-brand-purple/5">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-12">
               <div className="flex items-center justify-center mb-4">
@@ -95,7 +96,7 @@ const AboutUs = () => {
                 <h2 className="text-3xl font-bold font-display bg-clip-text text-transparent bg-gradient-to-r from-brand-pink to-brand-purple">Our Values</h2>
               </div>
               <p className="text-gray-700 max-w-3xl mx-auto">
-                These core principles guide everything we do at AI Design Tools.
+                These core principles guide everything we do at MyDesignly.
               </p>
             </div>
             
@@ -172,10 +173,10 @@ const AboutUs = () => {
                 <div className="p-3 rounded-full bg-gradient-to-r from-brand-blue/30 to-brand-yellow/30 mr-4 shadow-md">
                   <Users className="h-6 w-6 text-brand-blue" />
                 </div>
-                <h2 className="text-3xl font-bold font-display bg-clip-text text-transparent bg-gradient-to-r from-brand-blue to-brand-yellow">Our Team</h2>
+                <h2 className="text-3xl font-bold font-display bg-clip-text text-transparent bg-gradient-to-r from-brand-blue to-brand-purple">Our Team</h2>
               </div>
               <p className="text-gray-700 max-w-3xl mx-auto">
-                Meet the passionate individuals behind AI Design Tools who are dedicated to making design accessible to everyone.
+                Meet the passionate individuals behind MyDesignly who are dedicated to making design accessible to everyone.
               </p>
             </div>
             
