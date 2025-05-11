@@ -18,7 +18,7 @@ import {
 } from "lucide-react";
 import ToolItem from "./tools/ToolItem";
 
-// All tool data moved here, matching the ToolsGrid component
+// All tool data from ToolsGrid except coming soon ones
 const TOOLS = [
   {
     icon: Paintbrush,
@@ -34,6 +34,38 @@ const TOOLS = [
     description: "Design custom icons for your projects",
     color: "bg-emerald-100 text-emerald-500",
     link: "/icon-generator",
+    category: "premium"
+  },
+  {
+    icon: QrCode,
+    name: "Premium QR Code Generator",
+    description: "Create QR codes with analytics, location tracking, and team access",
+    color: "bg-blue-100 text-blue-500",
+    link: "/qr-code/premium",
+    category: "premium"
+  },
+  {
+    icon: User,
+    name: "AI Headshot Generator",
+    description: "Turn regular photos into professional headshots with AI",
+    color: "bg-blue-100 text-blue-500",
+    link: "/headshot-generator",
+    category: "premium"
+  },
+  {
+    icon: Layout,
+    name: "Business Card Generator",
+    description: "Create professional business cards that leave a lasting impression",
+    color: "bg-pink-100 text-pink-500",
+    link: "/business-card-generator",
+    category: "premium"
+  },
+  {
+    icon: ChartBar,
+    name: "Infographics Generator",
+    description: "Create compelling infographics and visual data representations",
+    color: "bg-orange-100 text-orange-500",
+    link: "/infographics-generator",
     category: "premium"
   },
   {
@@ -67,15 +99,23 @@ const TOOLS = [
     color: "bg-purple-100 text-purple-500",
     link: "/background-remover",
     category: "free"
+  },
+  {
+    icon: CircleDashed,
+    name: "Mesh Gradient Generator",
+    description: "Create beautiful, unique mesh gradients for your designs",
+    color: "bg-teal-100 text-teal-500",
+    link: "/mesh-gradient-generator",
+    category: "free"
   }
 ];
 
 const ExploreToolsSection = () => {
-  // Take only the first 6 tools to maintain 3x2 grid
-  const visibleTools = TOOLS.slice(0, 6);
+  const premiumTools = TOOLS.filter(tool => tool.category === "premium");
+  const freeTools = TOOLS.filter(tool => tool.category === "free");
 
   return (
-    <section className="py-8 bg-[#eee]">
+    <section className="py-12 bg-[#eee]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -89,25 +129,57 @@ const ExploreToolsSection = () => {
             Discover our full suite of design tools to enhance your creative workflow
           </p>
         </motion.div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-          {visibleTools.map((tool, index) => (
-            <div key={index}>
-              <ToolItem 
-                {...tool} 
-                badge={
-                  tool.category === "premium" ? 
+
+        <div className="mb-12">
+          <div className="flex items-center mb-6">
+            <h3 className="text-2xl font-bold">Premium Tools</h3>
+            <Badge variant="outline" className="ml-3 bg-gradient-to-r from-amber-100 to-amber-200 text-amber-700 border-amber-300">
+              <Award className="h-3 w-3 mr-1" /> Pro features
+            </Badge>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+            {premiumTools.map((tool, index) => (
+              <div key={index}>
+                <ToolItem 
+                  {...tool} 
+                  badge={
                     <Badge className="bg-gradient-to-r from-amber-400 to-amber-600 text-white">
                       <Award className="h-3 w-3 mr-1" /> Premium
-                    </Badge> : 
-                  tool.category === "free" ? 
+                    </Badge>
+                  }
+                />
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div>
+          <div className="flex items-center mb-6">
+            <h3 className="text-2xl font-bold">Free Tools</h3>
+            <Badge variant="outline" className="ml-3 bg-green-100 text-green-700 border-green-300">
+              <Tag className="h-3 w-3 mr-1" /> No credit card required
+            </Badge>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+            {freeTools.map((tool, index) => (
+              <div key={index}>
+                <ToolItem 
+                  {...tool} 
+                  badge={
                     <Badge className="bg-green-500 text-white">
                       <Tag className="h-3 w-3 mr-1" /> Free
-                    </Badge> : 
-                    undefined
-                }
-              />
-            </div>
-          ))}
+                    </Badge>
+                  }
+                />
+              </div>
+            ))}
+          </div>
+        </div>
+        
+        <div className="mt-12 text-center">
+          <Link to="/tools" className="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-primary shadow-sm hover:bg-primary/90 transition-colors">
+            View All Tools
+          </Link>
         </div>
       </div>
     </section>
