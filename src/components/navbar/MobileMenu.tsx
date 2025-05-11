@@ -37,6 +37,15 @@ const MobileMenu = ({ isMenuOpen, setIsMenuOpen, user, signOut, isLoading }: Mob
         >
           Email Signature Generator
         </Link>
+        <a 
+          href="https://blog.mydesignly.com"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="block px-3 py-2 rounded-md text-sm font-medium text-gray-900 hover:text-primary hover:bg-gray-50"
+          onClick={() => setIsMenuOpen(false)}
+        >
+          Blog
+        </a>
       </div>
     </div>
   );

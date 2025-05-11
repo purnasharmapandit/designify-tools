@@ -1,3 +1,4 @@
+
 import { Button } from "@/components/ui/button";
 import { Menu, Wand2, X } from "lucide-react";
 import { Link } from "react-router-dom";
@@ -41,6 +42,14 @@ const Navbar = () => {
             >
               Pricing
             </Link>
+            <a 
+              href="https://blog.mydesignly.com" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="font-medium text-gray-900 hover:text-primary transition-colors"
+            >
+              Blog
+            </a>
             <Link 
               to="/contact-us" 
               className="font-medium text-gray-900 hover:text-primary transition-colors"
