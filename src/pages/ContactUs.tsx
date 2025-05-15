@@ -1,3 +1,4 @@
+
 import { motion } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -125,7 +126,7 @@ const ContactUs = () => {
               initial={{ y: 20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ delay: 0.4, duration: 0.7 }}
-              className="text-lg text-gray-700 dark:text-gray-200 max-w-3xl mx-auto"
+              className="text-lg text-gray-800 dark:text-gray-200 max-w-3xl mx-auto"
             >
               Have questions or feedback? We'd love to hear from you. Get in touch with our team.
             </motion.p>
@@ -145,7 +146,7 @@ const ContactUs = () => {
           >
             <div>
               <h2 className="text-3xl font-bold font-display mb-6 bg-clip-text text-transparent bg-gradient-to-r from-brand-purple to-brand-blue">Get in Touch</h2>
-              <p className="text-gray-700 dark:text-gray-200 mb-6">
+              <p className="text-gray-800 dark:text-gray-200 mb-6">
                 We're here to help and answer any questions you might have. We look forward to hearing from you.
               </p>
             </div>
@@ -156,12 +157,12 @@ const ContactUs = () => {
                 whileHover={{ y: -5, transition: { duration: 0.2 } }}
               >
                 <div className="p-3 rounded-full bg-gradient-to-r from-brand-purple/30 to-brand-blue/30 shadow-md">
-                  <Mail className="h-6 w-6 text-brand-purple dark:text-brand-purple" />
+                  <Mail className="h-6 w-6 text-gray-800 dark:text-brand-purple" />
                 </div>
                 <div>
                   <h3 className="font-semibold text-lg text-gray-800 dark:text-white">Email</h3>
-                  <p className="text-gray-700 dark:text-gray-300">support@mydesignly.com</p>
-                  <p className="text-gray-700 dark:text-gray-300 mt-2">sales@mydesignly.com</p>
+                  <p className="text-gray-800 dark:text-gray-300">support@mydesignly.com</p>
+                  <p className="text-gray-800 dark:text-gray-300 mt-2">sales@mydesignly.com</p>
                 </div>
               </motion.div>
             </div>
@@ -180,28 +181,28 @@ const ContactUs = () => {
                   href="#" 
                   className="p-3 bg-gradient-to-r from-brand-blue/10 to-brand-blue/20 dark:from-brand-blue/30 dark:to-brand-blue/40 rounded-full hover:shadow-md transition-all"
                 >
-                  <Twitter className="h-5 w-5 text-brand-blue dark:text-brand-blue" />
+                  <Twitter className="h-5 w-5 text-gray-800 dark:text-brand-blue" />
                 </motion.a>
                 <motion.a 
                   whileHover={{ y: -5, scale: 1.1, transition: { duration: 0.2 } }}
                   href="#" 
                   className="p-3 bg-gradient-to-r from-brand-purple/10 to-brand-purple/20 dark:from-brand-purple/30 dark:to-brand-purple/40 rounded-full hover:shadow-md transition-all"
                 >
-                  <Facebook className="h-5 w-5 text-brand-purple dark:text-brand-purple" />
+                  <Facebook className="h-5 w-5 text-gray-800 dark:text-brand-purple" />
                 </motion.a>
                 <motion.a 
                   whileHover={{ y: -5, scale: 1.1, transition: { duration: 0.2 } }}
                   href="#" 
                   className="p-3 bg-gradient-to-r from-brand-pink/10 to-brand-pink/20 dark:from-brand-pink/30 dark:to-brand-pink/40 rounded-full hover:shadow-md transition-all"
                 >
-                  <Linkedin className="h-5 w-5 text-brand-pink dark:text-brand-pink" />
+                  <Linkedin className="h-5 w-5 text-gray-800 dark:text-brand-pink" />
                 </motion.a>
                 <motion.a 
                   whileHover={{ y: -5, scale: 1.1, transition: { duration: 0.2 } }}
                   href="#" 
                   className="p-3 bg-gradient-to-r from-brand-yellow/10 to-brand-yellow/20 dark:from-brand-yellow/30 dark:to-brand-yellow/40 rounded-full hover:shadow-md transition-all"
                 >
-                  <Github className="h-5 w-5 text-brand-yellow dark:text-brand-yellow" />
+                  <Github className="h-5 w-5 text-gray-800 dark:text-brand-yellow" />
                 </motion.a>
               </motion.div>
             </div>
