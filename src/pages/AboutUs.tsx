@@ -12,11 +12,11 @@ const AboutUs = () => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
-      className="min-h-screen bg-white"
+      className="min-h-screen bg-gray-100 dark:bg-gray-900"
     >
       <Navbar />
-      {/* Hero Section with gradient background */}
-      <div className="pt-28 pb-12 bg-gradient-to-r from-primary/10 via-brand-purple/20 to-brand-pink/10">
+      {/* Hero Section with darker gradient background */}
+      <div className="pt-28 pb-12 bg-gradient-to-r from-gray-200 to-gray-300 dark:from-gray-800 dark:to-gray-700">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             <motion.h1 
@@ -31,7 +31,7 @@ const AboutUs = () => {
               initial={{ y: 20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ delay: 0.4, duration: 0.7 }}
-              className="text-lg text-gray-900 max-w-3xl mx-auto"
+              className="text-lg text-gray-900 dark:text-gray-200 max-w-3xl mx-auto"
             >
               We're on a mission to democratize design with AI-powered tools that empower everyone to create professional-quality designs.
             </motion.p>
@@ -41,7 +41,7 @@ const AboutUs = () => {
       
       <main>
         {/* Our Mission Section */}
-        <section className="py-16 bg-white">
+        <section className="py-16 bg-gray-50 dark:bg-gray-800">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="lg:grid lg:grid-cols-2 lg:gap-16 items-center">
               <motion.div
@@ -56,13 +56,13 @@ const AboutUs = () => {
                   </div>
                   <h2 className="text-3xl font-bold font-display bg-clip-text text-transparent bg-gradient-to-r from-brand-purple to-brand-blue">Our Mission</h2>
                 </div>
-                <p className="text-gray-900 mb-6 leading-relaxed">
+                <p className="text-gray-900 dark:text-gray-200 mb-6 leading-relaxed">
                   At MyDesignly, our mission is to make professional-quality design accessible to everyone. We believe that great design shouldn't require years of training or expensive software.
                 </p>
-                <p className="text-gray-900 mb-6 leading-relaxed">
+                <p className="text-gray-900 dark:text-gray-200 mb-6 leading-relaxed">
                   By harnessing the power of artificial intelligence, we're creating intuitive tools that help individuals and businesses bring their creative visions to life quickly and affordably.
                 </p>
-                <p className="text-gray-900 leading-relaxed">
+                <p className="text-gray-900 dark:text-gray-200 leading-relaxed">
                   We're committed to continuously improving our technology to provide cutting-edge solutions that simplify the design process while delivering exceptional results.
                 </p>
               </motion.div>
@@ -73,9 +73,9 @@ const AboutUs = () => {
                 transition={{ duration: 0.7, delay: 0.2 }}
                 viewport={{ once: true }}
               >
-                <div className="bg-gradient-to-br from-brand-purple/10 to-brand-pink/10 rounded-2xl p-8 h-full border border-brand-purple/10 shadow-lg">
+                <div className="bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-700 dark:to-gray-600 rounded-2xl p-8 h-full border border-brand-purple/10 shadow-lg">
                   <Palette className="h-8 w-8 text-brand-purple mb-4 opacity-70" />
-                  <blockquote className="italic text-lg text-gray-900">
+                  <blockquote className="italic text-lg text-gray-900 dark:text-gray-200">
                     "We envision a world where anyone can create beautiful, professional designs regardless of their technical skills or background."
                   </blockquote>
                   <p className="mt-4 text-right font-semibold text-brand-purple">— Our Founding Team</p>
@@ -86,7 +86,7 @@ const AboutUs = () => {
         </section>
 
         {/* Our Values Section */}
-        <section className="py-16 bg-gradient-to-r from-slate-50 to-brand-purple/5">
+        <section className="py-16 bg-gradient-to-r from-gray-100 to-gray-200 dark:from-gray-900 dark:to-gray-800">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-12">
               <div className="flex items-center justify-center mb-4">
@@ -95,7 +95,7 @@ const AboutUs = () => {
                 </div>
                 <h2 className="text-3xl font-bold font-display bg-clip-text text-transparent bg-gradient-to-r from-brand-pink to-brand-purple">Our Values</h2>
               </div>
-              <p className="text-gray-900 max-w-3xl mx-auto">
+              <p className="text-gray-900 dark:text-gray-200 max-w-3xl mx-auto">
                 These core principles guide everything we do at MyDesignly.
               </p>
             </div>
@@ -147,7 +147,7 @@ const AboutUs = () => {
               ].map((value, index) => (
                 <motion.div 
                   key={index} 
-                  className={`bg-gradient-to-br ${value.color} rounded-lg p-6 border ${value.borderColor} hover:shadow-md transition-all`}
+                  className={`bg-gradient-to-br ${value.color} dark:bg-gray-700 dark:bg-opacity-40 rounded-lg p-6 border ${value.borderColor} hover:shadow-md transition-all`}
                   initial={{ y: 20, opacity: 0 }}
                   whileInView={{ y: 0, opacity: 1 }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
@@ -156,9 +156,9 @@ const AboutUs = () => {
                 >
                   <div className="flex items-center mb-3">
                     {value.icon}
-                    <h3 className="text-xl font-semibold ml-2">{value.title}</h3>
+                    <h3 className="text-xl font-semibold ml-2 dark:text-gray-100">{value.title}</h3>
                   </div>
-                  <p className="text-gray-900">{value.description}</p>
+                  <p className="text-gray-900 dark:text-gray-300">{value.description}</p>
                 </motion.div>
               ))}
             </div>
@@ -166,7 +166,7 @@ const AboutUs = () => {
         </section>
 
         {/* Our Team Section */}
-        <section className="py-16 bg-white">
+        <section className="py-16 bg-gray-50 dark:bg-gray-800">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-12">
               <div className="flex items-center justify-center mb-4">
@@ -175,7 +175,7 @@ const AboutUs = () => {
                 </div>
                 <h2 className="text-3xl font-bold font-display bg-clip-text text-transparent bg-gradient-to-r from-brand-blue to-brand-purple">Our Team</h2>
               </div>
-              <p className="text-gray-900 max-w-3xl mx-auto">
+              <p className="text-gray-900 dark:text-gray-200 max-w-3xl mx-auto">
                 Meet the passionate individuals behind MyDesignly who are dedicated to making design accessible to everyone.
               </p>
             </div>
@@ -197,7 +197,7 @@ const AboutUs = () => {
               ].map((member, index) => (
                 <motion.div 
                   key={index} 
-                  className="bg-white rounded-lg p-6 border border-gray-100 shadow hover:shadow-md transition-all"
+                  className="bg-white dark:bg-gray-700 rounded-lg p-6 border border-gray-100 dark:border-gray-600 shadow hover:shadow-md transition-all"
                   initial={{ y: 20, opacity: 0 }}
                   whileInView={{ y: 0, opacity: 1 }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
@@ -207,9 +207,9 @@ const AboutUs = () => {
                   <div className={`w-32 h-32 bg-gradient-to-br ${member.gradient} rounded-full mx-auto mb-4 flex items-center justify-center`}>
                     <span className="text-4xl font-bold text-white">{member.name.charAt(0)}</span>
                   </div>
-                  <h3 className="text-xl font-semibold">{member.name}</h3>
+                  <h3 className="text-xl font-semibold dark:text-white">{member.name}</h3>
                   <p className="text-brand-purple font-medium mb-3">{member.role}</p>
-                  <p className="text-gray-900 text-sm">{member.bio}</p>
+                  <p className="text-gray-900 dark:text-gray-300 text-sm">{member.bio}</p>
                 </motion.div>
               ))}
             </div>
@@ -217,7 +217,7 @@ const AboutUs = () => {
         </section>
 
         {/* CTA Section */}
-        <section className="py-16 bg-gradient-to-r from-brand-purple/10 to-brand-pink/10">
+        <section className="py-16 bg-gradient-to-r from-gray-200 to-gray-300 dark:from-gray-800 dark:to-gray-700">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <motion.div
               initial={{ scale: 0.95, opacity: 0 }}
@@ -242,7 +242,7 @@ const AboutUs = () => {
               whileInView={{ y: 0, opacity: 1 }}
               transition={{ duration: 0.5, delay: 0.3 }}
               viewport={{ once: true }}
-              className="text-gray-900 max-w-2xl mx-auto mb-8"
+              className="text-gray-900 dark:text-gray-200 max-w-2xl mx-auto mb-8"
             >
               Join thousands of users who are already creating amazing designs with our AI-powered tools. No design experience required!
             </motion.p>
@@ -256,7 +256,7 @@ const AboutUs = () => {
               <Button size="lg" className="bg-gradient-to-r from-brand-purple to-brand-pink hover:from-brand-purple/90 hover:to-brand-pink/90 transition-all shadow-md hover:shadow-lg">
                 Get Started For Free
               </Button>
-              <Button size="lg" variant="outline" asChild className="border-brand-purple text-brand-purple hover:bg-brand-purple/10">
+              <Button size="lg" variant="outline" asChild className="border-brand-purple text-brand-purple hover:bg-brand-purple/10 dark:text-white dark:border-white">
                 <Link to="/tools">Explore Our Tools</Link>
               </Button>
             </motion.div>

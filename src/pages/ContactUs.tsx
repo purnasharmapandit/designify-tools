@@ -107,11 +107,11 @@ const ContactUs = () => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
-      className="min-h-screen bg-white"
+      className="min-h-screen bg-gray-100 dark:bg-gray-900"
     >
       <Navbar />
-      {/* Hero Section with vibrant gradient background */}
-      <div className="pt-28 pb-12 bg-gradient-to-r from-primary/10 via-brand-purple/20 to-brand-pink/10">
+      {/* Hero Section with darker gradient background */}
+      <div className="pt-28 pb-12 bg-gradient-to-r from-gray-200 to-gray-300 dark:from-gray-800 dark:to-gray-700">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             <motion.h1 
@@ -126,7 +126,7 @@ const ContactUs = () => {
               initial={{ y: 20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ delay: 0.4, duration: 0.7 }}
-              className="text-lg text-gray-900 max-w-3xl mx-auto"
+              className="text-lg text-gray-900 dark:text-gray-200 max-w-3xl mx-auto"
             >
               Have questions or feedback? We'd love to hear from you. Get in touch with our team.
             </motion.p>
@@ -146,7 +146,7 @@ const ContactUs = () => {
           >
             <div>
               <h2 className="text-3xl font-bold font-display mb-6 bg-clip-text text-transparent bg-gradient-to-r from-brand-purple to-brand-blue">Get in Touch</h2>
-              <p className="text-gray-900 mb-6">
+              <p className="text-gray-900 dark:text-gray-200 mb-6">
                 We're here to help and answer any questions you might have. We look forward to hearing from you.
               </p>
             </div>
@@ -160,9 +160,9 @@ const ContactUs = () => {
                   <Mail className="h-6 w-6 text-brand-purple" />
                 </div>
                 <div>
-                  <h3 className="font-semibold text-lg">Email</h3>
-                  <p className="text-gray-900">support@mydesignly.com</p>
-                  <p className="text-gray-900 mt-2">sales@mydesignly.com</p>
+                  <h3 className="font-semibold text-lg dark:text-white">Email</h3>
+                  <p className="text-gray-900 dark:text-gray-300">support@mydesignly.com</p>
+                  <p className="text-gray-900 dark:text-gray-300 mt-2">sales@mydesignly.com</p>
                 </div>
               </motion.div>
             </div>
@@ -179,28 +179,28 @@ const ContactUs = () => {
                 <motion.a 
                   whileHover={{ y: -5, scale: 1.1, transition: { duration: 0.2 } }}
                   href="#" 
-                  className="p-3 bg-gradient-to-r from-brand-blue/10 to-brand-blue/20 rounded-full hover:shadow-md transition-all"
+                  className="p-3 bg-gradient-to-r from-brand-blue/10 to-brand-blue/20 dark:from-brand-blue/30 dark:to-brand-blue/40 rounded-full hover:shadow-md transition-all"
                 >
                   <Twitter className="h-5 w-5 text-brand-blue" />
                 </motion.a>
                 <motion.a 
                   whileHover={{ y: -5, scale: 1.1, transition: { duration: 0.2 } }}
                   href="#" 
-                  className="p-3 bg-gradient-to-r from-brand-purple/10 to-brand-purple/20 rounded-full hover:shadow-md transition-all"
+                  className="p-3 bg-gradient-to-r from-brand-purple/10 to-brand-purple/20 dark:from-brand-purple/30 dark:to-brand-purple/40 rounded-full hover:shadow-md transition-all"
                 >
                   <Facebook className="h-5 w-5 text-brand-purple" />
                 </motion.a>
                 <motion.a 
                   whileHover={{ y: -5, scale: 1.1, transition: { duration: 0.2 } }}
                   href="#" 
-                  className="p-3 bg-gradient-to-r from-brand-pink/10 to-brand-pink/20 rounded-full hover:shadow-md transition-all"
+                  className="p-3 bg-gradient-to-r from-brand-pink/10 to-brand-pink/20 dark:from-brand-pink/30 dark:to-brand-pink/40 rounded-full hover:shadow-md transition-all"
                 >
                   <Linkedin className="h-5 w-5 text-brand-pink" />
                 </motion.a>
                 <motion.a 
                   whileHover={{ y: -5, scale: 1.1, transition: { duration: 0.2 } }}
                   href="#" 
-                  className="p-3 bg-gradient-to-r from-brand-yellow/10 to-brand-yellow/20 rounded-full hover:shadow-md transition-all"
+                  className="p-3 bg-gradient-to-r from-brand-yellow/10 to-brand-yellow/20 dark:from-brand-yellow/30 dark:to-brand-yellow/40 rounded-full hover:shadow-md transition-all"
                 >
                   <Github className="h-5 w-5 text-brand-yellow" />
                 </motion.a>
@@ -210,7 +210,7 @@ const ContactUs = () => {
           
           {/* Contact Form Column */}
           <motion.div 
-            className="bg-white rounded-3xl shadow-lg p-8 border border-gray-100"
+            className="bg-white dark:bg-gray-800 rounded-3xl shadow-lg p-8 border border-gray-100 dark:border-gray-700"
             initial={{ x: 30, opacity: 0 }}
             whileInView={{ x: 0, opacity: 1 }}
             transition={{ duration: 0.7, delay: 0.2 }}
@@ -219,13 +219,14 @@ const ContactUs = () => {
               background: "linear-gradient(145deg, rgba(255,255,255,0.9), rgba(255,255,255,0.95))",
               boxShadow: "0 10px 40px rgba(155, 135, 245, 0.1)"
             }}
+            className="dark:bg-gradient-to-br dark:from-gray-800 dark:to-gray-700 dark:bg-opacity-95"
           >
             <h2 className="text-2xl font-bold font-display mb-6 bg-clip-text text-transparent bg-gradient-to-r from-brand-purple to-brand-pink">
               {location.state?.bookDemo ? "Book Your Demo" : "Send Us a Message"}
             </h2>
             <form onSubmit={handleSubmit} className="space-y-6">
               <div>
-                <label htmlFor="name" className="block text-sm font-medium text-gray-900 mb-1">
+                <label htmlFor="name" className="block text-sm font-medium text-gray-900 dark:text-gray-200 mb-1">
                   Your Name
                 </label>
                 <Input
@@ -235,13 +236,13 @@ const ContactUs = () => {
                   value={formData.name}
                   onChange={handleChange}
                   required
-                  className="w-full border-brand-purple/30 focus:border-brand-purple focus:ring-brand-purple/20"
+                  className="w-full border-brand-purple/30 focus:border-brand-purple focus:ring-brand-purple/20 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
                   placeholder="John Doe"
                 />
               </div>
               
               <div>
-                <label htmlFor="email" className="block text-sm font-medium text-gray-900 mb-1">
+                <label htmlFor="email" className="block text-sm font-medium text-gray-900 dark:text-gray-200 mb-1">
                   Your Email
                 </label>
                 <Input
@@ -251,23 +252,23 @@ const ContactUs = () => {
                   value={formData.email}
                   onChange={handleChange}
                   required
-                  className="w-full border-brand-purple/30 focus:border-brand-purple focus:ring-brand-purple/20"
+                  className="w-full border-brand-purple/30 focus:border-brand-purple focus:ring-brand-purple/20 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
                   placeholder="john@example.com"
                 />
               </div>
               
               <div>
-                <label htmlFor="subject" className="block text-sm font-medium text-gray-900 mb-1">
+                <label htmlFor="subject" className="block text-sm font-medium text-gray-900 dark:text-gray-200 mb-1">
                   Subject
                 </label>
                 <Select
                   value={formData.subject}
                   onValueChange={handleSubjectSelect}
                 >
-                  <SelectTrigger className="w-full border-brand-purple/30 focus:ring-brand-purple/20">
+                  <SelectTrigger className="w-full border-brand-purple/30 focus:ring-brand-purple/20 dark:bg-gray-700 dark:border-gray-600 dark:text-white">
                     <SelectValue placeholder="Select a subject" />
                   </SelectTrigger>
-                  <SelectContent>
+                  <SelectContent className="dark:bg-gray-800 dark:border-gray-700">
                     <SelectItem value="General Inquiry">General Inquiry</SelectItem>
                     <SelectItem value="Technical Support">Technical Support</SelectItem>
                     <SelectItem value="Book A Demo">Book A Demo</SelectItem>
@@ -283,7 +284,7 @@ const ContactUs = () => {
                   exit={{ opacity: 0, height: 0 }}
                   transition={{ duration: 0.3 }}
                 >
-                  <label htmlFor="customSubject" className="block text-sm font-medium text-gray-900 mb-1">
+                  <label htmlFor="customSubject" className="block text-sm font-medium text-gray-900 dark:text-gray-200 mb-1">
                     Please specify
                   </label>
                   <Input
@@ -293,7 +294,7 @@ const ContactUs = () => {
                     value={formData.customSubject}
                     onChange={handleChange}
                     required
-                    className="w-full border-brand-purple/30 focus:border-brand-purple focus:ring-brand-purple/20"
+                    className="w-full border-brand-purple/30 focus:border-brand-purple focus:ring-brand-purple/20 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
                     placeholder="Enter subject"
                   />
                 </motion.div>
@@ -306,17 +307,17 @@ const ContactUs = () => {
                   exit={{ opacity: 0, height: 0 }}
                   transition={{ duration: 0.3 }}
                 >
-                  <label htmlFor="selectedTool" className="block text-sm font-medium text-gray-900 mb-1">
+                  <label htmlFor="selectedTool" className="block text-sm font-medium text-gray-900 dark:text-gray-200 mb-1">
                     Select Tool for Demo
                   </label>
                   <Select
                     value={formData.selectedTool}
                     onValueChange={handleToolSelect}
                   >
-                    <SelectTrigger className="w-full border-brand-purple/30 focus:ring-brand-purple/20">
+                    <SelectTrigger className="w-full border-brand-purple/30 focus:ring-brand-purple/20 dark:bg-gray-700 dark:border-gray-600 dark:text-white">
                       <SelectValue placeholder="Select a tool" />
                     </SelectTrigger>
-                    <SelectContent>
+                    <SelectContent className="dark:bg-gray-800 dark:border-gray-700">
                       {tools.map((tool) => (
                         <SelectItem key={tool} value={tool}>
                           {tool}
@@ -328,7 +329,7 @@ const ContactUs = () => {
               )}
               
               <div>
-                <label htmlFor="message" className="block text-sm font-medium text-gray-900 mb-1">
+                <label htmlFor="message" className="block text-sm font-medium text-gray-900 dark:text-gray-200 mb-1">
                   Your Message
                 </label>
                 <Textarea
@@ -338,7 +339,7 @@ const ContactUs = () => {
                   onChange={handleChange}
                   required
                   rows={5}
-                  className="w-full border-brand-purple/30 focus:border-brand-purple focus:ring-brand-purple/20"
+                  className="w-full border-brand-purple/30 focus:border-brand-purple focus:ring-brand-purple/20 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
                   placeholder="Tell us how we can assist you..."
                 />
               </div>
