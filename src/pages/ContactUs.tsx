@@ -1,3 +1,4 @@
+
 import { motion } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -125,7 +126,7 @@ const ContactUs = () => {
               initial={{ y: 20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ delay: 0.4, duration: 0.7 }}
-              className="text-lg text-gray-800 max-w-3xl mx-auto"
+              className="text-lg text-gray-900 max-w-3xl mx-auto"
             >
               Have questions or feedback? We'd love to hear from you. Get in touch with our team.
             </motion.p>
@@ -145,7 +146,7 @@ const ContactUs = () => {
           >
             <div>
               <h2 className="text-3xl font-bold font-display mb-6 bg-clip-text text-transparent bg-gradient-to-r from-brand-purple to-brand-blue">Get in Touch</h2>
-              <p className="text-gray-800 mb-6">
+              <p className="text-gray-900 mb-6">
                 We're here to help and answer any questions you might have. We look forward to hearing from you.
               </p>
             </div>
@@ -160,8 +161,8 @@ const ContactUs = () => {
                 </div>
                 <div>
                   <h3 className="font-semibold text-lg">Email</h3>
-                  <p className="text-gray-800">support@mydesignly.com</p>
-                  <p className="text-gray-800 mt-2">sales@mydesignly.com</p>
+                  <p className="text-gray-900">support@mydesignly.com</p>
+                  <p className="text-gray-900 mt-2">sales@mydesignly.com</p>
                 </div>
               </motion.div>
             </div>
@@ -224,7 +225,7 @@ const ContactUs = () => {
             </h2>
             <form onSubmit={handleSubmit} className="space-y-6">
               <div>
-                <label htmlFor="name" className="block text-sm font-medium text-gray-800 mb-1">
+                <label htmlFor="name" className="block text-sm font-medium text-gray-900 mb-1">
                   Your Name
                 </label>
                 <Input
@@ -240,7 +241,7 @@ const ContactUs = () => {
               </div>
               
               <div>
-                <label htmlFor="email" className="block text-sm font-medium text-gray-800 mb-1">
+                <label htmlFor="email" className="block text-sm font-medium text-gray-900 mb-1">
                   Your Email
                 </label>
                 <Input
@@ -256,7 +257,7 @@ const ContactUs = () => {
               </div>
               
               <div>
-                <label htmlFor="subject" className="block text-sm font-medium text-gray-800 mb-1">
+                <label htmlFor="subject" className="block text-sm font-medium text-gray-900 mb-1">
                   Subject
                 </label>
                 <Select
@@ -282,7 +283,7 @@ const ContactUs = () => {
                   exit={{ opacity: 0, height: 0 }}
                   transition={{ duration: 0.3 }}
                 >
-                  <label htmlFor="customSubject" className="block text-sm font-medium text-gray-800 mb-1">
+                  <label htmlFor="customSubject" className="block text-sm font-medium text-gray-900 mb-1">
                     Please specify
                   </label>
                   <Input
@@ -305,7 +306,7 @@ const ContactUs = () => {
                   exit={{ opacity: 0, height: 0 }}
                   transition={{ duration: 0.3 }}
                 >
-                  <label htmlFor="selectedTool" className="block text-sm font-medium text-gray-800 mb-1">
+                  <label htmlFor="selectedTool" className="block text-sm font-medium text-gray-900 mb-1">
                     Select Tool for Demo
                   </label>
                   <Select
@@ -327,7 +328,7 @@ const ContactUs = () => {
               )}
               
               <div>
-                <label htmlFor="message" className="block text-sm font-medium text-gray-800 mb-1">
+                <label htmlFor="message" className="block text-sm font-medium text-gray-900 mb-1">
                   Your Message
                 </label>
                 <Textarea

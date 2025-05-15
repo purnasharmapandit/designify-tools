@@ -31,7 +31,7 @@ const AboutUs = () => {
               initial={{ y: 20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ delay: 0.4, duration: 0.7 }}
-              className="text-lg text-gray-800 max-w-3xl mx-auto"
+              className="text-lg text-gray-900 max-w-3xl mx-auto"
             >
               We're on a mission to democratize design with AI-powered tools that empower everyone to create professional-quality designs.
             </motion.p>
@@ -56,13 +56,13 @@ const AboutUs = () => {
                   </div>
                   <h2 className="text-3xl font-bold font-display bg-clip-text text-transparent bg-gradient-to-r from-brand-purple to-brand-blue">Our Mission</h2>
                 </div>
-                <p className="text-gray-800 mb-6 leading-relaxed">
+                <p className="text-gray-900 mb-6 leading-relaxed">
                   At MyDesignly, our mission is to make professional-quality design accessible to everyone. We believe that great design shouldn't require years of training or expensive software.
                 </p>
-                <p className="text-gray-800 mb-6 leading-relaxed">
+                <p className="text-gray-900 mb-6 leading-relaxed">
                   By harnessing the power of artificial intelligence, we're creating intuitive tools that help individuals and businesses bring their creative visions to life quickly and affordably.
                 </p>
-                <p className="text-gray-800 leading-relaxed">
+                <p className="text-gray-900 leading-relaxed">
                   We're committed to continuously improving our technology to provide cutting-edge solutions that simplify the design process while delivering exceptional results.
                 </p>
               </motion.div>
@@ -75,7 +75,7 @@ const AboutUs = () => {
               >
                 <div className="bg-gradient-to-br from-brand-purple/10 to-brand-pink/10 rounded-2xl p-8 h-full border border-brand-purple/10 shadow-lg">
                   <Palette className="h-8 w-8 text-brand-purple mb-4 opacity-70" />
-                  <blockquote className="italic text-lg text-gray-800">
+                  <blockquote className="italic text-lg text-gray-900">
                     "We envision a world where anyone can create beautiful, professional designs regardless of their technical skills or background."
                   </blockquote>
                   <p className="mt-4 text-right font-semibold text-brand-purple">— Our Founding Team</p>
@@ -95,7 +95,7 @@ const AboutUs = () => {
                 </div>
                 <h2 className="text-3xl font-bold font-display bg-clip-text text-transparent bg-gradient-to-r from-brand-pink to-brand-purple">Our Values</h2>
               </div>
-              <p className="text-gray-800 max-w-3xl mx-auto">
+              <p className="text-gray-900 max-w-3xl mx-auto">
                 These core principles guide everything we do at MyDesignly.
               </p>
             </div>
@@ -158,7 +158,7 @@ const AboutUs = () => {
                     {value.icon}
                     <h3 className="text-xl font-semibold ml-2">{value.title}</h3>
                   </div>
-                  <p className="text-gray-800">{value.description}</p>
+                  <p className="text-gray-900">{value.description}</p>
                 </motion.div>
               ))}
             </div>
@@ -175,7 +175,7 @@ const AboutUs = () => {
                 </div>
                 <h2 className="text-3xl font-bold font-display bg-clip-text text-transparent bg-gradient-to-r from-brand-blue to-brand-purple">Our Team</h2>
               </div>
-              <p className="text-gray-800 max-w-3xl mx-auto">
+              <p className="text-gray-900 max-w-3xl mx-auto">
                 Meet the passionate individuals behind MyDesignly who are dedicated to making design accessible to everyone.
               </p>
             </div>
@@ -209,7 +209,7 @@ const AboutUs = () => {
                   </div>
                   <h3 className="text-xl font-semibold">{member.name}</h3>
                   <p className="text-brand-purple font-medium mb-3">{member.role}</p>
-                  <p className="text-gray-800 text-sm">{member.bio}</p>
+                  <p className="text-gray-900 text-sm">{member.bio}</p>
                 </motion.div>
               ))}
             </div>
@@ -242,7 +242,7 @@ const AboutUs = () => {
               whileInView={{ y: 0, opacity: 1 }}
               transition={{ duration: 0.5, delay: 0.3 }}
               viewport={{ once: true }}
-              className="text-gray-800 max-w-2xl mx-auto mb-8"
+              className="text-gray-900 max-w-2xl mx-auto mb-8"
             >
               Join thousands of users who are already creating amazing designs with our AI-powered tools. No design experience required!
             </motion.p>
