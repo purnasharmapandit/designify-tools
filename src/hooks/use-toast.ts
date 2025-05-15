@@ -1,4 +1,5 @@
 
+import * as React from "react";
 import { Toast, ToastActionElement, ToastProps } from "@/components/ui/toast";
 
 const TOAST_LIMIT = 1;
@@ -74,7 +75,7 @@ export const reducer = (state: State, action: Action): State => {
         ...state,
         toasts: [
           ...state.toasts,
-          { ...action.toast, id: genId() },
+          { ...action.toast, id: genId() } as ToasterToast,
         ].slice(0, TOAST_LIMIT),
       };
 
@@ -137,7 +138,7 @@ function dispatch(action: Action) {
 
 type Toast = Omit<ToasterToast, "id">;
 
-function toast({ ...props }: Toast) {
+function toast(props: Toast) {
   const id = genId();
 
   const update = (props: ToasterToast) =>
@@ -156,7 +157,7 @@ function toast({ ...props }: Toast) {
       onOpenChange: (open) => {
         if (!open) dismiss();
       },
-    },
+    } as ToasterToast,
   });
 
   return {
