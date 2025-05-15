@@ -1,4 +1,3 @@
-
 import { motion } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -126,7 +125,7 @@ const ContactUs = () => {
               initial={{ y: 20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ delay: 0.4, duration: 0.7 }}
-              className="text-lg text-gray-900 dark:text-gray-200 max-w-3xl mx-auto"
+              className="text-lg text-gray-700 dark:text-gray-200 max-w-3xl mx-auto"
             >
               Have questions or feedback? We'd love to hear from you. Get in touch with our team.
             </motion.p>
@@ -146,7 +145,7 @@ const ContactUs = () => {
           >
             <div>
               <h2 className="text-3xl font-bold font-display mb-6 bg-clip-text text-transparent bg-gradient-to-r from-brand-purple to-brand-blue">Get in Touch</h2>
-              <p className="text-gray-900 dark:text-gray-200 mb-6">
+              <p className="text-gray-700 dark:text-gray-200 mb-6">
                 We're here to help and answer any questions you might have. We look forward to hearing from you.
               </p>
             </div>
@@ -157,12 +156,12 @@ const ContactUs = () => {
                 whileHover={{ y: -5, transition: { duration: 0.2 } }}
               >
                 <div className="p-3 rounded-full bg-gradient-to-r from-brand-purple/30 to-brand-blue/30 shadow-md">
-                  <Mail className="h-6 w-6 text-brand-purple" />
+                  <Mail className="h-6 w-6 text-brand-purple dark:text-brand-purple" />
                 </div>
                 <div>
-                  <h3 className="font-semibold text-lg dark:text-white">Email</h3>
-                  <p className="text-gray-900 dark:text-gray-300">support@mydesignly.com</p>
-                  <p className="text-gray-900 dark:text-gray-300 mt-2">sales@mydesignly.com</p>
+                  <h3 className="font-semibold text-lg text-gray-800 dark:text-white">Email</h3>
+                  <p className="text-gray-700 dark:text-gray-300">support@mydesignly.com</p>
+                  <p className="text-gray-700 dark:text-gray-300 mt-2">sales@mydesignly.com</p>
                 </div>
               </motion.div>
             </div>
@@ -181,28 +180,28 @@ const ContactUs = () => {
                   href="#" 
                   className="p-3 bg-gradient-to-r from-brand-blue/10 to-brand-blue/20 dark:from-brand-blue/30 dark:to-brand-blue/40 rounded-full hover:shadow-md transition-all"
                 >
-                  <Twitter className="h-5 w-5 text-brand-blue" />
+                  <Twitter className="h-5 w-5 text-brand-blue dark:text-brand-blue" />
                 </motion.a>
                 <motion.a 
                   whileHover={{ y: -5, scale: 1.1, transition: { duration: 0.2 } }}
                   href="#" 
                   className="p-3 bg-gradient-to-r from-brand-purple/10 to-brand-purple/20 dark:from-brand-purple/30 dark:to-brand-purple/40 rounded-full hover:shadow-md transition-all"
                 >
-                  <Facebook className="h-5 w-5 text-brand-purple" />
+                  <Facebook className="h-5 w-5 text-brand-purple dark:text-brand-purple" />
                 </motion.a>
                 <motion.a 
                   whileHover={{ y: -5, scale: 1.1, transition: { duration: 0.2 } }}
                   href="#" 
                   className="p-3 bg-gradient-to-r from-brand-pink/10 to-brand-pink/20 dark:from-brand-pink/30 dark:to-brand-pink/40 rounded-full hover:shadow-md transition-all"
                 >
-                  <Linkedin className="h-5 w-5 text-brand-pink" />
+                  <Linkedin className="h-5 w-5 text-brand-pink dark:text-brand-pink" />
                 </motion.a>
                 <motion.a 
                   whileHover={{ y: -5, scale: 1.1, transition: { duration: 0.2 } }}
                   href="#" 
                   className="p-3 bg-gradient-to-r from-brand-yellow/10 to-brand-yellow/20 dark:from-brand-yellow/30 dark:to-brand-yellow/40 rounded-full hover:shadow-md transition-all"
                 >
-                  <Github className="h-5 w-5 text-brand-yellow" />
+                  <Github className="h-5 w-5 text-brand-yellow dark:text-brand-yellow" />
                 </motion.a>
               </motion.div>
             </div>
@@ -210,23 +209,22 @@ const ContactUs = () => {
           
           {/* Contact Form Column */}
           <motion.div 
-            className="bg-white dark:bg-gray-800 rounded-3xl shadow-lg p-8 border border-gray-100 dark:border-gray-700"
             initial={{ x: 30, opacity: 0 }}
             whileInView={{ x: 0, opacity: 1 }}
             transition={{ duration: 0.7, delay: 0.2 }}
             viewport={{ once: true }}
+            className="bg-white dark:bg-gray-800 rounded-3xl shadow-lg p-8 border border-gray-100 dark:border-gray-700"
             style={{
               background: "linear-gradient(145deg, rgba(255,255,255,0.9), rgba(255,255,255,0.95))",
               boxShadow: "0 10px 40px rgba(155, 135, 245, 0.1)"
             }}
-            className="dark:bg-gradient-to-br dark:from-gray-800 dark:to-gray-700 dark:bg-opacity-95"
           >
             <h2 className="text-2xl font-bold font-display mb-6 bg-clip-text text-transparent bg-gradient-to-r from-brand-purple to-brand-pink">
               {location.state?.bookDemo ? "Book Your Demo" : "Send Us a Message"}
             </h2>
             <form onSubmit={handleSubmit} className="space-y-6">
               <div>
-                <label htmlFor="name" className="block text-sm font-medium text-gray-900 dark:text-gray-200 mb-1">
+                <label htmlFor="name" className="block text-sm font-medium text-gray-800 dark:text-gray-200 mb-1">
                   Your Name
                 </label>
                 <Input
@@ -242,7 +240,7 @@ const ContactUs = () => {
               </div>
               
               <div>
-                <label htmlFor="email" className="block text-sm font-medium text-gray-900 dark:text-gray-200 mb-1">
+                <label htmlFor="email" className="block text-sm font-medium text-gray-800 dark:text-gray-200 mb-1">
                   Your Email
                 </label>
                 <Input
@@ -258,7 +256,7 @@ const ContactUs = () => {
               </div>
               
               <div>
-                <label htmlFor="subject" className="block text-sm font-medium text-gray-900 dark:text-gray-200 mb-1">
+                <label htmlFor="subject" className="block text-sm font-medium text-gray-800 dark:text-gray-200 mb-1">
                   Subject
                 </label>
                 <Select
@@ -284,7 +282,7 @@ const ContactUs = () => {
                   exit={{ opacity: 0, height: 0 }}
                   transition={{ duration: 0.3 }}
                 >
-                  <label htmlFor="customSubject" className="block text-sm font-medium text-gray-900 dark:text-gray-200 mb-1">
+                  <label htmlFor="customSubject" className="block text-sm font-medium text-gray-800 dark:text-gray-200 mb-1">
                     Please specify
                   </label>
                   <Input
@@ -307,7 +305,7 @@ const ContactUs = () => {
                   exit={{ opacity: 0, height: 0 }}
                   transition={{ duration: 0.3 }}
                 >
-                  <label htmlFor="selectedTool" className="block text-sm font-medium text-gray-900 dark:text-gray-200 mb-1">
+                  <label htmlFor="selectedTool" className="block text-sm font-medium text-gray-800 dark:text-gray-200 mb-1">
                     Select Tool for Demo
                   </label>
                   <Select
@@ -329,7 +327,7 @@ const ContactUs = () => {
               )}
               
               <div>
-                <label htmlFor="message" className="block text-sm font-medium text-gray-900 dark:text-gray-200 mb-1">
+                <label htmlFor="message" className="block text-sm font-medium text-gray-800 dark:text-gray-200 mb-1">
                   Your Message
                 </label>
                 <Textarea
