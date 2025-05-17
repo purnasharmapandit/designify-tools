@@ -8,7 +8,7 @@ interface PremiumToolsColumnProps {
 
 const PremiumToolsColumn = ({ setIsMenuOpen }: PremiumToolsColumnProps) => {
   return (
-    <div className="grid grid-cols-2 gap-4">
+    <div className="md:grid md:grid-cols-2 md:gap-4 space-y-1 md:space-y-0">
       <ToolMenuItem 
         icon={(props) => (
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-purple-600 h-5 w-5" {...props}>
@@ -82,6 +82,19 @@ const PremiumToolsColumn = ({ setIsMenuOpen }: PremiumToolsColumnProps) => {
         name="Premium QR Code" 
         color="bg-blue-100"
         link="/qr-code/premium"
+        onClick={() => setIsMenuOpen && setIsMenuOpen(false)}
+      />
+      
+      <ToolMenuItem 
+        icon={(props) => (
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-green-600 h-5 w-5" {...props}>
+            <path d="M19 3H5C3.89543 3 3 3.89543 3 5V19C3 20.1046 3.89543 21 5 21H19C20.1046 21 21 20.1046 21 19V5C21 3.89543 20.1046 3 19 3Z" stroke="currentColor" strokeWidth="2" />
+            <path d="M9 7H15C15.5523 7 16 7.44772 16 8V16C16 16.5523 15.5523 17 15 17H9C8.44772 17 8 16.5523 8 16V8C8 7.44772 8.44772 7 9 7Z" stroke="currentColor" strokeWidth="2" />
+          </svg>
+        )} 
+        name="Business Cards" 
+        color="bg-green-100"
+        link="/business-card-generator"
         onClick={() => setIsMenuOpen && setIsMenuOpen(false)}
       />
     </div>
