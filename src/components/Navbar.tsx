@@ -42,6 +42,7 @@ const Navbar = () => {
             >
               Pricing
             </Link>
+            
             <a 
               href="https://blog.mydesignly.com" 
               target="_blank" 
@@ -50,11 +51,19 @@ const Navbar = () => {
             >
               Blog
             </a>
+            
             <Link 
               to="/contact-us" 
               className="font-medium text-gray-900 hover:text-primary transition-colors"
             >
               Contact
+            </Link>
+            
+            <Link 
+              to="/about-us" 
+              className="font-medium text-gray-900 hover:text-primary transition-colors"
+            >
+              About Us
             </Link>
           </nav>
           

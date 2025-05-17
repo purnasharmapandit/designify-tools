@@ -1,6 +1,7 @@
 
 import React from "react";
 import { Link } from "react-router-dom";
+import FreeToolsColumn from "./FreeToolsColumn";
 
 interface MobileMenuProps {
   isMenuOpen: boolean;
@@ -15,28 +16,46 @@ const MobileMenu = ({ isMenuOpen, setIsMenuOpen, user, signOut, isLoading }: Mob
   
   return (
     <div className="md:hidden">
-      <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 border-t border-gray-100">
+      <div className="px-2 pt-2 pb-3 space-y-3 sm:px-3 border-t border-gray-100">
         <Link 
-          to="/free-qr-code-generator"
+          to="/"
           className="block px-3 py-2 rounded-md text-sm font-medium text-gray-900 hover:text-primary hover:bg-gray-50"
           onClick={() => setIsMenuOpen(false)}
         >
-          QR Code Generator
+          Home
         </Link>
+        
+        <div className="space-y-1 pl-2">
+          <p className="px-3 py-1 text-xs font-semibold text-gray-500">Free Tools</p>
+          <FreeToolsColumn setIsMenuOpen={setIsMenuOpen} />
+        </div>
+        
+        <div className="space-y-1 pl-2">
+          <p className="px-3 py-1 text-xs font-semibold text-gray-500">Premium Tools</p>
+          <Link 
+            to="/logo-maker"
+            className="block px-3 py-2 rounded-md text-sm font-medium text-gray-900 hover:text-primary hover:bg-gray-50"
+            onClick={() => setIsMenuOpen(false)}
+          >
+            Logo Maker
+          </Link>
+          <Link 
+            to="/business-card-generator"
+            className="block px-3 py-2 rounded-md text-sm font-medium text-gray-900 hover:text-primary hover:bg-gray-50"
+            onClick={() => setIsMenuOpen(false)}
+          >
+            Business Card Generator
+          </Link>
+        </div>
+        
         <Link 
-          to="/free-color-palette-generator"
+          to="/pricing"
           className="block px-3 py-2 rounded-md text-sm font-medium text-gray-900 hover:text-primary hover:bg-gray-50"
           onClick={() => setIsMenuOpen(false)}
         >
-          Color Palette Generator
+          Pricing
         </Link>
-        <Link 
-          to="/free-email-signature-generator"
-          className="block px-3 py-2 rounded-md text-sm font-medium text-gray-900 hover:text-primary hover:bg-gray-50"
-          onClick={() => setIsMenuOpen(false)}
-        >
-          Email Signature Generator
-        </Link>
+        
         <a 
           href="https://blog.mydesignly.com"
           target="_blank"
@@ -46,6 +65,22 @@ const MobileMenu = ({ isMenuOpen, setIsMenuOpen, user, signOut, isLoading }: Mob
         >
           Blog
         </a>
+        
+        <Link 
+          to="/contact-us"
+          className="block px-3 py-2 rounded-md text-sm font-medium text-gray-900 hover:text-primary hover:bg-gray-50"
+          onClick={() => setIsMenuOpen(false)}
+        >
+          Contact
+        </Link>
+        
+        <Link 
+          to="/about-us"
+          className="block px-3 py-2 rounded-md text-sm font-medium text-gray-900 hover:text-primary hover:bg-gray-50"
+          onClick={() => setIsMenuOpen(false)}
+        >
+          About Us
+        </Link>
       </div>
     </div>
   );
