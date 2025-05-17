@@ -12,18 +12,18 @@ const AboutUs = () => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
-      className="min-h-screen bg-gray-100 dark:bg-gray-900"
+      className="min-h-screen bg-gray-50 dark:bg-gray-900"
     >
       <Navbar />
-      {/* Hero Section with darker gradient background */}
-      <div className="pt-28 pb-12 bg-gradient-to-r from-gray-200 to-gray-300 dark:from-gray-800 dark:to-gray-700">
+      {/* Hero Section with cleaner background */}
+      <div className="pt-28 pb-16 bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             <motion.h1 
               initial={{ y: -20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ delay: 0.2, duration: 0.7 }}
-              className="text-5xl font-bold font-display mb-4 text-black dark:text-white"
+              className="text-4xl md:text-5xl font-bold font-display mb-6 text-black dark:text-white"
             >
               About Us
             </motion.h1>
@@ -31,7 +31,7 @@ const AboutUs = () => {
               initial={{ y: 20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ delay: 0.4, duration: 0.7 }}
-              className="text-lg text-black dark:text-gray-200 max-w-3xl mx-auto"
+              className="text-lg text-gray-700 dark:text-gray-300 max-w-3xl mx-auto"
             >
               We're on a mission to democratize design with AI-powered tools that empower everyone to create professional-quality designs.
             </motion.p>
@@ -41,7 +41,7 @@ const AboutUs = () => {
       
       <main>
         {/* Our Mission Section */}
-        <section className="py-16 bg-gray-50 dark:bg-gray-800">
+        <section className="py-16 bg-white dark:bg-gray-800">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="lg:grid lg:grid-cols-2 lg:gap-16 items-center">
               <motion.div
@@ -50,19 +50,19 @@ const AboutUs = () => {
                 transition={{ duration: 0.7 }}
                 viewport={{ once: true }}
               >
-                <div className="flex items-center mb-4">
-                  <div className="p-3 rounded-full bg-gradient-to-r from-brand-purple/30 to-brand-blue/30 mr-4 shadow-md">
-                    <Target className="h-6 w-6 text-black dark:text-brand-purple" />
+                <div className="flex items-center mb-6">
+                  <div className="p-3 rounded-full bg-primary/10 mr-4 shadow-md">
+                    <Target className="h-6 w-6 text-primary" />
                   </div>
                   <h2 className="text-3xl font-bold font-display text-black dark:text-white">Our Mission</h2>
                 </div>
-                <p className="text-black dark:text-gray-200 mb-6 leading-relaxed">
+                <p className="text-gray-700 dark:text-gray-300 mb-6 leading-relaxed">
                   At MyDesignly, our mission is to make professional-quality design accessible to everyone. We believe that great design shouldn't require years of training or expensive software.
                 </p>
-                <p className="text-black dark:text-gray-200 mb-6 leading-relaxed">
+                <p className="text-gray-700 dark:text-gray-300 mb-6 leading-relaxed">
                   By harnessing the power of artificial intelligence, we're creating intuitive tools that help individuals and businesses bring their creative visions to life quickly and affordably.
                 </p>
-                <p className="text-black dark:text-gray-200 leading-relaxed">
+                <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
                   We're committed to continuously improving our technology to provide cutting-edge solutions that simplify the design process while delivering exceptional results.
                 </p>
               </motion.div>
@@ -73,29 +73,29 @@ const AboutUs = () => {
                 transition={{ duration: 0.7, delay: 0.2 }}
                 viewport={{ once: true }}
               >
-                <div className="bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-700 dark:to-gray-600 rounded-2xl p-8 h-full border border-brand-purple/10 shadow-lg">
-                  <Palette className="h-8 w-8 text-black dark:text-brand-purple mb-4 opacity-70" />
-                  <blockquote className="italic text-lg text-black dark:text-gray-200">
+                <div className="bg-gray-50 dark:bg-gray-700 rounded-2xl p-8 h-full border border-gray-200 dark:border-gray-600 shadow-lg">
+                  <Palette className="h-8 w-8 text-primary mb-4" />
+                  <blockquote className="italic text-lg text-gray-700 dark:text-gray-300">
                     "We envision a world where anyone can create beautiful, professional designs regardless of their technical skills or background."
                   </blockquote>
-                  <p className="mt-4 text-right font-semibold text-black dark:text-brand-purple">— Our Founding Team</p>
+                  <p className="mt-4 text-right font-semibold text-primary">— Our Founding Team</p>
                 </div>
               </motion.div>
             </div>
           </div>
         </section>
 
-        {/* Our Values Section */}
-        <section className="py-16 bg-gradient-to-r from-gray-100 to-gray-200 dark:from-gray-900 dark:to-gray-800">
+        {/* Our Values Section - with cleaner color scheme */}
+        <section className="py-16 bg-gray-50 dark:bg-gray-900">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-12">
-              <div className="flex items-center justify-center mb-4">
-                <div className="p-3 rounded-full bg-gradient-to-r from-brand-pink/30 to-brand-purple/30 mr-4 shadow-md">
-                  <Heart className="h-6 w-6 text-black dark:text-brand-pink" />
+              <div className="flex items-center justify-center mb-6">
+                <div className="p-3 rounded-full bg-primary/10 mr-4 shadow-md">
+                  <Heart className="h-6 w-6 text-primary" />
                 </div>
                 <h2 className="text-3xl font-bold font-display text-black dark:text-white">Our Values</h2>
               </div>
-              <p className="text-black dark:text-gray-200 max-w-3xl mx-auto">
+              <p className="text-gray-700 dark:text-gray-300 max-w-3xl mx-auto">
                 These core principles guide everything we do at MyDesignly.
               </p>
             </div>
@@ -105,49 +105,37 @@ const AboutUs = () => {
                 {
                   title: "Accessibility",
                   description: "We believe design tools should be accessible to everyone, regardless of technical expertise or budget.",
-                  color: "from-brand-purple/10 to-brand-blue/10",
-                  borderColor: "border-brand-purple/20",
-                  icon: <Palette className="h-5 w-5 text-black dark:text-brand-purple" />
+                  icon: <Palette className="h-5 w-5 text-primary" />
                 },
                 {
                   title: "Innovation",
                   description: "We're committed to pushing the boundaries of what's possible with AI-powered design technology.",
-                  color: "from-brand-pink/10 to-brand-purple/10",
-                  borderColor: "border-brand-pink/20",
-                  icon: <Rocket className="h-5 w-5 text-black dark:text-brand-pink" />
+                  icon: <Rocket className="h-5 w-5 text-primary" />
                 },
                 {
                   title: "Quality",
                   description: "We never compromise on the quality of our tools or the designs they help create.",
-                  color: "from-brand-blue/10 to-brand-yellow/10",
-                  borderColor: "border-brand-blue/20",
-                  icon: <Target className="h-5 w-5 text-black dark:text-brand-blue" />
+                  icon: <Target className="h-5 w-5 text-primary" />
                 },
                 {
                   title: "User-Centered",
                   description: "Everything we build starts with understanding and addressing real user needs.",
-                  color: "from-brand-purple/10 to-brand-pink/10",
-                  borderColor: "border-brand-purple/20",
-                  icon: <Users className="h-5 w-5 text-black dark:text-brand-purple" />
+                  icon: <Users className="h-5 w-5 text-primary" />
                 },
                 {
                   title: "Integrity",
                   description: "We operate with transparency and honesty in all our interactions with users and partners.",
-                  color: "from-brand-pink/10 to-brand-yellow/10",
-                  borderColor: "border-brand-pink/20",
-                  icon: <Heart className="h-5 w-5 text-black dark:text-brand-pink" />
+                  icon: <Heart className="h-5 w-5 text-primary" />
                 },
                 {
                   title: "Continuous Improvement",
                   description: "We're never satisfied with the status quo and continuously strive to improve our products.",
-                  color: "from-brand-blue/10 to-brand-purple/10",
-                  borderColor: "border-brand-blue/20",
-                  icon: <Brush className="h-5 w-5 text-black dark:text-brand-blue" />
+                  icon: <Brush className="h-5 w-5 text-primary" />
                 }
               ].map((value, index) => (
                 <motion.div 
                   key={index} 
-                  className={`bg-gradient-to-br ${value.color} dark:bg-gray-700 dark:bg-opacity-40 rounded-lg p-6 border ${value.borderColor} hover:shadow-md transition-all`}
+                  className="bg-white dark:bg-gray-800 rounded-lg p-6 border border-gray-200 dark:border-gray-700 shadow-sm hover:shadow-md transition-all"
                   initial={{ y: 20, opacity: 0 }}
                   whileInView={{ y: 0, opacity: 1 }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
@@ -156,84 +144,82 @@ const AboutUs = () => {
                 >
                   <div className="flex items-center mb-3">
                     {value.icon}
-                    <h3 className="text-xl font-semibold ml-2 text-black dark:text-gray-100">{value.title}</h3>
+                    <h3 className="text-xl font-semibold ml-2 text-black dark:text-white">{value.title}</h3>
                   </div>
-                  <p className="text-black dark:text-gray-300">{value.description}</p>
+                  <p className="text-gray-700 dark:text-gray-300">{value.description}</p>
                 </motion.div>
               ))}
             </div>
           </div>
         </section>
 
-        {/* Our Team Section */}
-        <section className="py-16 bg-gray-50 dark:bg-gray-800">
+        {/* Our Team Section - with improved styling */}
+        <section className="py-16 bg-white dark:bg-gray-800">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-12">
-              <div className="flex items-center justify-center mb-4">
-                <div className="p-3 rounded-full bg-gradient-to-r from-brand-blue/30 to-brand-yellow/30 mr-4 shadow-md">
-                  <Users className="h-6 w-6 text-black dark:text-brand-blue" />
+              <div className="flex items-center justify-center mb-6">
+                <div className="p-3 rounded-full bg-primary/10 mr-4 shadow-md">
+                  <Users className="h-6 w-6 text-primary" />
                 </div>
                 <h2 className="text-3xl font-bold font-display text-black dark:text-white">Our Team</h2>
               </div>
-              <p className="text-black dark:text-gray-200 max-w-3xl mx-auto">
+              <p className="text-gray-700 dark:text-gray-300 max-w-3xl mx-auto">
                 Meet the passionate individuals behind MyDesignly who are dedicated to making design accessible to everyone.
               </p>
             </div>
             
-            <div className="grid sm:grid-cols-2 lg:grid-cols-2 gap-8">
+            <div className="grid sm:grid-cols-2 lg:grid-cols-2 gap-8 max-w-4xl mx-auto">
               {[
                 {
                   name: "Oliver Reynolds",
                   role: "Founder & CEO",
-                  bio: "With over 15 years in design and tech, Oliver founded AI Design Tools to democratize access to professional design.",
-                  gradient: "from-brand-purple to-brand-blue"
+                  bio: "With over 15 years in design and tech, Oliver founded AI Design Tools to democratize access to professional design."
                 },
                 {
                   name: "Maya Lin",
                   role: "CTO",
-                  bio: "Maya leads our technical team, bringing expertise in AI and machine learning to create our innovative design tools.",
-                  gradient: "from-brand-pink to-brand-purple"
+                  bio: "Maya leads our technical team, bringing expertise in AI and machine learning to create our innovative design tools."
                 }
               ].map((member, index) => (
                 <motion.div 
                   key={index} 
-                  className="bg-white dark:bg-gray-700 rounded-lg p-6 border border-gray-100 dark:border-gray-600 shadow hover:shadow-md transition-all"
+                  className="bg-gray-50 dark:bg-gray-700 rounded-lg p-6 border border-gray-200 dark:border-gray-700 shadow hover:shadow-md transition-all"
                   initial={{ y: 20, opacity: 0 }}
                   whileInView={{ y: 0, opacity: 1 }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
                   viewport={{ once: true }}
                   whileHover={{ y: -5, transition: { duration: 0.2 } }}
                 >
-                  <div className={`w-32 h-32 bg-gradient-to-br ${member.gradient} rounded-full mx-auto mb-4 flex items-center justify-center`}>
+                  <div className="w-32 h-32 bg-gradient-to-br from-primary to-primary/70 rounded-full mx-auto mb-4 flex items-center justify-center">
                     <span className="text-4xl font-bold text-white">{member.name.charAt(0)}</span>
                   </div>
                   <h3 className="text-xl font-semibold text-black dark:text-white">{member.name}</h3>
-                  <p className="text-brand-purple font-medium mb-3">{member.role}</p>
-                  <p className="text-black dark:text-gray-300 text-sm">{member.bio}</p>
+                  <p className="text-primary font-medium mb-3">{member.role}</p>
+                  <p className="text-gray-700 dark:text-gray-300">{member.bio}</p>
                 </motion.div>
               ))}
             </div>
           </div>
         </section>
 
-        {/* CTA Section */}
-        <section className="py-16 bg-gradient-to-r from-gray-200 to-gray-300 dark:from-gray-800 dark:to-gray-700">
+        {/* CTA Section - with improved styling */}
+        <section className="py-16 bg-gray-50 dark:bg-gray-900">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <motion.div
               initial={{ scale: 0.95, opacity: 0 }}
               whileInView={{ scale: 1, opacity: 1 }}
               transition={{ duration: 0.5 }}
               viewport={{ once: true }}
-              className="inline-block p-3 rounded-full bg-gradient-to-r from-brand-purple/30 to-brand-pink/30 mb-4 shadow-md"
+              className="inline-block p-3 rounded-full bg-primary/10 mb-6 shadow-md"
             >
-              <Rocket className="h-6 w-6 text-black dark:text-brand-purple" />
+              <Rocket className="h-6 w-6 text-primary" />
             </motion.div>
             <motion.h2 
               initial={{ y: -10, opacity: 0 }}
               whileInView={{ y: 0, opacity: 1 }}
               transition={{ duration: 0.5, delay: 0.2 }}
               viewport={{ once: true }}
-              className="text-3xl font-bold font-display mb-4 text-black dark:text-white"
+              className="text-3xl font-bold font-display mb-6 text-black dark:text-white"
             >
               Ready to Try Our Tools?
             </motion.h2>
@@ -242,7 +228,7 @@ const AboutUs = () => {
               whileInView={{ y: 0, opacity: 1 }}
               transition={{ duration: 0.5, delay: 0.3 }}
               viewport={{ once: true }}
-              className="text-black dark:text-gray-200 max-w-2xl mx-auto mb-8"
+              className="text-gray-700 dark:text-gray-300 max-w-2xl mx-auto mb-8"
             >
               Join thousands of users who are already creating amazing designs with our AI-powered tools. No design experience required!
             </motion.p>
@@ -253,10 +239,10 @@ const AboutUs = () => {
               transition={{ duration: 0.5, delay: 0.4 }}
               viewport={{ once: true }}
             >
-              <Button size="lg" className="bg-gradient-to-r from-brand-purple to-brand-pink hover:from-brand-purple/90 hover:to-brand-pink/90 transition-all shadow-md hover:shadow-lg">
+              <Button size="lg" className="bg-primary hover:bg-primary/90 transition-all shadow-md hover:shadow-lg text-white">
                 Get Started For Free
               </Button>
-              <Button size="lg" variant="outline" asChild className="border-brand-purple text-brand-purple hover:bg-brand-purple/10 dark:text-white dark:border-white">
+              <Button size="lg" variant="outline" asChild className="border-primary text-primary hover:bg-primary/10 dark:text-white dark:border-white">
                 <Link to="/tools">Explore Our Tools</Link>
               </Button>
             </motion.div>
