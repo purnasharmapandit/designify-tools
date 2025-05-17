@@ -23,7 +23,7 @@ const AboutUs = () => {
               initial={{ y: -20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ delay: 0.2, duration: 0.7 }}
-              className="text-5xl font-bold font-display mb-4 bg-clip-text text-transparent bg-gradient-to-r from-brand-purple to-brand-pink"
+              className="text-5xl font-bold font-display mb-4 text-black dark:text-white"
             >
               About Us
             </motion.h1>
@@ -54,7 +54,7 @@ const AboutUs = () => {
                   <div className="p-3 rounded-full bg-gradient-to-r from-brand-purple/30 to-brand-blue/30 mr-4 shadow-md">
                     <Target className="h-6 w-6 text-black dark:text-brand-purple" />
                   </div>
-                  <h2 className="text-3xl font-bold font-display bg-clip-text text-transparent bg-gradient-to-r from-brand-purple to-brand-blue">Our Mission</h2>
+                  <h2 className="text-3xl font-bold font-display text-black dark:text-white">Our Mission</h2>
                 </div>
                 <p className="text-black dark:text-gray-200 mb-6 leading-relaxed">
                   At MyDesignly, our mission is to make professional-quality design accessible to everyone. We believe that great design shouldn't require years of training or expensive software.
@@ -93,7 +93,7 @@ const AboutUs = () => {
                 <div className="p-3 rounded-full bg-gradient-to-r from-brand-pink/30 to-brand-purple/30 mr-4 shadow-md">
                   <Heart className="h-6 w-6 text-black dark:text-brand-pink" />
                 </div>
-                <h2 className="text-3xl font-bold font-display bg-clip-text text-transparent bg-gradient-to-r from-brand-pink to-brand-purple">Our Values</h2>
+                <h2 className="text-3xl font-bold font-display text-black dark:text-white">Our Values</h2>
               </div>
               <p className="text-black dark:text-gray-200 max-w-3xl mx-auto">
                 These core principles guide everything we do at MyDesignly.
@@ -173,7 +173,7 @@ const AboutUs = () => {
                 <div className="p-3 rounded-full bg-gradient-to-r from-brand-blue/30 to-brand-yellow/30 mr-4 shadow-md">
                   <Users className="h-6 w-6 text-black dark:text-brand-blue" />
                 </div>
-                <h2 className="text-3xl font-bold font-display bg-clip-text text-transparent bg-gradient-to-r from-brand-blue to-brand-purple">Our Team</h2>
+                <h2 className="text-3xl font-bold font-display text-black dark:text-white">Our Team</h2>
               </div>
               <p className="text-black dark:text-gray-200 max-w-3xl mx-auto">
                 Meet the passionate individuals behind MyDesignly who are dedicated to making design accessible to everyone.
@@ -233,7 +233,7 @@ const AboutUs = () => {
               whileInView={{ y: 0, opacity: 1 }}
               transition={{ duration: 0.5, delay: 0.2 }}
               viewport={{ once: true }}
-              className="text-3xl font-bold font-display mb-4 bg-clip-text text-transparent bg-gradient-to-r from-brand-purple to-brand-pink"
+              className="text-3xl font-bold font-display mb-4 text-black dark:text-white"
             >
               Ready to Try Our Tools?
             </motion.h2>

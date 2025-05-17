@@ -118,7 +118,7 @@ const ContactUs = () => {
               initial={{ y: -20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ delay: 0.2, duration: 0.7 }}
-              className="text-5xl font-bold font-display mb-4 bg-clip-text text-transparent bg-gradient-to-r from-brand-purple to-brand-pink"
+              className="text-5xl font-bold font-display mb-4 text-black dark:text-white"
             >
               Contact Us
             </motion.h1>
@@ -145,7 +145,7 @@ const ContactUs = () => {
             viewport={{ once: true }}
           >
             <div>
-              <h2 className="text-3xl font-bold font-display mb-6 bg-clip-text text-transparent bg-gradient-to-r from-brand-purple to-brand-blue">Get in Touch</h2>
+              <h2 className="text-3xl font-bold font-display mb-6 text-black dark:text-white">Get in Touch</h2>
               <p className="text-black dark:text-gray-200 mb-6">
                 We're here to help and answer any questions you might have. We look forward to hearing from you.
               </p>
@@ -168,7 +168,7 @@ const ContactUs = () => {
             </div>
             
             <div>
-              <h3 className="text-2xl font-semibold font-display mb-6 bg-clip-text text-transparent bg-gradient-to-r from-brand-pink to-brand-purple">Follow Us</h3>
+              <h3 className="text-2xl font-semibold font-display mb-6 text-black dark:text-white">Follow Us</h3>
               <motion.div 
                 className="flex space-x-4"
                 initial={{ y: 20, opacity: 0 }}
@@ -220,7 +220,7 @@ const ContactUs = () => {
               boxShadow: "0 10px 40px rgba(155, 135, 245, 0.1)"
             }}
           >
-            <h2 className="text-2xl font-bold font-display mb-6 bg-clip-text text-transparent bg-gradient-to-r from-brand-purple to-brand-pink">
+            <h2 className="text-2xl font-bold font-display mb-6 text-black dark:text-white">
               {location.state?.bookDemo ? "Book Your Demo" : "Send Us a Message"}
             </h2>
             <form onSubmit={handleSubmit} className="space-y-6">
